@@ -85,9 +85,9 @@ export function Experience() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-3xl font-bold mb-12 flex items-center justify-center gap-3 text-center"
+            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-12 flex items-center justify-center gap-3 text-center"
           >
-            <Briefcase className="text-primary" size={32} />
+            <Briefcase className="text-primary" size={28} />
             Work Experience
           </motion.h3>
 
@@ -134,9 +134,9 @@ export function Experience() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-3xl font-bold mb-12 flex items-center justify-center gap-3 text-center"
+            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-12 flex items-center justify-center gap-3 text-center"
           >
-            <GraduationCap className="text-primary" size={32} />
+            <GraduationCap className="text-primary" size={28} />
             My Education
           </motion.h3>
 

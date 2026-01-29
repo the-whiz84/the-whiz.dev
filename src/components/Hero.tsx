@@ -3,14 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { MapPin, FileText, Github, Linkedin, Facebook, Twitter, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { MapPin, FileText, Github, Linkedin, Twitter, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { profile, socials, projects } from "@/data";
 import { useState, useEffect, useCallback, useRef } from "react";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Github,
   Linkedin,
-  Facebook,
   Twitter,
 };
 
@@ -138,23 +137,23 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap gap-5 justify-center mt-10"
+            className="flex flex-col md:flex-row gap-6 md:gap-10 justify-center mt-12 items-center"
           >
             <Link
               href={profile.resumeUrl}
               target="_blank"
-              className="btn-glow inline-flex items-center gap-3 px-8 py-4 rounded-full bg-primary text-white font-medium transition-all duration-300 hover:scale-105 hover:bg-primary/90 text-lg"
+              className="group flex items-center gap-3 text-muted-foreground font-light text-lg md:text-2xl hover:text-primary transition-colors duration-300"
             >
-              <FileText size={20} />
-              View Resume
+              <FileText size={24} className="group-hover:scale-110 transition-transform" />
+              <span>View Resume</span>
             </Link>
             <Link
               href={profile.locationUrl}
               target="_blank"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full glass text-foreground font-medium hover:bg-white/5 transition-all duration-300 hover:scale-105 hover:border-primary/50 text-lg"
+              className="group flex items-center gap-3 text-muted-foreground font-light text-lg md:text-2xl hover:text-primary transition-colors duration-300"
             >
-              <MapPin size={20} />
-              {profile.location}
+              <MapPin size={24} className="group-hover:scale-110 transition-transform" />
+              <span>{profile.location}</span>
             </Link>
           </motion.div>
         </div>
@@ -209,8 +208,8 @@ export function Hero() {
                     <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent" />
                     
                     {/* Project Details Overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16 flex flex-col items-start gap-6">
-                      <div className="space-y-4 max-w-3xl">
+                    <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col justify-end">
+                      <div className="space-y-4 max-w-3xl mb-12 select-none">
                         <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight drop-shadow-lg">
                           {project.title}
                         </h3>
@@ -219,11 +218,11 @@ export function Hero() {
                         </p>
                       </div>
 
-                      <div className="flex flex-wrap gap-4 pt-2">
+                      <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 lg:bottom-16 lg:right-16 flex gap-4">
                         <Link
                           href={project.link}
                           target="_blank"
-                          className="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-medium hover:scale-105 transition-all duration-300"
+                          className="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-medium hover:scale-105 transition-all duration-300 shadow-lg shadow-black/20"
                         >
                           {project.link.includes("github") ? <Github size={20} /> : <ExternalLink size={20} />}
                           {project.link.includes("github") ? "View Code" : "Live Preview"}

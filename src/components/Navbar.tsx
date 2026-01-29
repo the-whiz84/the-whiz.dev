@@ -40,11 +40,12 @@ export function Navbar() {
       <nav className="container mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="relative w-20 h-20 hover:scale-110 transition-transform duration-300">
           <Image 
-            src="/assets/img/tw-logo.jpg" 
+            src="/assets/img/navbar-logo.png" 
             alt="TheWhiz Logo" 
             fill 
             className="object-contain"
             priority
+            unoptimized
           />
         </Link>
 

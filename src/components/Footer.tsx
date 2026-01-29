@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Facebook, Twitter, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Twitter, ArrowUp } from "lucide-react";
 import { socials } from "@/data";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Github,
   Linkedin,
-  Facebook,
   Twitter,
 };
 
