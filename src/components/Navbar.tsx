@@ -45,7 +45,6 @@ export function Navbar() {
             fill 
             className="object-contain"
             priority
-            unoptimized
           />
         </Link>
 
