@@ -44,9 +44,9 @@ export interface SocialLink {
 
 export const profile = {
   name: "Radu Chiriac",
-  tagline: "I'm just a guy passionate about tech and Linux. I dabble in Python and DevOps.",
-  location: "Brasov, Romania",
-  locationUrl: "https://maps.app.goo.gl/u9i9G49btVbKAqBWA",
+  tagline: "I'm a guy passionate about videogames, tech and Linux. I dabble in Python, DevOps, AWS and AI.",
+  location: "Sibiu, Romania",
+  locationUrl: "https://maps.app.goo.gl/riqMDNYqAJRaxHdr9",
   resumeUrl: "/files/Resume.pdf",
   image: "/assets/img/profile-new.png",
 };
@@ -60,17 +60,17 @@ export const socials: SocialLink[] = [
 
 export const projects: Project[] = [
   {
-    title: "Portfolio Website v2",
+    title: "Zero-Dawn v2",
     description:
-      "The second iteration of my personal portfolio website, built to showcase my growing skills and projects. Available on GitHub.",
+      "The second iteration of my personal portfolio website, built to showcase my growing skills and projects. Created using Python, Flask and Bootstrap 5.",
     image: "/assets/img/project-v2-new.png",
     link: "https://github.com/the-whiz84/Portfolio-Website",
     linkLabel: "View Code",
   },
   {
-    title: "ZeroDawn (v1)",
+    title: "Zero-Dawn v1",
     description:
-      "The first version of my personal website (zerodawn.tech). A stepping stone in my web development journey.",
+      "The first version of my personal website. A stepping stone in my web development journey. Created using Hugo and Toha theme.",
     image: "/assets/img/project-v1-new.png",
     link: "https://github.com/the-whiz84/zerodawn.tech",
     linkLabel: "View Code",
@@ -81,7 +81,7 @@ export const projects: Project[] = [
       "This is the GitHub repo for most of the projects created using Python during the 100 Days of Code bootcamp. Larger projects have separate repos.",
     image: "/assets/img/python-projects.png",
     link: "https://github.com/the-whiz84/Python_Projects",
-    linkLabel: "Go to GitHub",
+    linkLabel: "View Code",
   },
   {
     title: "Radu's Blog",

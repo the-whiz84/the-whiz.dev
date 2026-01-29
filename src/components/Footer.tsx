@@ -65,10 +65,10 @@ export function Footer() {
 {/* Navigation Links removed as requested */}
 
           {/* Divider */}
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8" />
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8" />  
 
           {/* Copyright */}
-          <p className="text-muted-foreground/60 text-xs">
+          <p className="text-muted-foreground/60 text-sm">
             © {currentYear} Radu Chiriac. Crafted with passion.
           </p>
         </div>
