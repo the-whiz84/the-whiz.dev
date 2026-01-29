@@ -69,7 +69,7 @@ export function Hero() {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative w-44 h-44 md:w-52 md:h-52 lg:w-64 lg:h-64 mb-16"
+            className="relative w-44 h-44 md:w-52 md:h-52 lg:w-64 lg:h-64 mb-32"
           >
             {/* Glow effect behind image */}
             <div className="absolute inset-[-20px] rounded-full bg-gradient-to-br from-primary via-accent to-primary opacity-40 blur-3xl animate-pulse-glow" />

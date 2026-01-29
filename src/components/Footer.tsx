@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Facebook, Twitter, ArrowUp } from "lucide-react";
-import { socials, profile } from "@/data";
+import { socials } from "@/data";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Github,
@@ -27,9 +27,9 @@ export function Footer() {
       {/* Subtle glow effect */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-primary/5 blur-[100px] rounded-full" />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 py-16">
+      <div className="relative z-10 container mx-auto px-6 lg:px-12 py-16">
         {/* Main Footer Content */}
-        <div className="flex flex-col items-center text-center">
+        <div className="flex flex-col items-center justify-center text-center">
           {/* Scroll to top button */}
           <motion.button
             onClick={scrollToTop}

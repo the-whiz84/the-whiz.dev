@@ -60,11 +60,6 @@ function TimelineItem({ index, isLeft, children }: TimelineItemProps) {
 
 export function Experience() {
   // Combine experience and education for unified timeline
-  const allItems = [
-    ...experience.map((item) => ({ ...item, type: "experience" as const })),
-    ...education.map((item) => ({ ...item, type: "education" as const })),
-  ];
-
   return (
     <section id="experience" className="relative overflow-hidden flex flex-col items-center">
       {/* Subtle background gradient */}
@@ -134,7 +129,7 @@ export function Experience() {
         </div>
 
         {/* Education Timeline */}
-        <div className="pt-12">
+        <div className="pt-40">
           <motion.h3
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}

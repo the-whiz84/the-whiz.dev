@@ -63,7 +63,7 @@ export const projects: Project[] = [
     title: "Portfolio Website v2",
     description:
       "The second iteration of my personal portfolio website, built to showcase my growing skills and projects. Available on GitHub.",
-    image: "/assets/img/logo-new.png",
+    image: "/assets/img/project-v2-new.png",
     link: "https://github.com/the-whiz84/Portfolio-Website",
     linkLabel: "View Code",
   },
@@ -71,7 +71,7 @@ export const projects: Project[] = [
     title: "ZeroDawn (v1)",
     description:
       "The first version of my personal website (zerodawn.tech). A stepping stone in my web development journey.",
-    image: "/assets/img/logo-new.png",
+    image: "/assets/img/project-v1-new.png",
     link: "https://github.com/the-whiz84/zerodawn.tech",
     linkLabel: "View Code",
   },
