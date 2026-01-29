@@ -2,7 +2,7 @@ import { Hero, Experience, Skills, Certifications, SectionDivider } from "@/comp
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <main className="min-h-screen bg-background text-foreground overflow-x-hidden w-full">
       <Hero />
       <SectionDivider />
       <Experience />
@@ -10,6 +10,6 @@ export default function Home() {
       <Skills />
       <SectionDivider />
       <Certifications />
-    </div>
+    </main>
   );
 }

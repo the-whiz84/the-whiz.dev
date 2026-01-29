@@ -62,18 +62,7 @@ export function Footer() {
             })}
           </div>
 
-          {/* Navigation Links */}
-          <nav className="flex flex-wrap justify-center gap-6 mb-12 text-sm">
-            {["Projects", "Experience", "Skills", "Certifications"].map((item) => (
-              <Link
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                {item}
-              </Link>
-            ))}
-          </nav>
+{/* Navigation Links removed as requested */}
 
           {/* Divider */}
           <div className="w-32 h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8" />

@@ -8,7 +8,7 @@ import { certifications } from "@/data";
 
 export function Certifications() {
   return (
-    <section id="certifications" className="relative py-24 overflow-hidden">
+    <section id="certifications" className="relative py-24 overflow-hidden flex flex-col items-center">
       {/* Background */}
       <div className="absolute inset-0 bg-transparent" />
       

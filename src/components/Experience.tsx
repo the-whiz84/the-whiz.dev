@@ -66,7 +66,7 @@ export function Experience() {
   ];
 
   return (
-    <section id="experience" className="relative overflow-hidden">
+    <section id="experience" className="relative overflow-hidden flex flex-col items-center">
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/10 to-transparent" />
 
@@ -87,12 +87,12 @@ export function Experience() {
         {/* Experience Timeline */}
         <div className="mb-24">
           <motion.h3
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-2xl font-bold mb-8 flex items-center gap-3"
+            className="text-3xl font-bold mb-12 flex items-center justify-center gap-3 text-center"
           >
-            <Briefcase className="text-primary" size={28} />
+            <Briefcase className="text-primary" size={32} />
             Work Experience
           </motion.h3>
 
@@ -134,14 +134,14 @@ export function Experience() {
         </div>
 
         {/* Education Timeline */}
-        <div>
+        <div className="pt-12">
           <motion.h3
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-2xl font-bold mb-8 flex items-center gap-3"
+            className="text-3xl font-bold mb-12 flex items-center justify-center gap-3 text-center"
           >
-            <GraduationCap className="text-primary" size={28} />
+            <GraduationCap className="text-primary" size={32} />
             My Education
           </motion.h3>
 

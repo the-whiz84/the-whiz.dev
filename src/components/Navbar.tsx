@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -37,8 +38,14 @@ export function Navbar() {
       )}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold">
-          <span className="gradient-text">TheWhiz</span>
+        <Link href="/" className="relative w-10 h-10 hover:scale-110 transition-transform duration-300">
+          <Image 
+            src="/favicon.ico" 
+            alt="TheWhiz Logo" 
+            fill 
+            className="object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
