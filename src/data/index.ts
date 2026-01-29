@@ -48,7 +48,7 @@ export const profile = {
   location: "Brasov, Romania",
   locationUrl: "https://maps.app.goo.gl/u9i9G49btVbKAqBWA",
   resumeUrl: "/files/Resume.pdf",
-  image: "/assets/img/Radu.png",
+  image: "/assets/img/profile-new.png",
 };
 
 export const socials: SocialLink[] = [
@@ -59,6 +59,22 @@ export const socials: SocialLink[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    title: "Portfolio Website v2",
+    description:
+      "The second iteration of my personal portfolio website, built to showcase my growing skills and projects. Available on GitHub.",
+    image: "/assets/img/logo-new.png",
+    link: "https://github.com/the-whiz84/Portfolio-Website",
+    linkLabel: "View Code",
+  },
+  {
+    title: "ZeroDawn (v1)",
+    description:
+      "The first version of my personal website (zerodawn.tech). A stepping stone in my web development journey.",
+    image: "/assets/img/logo-new.png",
+    link: "https://github.com/the-whiz84/zerodawn.tech",
+    linkLabel: "View Code",
+  },
   {
     title: "Python Projects",
     description:
