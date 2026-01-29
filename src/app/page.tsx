@@ -1,4 +1,4 @@
-import { Hero, Projects, Experience, Skills, Certifications, SectionDivider } from "@/components";
+import { Hero, Experience, Skills, Certifications, SectionDivider } from "@/components";
 
 export default function Home() {
   return (
@@ -10,8 +10,6 @@ export default function Home() {
       <Skills />
       <SectionDivider />
       <Certifications />
-      <SectionDivider />
-      <Projects />
     </div>
   );
 }

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { MapPin, FileText, Github, Linkedin, Facebook, Twitter, ChevronLeft, ChevronRight } from "lucide-react";
+import { MapPin, FileText, Github, Linkedin, Facebook, Twitter, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { profile, socials, projects } from "@/data";
 import { useState, useEffect, useCallback, useRef } from "react";
 
@@ -193,31 +193,44 @@ export function Hero() {
                   initial={false}
                   animate={{
                     opacity: currentProject === index ? 1 : 0,
-                    scale: currentProject === index ? 1 : 1.1,
-                    filter: currentProject === index ? "blur(0px)" : "blur(10px)",
+                    zIndex: currentProject === index ? 10 : 0,
                   }}
                   transition={{ duration: 0.7 }}
-                  className={`absolute inset-0 ${currentProject === index ? "z-10" : "z-0 pointer-events-none"}`}
+                  className="absolute inset-0"
                 >
-                  <Link
-                    href="#projects"
-                    className="block relative h-full group"
-                    onClick={() => {
-                      sessionStorage.setItem("selectedProject", String(index));
-                    }}
-                  >
+                  <div className="relative h-full w-full group">
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-80" />
-                    <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 transform transition-transform duration-500 group-hover:translate-y-[-10px]">
-                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">{project.title}</h3>
-                      <p className="text-primary font-medium tracking-wide">Click to view details</p>
+                    {/* Gradient Overlay for Text Readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent" />
+                    
+                    {/* Project Details Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12 lg:p-16 flex flex-col items-start gap-6">
+                      <div className="space-y-4 max-w-3xl">
+                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight drop-shadow-lg">
+                          {project.title}
+                        </h3>
+                        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed line-clamp-2 md:line-clamp-3">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      <div className="flex flex-wrap gap-4 pt-2">
+                        <Link
+                          href={project.link}
+                          target="_blank"
+                          className="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-medium hover:scale-105 transition-all duration-300"
+                        >
+                          {project.link.includes("github") ? <Github size={20} /> : <ExternalLink size={20} />}
+                          {project.link.includes("github") ? "View Code" : "Live Preview"}
+                        </Link>
+                      </div>
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               ))}
             </div>

@@ -41,15 +41,7 @@ export function Footer() {
             <ArrowUp size={24} className="group-hover:-translate-y-1 transition-transform" />
           </motion.button>
 
-          {/* Brand */}
-          <Link href="/" className="text-3xl font-bold gradient-text mb-4">
-            TheWhiz
-          </Link>
-
-          {/* Tagline */}
-          <p className="text-muted-foreground text-sm max-w-md mb-8">
-            {profile.tagline}
-          </p>
+{/* Brand and Tagline removed as requested */}
 
           {/* Social Links */}
           <div className="flex gap-3 mb-12">
