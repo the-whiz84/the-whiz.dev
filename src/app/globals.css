@@ -1,18 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0d0d0d;
-  --foreground: #ededed;
-  --primary: #a78bfa;
+  --background: #050505;
+  --foreground: #ffffff;
+  --primary: #8b5cf6;
   --primary-foreground: #ffffff;
-  --secondary: #1c1c27;
-  --accent: #6366f1;
+  --secondary: #1a1a2e;
+  --accent: #ec4899;
   --muted: #27272a;
   --muted-foreground: #a1a1aa;
-  --card: #18181b;
-  --card-foreground: #fafafa;
-  --border: #27272a;
-  --ring: #a78bfa;
+  --card: #121216;
+  --card-foreground: #ffffff;
+  --border: #2e2e36;
+  --ring: #8b5cf6;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
 }
 
 @theme inline {
@@ -98,18 +103,25 @@ html {
 
 /* Glass effect utility */
 .glass {
-  background: rgba(24, 24, 27, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(20, 20, 25, 0.6);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 /* Gradient text utility */
 .gradient-text {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, #c4b5fd 0%, var(--primary) 50%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 2em rgba(139, 92, 246, 0.3));
+}
+
+/* Text Glow utility */
+.text-glow {
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5), 0 0 20px rgba(139, 92, 246, 0.3);
 }
 
 /* Glow effect */

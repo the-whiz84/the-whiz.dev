@@ -26,21 +26,24 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 
 export function Skills() {
   return (
-    <section id="skills" className="bg-secondary/30">
-      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="skills" className="relative py-24 bg-secondary/20">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent pointer-events-none" />
+      
+      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
+          <p className="text-primary font-mono text-sm tracking-widest uppercase mb-4">My Arsenal</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            Skills and <span className="gradient-text">Technologies</span>
+            Skills & <span className="gradient-text text-glow">Technologies</span>
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {skills.map((skill, index) => {
             const Icon = iconMap[skill.icon];
             return (
@@ -50,13 +53,16 @@ export function Skills() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="group glass rounded-2xl p-6 hover:glow transition-all duration-300"
+                className="group relative"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  {Icon && <Icon size={24} className="text-primary" />}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative h-full glass rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
+                    {Icon && <Icon size={28} className="text-primary group-hover:text-white transition-colors" />}
+                  </div>
+                  <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{skill.name}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{skill.description}</p>
                 </div>
-                <h3 className="font-bold text-lg text-foreground mb-2">{skill.name}</h3>
-                <p className="text-muted-foreground text-sm">{skill.description}</p>
               </motion.div>
             );
           })}

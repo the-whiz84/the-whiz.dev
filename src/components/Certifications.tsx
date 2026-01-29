@@ -8,21 +8,25 @@ import { certifications } from "@/data";
 
 export function Certifications() {
   return (
-    <section id="certifications">
-      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
+    <section id="certifications" className="relative py-24 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-transparent" />
+      
+      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
         >
+          <p className="text-primary font-mono text-sm tracking-widest uppercase mb-4">Continuous Learning</p>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            My <span className="gradient-text">Certifications</span>
+            My <span className="gradient-text text-glow">Certifications</span>
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {certifications.map((cert, index) => (
             <motion.div
               key={cert.title}
@@ -30,26 +34,31 @@ export function Certifications() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass rounded-2xl p-8 text-center hover:glow transition-all duration-300 flex flex-col"
+              className="group h-full"
             >
-              <div className="relative w-32 h-32 mx-auto mb-6">
-                <Image
-                  src={cert.image}
-                  alt={cert.title}
-                  fill
-                  className="object-contain rounded-full"
-                />
+              <div className="relative h-full glass rounded-3xl p-8 text-center hover:border-primary/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(139,92,246,0.15)] flex flex-col items-center">
+                <div className="relative w-32 h-32 mb-8 group-hover:scale-105 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <Image
+                    src={cert.image}
+                    alt={cert.title}
+                    fill
+                    className="object-contain rounded-full relative z-10"
+                  />
+                </div>
+                
+                <h3 className="font-bold text-xl text-foreground mb-4 group-hover:text-primary transition-colors">{cert.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">{cert.description}</p>
+                
+                <Link
+                  href={cert.link}
+                  target="_blank"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-secondary border border-white/5 text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 w-full group-hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                >
+                  View details
+                  <ExternalLink size={16} />
+                </Link>
               </div>
-              <h3 className="font-bold text-lg text-foreground mb-4">{cert.title}</h3>
-              <p className="text-muted-foreground text-sm mb-6 flex-1">{cert.description}</p>
-              <Link
-                href={cert.link}
-                target="_blank"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
-              >
-                View details
-                <ExternalLink size={14} />
-              </Link>
             </motion.div>
           ))}
         </div>
