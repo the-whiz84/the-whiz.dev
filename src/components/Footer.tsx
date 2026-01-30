@@ -31,11 +31,14 @@ export function Footer() {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           {/* Left Side: Brand */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">
               <span className="text-foreground">The-</span>
               <span className="text-primary">Whiz</span>
               <span className="text-muted-foreground">.dev</span>
             </h2>
+            <p className="text-muted-foreground max-w-sm">
+              Crafted with ❤️ by AI Agents. (I just supervised)
+            </p>
           </div>
 
           {/* Right Side: Connect & Contact */}
