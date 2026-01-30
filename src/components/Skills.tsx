@@ -26,7 +26,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 
 export function Skills() {
   return (
-    <section id="skills" className="relative py-24 overflow-hidden flex flex-col items-center">
+    <section id="skills" className="relative overflow-hidden flex flex-col items-center" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
       <div className="absolute inset-0 bg-transparent" />
       
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
@@ -35,15 +35,15 @@ export function Skills() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Skills & <span className="gradient-text text-glow">Technologies</span>
           </h2>
-          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-8">My Arsenal</p>
+          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase" style={{ marginBottom: "3rem" }}>My Arsenal</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {skills.map((skill, index) => {
             const Icon = iconMap[skill.icon];
             return (

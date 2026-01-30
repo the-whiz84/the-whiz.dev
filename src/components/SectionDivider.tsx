@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function SectionDivider() {
   return (
-    <div className="relative py-8 md:py-12 overflow-hidden">
+    <div className="relative py-4 md:py-6 overflow-hidden">
       {/* Central gradient line */}
       <motion.div
         initial={{ scaleX: 0, opacity: 0 }}
