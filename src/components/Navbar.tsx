@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -18,13 +18,45 @@ const navItems = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+  const sectionRatios = useRef<Record<string, number>>({});
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
+
+
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          sectionRatios.current[entry.target.id] = entry.intersectionRatio;
+        });
+
+        const activeId = Object.keys(sectionRatios.current).reduce((a, b) => 
+          sectionRatios.current[a] > sectionRatios.current[b] ? a : b
+        );
+        
+        if (sectionRatios.current[activeId] > 0) {
+          setActiveSection(activeId);
+        }
+      },
+      { 
+        threshold: [0, 0.2, 0.4, 0.6, 0.8, 1],
+        rootMargin: "-20% 0px -20% 0px" 
+      }
+    );
+
+    document.querySelectorAll("section[id]").forEach((section) => {
+      observer.observe(section);
+    });
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -50,18 +82,28 @@ export function Navbar() {
 
         {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center gap-2">
-          {navItems.map((item) => (
-            <li key={item.label}>
-              <Link
-                href={item.href}
-                target={item.external ? "_blank" : undefined}
-                className="relative px-5 py-2.5 rounded-full text-muted-foreground hover:text-white transition-colors duration-200 text-sm font-medium group overflow-hidden"
-              >
-                <span className="relative z-10">{item.label}</span>
-                <span className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
-              </Link>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activeSection === item.href.substring(1);
+            return (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  className={cn(
+                    "relative px-5 py-2.5 rounded-full transition-all duration-300 text-sm font-medium group overflow-hidden",
+                    isActive 
+                      ? "text-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.1)]" 
+                      : "text-muted-foreground hover:text-white"
+                  )}
+                >
+                  <span className="relative z-10">{item.label}</span>
+                  {!isActive && (
+                    <span className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
+                  )}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Mobile Menu Button */}
