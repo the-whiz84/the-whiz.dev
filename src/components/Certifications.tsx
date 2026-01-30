@@ -18,7 +18,7 @@ export function Certifications() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             My <span className="gradient-text text-glow">Certifications</span>
@@ -26,7 +26,7 @@ export function Certifications() {
           <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-24">Continuous Learning</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {certifications.map((cert, index) => (
             <motion.div
               key={cert.title}
@@ -47,16 +47,16 @@ export function Certifications() {
                   />
                 </div>
                 
-                <h3 className="font-bold text-xl text-foreground mb-4 group-hover:text-primary transition-colors">{cert.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">{cert.description}</p>
+                <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{cert.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">{cert.description}</p>
                 
                 <Link
                   href={cert.link}
                   target="_blank"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-secondary border border-white/5 text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 w-full group-hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                  className="inline-flex items-center justify-center gap-2 text-muted-foreground font-light text-sm hover:text-primary transition-colors duration-300"
                 >
                   View details
-                  <ExternalLink size={16} />
+                  <ExternalLink size={16} className="group-hover:scale-110 transition-transform" />
                 </Link>
               </div>
             </motion.div>
