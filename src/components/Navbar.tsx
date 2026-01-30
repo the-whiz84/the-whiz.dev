@@ -70,7 +70,7 @@ export function Navbar() {
         isScrolled ? "glass py-3 border-b border-white/5" : "py-5 bg-transparent"
       )}
     >
-      <nav className="w-full max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between">
+      <nav className="container mx-auto px-6 flex items-center justify-between">
         <Link href="/" className="relative w-20 h-20 hover:scale-110 transition-transform duration-300">
           <Image 
             src="/assets/img/navbar-logo.png" 

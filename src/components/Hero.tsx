@@ -14,7 +14,7 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
       {/* Background Gradient - Subtle dark gradient */}
       <div className="absolute inset-0 bg-background" />
 
