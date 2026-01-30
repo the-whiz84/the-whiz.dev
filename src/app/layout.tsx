@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Radu Chiriac | TheWhiz Portfolio",
   description: "Personal portfolio of Radu Chiriac - Tech enthusiast, Linux lover, and Python developer.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/assets/img/favicon.png",
   },
 };
 
