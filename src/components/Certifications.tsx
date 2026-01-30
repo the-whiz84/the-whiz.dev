@@ -8,7 +8,7 @@ import { certifications } from "@/data";
 
 export function Certifications() {
   return (
-    <section id="certifications" className="relative py-24 overflow-hidden flex flex-col items-center">
+    <section id="certifications" className="relative overflow-hidden flex flex-col items-center" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
       {/* Background */}
       <div className="absolute inset-0 bg-transparent" />
       
@@ -18,15 +18,15 @@ export function Certifications() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             My <span className="gradient-text text-glow">Certifications</span>
           </h2>
-          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-8">Continuous Learning</p>
+          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase" style={{ marginBottom: "3rem" }}>Continuous Learning</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {certifications.map((cert, index) => (
             <motion.div
               key={cert.title}
@@ -47,13 +47,13 @@ export function Certifications() {
                   />
                 </div>
                 
-                <h3 className="font-bold text-xl text-foreground mb-4 group-hover:text-primary transition-colors">{cert.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">{cert.description}</p>
+                <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{cert.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">{cert.description}</p>
                 
                 <Link
                   href={cert.link}
                   target="_blank"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-secondary border border-white/5 text-sm font-medium hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 w-full group-hover:shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                  className="btn-glow inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-medium hover:scale-105 transition-all duration-300 shadow-lg shadow-black/20"
                 >
                   View details
                   <ExternalLink size={16} />
