@@ -99,9 +99,13 @@ export function Footer() {
 
         {/* Copyright - Centered & Larger */}
         <div className="border-t border-white/5 pt-8 text-center">
-          <p className="text-muted-foreground text-base">
-            © {currentYear} Radu Chiriac. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-muted-foreground text-base">
+            <p>© {currentYear} Radu Chiriac. All rights reserved.</p>
+            <span className="hidden md:inline">•</span>
+            <Link href="/privacy" className="hover:text-primary transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
