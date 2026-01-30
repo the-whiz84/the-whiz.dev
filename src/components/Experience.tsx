@@ -136,7 +136,7 @@ export function Experience() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mt-24 flex items-center justify-center gap-3 text-center"
-            style={{ marginBottom: "3rem" }}
+            style={{ marginBottom: "3rem", marginTop: "3rem" }}
           >
             <GraduationCap className="text-primary" size={28} />
             My Education

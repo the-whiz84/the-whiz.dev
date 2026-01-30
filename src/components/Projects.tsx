@@ -62,6 +62,7 @@ export function Projects() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           className="max-w-5xl lg:max-w-6xl mx-auto"
+          style={{ marginLeft: "auto", marginRight: "auto" }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
