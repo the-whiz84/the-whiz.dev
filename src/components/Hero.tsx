@@ -86,7 +86,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex gap-4 mt-8"
+            className="flex gap-4 mt-12"
           >
             {socials.map((social) => {
               const Icon = iconMap[social.icon];
@@ -109,7 +109,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-col md:flex-row gap-6 md:gap-10 justify-center mt-12 items-center"
+            className="flex flex-col md:flex-row gap-6 md:gap-10 justify-center mt-16 items-center"
           >
             <Link
               href={profile.resumeUrl}

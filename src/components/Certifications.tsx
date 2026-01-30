@@ -23,7 +23,7 @@ export function Certifications() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             My <span className="gradient-text text-glow">Certifications</span>
           </h2>
-          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase">Continuous Learning</p>
+          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-8">Continuous Learning</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
