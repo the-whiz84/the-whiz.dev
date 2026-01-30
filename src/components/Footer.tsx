@@ -28,20 +28,13 @@ export function Footer() {
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12 py-16">
         {/* Main Footer Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           {/* Left Side: Brand */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
-              <span className="text-foreground">The</span>
-              <span className="text-primary">Whiz</span>
+              <span className="text-foreground">the-whiz</span>
               <span className="text-muted-foreground">.dev</span>
             </h2>
-            <p className="text-muted-foreground max-w-sm">
-              Crafting digital experiences with precision and passion.
-            </p>
-            <p className="text-muted-foreground/60 text-sm mt-8">
-              © {currentYear} Radu Chiriac. All rights reserved.
-            </p>
           </div>
 
           {/* Right Side: Connect & Contact */}
@@ -87,7 +80,7 @@ export function Footer() {
               </div>
             </div>
 
-            {/* Scroll to top button (Updated position) */}
+            {/* Scroll to top button */}
             <motion.button
               onClick={scrollToTop}
               whileHover={{ scale: 1.1 }}
@@ -98,6 +91,13 @@ export function Footer() {
               <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
             </motion.button>
           </div>
+        </div>
+
+        {/* Copyright - Centered & Larger */}
+        <div className="border-t border-white/5 pt-8 text-center">
+          <p className="text-muted-foreground text-base">
+            © {currentYear} Radu Chiriac. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
