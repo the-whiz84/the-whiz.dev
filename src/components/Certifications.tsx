@@ -53,10 +53,10 @@ export function Certifications() {
                 <Link
                   href={cert.link}
                   target="_blank"
-                  className="inline-flex items-center justify-center gap-2 text-muted-foreground font-light text-sm hover:text-primary transition-colors duration-300"
+                  className="btn-glow inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-medium hover:scale-105 transition-all duration-300 shadow-lg shadow-black/20"
                 >
                   View details
-                  <ExternalLink size={16} className="group-hover:scale-110 transition-transform" />
+                  <ExternalLink size={16} />
                 </Link>
               </div>
             </motion.div>
