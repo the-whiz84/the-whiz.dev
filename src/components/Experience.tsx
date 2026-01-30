@@ -61,7 +61,7 @@ function TimelineItem({ index, isLeft, children }: TimelineItemProps) {
 export function Experience() {
   // Combine experience and education for unified timeline
   return (
-    <section id="experience" className="relative py-12 overflow-hidden flex flex-col items-center">
+    <section id="experience" className="relative overflow-hidden flex flex-col items-center" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/10 to-transparent" />
 
@@ -85,7 +85,8 @@ export function Experience() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-96 flex items-center justify-center gap-3 text-center"
+            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase flex items-center justify-center gap-3 text-center"
+            style={{ marginBottom: "3rem" }}
           >
             <Briefcase className="text-primary" size={28} />
             Work Experience
@@ -134,7 +135,8 @@ export function Experience() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-96 flex items-center justify-center gap-3 text-center"
+            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mt-24 flex items-center justify-center gap-3 text-center"
+            style={{ marginBottom: "3rem" }}
           >
             <GraduationCap className="text-primary" size={28} />
             My Education

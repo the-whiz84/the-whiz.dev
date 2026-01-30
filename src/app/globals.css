@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../../src";
+
 
 :root {
   --background: #050505;
@@ -36,6 +38,8 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+
+
 
 * {
   box-sizing: border-box;
