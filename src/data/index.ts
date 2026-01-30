@@ -87,7 +87,7 @@ export const projects: Project[] = [
     description:
       "A Blog Website created with Python, Flask and SQLAlchemy with user registration and login flow to post articles and comments.",
     image: "/assets/img/blog.png",
-    link: "https://blog.thewhiz.me",
+    link: "https://blog.the-whiz.dev",
     linkLabel: "Go to Website",
   },
   {
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     description:
       "ToDo Web App created with Flask, Bootstrap 5 and PostgreSQL database to manage each user's list. Tasks show due date and can be closed or deleted.",
     image: "/assets/img/organize-it.png",
-    link: "https://todo.thewhiz.me",
+    link: "https://todo.the-whiz.dev",
     linkLabel: "Go to Website",
   },
   {
