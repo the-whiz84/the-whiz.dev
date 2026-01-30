@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const navItems = [
   { label: "V1", href: "https://v1.thewhiz.me", external: true },
   { label: "V2", href: "https://thewhiz.me", external: true },
+  { label: "Projects", href: "#projects", external: false },
   { label: "Experience", href: "#experience", external: false },
   { label: "Skills", href: "#skills", external: false },
   { label: "Certifications", href: "#certifications", external: false },
@@ -69,7 +70,7 @@ export function Navbar() {
         isScrolled ? "glass py-3 border-b border-white/5" : "py-5 bg-transparent"
       )}
     >
-      <nav className="container mx-auto px-6 flex items-center justify-between">
+      <nav className="w-full max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between">
         <Link href="/" className="relative w-20 h-20 hover:scale-110 transition-transform duration-300">
           <Image 
             src="/assets/img/navbar-logo.png" 
