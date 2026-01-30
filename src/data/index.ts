@@ -63,7 +63,7 @@ export const projects: Project[] = [
     description:
       "The second iteration of my personal portfolio website, built to showcase my growing skills and projects. Created using Python, Flask and Bootstrap 5.",
     image: "/assets/img/project-v2-new.png",
-    link: "https://github.com/the-whiz84/Portfolio-Website",
+    link: "https://github.com/the-whiz84/zero-dawn-v2",
     linkLabel: "View Code",
   },
   {
@@ -71,7 +71,7 @@ export const projects: Project[] = [
     description:
       "The first version of my personal website. A stepping stone in my web development journey. Created using Hugo and Toha theme.",
     image: "/assets/img/project-v1-new.png",
-    link: "https://github.com/the-whiz84/zerodawn.tech",
+    link: "https://github.com/the-whiz84/zero-dawn-v1",
     linkLabel: "View Code",
   },
   {
