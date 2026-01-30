@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, ArrowUp } from "lucide-react";
+import { Github, Linkedin, Twitter, ArrowUp, Mail } from "lucide-react";
 import { socials } from "@/data";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -41,6 +41,22 @@ export function Footer() {
           </motion.button>
 
 {/* Brand and Tagline removed as requested */}
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="mb-12"
+          >
+            <a
+              href="mailto:radu@the-whiz.dev"
+              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-full font-bold text-lg tracking-wide hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:shadow-[0_0_30px_rgba(139,92,246,0.8)]"
+            >
+              <Mail size={22} className="group-hover:rotate-12 transition-transform duration-300" />
+              <span>Get In Touch</span>
+              <div className="absolute inset-0 rounded-full bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </a>
+          </motion.div>
 
           {/* Social Links */}
           <div className="flex gap-3 mb-12">
