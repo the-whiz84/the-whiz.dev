@@ -39,6 +39,20 @@ File: `src/data/index.ts`
     },
     ```
 
+### How to add a new Project:
+1.  Find the `projects` array in `src/data/index.ts`.
+2.  Add a new entry:
+    ```typescript
+    {
+      title: "Project Name",
+      description: "A brief description of what the project does...",
+      image: "/assets/img/project-screenshot.png", // See Section 2 for images
+      link: "https://github.com/your-repo" // or live URL
+    },
+    ```
+3.  **Recommended image size**: Use screenshots with a 16:9 aspect ratio for best display in the carousel.
+4.  Projects are displayed in the order they appear in the array (first item = first in carousel).
+
 ## 2. Adding Images
 
 Images should be placed in the `public/assets/img/` directory.

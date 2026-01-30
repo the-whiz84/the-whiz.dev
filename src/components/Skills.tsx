@@ -26,8 +26,8 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 
 export function Skills() {
   return (
-    <section id="skills" className="relative py-24 bg-secondary/20 flex flex-col items-center">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent pointer-events-none" />
+    <section id="skills" className="relative py-24 overflow-hidden flex flex-col items-center">
+      <div className="absolute inset-0 bg-transparent" />
       
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <motion.div
@@ -37,13 +37,13 @@ export function Skills() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-primary font-mono text-sm tracking-widest uppercase mb-4">My Arsenal</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             Skills & <span className="gradient-text text-glow">Technologies</span>
           </h2>
+          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-8">My Arsenal</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12">
           {skills.map((skill, index) => {
             const Icon = iconMap[skill.icon];
             return (
