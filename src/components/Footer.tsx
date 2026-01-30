@@ -28,64 +28,76 @@ export function Footer() {
 
       <div className="relative z-10 container mx-auto px-6 lg:px-12 py-16">
         {/* Main Footer Content */}
-        <div className="flex flex-col items-center justify-center text-center">
-          {/* Scroll to top button */}
-          <motion.button
-            onClick={scrollToTop}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="mb-8 p-4 rounded-full glass hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300 group"
-            aria-label="Scroll to top"
-          >
-            <ArrowUp size={24} className="group-hover:-translate-y-1 transition-transform" />
-          </motion.button>
-
-{/* Brand and Tagline removed as requested */}
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <a
-              href="mailto:radu@the-whiz.dev"
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-primary text-white rounded-full font-bold text-lg tracking-wide hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:shadow-[0_0_30px_rgba(139,92,246,0.8)]"
-            >
-              <Mail size={22} className="group-hover:rotate-12 transition-transform duration-300" />
-              <span>Get In Touch</span>
-              <div className="absolute inset-0 rounded-full bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </a>
-          </motion.div>
-
-          {/* Social Links */}
-          <div className="flex gap-3 mb-12">
-            {socials.map((social) => {
-              const Icon = iconMap[social.icon];
-              return (
-                <motion.div key={social.name} whileHover={{ scale: 1.1, y: -2 }}>
-                  <Link
-                    href={social.url}
-                    target="_blank"
-                    aria-label={social.name}
-                    className="flex items-center justify-center w-12 h-12 rounded-full glass hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300"
-                  >
-                    {Icon && <Icon size={20} />}
-                  </Link>
-                </motion.div>
-              );
-            })}
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Side: Brand */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
+              <span className="text-foreground">The</span>
+              <span className="text-primary">Whiz</span>
+              <span className="text-muted-foreground">.dev</span>
+            </h2>
+            <p className="text-muted-foreground max-w-sm">
+              Crafting digital experiences with precision and passion.
+            </p>
+            <p className="text-muted-foreground/60 text-sm mt-8">
+              © {currentYear} Radu Chiriac. All rights reserved.
+            </p>
           </div>
 
-{/* Navigation Links removed as requested */}
+          {/* Right Side: Connect & Contact */}
+          <div className="flex flex-col items-center md:items-end space-y-6">
+            <div className="flex flex-col items-center md:items-end space-y-4">
+              <h3 className="text-2xl font-bold text-foreground">Connect with me</h3>
+              
+              <div className="flex items-center gap-6">
+                 {/* Social Links */}
+                <div className="flex gap-3">
+                  {socials.map((social) => {
+                    const Icon = iconMap[social.icon];
+                    return (
+                      <motion.div key={social.name} whileHover={{ scale: 1.1, y: -2 }}>
+                        <Link
+                          href={social.url}
+                          target="_blank"
+                          aria-label={social.name}
+                          className="flex items-center justify-center w-12 h-12 rounded-full glass hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300"
+                        >
+                          {Icon && <Icon size={20} />}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
 
-          {/* Divider */}
-          <div className="w-32 h-px bg-gradient-to-r from-transparent via-border to-transparent mb-8" />  
+                {/* Contact Button */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                >
+                  <a
+                    href="mailto:radu@the-whiz.dev"
+                    className="group relative inline-flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-full font-bold text-base tracking-wide hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:shadow-[0_0_30px_rgba(139,92,246,0.8)]"
+                  >
+                    <Mail size={18} className="group-hover:rotate-12 transition-transform duration-300" />
+                    <span>Get In Touch</span>
+                    <div className="absolute inset-0 rounded-full bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </a>
+                </motion.div>
+              </div>
+            </div>
 
-          {/* Copyright */}
-          <p className="text-muted-foreground/60 text-sm">
-            © {currentYear} Radu Chiriac. Crafted with passion.
-          </p>
+            {/* Scroll to top button (Updated position) */}
+            <motion.button
+              onClick={scrollToTop}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-3 rounded-full glass hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300 group mt-4"
+              aria-label="Scroll to top"
+            >
+              <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
+            </motion.button>
+          </div>
         </div>
       </div>
     </footer>
