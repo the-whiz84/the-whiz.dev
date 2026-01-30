@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
-  { label: "V1", href: "https://v1.thewhiz.me", external: true },
+  { label: "V1", href: "https://v1.the-whiz.dev", external: true },
   { label: "V2", href: "https://thewhiz.me", external: true },
   { label: "Projects", href: "#projects", external: false },
   { label: "Experience", href: "#experience", external: false },
