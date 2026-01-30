@@ -8,7 +8,7 @@ import { certifications } from "@/data";
 
 export function Certifications() {
   return (
-    <section id="certifications" className="relative py-24 overflow-hidden flex flex-col items-center">
+    <section id="certifications" className="relative py-12 overflow-hidden flex flex-col items-center">
       {/* Background */}
       <div className="absolute inset-0 bg-transparent" />
       
@@ -23,7 +23,7 @@ export function Certifications() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             My <span className="gradient-text text-glow">Certifications</span>
           </h2>
-          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-24">Continuous Learning</p>
+          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-48">Continuous Learning</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

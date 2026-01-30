@@ -36,7 +36,7 @@ export function Projects() {
   const handleMouseLeave = () => setIsPaused(false);
 
   return (
-    <section id="projects" className="relative py-24 overflow-hidden flex flex-col items-center">
+    <section id="projects" className="relative py-12 overflow-hidden flex flex-col items-center">
       {/* Background */}
       <div className="absolute inset-0 bg-transparent" />
       
@@ -52,7 +52,7 @@ export function Projects() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             My <span className="gradient-text text-glow">Projects</span>
           </h2>
-          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-24">Featured Work</p>
+          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-48">Featured Work</p>
         </motion.div>
 
         {/* Project Carousel */}
