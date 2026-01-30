@@ -68,27 +68,7 @@ body {
   }
 }
 
-/* Section spacing - reduced to half */
-/* Section spacing with explicit visual separation */
-section {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  position: relative;
-}
-
-@media (min-width: 768px) {
-  section {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  section {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-}
+/* Section spacing - relying on utility classes (py-12 etc) instead of global override */
 
 /* Smooth scroll */
 html {

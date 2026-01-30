@@ -85,7 +85,7 @@ export function Experience() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-80 flex items-center justify-center gap-3 text-center"
+            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-[20rem] flex items-center justify-center gap-3 text-center"
           >
             <Briefcase className="text-primary" size={28} />
             Work Experience
@@ -134,7 +134,7 @@ export function Experience() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-80 flex items-center justify-center gap-3 text-center"
+            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-[20rem] flex items-center justify-center gap-3 text-center"
           >
             <GraduationCap className="text-primary" size={28} />
             My Education
