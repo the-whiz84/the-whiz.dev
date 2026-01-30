@@ -102,30 +102,33 @@ export function Projects() {
                       alt={project.title}
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1150px"
                     />
                     {/* Gradient Overlay for Text Readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent" />
                     
                     {/* Project Details Overlay */}
-                    <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col justify-end">
-                      <div className="space-y-4 max-w-3xl mb-12 select-none">
-                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight drop-shadow-lg">
-                          {project.title}
-                        </h3>
-                        <p className="text-muted-foreground text-lg md:text-xl leading-relaxed line-clamp-2 md:line-clamp-3">
-                          {project.description}
-                        </p>
-                      </div>
+                    <div className="absolute inset-0 p-6 md:p-12 lg:p-16 flex flex-col justify-end">
+                      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                        <div className="space-y-3 max-w-2xl select-none">
+                          <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight drop-shadow-lg">
+                            {project.title}
+                          </h3>
+                          <p className="text-muted-foreground text-sm md:text-xl leading-relaxed line-clamp-3 md:line-clamp-3">
+                            {project.description}
+                          </p>
+                        </div>
 
-                      <div className="absolute bottom-8 right-8 md:bottom-12 md:right-12 lg:bottom-16 lg:right-16 flex gap-4">
-                        <Link
-                          href={project.link}
-                          target="_blank"
-                          className="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-medium hover:scale-105 transition-all duration-300 shadow-lg shadow-black/20"
-                        >
-                          {project.link.includes("github") ? <Github size={20} /> : <ExternalLink size={20} />}
-                          {project.link.includes("github") ? "View Code" : "Live Preview"}
-                        </Link>
+                        <div className="flex shrink-0">
+                          <Link
+                            href={project.link}
+                            target="_blank"
+                            className="btn-glow inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 rounded-full bg-primary text-white text-sm md:text-base font-medium hover:scale-105 transition-all duration-300 shadow-lg shadow-black/20"
+                          >
+                            {project.link.includes("github") ? <Github size={18} className="md:w-5 md:h-5" /> : <ExternalLink size={18} className="md:w-5 md:h-5" />}
+                            {project.link.includes("github") ? "View Code" : "Live Preview"}
+                          </Link>
+                        </div>
                       </div>
                     </div>
                   </div>
