@@ -32,7 +32,8 @@ export function Footer() {
           {/* Left Side: Brand */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
             <h2 className="text-4xl md:text-5xl font-bold tracking-tighter">
-              <span className="text-foreground">the-whiz</span>
+              <span className="text-foreground">The-</span>
+              <span className="text-primary">Whiz</span>
               <span className="text-muted-foreground">.dev</span>
             </h2>
           </div>
