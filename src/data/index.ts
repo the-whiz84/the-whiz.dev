@@ -103,7 +103,7 @@ export const projects: Project[] = [
     description:
       "This is an e-commerce Example Website created with Flask, Bootstrap 5 and functioning payment processing for testing using Stripe's API services.",
     image: "/assets/img/shop.png",
-    link: "https://thewhiz.eu.pythonanywhere.com",
+    link: "https://shop.the-whiz.dev",
     linkLabel: "Go to Website",
   },
 ];
