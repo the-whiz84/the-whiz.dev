@@ -52,7 +52,7 @@ export function Projects() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             My <span className="gradient-text text-glow">Projects</span>
           </h2>
-          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-8">Featured Work</p>
+          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mb-24">Featured Work</p>
         </motion.div>
 
         {/* Project Carousel */}
