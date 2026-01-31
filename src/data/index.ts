@@ -109,11 +109,23 @@ export const projects: Project[] = [
 ];
 
 export const experience: ExperienceItem[] = [
+    {
+    company: "Bull Romania",
+    logo: "/assets/img/logos/bull.webp",
+    role: "HPC Technical Engineer",
+    period: "Jan. 2026 - Present",
+    accomplishments: [
+      "Supporting the server infrastructure for a German auto maker for one of its most critical projects.",
+      "Using Puppet for configuration management and automatic patching of RHEL servers.",
+      "Monitoring the infrastructure using ManageNow for Datacenter Monitoring (MN4DCM) from Fujitsu.",
+      "Participating in a project to migrate existing remote locations to a more streamlined solution.",
+    ],
+  },
   {
     company: "Eviden Technologies",
     logo: "/assets/img/logos/eviden.png",
     role: "HPC Technical Engineer",
-    period: "July 2023 - Present",
+    period: "July 2023 - Dec. 2025",
     accomplishments: [
       "Supporting the server infrastructure for a German auto maker for one of its most critical projects.",
       "Using Puppet for configuration management and automatic patching of RHEL servers.",
