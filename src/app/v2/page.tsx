@@ -55,11 +55,11 @@ export default function V2Page() {
             </Link>
           </div>
           <Link
-            href="/v1"
+            href="/"
             className="px-4 py-1.5 rounded text-sm font-medium text-white"
             style={{ backgroundColor: colors.success }}
           >
-            Zero-Dawn v1.0
+            Home
           </Link>
         </div>
       </nav>
@@ -72,16 +72,18 @@ export default function V2Page() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
         
         <div className="relative z-10 text-center px-6 py-20 mt-16">
-          {/* Profile Image - Circular Style */}
-          <div className="w-36 h-36 mx-auto mb-6 rounded-full overflow-hidden shadow-2xl border-4 border-white/20">
-            <Image
-              src="/assets/img/profile-new.png"
-              alt={profile.name}
-              width={144}
-              height={144}
-              className="object-cover w-full h-full"
-              priority
-            />
+          {/* Profile Image - Large Portrait Style */}
+          <div className="flex justify-center mb-6">
+            <div className="overflow-hidden" style={{ width: '300px', height: '400px' }}>
+              <Image
+                src="/assets/img/profile-new.png"
+                alt={profile.name}
+                width={300}
+                height={400}
+                className="object-cover object-top w-full h-full"
+                priority
+              />
+            </div>
           </div>
 
           <p className="font-medium mb-2" style={{ color: colors.primary }}>
@@ -140,11 +142,11 @@ export default function V2Page() {
       </header>
 
       {/* Main Content Sections */}
-      <div className="py-5">
+      <div className="py-8">
         {/* Projects Section */}
-        <section id="projects" className="py-12">
-          <div className="max-w-7xl mx-auto px-6">
-            <h3 className="text-2xl font-semibold mb-8 pb-2 border-b border-white/20">
+        <section id="projects" className="py-20 flex justify-center">
+          <div className="w-full max-w-7xl mx-auto px-6">
+            <h3 className="text-2xl font-semibold mb-12 pb-3 border-b border-white/20">
               Check my latest Projects
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -180,10 +182,10 @@ export default function V2Page() {
         </section>
 
         {/* Experience/Education Tabs */}
-        <section id="experience" className="py-8">
-          <div className="max-w-7xl mx-auto px-6">
+        <section id="experience" className="py-20 flex justify-center">
+          <div className="w-full max-w-7xl mx-auto px-6">
             {/* Tab Buttons - Material Kit Style */}
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center mb-12">
               <div 
                 className="inline-flex rounded-lg p-1"
                 style={{ backgroundColor: colors.primary }}
@@ -290,9 +292,9 @@ export default function V2Page() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-12">
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl font-semibold mb-8 pb-2 border-b border-white/20">
+        <section id="skills" className="py-20 flex justify-center">
+          <div className="w-full max-w-7xl mx-auto px-6">
+            <h2 className="text-2xl font-semibold mb-12 pb-3 border-b border-white/20">
               Skills and Technologies
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -317,9 +319,9 @@ export default function V2Page() {
         </section>
 
         {/* Certifications Section */}
-        <section id="certifications" className="py-12">
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl font-semibold mb-8 pb-2 border-b border-white/20">
+        <section id="certifications" className="py-20 flex justify-center">
+          <div className="w-full max-w-7xl mx-auto px-6">
+            <h2 className="text-2xl font-semibold mb-12 pb-3 border-b border-white/20">
               Certifications
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
