@@ -1,11 +1,4 @@
-import dynamic from "next/dynamic";
-import { Hero, SectionDivider } from "@/components";
-
-// Lazy load below-the-fold components
-const Projects = dynamic(() => import("@/components").then((mod) => mod.Projects));
-const Experience = dynamic(() => import("@/components").then((mod) => mod.Experience));
-const Skills = dynamic(() => import("@/components").then((mod) => mod.Skills));
-const Certifications = dynamic(() => import("@/components").then((mod) => mod.Certifications));
+import { Hero, SectionDivider, Projects, Experience, Skills, Certifications } from "@/components";
 
 export default function Home() {
   return (
@@ -22,3 +15,4 @@ export default function Home() {
     </main>
   );
 }
+
