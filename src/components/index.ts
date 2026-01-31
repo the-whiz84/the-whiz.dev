@@ -6,3 +6,4 @@ export { Experience } from "./Experience";
 export { Skills } from "./Skills";
 export { Certifications } from "./Certifications";
 export { SectionDivider } from "./SectionDivider";
+export { default as LayoutWrapper } from "./LayoutWrapper";
