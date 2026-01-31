@@ -115,10 +115,9 @@ export function Hero() {
         <Link
           href="#projects"
           aria-label="Scroll to projects"
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+          className="flex items-center justify-center text-muted-foreground hover:text-primary transition-colors"
         >
-          <span className="text-sm font-light tracking-wider uppercase">Scroll</span>
-          <ChevronDown size={28} className="animate-bounce-down" />
+          <ChevronDown size={32} className="animate-bounce-down" />
         </Link>
       </div>
     </section>
