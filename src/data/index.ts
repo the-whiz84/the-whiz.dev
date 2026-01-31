@@ -123,7 +123,7 @@ export const experience: ExperienceItem[] = [
   },
   {
     company: "Eviden Technologies",
-    logo: "/assets/img/logos/eviden.png",
+    logo: "/assets/img/logos/eviden.webp",
     role: "HPC Technical Engineer",
     period: "July 2023 - Dec. 2025",
     accomplishments: [
@@ -195,7 +195,7 @@ export const experience: ExperienceItem[] = [
 export const education: EducationItem[] = [
   {
     institution: "University of Spiru Haret, Bucharest",
-    logo: "/assets/img/logos/spiru_haret.jpg",
+    logo: "/assets/img/logos/spiru_haret.webp",
     degree: "Bachelor Degree in International Relations and European Studies",
     period: "2003-2007",
     details: [
@@ -278,21 +278,21 @@ export const skills: Skill[] = [
 export const certifications: Certification[] = [
   {
     title: "100 Days of Code: The Complete Python Bootcamp",
-    image: "/assets/img/logos/python.png",
+    image: "/assets/img/logos/python.webp",
     description:
       "Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps! You will be able to program in Python professionally. Create a portfolio of 100 Python projects to apply for developer jobs. Be able to use Python for data science and machine learning. You will learn Selenium, Beautiful Soup, Request, Flask, Pandas, NumPy, Scikit Learn, Plotly, and Matplotlib.",
     link: "https://www.udemy.com/certificate/UC-a0f21ccd-9840-4158-8bb3-b2d4f39dac93/",
   },
   {
     title: "CompTIA Linux+",
-    image: "/assets/img/logos/Comptia-linux.png",
+    image: "/assets/img/logos/Comptia-linux.webp",
     description:
       "Earners of the CompTIA Linux+ certification have the knowledge and skills required to succeed in a Linux operating system environment. CompTIA Linux+ earners have demonstrated the ability to configure the system, navigate the command line, and use common package management systems. They are also able to customize the environment, create scripts and configure networking.",
     link: "https://www.credly.com/badges/ee106ea6-ba34-440b-9f29-3f2a59239e9d/public_url",
   },
   {
     title: "Okta Certified Consultant",
-    image: "/assets/img/logos/Okta-consultant.png",
+    image: "/assets/img/logos/Okta-consultant.webp",
     description:
       "Okta Certified Consultants are technically proficient at implementing the Okta service in a variety of configurations. Consultants have experience integrating common applications, such as Office 365 and G Suite, with Okta. They also have extensive experience scoping and implementing complex Okta integrations involving multi-forest and multi-domain environments, advanced single sign-on, and inbound federation with Okta. They have working knowledge of Okta APIs and custom configuration options.",
     link: "https://www.credly.com/badges/0239f2b6-94c8-42cb-8ba4-1aa1435067a8/public_url",
