@@ -62,7 +62,7 @@ export const projects: Project[] = [
     title: "Zero-Dawn v2",
     description:
       "The second iteration of my personal portfolio website, built to showcase my growing skills and projects. Created using Python, Flask and Bootstrap 5.",
-    image: "/assets/img/project-v2-new.png",
+    image: "/assets/img/project-v2-new.webp",
     link: "https://github.com/the-whiz84/zero-dawn-v2",
     linkLabel: "View Code",
   },
@@ -70,7 +70,7 @@ export const projects: Project[] = [
     title: "Zero-Dawn v1",
     description:
       "The first version of my personal website. A stepping stone in my web development journey. Created using Hugo and Toha theme.",
-    image: "/assets/img/project-v1-new.png",
+    image: "/assets/img/project-v1-new.webp",
     link: "https://github.com/the-whiz84/zero-dawn-v1",
     linkLabel: "View Code",
   },
@@ -78,7 +78,7 @@ export const projects: Project[] = [
     title: "Python Projects",
     description:
       "This is the GitHub repo for most of the projects created using Python during the 100 Days of Code bootcamp. Larger projects have separate repos.",
-    image: "/assets/img/python-projects.png",
+    image: "/assets/img/python-projects.webp",
     link: "https://github.com/the-whiz84/Python_Projects",
     linkLabel: "View Code",
   },
@@ -86,7 +86,7 @@ export const projects: Project[] = [
     title: "Radu's Blog",
     description:
       "A Blog Website created with Python, Flask and SQLAlchemy with user registration and login flow to post articles and comments.",
-    image: "/assets/img/blog.png",
+    image: "/assets/img/blog.webp",
     link: "https://blog.the-whiz.dev",
     linkLabel: "Go to Website",
   },
@@ -94,7 +94,7 @@ export const projects: Project[] = [
     title: "OrganizeIt",
     description:
       "ToDo Web App created with Flask, Bootstrap 5 and PostgreSQL database to manage each user's list. Tasks show due date and can be closed or deleted.",
-    image: "/assets/img/organize-it.png",
+    image: "/assets/img/organize-it.webp",
     link: "https://todo.the-whiz.dev",
     linkLabel: "Go to Website",
   },
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     title: "Demo E-Commerce Website",
     description:
       "This is an e-commerce Example Website created with Flask, Bootstrap 5 and functioning payment processing for testing using Stripe's API services.",
-    image: "/assets/img/shop.png",
+    image: "/assets/img/shop.webp",
     link: "https://shop.the-whiz.dev",
     linkLabel: "Go to Website",
   },
