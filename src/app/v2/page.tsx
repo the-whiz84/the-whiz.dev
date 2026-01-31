@@ -144,9 +144,9 @@ export default function V2Page() {
       {/* Main Content Sections */}
       <div className="py-8">
         {/* Projects Section */}
-        <section id="projects" className="py-20 flex justify-center">
+        <section id="projects" className="py-32 flex justify-center">
           <div className="w-full max-w-7xl mx-auto px-6">
-            <h3 className="text-2xl font-semibold mb-12 pb-3 border-b border-white/20">
+            <h3 className="text-3xl font-semibold mb-12 pb-4 border-b border-white/20">
               Check my latest Projects
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -182,7 +182,7 @@ export default function V2Page() {
         </section>
 
         {/* Experience/Education Tabs */}
-        <section id="experience" className="py-20 flex justify-center">
+        <section id="experience" className="py-32 flex justify-center">
           <div className="w-full max-w-7xl mx-auto px-6">
             {/* Tab Buttons - Material Kit Style */}
             <div className="flex justify-center mb-12">
@@ -292,9 +292,9 @@ export default function V2Page() {
         </section>
 
         {/* Skills Section */}
-        <section id="skills" className="py-20 flex justify-center">
+        <section id="skills" className="py-32 flex justify-center">
           <div className="w-full max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl font-semibold mb-12 pb-3 border-b border-white/20">
+            <h2 className="text-3xl font-semibold mb-12 pb-4 border-b border-white/20">
               Skills and Technologies
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -319,9 +319,9 @@ export default function V2Page() {
         </section>
 
         {/* Certifications Section */}
-        <section id="certifications" className="py-20 flex justify-center">
+        <section id="certifications" className="py-32 flex justify-center">
           <div className="w-full max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl font-semibold mb-12 pb-3 border-b border-white/20">
+            <h2 className="text-3xl font-semibold mb-12 pb-4 border-b border-white/20">
               Certifications
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
