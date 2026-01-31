@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { MapPin, FileText, Github, Linkedin, Twitter } from "lucide-react";
+import { MapPin, FileText, Github, Linkedin, Twitter, ChevronDown } from "lucide-react";
 import { profile, socials } from "@/data";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
@@ -36,12 +35,7 @@ export function Hero() {
         {/* Centered Profile Section */}
         <div className="flex flex-col items-center text-center">
           {/* Profile Image with Glow */}
-          <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="relative w-44 h-44 md:w-52 md:h-52 lg:w-64 lg:h-64 mb-32"
-          >
+          <div className="relative w-44 h-44 md:w-52 md:h-52 lg:w-64 lg:h-64 mb-32 animate-scale-in">
             {/* Glow effect behind image */}
             <div className="absolute inset-[-20px] rounded-full bg-gradient-to-br from-primary via-accent to-primary opacity-40 blur-3xl animate-pulse-glow" />
             
@@ -61,15 +55,10 @@ export function Hero() {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Name & Tagline */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="space-y-6"
-          >
+          <div className="space-y-6 animate-fade-in-up delay-100">
             <p className="text-primary font-mono text-sm md:text-base tracking-[0.2em] uppercase">
               Hello, I&apos;m
             </p>
@@ -79,15 +68,10 @@ export function Hero() {
             <p className="text-muted-foreground text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-light">
               {profile.tagline}
             </p>
-          </motion.div>
+          </div>
 
           {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex gap-4 mt-12"
-          >
+          <div className="flex gap-4 mt-12 animate-fade-in-up delay-200">
             {socials.map((social) => {
               const Icon = iconMap[social.icon];
               return (
@@ -102,15 +86,10 @@ export function Hero() {
                 </Link>
               );
             })}
-          </motion.div>
+          </div>
 
           {/* CTA Buttons with Glow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="flex flex-col md:flex-row gap-6 md:gap-10 justify-center mt-16 items-center"
-          >
+          <div className="flex flex-col md:flex-row gap-6 md:gap-10 justify-center mt-16 items-center animate-fade-in-up delay-300">
             <Link
               href={profile.resumeUrl}
               target="_blank"
@@ -127,8 +106,20 @@ export function Hero() {
               <MapPin size={24} className="group-hover:scale-110 transition-transform" />
               <span>{profile.location}</span>
             </Link>
-          </motion.div>
+          </div>
         </div>
+      </div>
+
+      {/* Scroll Indicator Arrow */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-fade-in-up delay-400">
+        <Link
+          href="#projects"
+          aria-label="Scroll to projects"
+          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+        >
+          <span className="text-sm font-light tracking-wider uppercase">Scroll</span>
+          <ChevronDown size={28} className="animate-bounce-down" />
+        </Link>
       </div>
     </section>
   );

@@ -28,7 +28,6 @@ export function Navbar() {
     };
 
 
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -61,12 +60,9 @@ export function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+    <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-slide-down",
         isScrolled ? "glass py-3 border-b border-white/5" : "py-5 bg-transparent"
       )}
     >
@@ -117,7 +113,7 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Navigation */}
+      {/* Mobile Navigation - keep AnimatePresence for mobile menu only */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -144,6 +140,6 @@ export function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }
