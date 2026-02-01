@@ -35,7 +35,7 @@ export function Hero() {
         {/* Centered Profile Section */}
         <div className="flex flex-col items-center text-center">
           {/* Profile Image with Glow */}
-          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mb-32 animate-scale-in">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mb-12 animate-scale-in">
             {/* Glow effect behind image */}
             <div className="absolute inset-[-20px] rounded-full bg-gradient-to-br from-primary via-accent to-primary opacity-40 blur-3xl animate-pulse-glow" />
             
