@@ -2,6 +2,8 @@
   "name": "the-whiz.dev",
   "version": "0.1.0",
   "private": true,
+  "description": "Professional portfolio website for Radu Chiriac, built with Next.js, React, and Tailwind CSS.",
+  "author": "Radu Chiriac",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
