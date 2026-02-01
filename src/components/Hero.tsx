@@ -59,7 +59,7 @@ export function Hero() {
 
           {/* Name & Tagline */}
           <div className="space-y-6 animate-fade-in-up delay-100">
-            <p className="text-primary font-mono text-sm md:text-base tracking-[0.2em] uppercase">
+            <p className="text-primary font-mono text-xl md:text-2xl lg:text-3xl tracking-[0.2em] uppercase">
               Hello, I&apos;m
             </p>
             <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight">
