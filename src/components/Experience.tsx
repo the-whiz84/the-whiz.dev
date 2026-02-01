@@ -130,13 +130,13 @@ export function Experience() {
         </div>
 
         {/* Education Timeline */}
-        <div className="pt-40">
+        <div className="mt-16">
           <motion.h3
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase mt-24 flex items-center justify-center gap-3 text-center"
-            style={{ marginBottom: "3rem", marginTop: "3rem" }}
+            className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase flex items-center justify-center gap-3 text-center"
+            style={{ marginBottom: "3rem" }}
           >
             <GraduationCap className="text-primary" size={28} />
             My Education

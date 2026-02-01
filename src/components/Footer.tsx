@@ -26,19 +26,32 @@ export function Footer() {
       {/* Subtle glow effect */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] bg-primary/5 blur-[100px] rounded-full" />
 
-      <div className="relative z-10 container mx-auto px-6 lg:px-12 py-16">
+      <div className="relative z-10 container mx-auto px-6 lg:px-12 pb-12">
         {/* Main Footer Content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          {/* Left Side: Brand */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">
-              <span className="text-foreground">The-</span>
-              <span className="text-primary">Whiz</span>
-              <span className="text-muted-foreground">.dev</span>
-            </h2>
-            <p className="text-muted-foreground max-w-sm">
-              Crafted with ❤️ by AI Agents. (I just supervised)
-            </p>
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-4">
+          {/* Left Side: Brand + Scroll to Top */}
+          <div className="flex items-center gap-6">
+            {/* Scroll to top button */}
+            <motion.button
+              onClick={scrollToTop}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="hidden md:flex p-3 rounded-full glass hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300 group"
+              aria-label="Scroll to top"
+            >
+              <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
+            </motion.button>
+            
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-2">
+                <span className="text-foreground">The-</span>
+                <span className="text-primary">Whiz</span>
+                <span className="text-muted-foreground">.dev</span>
+              </h2>
+              <p className="text-muted-foreground max-w-sm">
+                Crafted with ❤️ by AI Agents. (I just supervised)
+              </p>
+            </div>
           </div>
 
           {/* Right Side: Connect & Contact */}
@@ -83,22 +96,11 @@ export function Footer() {
                 </motion.div>
               </div>
             </div>
-
-            {/* Scroll to top button */}
-            <motion.button
-              onClick={scrollToTop}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-3 rounded-full glass hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300 group mt-4"
-              aria-label="Scroll to top"
-            >
-              <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
-            </motion.button>
           </div>
         </div>
 
-        {/* Copyright - Centered & Larger */}
-        <div className="border-t border-white/5 pt-8 text-center">
+        {/* Copyright - Centered */}
+        <div className="pt-2 text-center">
           <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 text-muted-foreground text-base">
             <p>© {currentYear} Radu Chiriac. All rights reserved.</p>
             <span className="hidden md:inline">•</span>
