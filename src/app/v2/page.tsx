@@ -76,7 +76,7 @@ export default function V2Page() {
           <div className="flex justify-center mb-6">
             <div className="overflow-hidden" style={{ width: '300px', height: '400px' }}>
               <Image
-                src="/assets/img/profile-new.png"
+                src="/assets/img/profile-old.png"
                 alt={profile.name}
                 width={300}
                 height={400}
@@ -391,7 +391,7 @@ export default function V2Page() {
         </div>
         
         <p className="text-sm" style={{ color: colors.primary }}>
-          Copyright © 2025 Zero-Dawn v2.0 by Radu Chiriac.
+          Copyright © 2026 Zero-Dawn v2.0 by Radu Chiriac.
         </p>
       </footer>
     </div>
