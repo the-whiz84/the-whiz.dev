@@ -35,7 +35,7 @@ export function Hero() {
         {/* Centered Profile Section */}
         <div className="flex flex-col items-center text-center">
           {/* Profile Image with Glow */}
-          <div className="relative w-44 h-44 md:w-52 md:h-52 lg:w-64 lg:h-64 mb-32 animate-scale-in">
+          <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 mb-32 animate-scale-in">
             {/* Glow effect behind image */}
             <div className="absolute inset-[-20px] rounded-full bg-gradient-to-br from-primary via-accent to-primary opacity-40 blur-3xl animate-pulse-glow" />
             
@@ -65,6 +65,9 @@ export function Hero() {
             <h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight">
               <span className="gradient-text text-glow">{profile.name}</span>
             </h1>
+            <p className="text-xl md:text-2xl lg:text-3xl font-light text-muted-foreground/80 mt-[-10px] mb-6">
+              aka <span className="text-primary font-medium">The-Whiz</span>
+            </p>
             <p className="text-muted-foreground text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed font-light">
               {profile.tagline}
             </p>
