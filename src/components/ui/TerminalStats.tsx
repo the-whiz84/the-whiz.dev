@@ -28,7 +28,7 @@ const stats = [
   {
     icon: <Clock className="w-4 h-4 text-white" />,
     label: "Uptime",
-    value: "5.2y",
+    value: `${((new Date().getTime() - new Date("2020-10-01").getTime()) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1)}y`,
     detail: "Since Hello World",
     color: "bg-white"
   },
