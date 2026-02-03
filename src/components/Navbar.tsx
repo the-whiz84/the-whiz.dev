@@ -72,7 +72,7 @@ export function Navbar() {
             src="/assets/img/navbar-logo.webp" 
             alt="TheWhiz Logo" 
             fill 
-            className="object-contain scale-125"
+            className="object-contain scale-[1.5]"
             priority
           />
         </Link>
