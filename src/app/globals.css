@@ -164,8 +164,7 @@ html {
 
 /* Brand Buttons */
 .btn-primary {
-  @apply bg-primary text-white rounded-full font-mono transition-all duration-300;
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  @apply text-white rounded-full font-mono transition-all duration-300 bg-gradient-to-r from-[#c4b5fd] via-primary to-accent shadow-lg shadow-black/20;
 }
 
 .btn-primary:hover {
