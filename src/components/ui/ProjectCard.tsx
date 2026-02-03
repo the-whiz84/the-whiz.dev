@@ -33,7 +33,7 @@ export function ProjectCard({ title, description, tags, imageUrl, liveUrl, repoU
             </h3>
             <div className="flex space-x-3">
                {repoUrl && (
-                  <Link href={repoUrl} target="_blank" className="text-muted-foreground hover:text-white transition-colors">
+                  <Link href={repoUrl} target="_blank" className="text-white hover:text-primary transition-colors">
                      <Github size={20} />
                   </Link>
                )}
