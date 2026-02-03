@@ -1,4 +1,4 @@
-import { Hero, SectionDivider, Projects, Experience, Certifications } from "@/components";
+import { Hero, SectionDivider, Projects, Experience, Certifications, Skills } from "@/components";
 import TerminalStats from "@/components/ui/TerminalStats";
 
 export default function Home() {
@@ -10,6 +10,8 @@ export default function Home() {
       <Projects />
       <SectionDivider />
       <Experience />
+      <SectionDivider />
+      <Skills />
       <SectionDivider />
       <Certifications />
       {/* Footer is likely in LayoutWrapper or Layout */}
