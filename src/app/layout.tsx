@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Radu Chiriac | TheWhiz Portfolio",
     description: "Personal portfolio of Radu Chiriac - Tech enthusiast, Linux lover, and Python developer.",
     creator: "@the_whiz84",
-    images: ["/assets/img/profile-new.png"],
+    images: ["/assets/img/profile-old.png"],
   },
   robots: {
     index: true,

@@ -49,7 +49,7 @@ export const profile = {
   location: "Sibiu, Romania",
   locationUrl: "https://maps.app.goo.gl/riqMDNYqAJRaxHdr9",
   resumeUrl: "/files/Resume.pdf",
-  image: "/assets/img/profile-new.png",
+  image: "/assets/img/profile-old.png",
 };
 
 export const socials: SocialLink[] = [
@@ -124,7 +124,6 @@ export const experience: ExperienceItem[] = [
     accomplishments: [
       "Maintaining critical server infrastructure for a major German automaker.",
       "Automating RHEL patching and configuration management via Puppet.",
-      "Monitoring datacenter health with Fujitsu ManageNow (MN4DCM).",
       "Streamlining remote location migrations to modern solutions.",
     ],
   },
@@ -136,7 +135,6 @@ export const experience: ExperienceItem[] = [
     accomplishments: [
       "Supported mission-critical infrastructure for automotive clients.",
       "Managed RHEL automation and patching using Puppet.",
-      "Monitored datacenter operations via Fujitsu ManageNow.",
       "Executed migration of RHV-Manager servers to vSphere clusters.",
     ],
   },
@@ -148,7 +146,6 @@ export const experience: ExperienceItem[] = [
     accomplishments: [
       "Updated technical documentation to meet modern standards.",
       "Automated server patching and configuration with Puppet.",
-      "Monitored infrastructure health using Fujitsu ManageNow.",
       "Assisted in migrating remote locations to streamlined solutions.",
     ],
   },
@@ -160,8 +157,6 @@ export const experience: ExperienceItem[] = [
     accomplishments: [
       "Resolved complex SSO, MFA, and federation tickets (SAML/OIDC/SCIM).",
       "Guided admins on Okta integrations and Access Gateway troubleshooting.",
-      "Authored knowledge base articles for undocumented issues.",
-      "Troubleshooted Access Gateway via SSH/Linux CLI.",
     ],
   },
   {
@@ -170,7 +165,7 @@ export const experience: ExperienceItem[] = [
     role: "L2 Technical Mentor - Dell",
     period: "April 2018 - March 2020",
     accomplishments: [
-      "Mentored L1 support teams and liaised with L3 engineering.",
+      "Mentored L1 support teams and collaborated with L3 team.",
       "Developed and delivered training materials for new product lines.",
       "Managed Jira ticket escalations to internal teams.",
     ],
@@ -191,8 +186,7 @@ export const experience: ExperienceItem[] = [
     role: "Back Office Agent - Sprint",
     period: "Aug. 2012 - Oct. 2014",
     accomplishments: [
-      "Managed support tickets and troubleshooted hardware issues for mobile devices and PCs.",
-      "Provided root cause analysis and customer solutions.",
+      "Managed support tickets and purchase orders for employees.",
     ],
   },
 ];
