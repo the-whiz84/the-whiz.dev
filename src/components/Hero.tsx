@@ -29,6 +29,10 @@ export function Hero() {
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-background">
+      {/* Floating Orbs */}
+      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-primary/20 rounded-full blur-[120px] animate-pulse-glow" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-accent/20 rounded-full blur-[120px] animate-float" style={{ animationDelay: "2s" }} />
+
       {/* Background Matrix/Grid Effect (Subtle) */}
       <div 
         className="absolute inset-0 opacity-[0.05] pointer-events-none"
