@@ -62,7 +62,7 @@ export function Hero() {
         <Link 
           href="#projects"
           onClick={scrollToProjects}
-          className="btn-primary inline-flex items-center px-10 py-5 text-2xl md:text-3xl font-mono tracking-wider group cursor-pointer"
+          className="btn-primary inline-flex items-center px-10 py-5 text-2xl md:text-3xl font-mono tracking-wider group cursor-pointer !border-2 !border-primary/60 hover:!border-primary"
         >
           <span>Run </span>
           <span className="gradient-text">{"./projects.sh"}</span>
