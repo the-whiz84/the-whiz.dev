@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { Github, Linkedin, Twitter, MapPin, ArrowRight, Home, Briefcase, Code2, Award, Mail } from "lucide-react";
-import { profile, socials, skills, experience, education, projects, certifications } from "@/data";
+import { profile, socials, skills, experience, projects, certifications } from "@/data";
 
 const socialIconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Github,
@@ -23,8 +22,6 @@ const colors = {
 };
 
 export default function V2Page() {
-  const [activeTab, setActiveTab] = useState<"experience" | "education">("experience");
-
   return (
     <div 
       className="min-h-screen text-white"
@@ -181,113 +178,38 @@ export default function V2Page() {
           </div>
         </section>
 
-        {/* Experience/Education Tabs */}
+        {/* Experience Section */}
         <section id="experience" className="py-32 flex justify-center">
           <div className="w-full max-w-7xl mx-auto px-6">
-            {/* Tab Buttons - Material Kit Style */}
-            <div className="flex justify-center mb-12">
-              <div 
-                className="inline-flex rounded-lg p-1"
-                style={{ backgroundColor: colors.primary }}
-              >
-                <button
-                  onClick={() => setActiveTab("experience")}
-                  className={`px-8 py-2 rounded-md text-sm font-medium transition-all ${
-                    activeTab === "experience" 
-                      ? "bg-white shadow-md" 
-                      : "text-white/90 hover:text-white"
-                  }`}
-                  style={{
-                    color: activeTab === "experience" ? colors.primary : undefined,
-                  }}
-                >
-                  My Experience
-                </button>
-                <button
-                  onClick={() => setActiveTab("education")}
-                  className={`px-8 py-2 rounded-md text-sm font-medium transition-all ${
-                    activeTab === "education" 
-                      ? "bg-white shadow-md" 
-                      : "text-white/90 hover:text-white"
-                  }`}
-                  style={{
-                    color: activeTab === "education" ? colors.primary : undefined,
-                  }}
-                >
-                  Education
-                </button>
+            <div className="grid md:grid-cols-[1fr_2fr] gap-8">
+              <div>
+                <h3 className="text-2xl font-semibold">Work Experience</h3>
+              </div>
+              <div className="space-y-4">
+                {experience.map((exp, index) => (
+                  <div key={index} className="flex gap-4 p-4">
+                    <div className="w-14 h-14 flex-shrink-0 bg-white rounded-lg overflow-hidden flex items-center justify-center shadow-md">
+                      <Image
+                        src={exp.logo}
+                        alt={exp.company}
+                        width={40}
+                        height={40}
+                        className="object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h5 className="font-semibold text-white">{exp.role}</h5>
+                      <p className="text-white/60 text-sm mb-2">{exp.company}: {exp.period}</p>
+                      <ul className="text-white/50 text-sm space-y-1">
+                        {exp.accomplishments.slice(0, 3).map((acc, i) => (
+                          <li key={i}>• {acc}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-
-            {/* Experience Tab Content */}
-            {activeTab === "experience" && (
-              <div className="grid md:grid-cols-[1fr_2fr] gap-8">
-                <div>
-                  <h3 className="text-2xl font-semibold">Work Experience</h3>
-                </div>
-                <div className="space-y-4">
-                  {experience.map((exp, index) => (
-                    <div key={index} className="flex gap-4 p-4">
-                      <div className="w-14 h-14 flex-shrink-0 bg-white rounded-lg overflow-hidden flex items-center justify-center shadow-md">
-                        <Image
-                          src={exp.logo}
-                          alt={exp.company}
-                          width={40}
-                          height={40}
-                          className="object-contain"
-                        />
-                      </div>
-                      <div>
-                        <h5 className="font-semibold text-white">{exp.role}</h5>
-                        <p className="text-white/60 text-sm mb-2">{exp.company}: {exp.period}</p>
-                        <ul className="text-white/50 text-sm space-y-1">
-                          {exp.accomplishments.slice(0, 3).map((acc, i) => (
-                            <li key={i}>• {acc}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Education Tab Content */}
-            {activeTab === "education" && (
-              <div className="grid md:grid-cols-[1fr_2fr] gap-8">
-                <div>
-                  <h3 className="text-2xl font-semibold">Education</h3>
-                </div>
-                <div className="space-y-4">
-                  {education.map((edu, index) => (
-                    <div key={index} className="flex gap-4 p-4">
-                      <div className="w-14 h-14 flex-shrink-0 bg-white rounded-lg overflow-hidden flex items-center justify-center shadow-md">
-                        {edu.logo ? (
-                          <Image
-                            src={edu.logo}
-                            alt={edu.institution}
-                            width={40}
-                            height={40}
-                            className="object-contain"
-                          />
-                        ) : (
-                          <span className="text-2xl">🎓</span>
-                        )}
-                      </div>
-                      <div>
-                        <h5 className="font-semibold text-white">{edu.degree}</h5>
-                        <p className="text-white/60 text-sm mb-2">{edu.institution}: {edu.period}</p>
-                        <ul className="text-white/50 text-sm space-y-1">
-                          {edu.details.map((detail, i) => (
-                            <li key={i}>• {detail}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </section>
 
