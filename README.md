@@ -9,6 +9,7 @@ Professional portfolio website for **Radu Chiriac**, a guy passionate about vide
 
 ## ✨ Features
 
+-   **Terminal Aesthetic**: Unique brand identity featuring a dark mode with terminal-inspired visuals, custom typography (Geist Mono), and electric violet accents.
 -   **Modern UI/UX**: Built with React 19 and Next.js 15 for a fast, responsive user experience.
 -   **Dynamic Animations**: Powered by Framer Motion for smooth transitions and interactive elements.
 -   **Comprehensive Portfolio**: Showcases various projects ranging from Python automation to Flask web apps.
