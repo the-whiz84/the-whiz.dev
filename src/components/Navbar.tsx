@@ -67,7 +67,7 @@ export function Navbar() {
       )}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="relative w-24 h-24 hover:scale-110 transition-transform duration-300">
+        <Link href="/" className="relative w-16 h-16 md:w-24 md:h-24 hover:scale-110 transition-transform duration-300">
           <Image 
             src="/assets/img/navbar-logo.webp" 
             alt="TheWhiz Logo" 
