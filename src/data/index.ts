@@ -4,6 +4,7 @@ export interface Project {
   image: string;
   link: string;
   linkLabel: string;
+  tags: string[];
 }
 
 export interface ExperienceItem {
@@ -65,6 +66,7 @@ export const projects: Project[] = [
     image: "/assets/img/project-v2-new.webp",
     link: "https://github.com/the-whiz84/zero-dawn-v2",
     linkLabel: "View Code",
+    tags: ["Python", "Flask", "Bootstrap"],
   },
   {
     title: "Zero-Dawn v1",
@@ -73,6 +75,7 @@ export const projects: Project[] = [
     image: "/assets/img/project-v1-new.webp",
     link: "https://github.com/the-whiz84/zero-dawn-v1",
     linkLabel: "View Code",
+    tags: ["Hugo", "Go", "HTML"],
   },
   {
     title: "Python Projects",
@@ -81,6 +84,7 @@ export const projects: Project[] = [
     image: "/assets/img/python-projects.webp",
     link: "https://github.com/the-whiz84/Python_Projects",
     linkLabel: "View Code",
+    tags: ["Python", "Data Science", "Automation"],
   },
   {
     title: "Radu's Blog",
@@ -89,6 +93,7 @@ export const projects: Project[] = [
     image: "/assets/img/blog.webp",
     link: "https://blog.the-whiz.dev",
     linkLabel: "Go to Website",
+    tags: ["Python", "Flask", "SQLAlchemy"],
   },
   {
     title: "OrganizeIt",
@@ -97,6 +102,7 @@ export const projects: Project[] = [
     image: "/assets/img/organize-it.webp",
     link: "https://todo.the-whiz.dev",
     linkLabel: "Go to Website",
+    tags: ["Flask", "PostgreSQL", "Bootstrap"],
   },
   {
     title: "Demo E-Commerce Website",
@@ -105,6 +111,7 @@ export const projects: Project[] = [
     image: "/assets/img/shop.webp",
     link: "https://shop.the-whiz.dev",
     linkLabel: "Go to Website",
+    tags: ["Flask", "Stripe API", "Bootstrap"],
   },
 ];
 
