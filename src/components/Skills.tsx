@@ -50,7 +50,7 @@ export function Skills() {
             <span className="text-xl">cat ./skills.json</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold text-white font-mono">
-             Technical <span className="text-primary">Arsenal</span>
+             Technical <span className="gradient-text">Arsenal</span>
           </h2>
         </motion.div>
 
