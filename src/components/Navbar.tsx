@@ -67,12 +67,12 @@ export function Navbar() {
       )}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="relative w-24 h-24 md:w-28 md:h-28 hover:scale-110 transition-transform duration-300">
+        <Link href="/" className="relative w-24 h-24 hover:scale-110 transition-transform duration-300">
           <Image 
             src="/assets/img/navbar-logo.webp" 
             alt="TheWhiz Logo" 
             fill 
-            className="object-contain"
+            className="object-contain scale-125"
             priority
           />
         </Link>
