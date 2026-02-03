@@ -45,7 +45,7 @@ export function Footer() {
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
               <h2 className="text-4xl md:text-5xl font-bold tracking-tighter mb-2">
                 <span className="text-foreground">The-</span>
-                <span className="text-primary">Whiz</span>
+                <span className="gradient-text">Whiz</span>
                 <span className="text-muted-foreground">.dev</span>
               </h2>
               <p className="text-muted-foreground max-w-sm">
