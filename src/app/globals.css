@@ -5,7 +5,7 @@
 :root {
   --background: #050505;
   --foreground: #ffffff;
-  --primary: #8b5cf6;
+  --primary: #8B5CF6;
   --primary-foreground: #ffffff;
   --secondary: #1a1a2e;
   --accent: #ec4899;
@@ -49,7 +49,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-mono), monospace;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -160,6 +160,26 @@ html {
 
 .btn-glow:hover {
   box-shadow: 0 0 30px rgba(167, 139, 250, 0.6), 0 0 60px rgba(99, 102, 241, 0.3);
+}
+
+/* Brand Buttons */
+.btn-primary {
+  @apply bg-primary text-white rounded-full font-mono transition-all duration-300;
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.7), 0 0 60px rgba(99, 102, 241, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  @apply bg-background text-muted-foreground rounded-none border border-border font-mono transition-all duration-300;
+}
+
+.btn-secondary:hover {
+  @apply text-foreground border-primary;
+  background: rgba(139, 92, 246, 0.05);
 }
 
 /* Timeline styles */
