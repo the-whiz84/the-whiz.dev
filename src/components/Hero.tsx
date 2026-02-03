@@ -5,7 +5,11 @@ import Link from "next/link";
 import { Terminal } from "lucide-react";
 import TerminalStats from "@/components/ui/TerminalStats";
 
-export function Hero() {
+interface HeroProps {
+  repoCount?: number;
+}
+
+export function Hero({ repoCount }: HeroProps) {
   const [text, setText] = useState("");
   const fullText = "Bridging Hardware, Code, and Cloud.";
 
@@ -70,7 +74,7 @@ export function Hero() {
       </div>
 
       <div className="container px-4 relative z-20 mt-12 mb-20">
-        <TerminalStats />
+        <TerminalStats repoCount={repoCount} />
       </div>
 
       {/* Decorative Glow */}

@@ -3,38 +3,42 @@
 import { motion } from "framer-motion";
 import { Terminal, Cpu, Clock, Server } from "lucide-react";
 
-const stats = [
-  {
-    icon: <Cpu className="w-4 h-4 text-primary" />,
-    label: "Core Usage",
-    value: "50%",
-    detail: "Developer",
-    color: "bg-primary"
-  },
-  {
-    icon: <Server className="w-4 h-4 text-purple-400" />,
-    label: "Memory",
-    value: "256GB",
-    detail: "Knowledge Base",
-    color: "bg-purple-400"
-  },
-  {
-    icon: <Terminal className="w-4 h-4 text-indigo-400" />,
-    label: "Processes",
-    value: "13",
-    detail: "Active Projects",
-    color: "bg-indigo-400"
-  },
-  {
-    icon: <Clock className="w-4 h-4 text-white" />,
-    label: "Uptime",
-    value: `${((new Date().getTime() - new Date("2020-10-01").getTime()) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1)}y`,
-    detail: "Since Hello World",
-    color: "bg-white"
-  },
-];
+interface TerminalStatsProps {
+  repoCount?: number;
+}
 
-export default function TerminalStats() {
+export default function TerminalStats({ repoCount }: TerminalStatsProps) {
+  const stats = [
+    {
+      icon: <Cpu className="w-4 h-4 text-primary" />,
+      label: "Core Usage",
+      value: "50%",
+      detail: "Developer",
+      color: "bg-primary"
+    },
+    {
+      icon: <Server className="w-4 h-4 text-purple-400" />,
+      label: "Memory",
+      value: "256GB",
+      detail: "Knowledge Base",
+      color: "bg-purple-400"
+    },
+    {
+      icon: <Terminal className="w-4 h-4 text-indigo-400" />,
+      label: "Processes",
+      value: repoCount ? repoCount.toString() : "13",
+      detail: "Active Projects",
+      color: "bg-indigo-400"
+    },
+    {
+      icon: <Clock className="w-4 h-4 text-white" />,
+      label: "Uptime",
+      value: `${((new Date().getTime() - new Date("2020-10-01").getTime()) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1)}y`,
+      detail: "Since Hello World",
+      color: "bg-white"
+    },
+  ];
+
   return (
     <div className="w-full max-w-7xl mx-auto mt-20 p-6 border border-border bg-card/50 backdrop-blur-sm relative overflow-hidden group">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-purple-500 to-indigo-500 opacity-50"></div>
