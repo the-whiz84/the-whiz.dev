@@ -8,12 +8,12 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
-  { label: "V1", href: "https://v1.the-whiz.dev", external: true },
-  { label: "V2", href: "/v2", external: false },
   { label: "Projects", href: "#projects", external: false },
   { label: "Experience", href: "#experience", external: false },
   { label: "Skills", href: "#skills", external: false },
   { label: "Certifications", href: "#certifications", external: false },
+  { label: "V1", href: "https://v1.the-whiz.dev", external: true },
+  { label: "V2", href: "/v2", external: false },
 ];
 
 export function Navbar() {
@@ -24,9 +24,12 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrolled = window.scrollY > 50;
+      setIsScrolled(scrolled);
+      if (window.scrollY < 100) {
+        setActiveSection("");
+      }
     };
-
 
     const observer = new IntersectionObserver(
       (entries) => {
