@@ -55,7 +55,7 @@ export function Hero() {
         </Link>
       </div>
 
-      <div className="container px-4 relative z-20 mb-20">
+      <div className="container px-4 relative z-20 mt-12 mb-20">
         <TerminalStats />
       </div>
 

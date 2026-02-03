@@ -48,13 +48,13 @@ export default function TerminalStats() {
                     transition={{ delay: index * 0.1 }}
                     className="flex flex-col space-y-2 hover:bg-white/5 p-2 rounded-sm transition-colors cursor-default"
                 >
-                    <div className="flex items-center space-x-2 text-muted-foreground text-xs uppercase tracking-widest font-mono">
+                    <div className="flex items-center space-x-2 text-muted-foreground text-sm uppercase tracking-widest font-mono">
                         {stat.icon}
                         <span>{stat.label}</span>
                     </div>
                     <div className="flex items-baseline space-x-2">
-                        <span className="text-2xl font-bold font-mono text-white">{stat.value}</span>
-                        <span className="text-xs text-muted-foreground whitespace-nowrap">{stat.detail}</span>
+                        <span className="text-4xl md:text-5xl font-bold font-mono text-white">{stat.value}</span>
+                        <span className="text-xl md:text-2xl text-muted-foreground whitespace-nowrap">{stat.detail}</span>
                     </div>
                     <div className="w-full h-1 bg-white/10 rounded-full mt-2 overflow-hidden">
                         <motion.div 
