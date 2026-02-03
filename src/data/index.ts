@@ -122,10 +122,10 @@ export const experience: ExperienceItem[] = [
     role: "HPC Technical Engineer",
     period: "Jan. 2026 - Present",
     accomplishments: [
-      "Supporting the server infrastructure for a German auto maker for one of its most critical projects.",
-      "Using Puppet for configuration management and automatic patching of RHEL servers.",
-      "Monitoring the infrastructure using ManageNow for Datacenter Monitoring (MN4DCM) from Fujitsu.",
-      "Participating in a project to migrate existing remote locations to a more streamlined solution.",
+      "Maintaining critical server infrastructure for a major German automaker.",
+      "Automating RHEL patching and configuration management via Puppet.",
+      "Monitoring datacenter health with Fujitsu ManageNow (MN4DCM).",
+      "Streamlining remote location migrations to modern solutions.",
     ],
   },
   {
@@ -134,10 +134,10 @@ export const experience: ExperienceItem[] = [
     role: "HPC Technical Engineer",
     period: "July 2023 - Dec. 2025",
     accomplishments: [
-      "Supporting the server infrastructure for a German auto maker for one of its most critical projects.",
-      "Using Puppet for configuration management and automatic patching of RHEL servers.",
-      "Monitoring the infrastructure using ManageNow for Datacenter Monitoring (MN4DCM) from Fujitsu.",
-      "Participating in a project to migrate obsolete RHV-Manager servers to new vSphere cluster.",
+      "Supported mission-critical infrastructure for automotive clients.",
+      "Managed RHEL automation and patching using Puppet.",
+      "Monitored datacenter operations via Fujitsu ManageNow.",
+      "Executed migration of RHV-Manager servers to vSphere clusters.",
     ],
   },
   {
@@ -146,10 +146,10 @@ export const experience: ExperienceItem[] = [
     role: "HPC Technical Engineer",
     period: "Feb. 2022 - July 2023",
     accomplishments: [
-      "Reviewing all the existing technical documentation and updating it accordingly to the current requirements.",
-      "Using Puppet for configuration management and automatic patching of RHEL servers.",
-      "Monitoring the infrastructure using ManageNow for Datacenter Monitoring (MN4DCM) from Fujitsu.",
-      "Participating in a project to migrate existing remote locations to a more streamlined solution.",
+      "Updated technical documentation to meet modern standards.",
+      "Automated server patching and configuration with Puppet.",
+      "Monitored infrastructure health using Fujitsu ManageNow.",
+      "Assisted in migrating remote locations to streamlined solutions.",
     ],
   },
   {
@@ -158,10 +158,10 @@ export const experience: ExperienceItem[] = [
     role: "Technical Support Engineer - Okta",
     period: "April 2020 - Jan. 2022",
     accomplishments: [
-      "Resolving support tickets submitted by customers.",
-      "Helping new admins to implement SSO, MFA and federation for their applications using SAML, OIDC and SCIM.",
-      "Writing new Knowledge Articles for problems and possible solutions not yet documented.",
-      "Troubleshooting Okta Access Gateway using ssh connections and Linux CLI.",
+      "Resolved complex SSO, MFA, and federation tickets (SAML/OIDC/SCIM).",
+      "Guided admins on Okta integrations and Access Gateway troubleshooting.",
+      "Authored knowledge base articles for undocumented issues.",
+      "Troubleshooted Access Gateway via SSH/Linux CLI.",
     ],
   },
   {
@@ -170,9 +170,9 @@ export const experience: ExperienceItem[] = [
     role: "L2 Technical Mentor - Dell",
     period: "April 2018 - March 2020",
     accomplishments: [
-      "Provide guidance and support for the Level 1 support team.",
-      "Liaison with the Level 3 team and create Jira tickets for them and other internal teams.",
-      "Create and share new training materials for latest products.",
+      "Mentored L1 support teams and liaised with L3 engineering.",
+      "Developed and delivered training materials for new product lines.",
+      "Managed Jira ticket escalations to internal teams.",
     ],
   },
   {
@@ -181,9 +181,8 @@ export const experience: ExperienceItem[] = [
     role: "Technical Support Agent - Lenovo",
     period: "Oct. 2014 - April 2018",
     accomplishments: [
-      "Log new support tickets received by phone or email.",
-      "Troubleshoot hardware problems related to laptops, PCs or mobile devices.",
-      "Find root cause for the issues and provide solution to customers.",
+      "Diagnosed and resolved hardware/software issues for laptops and mobile devices.",
+      "Identified root causes to provide permanent customer solutions.",
     ],
   },
   {
@@ -192,45 +191,13 @@ export const experience: ExperienceItem[] = [
     role: "Back Office Agent - Sprint",
     period: "Aug. 2012 - Oct. 2014",
     accomplishments: [
-      "Log new support tickets received by phone or email.",
-      "Troubleshoot hardware problems related to laptops, PCs or mobile devices.",
-      "Find root cause for the issues and provide solution to customers.",
+      "Managed support tickets and troubleshooted hardware issues for mobile devices and PCs.",
+      "Provided root cause analysis and customer solutions.",
     ],
   },
 ];
 
-export const education: EducationItem[] = [
-  {
-    institution: "University of Spiru Haret, Bucharest",
-    logo: "/assets/img/logos/spiru_haret.webp",
-    degree: "Bachelor Degree in International Relations and European Studies",
-    period: "2003-2007",
-    details: [
-      "Graduation Grade: 8.60/10",
-      "European Studies: 9/10",
-      "History of the European Union: 10/10",
-      "Communication and Negotiations Skills: 8/10",
-      "European Law: 9/10",
-    ],
-  },
-  {
-    institution: "Gheorghe Cartianu Technical College, Piatra-Neamt",
-    icon: "GraduationCap",
-    degree: "Baccalaureate Diploma",
-    period: "1999-2003",
-    details: ["Graduation Grade: 8.16/10"],
-  },
-  {
-    institution: "Public School Nr 2, Piatra-Neamt",
-    icon: "School",
-    degree: "Secondary School Certificate",
-    period: "1995-1999",
-    details: [
-      "Reached the Regional Stage in the Mathematics school olympics.",
-      "Took chess and airsoft rifle shooting classes at the local Children's Club.",
-    ],
-  },
-];
+
 
 export const skills: Skill[] = [
   {
@@ -287,21 +254,21 @@ export const certifications: Certification[] = [
     title: "100 Days of Code: The Complete Python Bootcamp",
     image: "/assets/img/logos/python.webp",
     description:
-      "Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps! You will be able to program in Python professionally. Create a portfolio of 100 Python projects to apply for developer jobs. Be able to use Python for data science and machine learning. You will learn Selenium, Beautiful Soup, Request, Flask, Pandas, NumPy, Scikit Learn, Plotly, and Matplotlib.",
+      "Built 100+ Python projects covering web dev (Flask), data science (Pandas/Matplotlib), and automation apps.",
     link: "https://www.udemy.com/certificate/UC-a0f21ccd-9840-4158-8bb3-b2d4f39dac93/",
   },
   {
     title: "CompTIA Linux+",
     image: "/assets/img/logos/Comptia-linux.webp",
     description:
-      "Earners of the CompTIA Linux+ certification have the knowledge and skills required to succeed in a Linux operating system environment. CompTIA Linux+ earners have demonstrated the ability to configure the system, navigate the command line, and use common package management systems. They are also able to customize the environment, create scripts and configure networking.",
+      "Validates proficiency in Linux system configuration, CLI navigation, and core package management.",
     link: "https://www.credly.com/badges/ee106ea6-ba34-440b-9f29-3f2a59239e9d/public_url",
   },
   {
     title: "Okta Certified Consultant",
     image: "/assets/img/logos/Okta-consultant.webp",
     description:
-      "Okta Certified Consultants are technically proficient at implementing the Okta service in a variety of configurations. Consultants have experience integrating common applications, such as Office 365 and G Suite, with Okta. They also have extensive experience scoping and implementing complex Okta integrations involving multi-forest and multi-domain environments, advanced single sign-on, and inbound federation with Okta. They have working knowledge of Okta APIs and custom configuration options.",
+      "Expert-level validation for scoping and implementing complex Okta SSO/MFA integrations and architectures.",
     link: "https://www.credly.com/badges/0239f2b6-94c8-42cb-8ba4-1aa1435067a8/public_url",
   },
 ];
