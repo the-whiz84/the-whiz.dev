@@ -90,7 +90,7 @@ export function Footer() {
                     className="btn-primary inline-flex items-center gap-3 px-6 py-3"
                   >
                     <Mail size={18} className="group-hover:rotate-12 transition-transform duration-300 text-white" />
-                    <span>Get In <span className="gradient-text">Touch</span></span>
+                    <span>Get <span className="gradient-text">In Touch</span></span>
                     <div className="absolute inset-0 rounded-full bg-white/5 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </a>
                 </motion.div>

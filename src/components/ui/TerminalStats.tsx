@@ -61,7 +61,7 @@ export default function TerminalStats() {
                             initial={{ width: 0 }}
                             animate={{ width: "100%" }}
                             transition={{ duration: 1.5, delay: 0.5 + (index * 0.1) }}
-                            className={`h-full ${stat.color} shadow-[0_0_10px_rgba(139,92,246,0.5)]`}
+                            className={`h-full bg-gradient-to-r from-white via-primary to-accent shadow-[0_0_10px_rgba(139,92,246,0.5)]`}
                         />
                     </div>
                 </motion.div>
