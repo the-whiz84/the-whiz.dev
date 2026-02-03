@@ -50,7 +50,7 @@ export default function V2Page() {
             <Link href="#certifications" className="flex items-center gap-1 text-white/80 hover:text-white">
               <Award size={14} /> Certifications
             </Link>
-            <Link href="#contact" className="flex items-center gap-1 text-white/80 hover:text-white">
+            <Link href="mailto:radu@the-whiz.dev" className="flex items-center gap-1 text-white/80 hover:text-white">
               <Mail size={14} /> Contact Me
             </Link>
           </div>

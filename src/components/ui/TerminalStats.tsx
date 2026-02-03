@@ -7,21 +7,21 @@ const stats = [
   {
     icon: <Cpu className="w-4 h-4 text-primary" />,
     label: "Core Usage",
-    value: "98%",
-    detail: "Full Stack Dev",
+    value: "50%",
+    detail: "Developer",
     color: "bg-primary"
   },
   {
     icon: <Server className="w-4 h-4 text-purple-400" />,
     label: "Memory",
-    value: "64GB",
+    value: "256GB",
     detail: "Knowledge Base",
     color: "bg-purple-400"
   },
   {
     icon: <Terminal className="w-4 h-4 text-indigo-400" />,
     label: "Processes",
-    value: "24",
+    value: "13",
     detail: "Active Projects",
     color: "bg-indigo-400"
   },
