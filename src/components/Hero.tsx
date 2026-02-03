@@ -7,7 +7,7 @@ import TerminalStats from "@/components/ui/TerminalStats";
 
 export function Hero() {
   const [text, setText] = useState("");
-  const fullText = "Building aesthetics from the command line.";
+  const fullText = "Bridging Hardware, Code, and Cloud.";
 
   useEffect(() => {
     let i = 0;
