@@ -26,43 +26,62 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; className?: s
 
 export function Skills() {
   return (
-    <section id="skills" className="relative overflow-hidden flex flex-col items-center" style={{ paddingTop: "3rem", paddingBottom: "3rem" }}>
-      <div className="absolute inset-0 bg-transparent" />
-      
-      <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+    <section id="skills" className="py-20 relative bg-background overflow-hidden">
+      {/* Background Matrix Effect */}
+      <div 
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(139, 92, 246, 0.1) 1px, transparent 1px)`,
+          backgroundSize: "30px 30px",
+        }}
+      />
+
+      <div className="container mx-auto px-6 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.6 }}
+           className="mb-12"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Skills & <span className="gradient-text text-glow">Technologies</span>
+          <div className="flex items-center space-x-2 text-primary font-mono mb-2">
+            <span className="text-xl">$</span>
+            <span className="text-xl">cat ./skills.json</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white font-mono">
+             Technical <span className="text-primary">Arsenal</span>
           </h2>
-          <p className="text-primary font-mono text-xl md:text-2xl tracking-widest uppercase" style={{ marginBottom: "3rem" }}>My Arsenal</p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {skills.map((skill, index) => {
             const Icon = iconMap[skill.icon];
             return (
               <motion.div
                 key={skill.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                className="group relative"
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+                className="group border border-border bg-card/40 hover:bg-card/80 hover:border-primary transition-all duration-300 p-6 flex flex-col h-full"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative h-full glass rounded-2xl p-6 hover:border-primary/30 transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
-                    {Icon && <Icon size={28} className="text-primary group-hover:text-white transition-colors" />}
+                <div className="flex items-center justify-between mb-4">
+                  <div className="p-3 bg-primary/10 rounded-none group-hover:bg-primary/20 transition-colors">
+                     {Icon && <Icon size={24} className="text-primary" />}
                   </div>
-                  <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">{skill.name}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{skill.description}</p>
+                  <span className="text-xs font-mono text-muted-foreground group-hover:text-primary transition-colors">
+                    v1.0
+                  </span>
                 </div>
+                
+                <h3 className="text-lg font-bold text-white font-mono mb-2 group-hover:text-primary transition-colors">
+                  {skill.name}
+                </h3>
+                
+                <p className="text-sm text-muted-foreground leading-relaxed font-mono">
+                  {skill.description}
+                </p>
               </motion.div>
             );
           })}

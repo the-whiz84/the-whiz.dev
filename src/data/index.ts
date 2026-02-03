@@ -66,7 +66,7 @@ export const projects: Project[] = [
     image: "/assets/img/project-v2-new.webp",
     link: "https://github.com/the-whiz84/zero-dawn-v2",
     linkLabel: "View Code",
-    tags: ["Python", "Flask", "Bootstrap"],
+    tags: ["Python", "Flask", "Bootstrap 5"],
   },
   {
     title: "Zero-Dawn v1",
@@ -75,7 +75,7 @@ export const projects: Project[] = [
     image: "/assets/img/project-v1-new.webp",
     link: "https://github.com/the-whiz84/zero-dawn-v1",
     linkLabel: "View Code",
-    tags: ["Hugo", "Go", "HTML"],
+    tags: ["Hugo", "Go", "Toha Theme"],
   },
   {
     title: "Python Projects",
@@ -84,7 +84,7 @@ export const projects: Project[] = [
     image: "/assets/img/python-projects.webp",
     link: "https://github.com/the-whiz84/Python_Projects",
     linkLabel: "View Code",
-    tags: ["Python", "Data Science", "Automation"],
+    tags: ["Pandas", "Matplotlib", "Flask", "Selenium"],
   },
   {
     title: "Radu's Blog",
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     image: "/assets/img/organize-it.webp",
     link: "https://todo.the-whiz.dev",
     linkLabel: "Go to Website",
-    tags: ["Flask", "PostgreSQL", "Bootstrap"],
+    tags: ["Flask", "PostgreSQL", "Bootstrap 5"],
   },
   {
     title: "Demo E-Commerce Website",
@@ -111,7 +111,7 @@ export const projects: Project[] = [
     image: "/assets/img/shop.webp",
     link: "https://shop.the-whiz.dev",
     linkLabel: "Go to Website",
-    tags: ["Flask", "Stripe API", "Bootstrap"],
+    tags: ["Flask", "Stripe API", "Bootstrap 5"],
   },
 ];
 

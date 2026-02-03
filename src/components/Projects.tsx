@@ -45,7 +45,7 @@ export function Projects() {
               <ProjectCard 
                 title={project.title}
                 description={project.description}
-                tags={["Next.js", "React", "Tailwind"]} // Placeholder, data needing update if not present
+                tags={project.tags}
                 imageUrl={project.image}
                 liveUrl={project.link}
               />
