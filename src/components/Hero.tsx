@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Terminal } from "lucide-react";
+import TerminalStats from "@/components/ui/TerminalStats";
 
 export function Hero() {
   const [text, setText] = useState("");
@@ -52,6 +53,10 @@ export function Hero() {
         >
           <span>Run ./projects.sh</span>
         </Link>
+      </div>
+
+      <div className="container px-4 relative z-20 mb-20">
+        <TerminalStats />
       </div>
 
       {/* Decorative Glow */}

@@ -36,7 +36,7 @@ const stats = [
 
 export default function TerminalStats() {
   return (
-    <div className="w-full max-w-4xl mx-auto mt-20 p-6 border border-border bg-card/50 backdrop-blur-sm relative overflow-hidden group">
+    <div className="w-full max-w-7xl mx-auto mt-20 p-6 border border-border bg-card/50 backdrop-blur-sm relative overflow-hidden group">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-purple-500 to-indigo-500 opacity-50"></div>
         
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -54,7 +54,7 @@ export default function TerminalStats() {
                     </div>
                     <div className="flex items-baseline space-x-2">
                         <span className="text-2xl font-bold font-mono text-white">{stat.value}</span>
-                        <span className="text-xs text-muted-foreground truncate">{stat.detail}</span>
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">{stat.detail}</span>
                     </div>
                     <div className="w-full h-1 bg-white/10 rounded-full mt-2 overflow-hidden">
                         <motion.div 
