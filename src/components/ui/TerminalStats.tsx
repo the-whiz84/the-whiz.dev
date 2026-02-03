@@ -39,7 +39,7 @@ export default function TerminalStats() {
     <div className="w-full max-w-7xl mx-auto mt-20 p-6 border border-border bg-card/50 backdrop-blur-sm relative overflow-hidden group">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-purple-500 to-indigo-500 opacity-50"></div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
                 <motion.div 
                     key={index}
