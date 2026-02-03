@@ -29,7 +29,7 @@ export function Projects() {
              <span className="text-primary font-mono text-sm tracking-widest uppercase">./work/featured</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold font-mono mb-4 text-white">
-            <span className="text-primary">{">"}</span> Selected <span className="text-primary">Projects</span>
+            <span className="text-primary">{">"}</span> Selected <span className="gradient-text">Projects</span>
           </h2>
         </motion.div>
 
