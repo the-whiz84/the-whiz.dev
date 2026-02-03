@@ -53,10 +53,10 @@ export function Certifications() {
                 <Link
                   href={cert.link}
                   target="_blank"
-                  className="btn-glow inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#c4b5fd] via-primary to-accent text-white font-medium hover:scale-105 transition-all duration-300 shadow-lg shadow-black/20"
+                  className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3"
                 >
-                  View details
-                  <ExternalLink size={16} />
+                  <span>View details</span>
+                  <ExternalLink size={16} className="text-primary" /> {/* Icon needs explicit color since it's not text */}
                 </Link>
               </div>
             </motion.div>
