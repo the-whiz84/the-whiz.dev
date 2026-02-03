@@ -43,9 +43,9 @@ export function Skills() {
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
            transition={{ duration: 0.6 }}
-           className="mb-12"
+           className="mb-12 text-center"
         >
-          <div className="flex items-center space-x-2 text-primary font-mono mb-2">
+          <div className="flex items-center justify-center space-x-2 text-primary font-mono mb-2">
             <span className="text-xl">$</span>
             <span className="text-xl">cat ./skills.json</span>
           </div>
