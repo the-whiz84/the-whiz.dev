@@ -87,11 +87,11 @@ export function Footer() {
                 >
                   <a
                     href="mailto:radu@the-whiz.dev"
-                    className="group relative inline-flex items-center gap-3 px-6 py-3 bg-primary text-white rounded-full font-bold text-base tracking-wide hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(139,92,246,0.5)] hover:shadow-[0_0_30px_rgba(139,92,246,0.8)]"
+                    className="btn-primary inline-flex items-center gap-3 px-6 py-3"
                   >
-                    <Mail size={18} className="group-hover:rotate-12 transition-transform duration-300" />
-                    <span>Get In Touch</span>
-                    <div className="absolute inset-0 rounded-full bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <Mail size={18} className="group-hover:rotate-12 transition-transform duration-300 text-white" />
+                    <span>Get In <span className="gradient-text">Touch</span></span>
+                    <div className="absolute inset-0 rounded-full bg-white/5 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                   </a>
                 </motion.div>
               </div>
