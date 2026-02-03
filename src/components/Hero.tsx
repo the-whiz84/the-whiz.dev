@@ -19,6 +19,14 @@ export function Hero() {
     return () => clearInterval(interval);
   }, []);
 
+  const scrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const projectsSection = document.getElementById("projects");
+    if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden bg-background">
       {/* Background Matrix/Grid Effect (Subtle) */}
@@ -49,7 +57,8 @@ export function Hero() {
 
         <Link 
           href="#projects"
-          className="btn-primary inline-flex items-center px-8 py-4 text-lg font-mono tracking-wider group"
+          onClick={scrollToProjects}
+          className="btn-primary inline-flex items-center px-8 py-4 text-lg font-mono tracking-wider group cursor-pointer"
         >
           <span>Run ./projects.sh</span>
         </Link>

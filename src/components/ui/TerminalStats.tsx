@@ -54,7 +54,7 @@ export default function TerminalStats() {
                     </div>
                     <div className="flex items-baseline space-x-2">
                         <span className="text-4xl md:text-5xl font-bold font-mono text-white">{stat.value}</span>
-                        <span className="text-xl md:text-2xl text-muted-foreground whitespace-nowrap">{stat.detail}</span>
+                        <span className="text-sm md:text-base font-medium text-muted-foreground whitespace-nowrap">{stat.detail}</span>
                     </div>
                     <div className="w-full h-1 bg-white/10 rounded-full mt-2 overflow-hidden">
                         <motion.div 
