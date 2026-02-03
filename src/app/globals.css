@@ -164,7 +164,7 @@ html {
 
 /* Brand Buttons */
 .btn-primary {
-  @apply relative rounded-full font-mono font-bold transition-all duration-300;
+  @apply relative rounded-full font-mono font-bold transition-all duration-300 text-white;
   background: rgba(20, 20, 25, 0.8) !important; /* Force dark background */
   border: 1px solid rgba(139, 92, 246, 0.3);
   box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
