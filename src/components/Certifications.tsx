@@ -55,7 +55,7 @@ export function Certifications() {
                   target="_blank"
                   className="btn-primary inline-flex items-center justify-center gap-2 px-6 py-3"
                 >
-                  <span>View details</span>
+                  <span>View <span className="gradient-text">details</span></span>
                   <ExternalLink size={16} className="text-primary" /> {/* Icon needs explicit color since it's not text */}
                 </Link>
               </div>

@@ -170,13 +170,13 @@ html {
   box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
 }
 
-.btn-primary span {
+.btn-primary span.gradient-text {
   background: linear-gradient(135deg, #c4b5fd 0%, var(--primary) 50%, var(--accent) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  display: inline-block; /* Ensure gradient works on text */
+  display: inline-block;
 }
 
 .btn-primary:hover {
