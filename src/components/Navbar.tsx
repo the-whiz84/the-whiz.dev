@@ -144,7 +144,7 @@ export function Navbar() {
                     href={item.href}
                     target={item.external ? "_blank" : undefined}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-muted-foreground hover:text-primary transition-colors duration-200 text-base font-medium block py-3 px-4 hover:bg-white/5 rounded-lg"
+                    className="text-foreground hover:text-primary transition-colors duration-200 text-base font-medium block py-3 px-4 hover:bg-white/5 rounded-lg"
                   >
                     {item.label}
                   </Link>
