@@ -36,7 +36,7 @@ export function Footer() {
               onClick={scrollToTop}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden md:flex p-3 rounded-full glass hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300 group"
+              className="flex p-3 rounded-full glass hover:bg-primary/20 text-muted-foreground hover:text-primary transition-all duration-300 group"
               aria-label="Scroll to top"
             >
               <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
