@@ -12,6 +12,7 @@ Professional portfolio website for **Radu Chiriac**, a guy passionate about vide
 -   **Terminal Aesthetic**: Unique brand identity featuring a dark mode with terminal-inspired visuals, custom typography (Geist Mono), and electric violet accents.
 -   **Modern UI/UX**: Built with React 19 and Next.js 15 for a fast, responsive user experience.
 -   **Dynamic Animations**: Powered by Framer Motion for smooth transitions and interactive elements.
+-   **Dynamic Stats**: Tracks GitHub stats and project uptime in real-time.
 -   **Comprehensive Portfolio**: Showcases various projects ranging from Python automation to Flask web apps.
 -   **Professional Timeline**: Detailed experience in HPC (High-Performance Computing) and Technical Support.
 -   **Modern Styling**: Styled with Tailwind CSS 4.0 for a clean and professional look.
@@ -40,6 +41,13 @@ src/
 ## 🚀 Getting Started
 
 To run this project locally, follow these steps:
+
+### Prerequisites
+
+-   **Node.js**: >= 18.18.0 (Required for Next.js 16)
+-   **Package Manager**: npm, yarn, or pnpm
+
+### Installation
 
 1.  **Clone the repository**:
     ```bash
