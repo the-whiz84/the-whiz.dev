@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Github, Linkedin, Twitter, MapPin, ArrowRight, Home, Briefcase, Code2, Award, Mail } from "lucide-react";
+import { useState } from "react";
+import { Github, Linkedin, Twitter, MapPin, ArrowRight, Home, Briefcase, Code2, Award, Mail, Menu, X } from "lucide-react";
 import { profile, socials, skills, experience, projects, certifications } from "@/data";
+import { motion, AnimatePresence } from "framer-motion";
 
 const socialIconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Github,
@@ -22,6 +24,8 @@ const colors = {
 };
 
 export default function V2Page() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div 
       className="min-h-screen text-white"
@@ -32,7 +36,14 @@ export default function V2Page() {
         <div className="container mx-auto px-6 py-3 flex items-center justify-between">
           <span className="text-white font-medium">Zero-Dawn v2.0</span>
           <div className="hidden md:flex items-center gap-6 text-sm">
-            <Link href="#" className="flex items-center gap-1 text-white/80 hover:text-white">
+            <Link 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="flex items-center gap-1 text-white/80 hover:text-white"
+            >
               <Home size={14} /> Home
             </Link>
             <Link href="#projects" className="flex items-center gap-1 text-white/80 hover:text-white">
@@ -53,17 +64,90 @@ export default function V2Page() {
           </div>
           <Link
             href="/"
-            className="px-4 py-1.5 rounded text-sm font-medium text-white"
+            className="hidden md:block px-4 py-1.5 rounded text-sm font-medium text-white"
             style={{ backgroundColor: colors.success }}
           >
-            Home
+            Back to Main Page
           </Link>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-white p-1"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="md:hidden bg-black/90 backdrop-blur-md border-t border-white/10 overflow-hidden"
+            >
+              <div className="container mx-auto px-6 py-4 flex flex-col gap-4">
+                <Link 
+                  href="#" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-white/80 hover:text-white py-2"
+                >
+                  <Home size={16} /> Home
+                </Link>
+                <Link 
+                  href="#projects" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-white/80 hover:text-white py-2"
+                >
+                  <Code2 size={16} /> Projects
+                </Link>
+                <Link 
+                  href="#experience" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-white/80 hover:text-white py-2"
+                >
+                  <Briefcase size={16} /> Experience
+                </Link>
+                <Link 
+                  href="#skills" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-white/80 hover:text-white py-2"
+                >
+                  <Code2 size={16} /> Skills
+                </Link>
+                <Link 
+                  href="#certifications" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-white/80 hover:text-white py-2"
+                >
+                  <Award size={16} /> Certifications
+                </Link>
+                <Link 
+                  href="mailto:radu@the-whiz.dev" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-white/80 hover:text-white py-2"
+                >
+                  <Mail size={16} /> Contact Me
+                </Link>
+                <Link 
+                  href="/" 
+                  className="inline-block text-center px-4 py-2 rounded text-sm font-medium text-white mt-2"
+                  style={{ backgroundColor: colors.success }}
+                >
+                  Go to Main Site
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section with Background */}
       <header
-        className="min-h-[75vh] relative bg-cover bg-center flex items-center justify-center"
+        className="min-h-[75vh] relative bg-cover bg-top flex items-center justify-center"
         style={{ backgroundImage: "url('/assets/img/bg-magic.png')" }}
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 to-black/60" />
@@ -71,7 +155,7 @@ export default function V2Page() {
         <div className="relative z-10 text-center px-6 py-20 mt-16">
           {/* Profile Image - Large Portrait Style */}
           <div className="flex justify-center mb-6">
-            <div className="overflow-hidden" style={{ width: '300px', height: '400px' }}>
+            <div className="overflow-hidden relative" style={{ width: '100%', maxWidth: '300px', aspectRatio: '3/4', height: 'auto' }}>
               <Image
                 src="/assets/img/profile-old.png"
                 alt={profile.name}
@@ -277,7 +361,7 @@ export default function V2Page() {
 
       {/* Footer - Material Kit Style */}
       <footer className="py-12 px-6 text-center" style={{ backgroundColor: colors.darkBg }}>
-        <div className="flex justify-center gap-8 mb-6 text-sm">
+        <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-6 text-sm">
           <Link href="#" style={{ color: colors.success }} className="hover:underline">
             Home
           </Link>
