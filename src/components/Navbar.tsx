@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,6 +18,7 @@ const navItems = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -70,7 +72,16 @@ export function Navbar() {
       )}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="relative w-16 h-16 md:w-24 md:h-24 hover:scale-110 transition-transform duration-300">
+        <Link 
+          href="/" 
+          className="relative w-16 h-16 md:w-24 md:h-24 hover:scale-110 transition-transform duration-300"
+          onClick={(e) => {
+            if (pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
           <Image 
             src="/assets/img/navbar-logo.webp" 
             alt="TheWhiz Logo" 
