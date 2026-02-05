@@ -1,6 +1,5 @@
 import { motion } from 'motion/react'
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
 import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X } from 'lucide-react'
 
@@ -182,10 +181,6 @@ export default function Design3() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link to="/" className="font-orbitron text-sm text-cyan-400 hover:neon-cyan transition-all">
-            ← BACK
-          </Link>
-
           {/* Desktop Nav */}
           <ul className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
