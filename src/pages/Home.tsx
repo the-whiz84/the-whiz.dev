@@ -1,7 +1,6 @@
 import { Link } from 'react-router'
 
 const designs = [
-  { path: '/1', name: 'Kinetic Typography', desc: 'Words ARE the interface — massive moving text' },
   { path: '/2', name: '3D Isometric World', desc: 'Dark floating blocks, explorable diorama' },
   { path: '/3', name: 'Retro-Futuristic Neon', desc: 'Cyberpunk, neon glows, synthwave vibes' },
 ]
