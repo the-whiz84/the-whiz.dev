@@ -10,8 +10,8 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 const navItems = [
   { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
   { label: 'Certifications', href: '#certifications' },
 ]
 
@@ -136,8 +136,8 @@ export default function Design1() {
             })}
           </ul>
 
-          {/* Social Icons */}
-          <div className="hidden md:flex gap-4">
+          {/* Social Icons + V1/V2 Links */}
+          <div className="hidden md:flex items-center gap-4">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
               return Icon ? (
@@ -152,6 +152,23 @@ export default function Design1() {
                 </a>
               ) : null
             })}
+            <span className="w-px h-5 bg-zinc-700" />
+            <a
+              href="https://v1.the-whiz.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-clash text-xs text-zinc-500 hover:text-orange-500 transition-colors"
+            >
+              V1
+            </a>
+            <a
+              href="https://v2.the-whiz.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-clash text-xs text-zinc-500 hover:text-orange-500 transition-colors"
+            >
+              V2
+            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -293,39 +310,6 @@ export default function Design1() {
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-24 px-6 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="font-monument text-[10vw] md:text-[8vw] text-stroke-orange mb-12"
-          >
-            SKILLS
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {skills.map((skill, i) => (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group p-6 border border-zinc-800 hover:border-orange-500 transition-all duration-500"
-              >
-                <h3 className="font-monument text-xl mb-3 group-hover:text-orange-500 transition-colors">
-                  {skill.name.toUpperCase()}
-                </h3>
-                <p className="font-clash text-zinc-500 group-hover:text-zinc-300 transition-colors text-sm">
-                  {skill.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Experience Section */}
       <section id="experience" className="py-24 px-6 md:px-8 bg-zinc-950">
         <div className="max-w-6xl mx-auto">
@@ -333,7 +317,7 @@ export default function Design1() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="font-monument text-[10vw] md:text-[8vw] text-stroke mb-12"
+            className="font-monument text-[10vw] md:text-[8vw] text-stroke-orange mb-12"
           >
             EXPERIENCE
           </motion.h2>
@@ -364,6 +348,40 @@ export default function Design1() {
           </div>
         </div>
       </section>
+
+      {/* Skills Section */}
+      <section id="skills" className="py-24 px-6 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="font-monument text-[10vw] md:text-[8vw] text-stroke mb-12"
+          >
+            SKILLS
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {skills.map((skill, i) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group p-6 border border-zinc-800 hover:border-orange-500 transition-all duration-500"
+              >
+                <h3 className="font-monument text-xl mb-3 group-hover:text-orange-500 transition-colors">
+                  {skill.name.toUpperCase()}
+                </h3>
+                <p className="font-clash text-zinc-500 group-hover:text-zinc-300 transition-colors text-sm">
+                  {skill.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* Certifications Section */}
       <section id="certifications" className="py-24 px-6 md:px-8">
@@ -448,12 +466,10 @@ export default function Design1() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-8 border-t border-zinc-800">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="font-clash text-zinc-600 tracking-widest text-sm">
-            © 2026 RADU CHIRIAC
-          </p>
-          <div className="flex gap-4">
+      <footer className="py-6 px-8 border-t border-zinc-800">
+        <div className="max-w-6xl mx-auto flex justify-between items-center">
+          <p className="font-clash text-zinc-600 text-sm">© 2026 RADU CHIRIAC</p>
+          <div className="flex items-center gap-4">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
               return Icon ? (
@@ -464,10 +480,13 @@ export default function Design1() {
                   rel="noopener noreferrer"
                   className="text-zinc-600 hover:text-orange-500 transition-colors"
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4" />
                 </a>
               ) : null
             })}
+            <span className="w-px h-4 bg-zinc-700" />
+            <a href="https://v1.the-whiz.dev" target="_blank" rel="noopener noreferrer" className="font-clash text-xs text-zinc-600 hover:text-orange-500">V1</a>
+            <a href="https://v2.the-whiz.dev" target="_blank" rel="noopener noreferrer" className="font-clash text-xs text-zinc-600 hover:text-orange-500">V2</a>
           </div>
         </div>
       </footer>
