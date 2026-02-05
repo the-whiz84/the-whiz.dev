@@ -12,8 +12,8 @@ export default function TerminalStats({ repoCount }: TerminalStatsProps) {
     {
       icon: <Cpu className="w-4 h-4 text-primary" />,
       label: "Core Usage",
-      value: "50%",
-      detail: "Developer",
+      value: "25%",
+      detail: "Hobbyist Developer",
       color: "bg-primary"
     },
     {
