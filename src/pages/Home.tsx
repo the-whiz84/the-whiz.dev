@@ -363,15 +363,15 @@ export default function Home() {
           >
             EXPERIENCE
           </motion.h2>
-          <div className="space-y-12">
-            {experience.slice(0, 4).map((exp, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {experience.map((exp, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="border-l-4 border-zinc-800 hover:border-orange-500 pl-6 transition-all duration-500"
+                className="border-l-4 border-zinc-800 hover:border-orange-500 pl-6 transition-all duration-500 text-left"
               >
                 <span className="font-clash text-zinc-600 text-sm tracking-widest">
                   {exp.period}
