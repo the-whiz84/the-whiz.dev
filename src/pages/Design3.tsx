@@ -1,11 +1,19 @@
 import { motion } from 'motion/react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
-import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap } from 'lucide-react'
+import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X } from 'lucide-react'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
 }
+
+const navItems = [
+  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Certifications', href: '#certifications' },
+]
 
 function NeonCard({ 
   children, 
@@ -45,6 +53,59 @@ function GlitchText({ children, className = '' }: { children: string; className?
 }
 
 export default function Design3() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
+  const sectionRatios = useRef<Record<string, number>>({})
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+      if (window.scrollY < 100) {
+        setActiveSection('')
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          sectionRatios.current[entry.target.id] = entry.intersectionRatio
+        })
+
+        const activeId = Object.keys(sectionRatios.current).reduce((a, b) =>
+          sectionRatios.current[a] > sectionRatios.current[b] ? a : b
+        )
+
+        if (sectionRatios.current[activeId] > 0) {
+          setActiveSection(activeId)
+        }
+      },
+      {
+        threshold: [0, 0.2, 0.4, 0.6, 0.8, 1],
+        rootMargin: '-20% 0px -20% 0px'
+      }
+    )
+
+    document.querySelectorAll('section[id]').forEach((section) => {
+      observer.observe(section)
+    })
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
+    }
+  }, [])
+
+  const scrollToSection = (href: string) => {
+    const id = href.replace('#', '')
+    const element = document.getElementById(id)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsMobileMenuOpen(false)
+  }
+
   return (
     <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
       {/* Styles */}
@@ -112,21 +173,50 @@ export default function Design3() {
       <div className="fixed inset-0 grid-pattern pointer-events-none" />
       <div className="fixed inset-0 scanline pointer-events-none opacity-50" />
 
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 p-6 backdrop-blur-md bg-slate-950/50 border-b border-cyan-500/20">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+      {/* Fixed Navbar with Section Highlighting */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-slate-950/90 backdrop-blur-md border-b border-cyan-500/30 py-3'
+            : 'bg-transparent py-6'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link to="/" className="font-orbitron text-sm text-cyan-400 hover:neon-cyan transition-all">
             ← BACK
           </Link>
-          <div className="flex gap-4">
+
+          {/* Desktop Nav */}
+          <ul className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const isActive = activeSection === item.href.substring(1)
+              return (
+                <li key={item.label}>
+                  <button
+                    onClick={() => scrollToSection(item.href)}
+                    className={`font-orbitron text-xs tracking-wider px-4 py-2 rounded transition-all duration-300 ${
+                      isActive
+                        ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 shadow-[0_0_15px_rgba(0,255,255,0.3)]'
+                        : 'text-slate-400 hover:text-cyan-400 hover:bg-slate-800/50'
+                    }`}
+                  >
+                    {item.label.toUpperCase()}
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+
+          {/* Social Icons */}
+          <div className="hidden md:flex gap-3">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
               return Icon ? (
-                <a 
-                  key={s.name} 
-                  href={s.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  key={s.name}
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="p-2 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-all"
                 >
                   <Icon className="w-4 h-4 text-cyan-400" />
@@ -134,7 +224,46 @@ export default function Design3() {
               ) : null
             })}
           </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 border border-cyan-500/30 rounded"
+          >
+            {isMobileMenuOpen ? <X className="w-5 h-5 text-cyan-400" /> : <Menu className="w-5 h-5 text-cyan-400" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden bg-slate-900/95 backdrop-blur-md border-t border-cyan-500/30 px-6 py-4"
+          >
+            {navItems.map((item) => (
+              <button
+                key={item.label}
+                onClick={() => scrollToSection(item.href)}
+                className={`block w-full text-left font-orbitron text-sm py-3 border-b border-slate-800 ${
+                  activeSection === item.href.substring(1) ? 'text-cyan-400' : 'text-slate-300'
+                }`}
+              >
+                {item.label.toUpperCase()}
+              </button>
+            ))}
+            <div className="flex gap-4 pt-4">
+              {socials.map((s) => {
+                const Icon = iconMap[s.icon]
+                return Icon ? (
+                  <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer">
+                    <Icon className="w-5 h-5 text-cyan-400" />
+                  </a>
+                ) : null
+              })}
+            </div>
+          </motion.div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -146,7 +275,7 @@ export default function Design3() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="font-rajdhani text-cyan-400 text-xl tracking-[0.3em] mb-6">WELCOME TO THE GRID</p>
-            <h1 className="font-orbitron text-6xl md:text-8xl font-black">
+            <h1 className="font-orbitron text-5xl md:text-8xl font-black">
               <GlitchText className="neon-cyan">{profile.name.split(' ')[0].toUpperCase()}</GlitchText>
               <br />
               <span className="neon-pink">{profile.name.split(' ')[1]?.toUpperCase()}</span>
@@ -160,11 +289,11 @@ export default function Design3() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
-            className="flex justify-center gap-6 mt-12"
+            className="flex flex-wrap justify-center gap-4 mt-12"
           >
             <a 
               href={profile.resumeUrl}
-              className="font-orbitron px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 text-black font-bold rounded hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-all flex items-center gap-2"
+              className="font-orbitron px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-black font-bold rounded hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-all flex items-center gap-2"
             >
               <Zap className="w-5 h-5" /> DOWNLOAD CV
             </a>
@@ -172,14 +301,14 @@ export default function Design3() {
               href={profile.locationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-orbitron px-8 py-4 border-2 border-pink-500 text-pink-400 font-bold rounded hover:bg-pink-500/10 hover:shadow-[0_0_30px_rgba(255,0,128,0.3)] transition-all"
+              className="font-orbitron px-6 py-3 border-2 border-pink-500 text-pink-400 font-bold rounded hover:bg-pink-500/10 hover:shadow-[0_0_30px_rgba(255,0,128,0.3)] transition-all"
             >
               LOCATE ME
             </a>
           </motion.div>
         </div>
 
-        {/* Animated Lines */}
+        {/* Animated Line */}
         <motion.div 
           className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
           animate={{ opacity: [0.3, 1, 0.3] }}
@@ -187,27 +316,87 @@ export default function Design3() {
         />
       </section>
 
+      {/* Projects Section — Right After Hero */}
+      <section id="projects" className="py-24 px-6 md:px-8">
+        <div className="max-w-7xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="font-orbitron text-4xl font-bold mb-12"
+          >
+            <span className="neon-pink">PROJECTS</span>
+          </motion.h2>
+          
+          {/* Project Cards with Images */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {projects.map((project, i) => (
+              <motion.a
+                key={project.title}
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group"
+              >
+                <NeonCard 
+                  glowColor={['pink', 'purple', 'cyan'][i % 3] as 'cyan' | 'pink' | 'purple'}
+                  className="h-full"
+                >
+                  {/* Project Image */}
+                  <div className="aspect-video rounded overflow-hidden mb-4 bg-slate-800">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                    />
+                  </div>
+                  
+                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 group-hover:neon-cyan transition-all">
+                    {project.title.toUpperCase()}
+                  </h3>
+                  <p className="font-rajdhani text-slate-400 text-sm mb-4 line-clamp-2">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <span key={tag} className="font-orbitron text-xs px-2 py-1 border border-purple-500/30 text-purple-400 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="font-rajdhani text-cyan-400 flex items-center gap-2 text-sm">
+                    <ExternalLink className="w-4 h-4" /> {project.linkLabel}
+                  </span>
+                </NeonCard>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Skills Section */}
-      <section className="py-24 px-8">
+      <section id="skills" className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="font-orbitron text-4xl font-bold mb-16"
+            className="font-orbitron text-4xl font-bold mb-12"
           >
             <span className="neon-purple">CAPABILITIES</span>
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {skills.map((skill, i) => (
               <NeonCard 
                 key={skill.name} 
                 glowColor={['cyan', 'pink', 'purple'][i % 3] as 'cyan' | 'pink' | 'purple'}
               >
-                <h3 className="font-orbitron text-lg font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">
+                <h3 className="font-orbitron text-sm font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">
                   {skill.name.toUpperCase()}
                 </h3>
-                <p className="font-rajdhani text-slate-400">{skill.description}</p>
+                <p className="font-rajdhani text-slate-400 text-sm">{skill.description}</p>
               </NeonCard>
             ))}
           </div>
@@ -215,13 +404,13 @@ export default function Design3() {
       </section>
 
       {/* Experience Section */}
-      <section className="py-24 px-8 relative">
+      <section id="experience" className="py-24 px-6 md:px-8 relative">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="font-orbitron text-4xl font-bold mb-16"
+            className="font-orbitron text-4xl font-bold mb-12"
           >
             <span className="neon-cyan">EXPERIENCE LOG</span>
           </motion.h2>
@@ -230,7 +419,7 @@ export default function Design3() {
               <NeonCard key={i} glowColor="cyan">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                   <div>
-                    <h3 className="font-orbitron text-xl font-bold neon-cyan">{exp.role.toUpperCase()}</h3>
+                    <h3 className="font-orbitron text-lg font-bold neon-cyan">{exp.role.toUpperCase()}</h3>
                     <p className="font-rajdhani text-pink-400 text-lg">{exp.company}</p>
                   </div>
                   <span className="font-orbitron text-xs text-slate-500 border border-slate-700 px-3 py-1 rounded">
@@ -239,8 +428,8 @@ export default function Design3() {
                 </div>
                 <ul className="mt-4 space-y-2">
                   {exp.accomplishments.map((acc, j) => (
-                    <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2">
-                      <ArrowRight className="w-4 h-4 text-cyan-500 mt-1 flex-shrink-0" /> {acc}
+                    <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2 text-sm">
+                      <ArrowRight className="w-4 h-4 text-cyan-500 mt-0.5 flex-shrink-0" /> {acc}
                     </li>
                   ))}
                 </ul>
@@ -250,64 +439,27 @@ export default function Design3() {
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section className="py-24 px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="font-orbitron text-4xl font-bold mb-16"
-          >
-            <span className="neon-pink">PROJECTS</span>
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {projects.map((project, i) => (
-              <NeonCard 
-                key={project.title} 
-                glowColor={['pink', 'purple', 'cyan'][i % 3] as 'cyan' | 'pink' | 'purple'}
-              >
-                <h3 className="font-orbitron text-lg font-bold text-white mb-3">
-                  {project.title.toUpperCase()}
-                </h3>
-                <p className="font-rajdhani text-slate-400 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="font-orbitron text-xs px-2 py-1 border border-purple-500/30 text-purple-400 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <a 
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-rajdhani text-cyan-400 flex items-center gap-2 hover:neon-cyan transition-all"
-                >
-                  <ExternalLink className="w-4 h-4" /> {project.linkLabel}
-                </a>
-              </NeonCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Certifications Section */}
-      <section className="py-24 px-8">
+      <section id="certifications" className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="font-orbitron text-4xl font-bold mb-16"
+            className="font-orbitron text-4xl font-bold mb-12"
           >
             <span className="neon-purple">CERTIFICATIONS</span>
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {certifications.map((cert, i) => (
+            {certifications.map((cert) => (
               <NeonCard key={cert.title} glowColor="purple">
-                <h3 className="font-orbitron text-sm font-bold text-white mb-3">{cert.title}</h3>
-                <p className="font-rajdhani text-slate-500 text-sm mb-4">{cert.description}</p>
+                <div className="flex items-start gap-4 mb-4">
+                  <img src={cert.image} alt={cert.title} className="w-16 h-16 object-contain rounded bg-slate-800 p-2" />
+                  <div>
+                    <h3 className="font-orbitron text-xs font-bold text-white">{cert.title}</h3>
+                    <p className="font-rajdhani text-slate-500 text-xs mt-1">{cert.description}</p>
+                  </div>
+                </div>
                 <a 
                   href={cert.link}
                   target="_blank"

@@ -2,10 +2,8 @@ import { Link } from 'react-router'
 
 const designs = [
   { path: '/1', name: 'Kinetic Typography', desc: 'Words ARE the interface — massive moving text' },
-  { path: '/2', name: '3D Isometric World', desc: 'Floating pastel blocks, explorable diorama' },
+  { path: '/2', name: '3D Isometric World', desc: 'Dark floating blocks, explorable diorama' },
   { path: '/3', name: 'Retro-Futuristic Neon', desc: 'Cyberpunk, neon glows, synthwave vibes' },
-  { path: '/4', name: 'Organic Minimalism', desc: 'Soft gradients, fluid shapes, calming' },
-  { path: '/5', name: 'Maximalist Chaos', desc: 'Bold, loud, collage-style, unforgettable' },
 ]
 
 export default function Home() {
