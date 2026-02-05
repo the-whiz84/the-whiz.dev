@@ -14,7 +14,7 @@ const navItems = [
   { label: 'Certifications', href: '#certifications' },
 ]
 
-export default function Design1() {
+export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
@@ -114,7 +114,7 @@ export default function Design1() {
             <img 
               src="/assets/img/navbar-logo-symbol.png" 
               alt="The Whiz" 
-              className="h-8 w-auto hover:opacity-80 transition-opacity" 
+              className="h-12 w-auto hover:opacity-80 transition-opacity" 
             />
           </div>
 
@@ -489,7 +489,7 @@ export default function Design1() {
       </section>
 
       {/* Footer */}
-      <footer className="py-4 px-8 border-t border-zinc-800">
+      <footer className="py-2 px-8 border-t border-zinc-800">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <p className="font-clash text-zinc-600 text-xs whitespace-nowrap">© 2026 RADU CHIRIAC</p>
           <div className="flex items-center gap-3">
