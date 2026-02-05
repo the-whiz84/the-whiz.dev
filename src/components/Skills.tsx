@@ -41,7 +41,7 @@ export function Skills() {
         <motion.div
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
+           viewport={{ once: true, amount: 0.2 }}
            transition={{ duration: 0.6 }}
            className="mb-12 text-center"
         >
@@ -62,7 +62,7 @@ export function Skills() {
                 key={skill.name}
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: index * 0.05, duration: 0.4 }}
                 className="group border border-border bg-card/40 hover:bg-card/80 hover:border-primary transition-all duration-300 p-6 flex flex-col h-full"
               >
