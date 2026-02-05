@@ -102,8 +102,8 @@ export default function Home() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-black/80 backdrop-blur-md border-b border-zinc-800 py-3'
-            : 'bg-transparent py-6'
+            ? 'bg-black/80 backdrop-blur-md py-2'
+            : 'bg-transparent py-3'
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -114,7 +114,7 @@ export default function Home() {
             <img 
               src="/assets/img/navbar-logo-symbol.png" 
               alt="The Whiz" 
-              className="h-12 w-auto hover:opacity-80 transition-opacity" 
+              className="h-16 w-auto hover:opacity-80 transition-opacity" 
             />
           </div>
 
@@ -245,10 +245,29 @@ export default function Home() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="text-center"
         >
-          <h1 className="font-monument text-[12vw] md:text-[15vw] leading-[0.85] tracking-tighter">
+          <h1 className="font-monument text-[10vw] md:text-[12vw] leading-[0.85] tracking-tighter">
             <span className="block text-stroke">RADU</span>
             <span className="block text-orange-500">CHIRIAC</span>
           </h1>
+          <motion.p
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ delay: 0.3, duration: 1 }}
+             className="font-clash text-zinc-400 text-lg md:text-2xl mt-6 tracking-wide"
+          >
+            HPC ENGINEER AT <a href="https://www.bull.com" target="_blank" rel="noreferrer" className="text-orange-500 hover:text-white transition-colors">BULL</a> AND HOBBYST DEVELOPER
+          </motion.p>
+          <motion.a
+            href={profile.locationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 1 }}
+            className="block text-zinc-500 font-clash text-sm mt-2 hover:text-orange-500 transition-colors"
+          >
+            {profile.location.toUpperCase()}
+          </motion.a>
         </motion.div>
 
         <motion.p
@@ -270,7 +289,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section — Right After Hero */}
-      <section id="projects" className="py-24 px-6 md:px-8 bg-zinc-950">
+      <section id="projects" className="py-24 px-6 md:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, x: -50 }}
@@ -313,7 +332,7 @@ export default function Home() {
                     </h3>
                     <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
                   </div>
-                  <p className="font-clash text-zinc-500 text-sm line-clamp-2">
+                  <p className="font-clash text-zinc-500 text-base line-clamp-2">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-4">
@@ -334,7 +353,7 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-24 px-6 md:px-8 bg-zinc-950">
+      <section id="experience" className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, x: -50 }}
@@ -361,7 +380,7 @@ export default function Home() {
                 <p className="font-clash text-orange-500 text-lg mt-1">{exp.company}</p>
                 <ul className="mt-4 space-y-2">
                   {exp.accomplishments.map((acc, j) => (
-                    <li key={j} className="font-clash text-zinc-500 text-sm">
+                    <li key={j} className="font-clash text-zinc-500 text-base">
                       • {acc}
                     </li>
                   ))}
@@ -396,7 +415,7 @@ export default function Home() {
                 <h3 className="font-monument text-xl mb-3 group-hover:text-orange-500 transition-colors">
                   {skill.name.toUpperCase()}
                 </h3>
-                <p className="font-clash text-zinc-500 group-hover:text-zinc-300 transition-colors text-sm">
+                <p className="font-clash text-zinc-500 group-hover:text-zinc-300 transition-colors text-base">
                   {skill.description}
                 </p>
               </motion.div>
@@ -435,80 +454,80 @@ export default function Home() {
                   alt={cert.title}
                   className="w-20 h-20 object-contain mb-4 group-hover:scale-110 transition-transform"
                 />
-                <h3 className="font-monument text-sm mb-2 group-hover:text-orange-500 transition-colors">
+                <h3 className="font-monument text-base mb-2 group-hover:text-orange-500 transition-colors">
                   {cert.title.toUpperCase()}
                 </h3>
-                <p className="font-clash text-zinc-500 text-xs">{cert.description}</p>
+                <p className="font-clash text-zinc-500 text-base">{cert.description}</p>
               </motion.a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About / Contact Section */}
-      <section className="py-24 px-6 md:px-8 bg-zinc-950">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-monument text-[8vw] md:text-[6vw] text-stroke-orange mb-8"
-          >
-            LET'S CONNECT
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="font-clash text-xl md:text-2xl text-zinc-400 mb-8"
-          >
-            {profile.tagline}
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <a
-              href={profile.resumeUrl}
-              className="font-clash text-sm px-6 py-3 border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-black transition-all flex items-center gap-2"
+      <footer id="contact" className="py-10 px-8 border-t border-zinc-900 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-10">
+            <div className="text-left">
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="font-monument text-3xl md:text-4xl text-orange-500 mb-4"
+              >
+                LET'S CONNECT
+              </motion.h2>
+              <p className="font-clash text-zinc-400 text-base max-w-md">
+                {profile.tagline}
+              </p>
+            </div>
+            
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-wrap gap-4 md:justify-end"
             >
-              <Download className="w-4 h-4" /> DOWNLOAD CV
-            </a>
-            <a
-              href="mailto:contact@the-whiz.dev"
-              className="font-clash text-sm px-6 py-3 bg-white text-black hover:bg-orange-500 transition-all flex items-center gap-2"
-            >
-              <Mail className="w-4 h-4" /> CONTACT
-            </a>
-          </motion.div>
-        </div>
-      </section>
+              <a
+                href={profile.resumeUrl}
+                className="font-clash text-sm px-8 py-4 border border-zinc-800 bg-zinc-900/50 text-white hover:bg-orange-500 hover:border-orange-500 hover:text-black transition-all duration-300 flex items-center gap-3"
+              >
+                <Download className="w-4 h-4" /> DOWNLOAD CV
+              </a>
+              <a
+                href="mailto:contact@the-whiz.dev"
+                className="font-clash text-sm px-8 py-4 bg-white text-black hover:bg-orange-500 transition-all duration-300 flex items-center gap-3"
+              >
+                <Mail className="w-4 h-4" /> SEND EMAIL
+              </a>
+            </motion.div>
+          </div>
 
-      {/* Footer */}
-      <footer className="py-2 px-8 border-t border-zinc-800">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <p className="font-clash text-zinc-600 text-xs whitespace-nowrap">© 2026 RADU CHIRIAC</p>
-          <div className="flex items-center gap-3">
-            {socials.map((s) => {
-              const Icon = iconMap[s.icon]
-              return Icon ? (
-                <a
-                  key={s.name}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-zinc-600 hover:text-orange-500 transition-colors"
-                >
-                  <Icon className="w-4 h-4" />
-                </a>
-              ) : null
-            })}
-            <span className="w-px h-3 bg-zinc-700" />
-            <a href="/privacy" className="font-clash text-xs text-zinc-600 hover:text-orange-500">Privacy</a>
+          <div className="border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <p className="font-clash text-zinc-600 text-xs tracking-wider">
+                © 2026 RADU CHIRIAC. ALL RIGHTS RESERVED.
+              </p>
+              <a href="/privacy" className="font-clash text-zinc-600 hover:text-orange-500 text-xs tracking-wider transition-colors">
+                PRIVACY POLICY
+              </a>
+            </div>
+
+            <div className="flex items-center gap-4">
+              {socials.map((s) => {
+                const Icon = iconMap[s.icon]
+                return Icon ? (
+                  <a
+                    key={s.name}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-orange-500 transition-all duration-300"
+                  >
+                    <Icon className="w-4 h-4" />
+                  </a>
+                ) : null
+              })}
+            </div>
           </div>
         </div>
       </footer>
