@@ -107,8 +107,17 @@ export default function Design1() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Logo/Name */}
-          <span className="font-monument text-lg tracking-wider">THE WHIZ</span>
+          {/* Logo */}
+          <div 
+            className="cursor-pointer" 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          >
+            <img 
+              src="/assets/img/navbar-logo.webp" 
+              alt="The Whiz" 
+              className="h-8 w-auto hover:opacity-80 transition-opacity" 
+            />
+          </div>
 
           {/* Desktop Nav */}
           <ul className="hidden md:flex items-center gap-1">
@@ -129,6 +138,27 @@ export default function Design1() {
                 </li>
               )
             })}
+            {/* V1 & V2 Links moved here */}
+            <li>
+              <a
+                href="https://v1.the-whiz.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-clash text-sm tracking-wider px-4 py-2 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all duration-300"
+              >
+                V1
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://v2.the-whiz.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-clash text-sm tracking-wider px-4 py-2 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all duration-300"
+              >
+                V2
+              </a>
+            </li>
           </ul>
 
           {/* Social Icons + V1/V2 Links */}
@@ -147,23 +177,6 @@ export default function Design1() {
                 </a>
               ) : null
             })}
-            <span className="w-px h-5 bg-zinc-700" />
-            <a
-              href="https://v1.the-whiz.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-clash text-xs text-zinc-500 hover:text-orange-500 transition-colors"
-            >
-              V1
-            </a>
-            <a
-              href="https://v2.the-whiz.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-clash text-xs text-zinc-500 hover:text-orange-500 transition-colors"
-            >
-              V2
-            </a>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -461,7 +474,7 @@ export default function Design1() {
       </section>
 
       {/* Footer */}
-      <footer className="py-4 px-8 border-t border-zinc-800">
+      <footer className="py-8 px-8 border-t border-zinc-800">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <p className="font-clash text-zinc-600 text-xs whitespace-nowrap">© 2026 RADU CHIRIAC</p>
           <div className="flex items-center gap-3">
@@ -479,9 +492,6 @@ export default function Design1() {
                 </a>
               ) : null
             })}
-            <span className="w-px h-3 bg-zinc-700" />
-            <a href="https://v1.the-whiz.dev" target="_blank" rel="noopener noreferrer" className="font-clash text-xs text-zinc-600 hover:text-orange-500">V1</a>
-            <a href="https://v2.the-whiz.dev" target="_blank" rel="noopener noreferrer" className="font-clash text-xs text-zinc-600 hover:text-orange-500">V2</a>
             <span className="w-px h-3 bg-zinc-700" />
             <a href="/privacy" className="font-clash text-xs text-zinc-600 hover:text-orange-500">Privacy</a>
           </div>
