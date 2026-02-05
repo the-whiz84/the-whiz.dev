@@ -119,17 +119,17 @@ export default function Home() {
           </div>
 
           {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-1">
+          <ul className="hidden md:flex items-center gap-8">
             {navItems.map((item) => {
               const isActive = activeSection === item.href.substring(1)
               return (
                 <li key={item.label}>
                   <button
                     onClick={() => scrollToSection(item.href)}
-                    className={`font-clash text-sm tracking-wider px-4 py-2 rounded-full transition-all duration-300 ${
+                    className={`font-clash text-sm tracking-wider transition-all duration-300 ${
                       isActive
-                        ? 'bg-orange-500 text-black'
-                        : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                        ? 'text-orange-500'
+                        : 'text-zinc-400 hover:text-orange-500'
                     }`}
                   >
                     {item.label.toUpperCase()}
@@ -143,7 +143,7 @@ export default function Home() {
                 href="https://v1.the-whiz.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-clash text-sm tracking-wider px-4 py-2 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all duration-300"
+                className="font-clash text-sm tracking-wider text-zinc-400 hover:text-orange-500 transition-all duration-300"
               >
                 V1
               </a>
@@ -153,7 +153,7 @@ export default function Home() {
                 href="https://v2.the-whiz.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-clash text-sm tracking-wider px-4 py-2 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition-all duration-300"
+                className="font-clash text-sm tracking-wider text-zinc-400 hover:text-orange-500 transition-all duration-300"
               >
                 V2
               </a>
@@ -290,7 +290,7 @@ export default function Home() {
 
       {/* Projects Section — Right After Hero */}
       <section id="projects" className="py-24 px-6 md:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -465,7 +465,7 @@ export default function Home() {
       </section>
 
       <footer id="contact" className="py-10 px-8 border-t border-zinc-900 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-10">
             <div className="text-left">
               <motion.h2 
@@ -494,7 +494,7 @@ export default function Home() {
                 <Download className="w-4 h-4" /> DOWNLOAD CV
               </a>
               <a
-                href="mailto:contact@the-whiz.dev"
+                href="mailto:radu@the-whiz.dev"
                 className="font-clash text-sm px-8 py-4 bg-white text-black hover:bg-orange-500 transition-all duration-300 flex items-center gap-3"
               >
                 <Mail className="w-4 h-4" /> SEND EMAIL
