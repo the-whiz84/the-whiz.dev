@@ -107,13 +107,12 @@ export default function Design1() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          {/* Logo */}
           <div 
             className="cursor-pointer" 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <img 
-              src="/assets/img/navbar-logo.webp" 
+              src="/assets/img/navbar-logo-symbol.png" 
               alt="The Whiz" 
               className="h-8 w-auto hover:opacity-80 transition-opacity" 
             />
@@ -208,6 +207,22 @@ export default function Design1() {
                 {item.label.toUpperCase()}
               </button>
             ))}
+            <a
+              href="https://v1.the-whiz.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-left font-clash py-3 border-b border-zinc-800 text-zinc-300 hover:text-orange-500"
+            >
+              V1 WEBSITE
+            </a>
+            <a
+              href="https://v2.the-whiz.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full text-left font-clash py-3 border-b border-zinc-800 text-zinc-300 hover:text-orange-500"
+            >
+              V2 WEBSITE
+            </a>
             <div className="flex gap-4 pt-4">
               {socials.map((s) => {
                 const Icon = iconMap[s.icon]
@@ -474,7 +489,7 @@ export default function Design1() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-8 border-t border-zinc-800">
+      <footer className="py-4 px-8 border-t border-zinc-800">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           <p className="font-clash text-zinc-600 text-xs whitespace-nowrap">© 2026 RADU CHIRIAC</p>
           <div className="flex items-center gap-3">
