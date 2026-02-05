@@ -50,7 +50,7 @@ export default function TerminalStats({ repoCount }: TerminalStatsProps) {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="flex flex-col space-y-2 hover:bg-white/5 p-2 rounded-sm transition-colors cursor-default"
+                    className="flex flex-col space-y-2 p-2 rounded-sm cursor-default"
                 >
                     <div className="flex items-center space-x-2 text-muted-foreground text-sm uppercase tracking-widest font-mono">
                         {stat.icon}
