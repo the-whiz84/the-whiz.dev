@@ -461,10 +461,10 @@ export default function Design1() {
       </section>
 
       {/* Footer */}
-      <footer className="py-6 px-8 border-t border-zinc-800">
+      <footer className="py-4 px-8 border-t border-zinc-800">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <p className="font-clash text-zinc-600 text-sm">© 2026 RADU CHIRIAC</p>
-          <div className="flex items-center gap-4">
+          <p className="font-clash text-zinc-600 text-xs whitespace-nowrap">© 2026 RADU CHIRIAC</p>
+          <div className="flex items-center gap-3">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
               return Icon ? (
@@ -479,9 +479,11 @@ export default function Design1() {
                 </a>
               ) : null
             })}
-            <span className="w-px h-4 bg-zinc-700" />
+            <span className="w-px h-3 bg-zinc-700" />
             <a href="https://v1.the-whiz.dev" target="_blank" rel="noopener noreferrer" className="font-clash text-xs text-zinc-600 hover:text-orange-500">V1</a>
             <a href="https://v2.the-whiz.dev" target="_blank" rel="noopener noreferrer" className="font-clash text-xs text-zinc-600 hover:text-orange-500">V2</a>
+            <span className="w-px h-3 bg-zinc-700" />
+            <a href="/privacy" className="font-clash text-xs text-zinc-600 hover:text-orange-500">Privacy</a>
           </div>
         </div>
       </footer>
