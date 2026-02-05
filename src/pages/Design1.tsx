@@ -1,6 +1,5 @@
 import { motion } from 'motion/react'
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router'
 import { profile, projects, skills, socials, experience, certifications } from '../data'
 import { Github, Linkedin, Twitter, Mail, ArrowUpRight, Menu, X, Download } from 'lucide-react'
 
@@ -108,12 +107,8 @@ export default function Design1() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <Link
-            to="/"
-            className="font-clash text-sm tracking-widest hover:text-orange-500 transition-colors"
-          >
-            ← BACK
-          </Link>
+          {/* Logo/Name */}
+          <span className="font-monument text-lg tracking-wider">THE WHIZ</span>
 
           {/* Desktop Nav */}
           <ul className="hidden md:flex items-center gap-1">
