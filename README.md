@@ -1,81 +1,73 @@
-# the-whiz.dev 🚀
+# React + TypeScript + Vite
 
-Professional portfolio website for **Radu Chiriac**, a guy passionate about videogames, tech, and Linux. This project showcases my journey, skills, projects, and professional experience in HPC, DevOps, and Web Development.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)](https://reactjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+Currently, two official plugins are available:
 
-## ✨ Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
--   **Terminal Aesthetic**: Unique brand identity featuring a dark mode with terminal-inspired visuals, custom typography (Geist Mono), and electric violet accents.
--   **Modern UI/UX**: Built with React 19 and Next.js 15 for a fast, responsive user experience.
--   **Dynamic Animations**: Powered by Framer Motion for smooth transitions and interactive elements.
--   **Dynamic Stats**: Tracks GitHub stats and project uptime in real-time.
--   **Comprehensive Portfolio**: Showcases various projects ranging from Python automation to Flask web apps.
--   **Professional Timeline**: Detailed experience in HPC (High-Performance Computing) and Technical Support.
--   **Modern Styling**: Styled with Tailwind CSS 4.0 for a clean and professional look.
--   **SEO Optimized**: Built-in meta tags and semantic HTML for better visibility.
+## React Compiler
 
-## 🛠️ Tech Stack
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
--   **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
--   **Language**: [TypeScript](https://www.typescriptlang.org/)
--   **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
--   **Animations**: [Framer Motion](https://www.framer.com/motion/)
--   **Icons**: [Lucide React](https://lucide.dev/)
--   **Analytics**: [Vercel Speed Insights](https://vercel.com/docs/speed-insights)
+## Expanding the ESLint configuration
 
-## 📁 Project Structure
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-```text
-src/
-├── app/          # Next.js App Router pages and layouts
-├── components/   # Reusable UI components (Hero, Projects, Skills, etc.)
-├── data/         # Centralized data file for profile, projects, and experience
-├── lib/          # Utility functions and helper methods
-└── public/       # Static assets (images, fonts, PDFs)
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-## 🚀 Getting Started
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-To run this project locally, follow these steps:
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-### Prerequisites
-
--   **Node.js**: >= 18.18.0 (Required for Next.js 16)
--   **Package Manager**: npm, yarn, or pnpm
-
-### Installation
-
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/the-whiz84/the-whiz.dev.git
-    cd the-whiz.dev
-    ```
-
-2.  **Install dependencies**:
-    ```bash
-    npm install
-    ```
-
-3.  **Run the development server**:
-    ```bash
-    npm run dev
-    ```
-
-4.  **Open the browser**:
-    Navigate to `http://localhost:3000` to see the result.
-
-## 📦 Deployment
-
-The easiest way to deploy this project is using the [Vercel Platform](https://vercel.com/new). It is pre-configured for optimal performance on Vercel out of the box.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Built with ❤️ by [Radu Chiriac](https://the-whiz.dev)
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
