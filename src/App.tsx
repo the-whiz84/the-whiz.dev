@@ -1,16 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
-import Home from './pages/Home'
 import Design2 from './pages/Design2'
-import Design3 from './pages/Design3'
 import './index.css'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/2" element={<Design2 />} />
-        <Route path="/3" element={<Design3 />} />
+        <Route path="/" element={<Design2 />} />
       </Routes>
     </BrowserRouter>
   )

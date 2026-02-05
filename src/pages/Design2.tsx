@@ -1,5 +1,4 @@
 import { motion } from 'motion/react'
-import { Link } from 'react-router'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
 import { Github, Linkedin, Twitter, MapPin, FileDown, ExternalLink } from 'lucide-react'
 
@@ -84,9 +83,6 @@ export default function Design2() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 p-6">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
-          <Link to="/" className="font-space text-sm text-zinc-400 hover:text-violet transition-colors">
-            ← BACK
-          </Link>
           <div className="flex gap-3">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
