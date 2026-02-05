@@ -1,33 +1,52 @@
-# Portfolio - Isometric 3D Edition
+# The-Whiz.dev
 
-A dark, atmospheric portfolio featuring a 3D isometric world theme with floating glass blocks and neon accents.
+This is the source code for my personal portfolio website, [the-whiz.dev](https://the-whiz.dev).
+It showcases my projects, experience, skills, and certifications.
 
-## Design Philosophy
+## 🛠️ Tech Stack
 
-- **Theme**: Dark Mode Isometric Diorama
-- **Core Visuals**: Floating 3D blocks, glassmorphism, neon glows (violet, emerald, cyan, amber)
-- **Typography**: `Space Mono` (structural/code) + `Outfit` (clean modern)
+-   **Framework**: React (Vite)
+-   **Language**: TypeScript
+-   **Styling**: Tailwind CSS, Framer Motion
+-   **Package Manager**: Bun
 
-## Tech Stack
+## 🚀 Getting Started
 
-- **React + Vite** (Fast build & HMR)
-- **Tailwind CSS v4** (Styling)
-- **Framer Motion** (Animations)
-- **Lucide React** (Iconography)
+To run this project locally, follow these steps:
 
-## Getting Started
+### Prerequisites
 
-1. **Install dependencies:**
-   ```bash
-   bun install
-   ```
+-   **Bun**: Latest version (Required)
 
-2. **Run development server:**
-   ```bash
-   bun dev
-   ```
+### Installation
 
-3. **Build for production:**
-   ```bash
-   bun run build
-   ```
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/the-whiz84/the-whiz.dev.git
+    cd the-whiz.dev
+    ```
+
+2.  **Install dependencies**:
+    ```bash
+    bun install
+    ```
+
+3.  **Run the development server**:
+    ```bash
+    bun run dev
+    ```
+
+4.  **Open the browser**:
+    Navigate to `http://localhost:5173` to see the result.
+
+## 📦 Deployment
+
+The easiest way to deploy this project is using the [Vercel Platform](https://vercel.com/new). It is pre-configured for optimal performance on Vercel out of the box.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Built with ❤️ by [Radu Chiriac](https://the-whiz.dev)
