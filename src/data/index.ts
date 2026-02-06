@@ -49,7 +49,7 @@ export const profile = {
   location: "Sibiu, Romania",
   locationUrl: "https://maps.app.goo.gl/riqMDNYqAJRaxHdr9",
   resumeUrl: "/files/Resume.pdf",
-  image: "/assets/img/profile-old.png",
+  image: "/assets/img/hero-portrait.png",
 };
 
 export const socials: SocialLink[] = [

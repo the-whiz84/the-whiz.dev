@@ -1,42 +1,14 @@
-# the-whiz.dev 🚀
+# The-Whiz.dev
 
-Professional portfolio website for **Radu Chiriac**, a guy passionate about videogames, tech, and Linux. This project showcases my journey, skills, projects, and professional experience in HPC, DevOps, and Web Development.
-
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19-blue?style=flat-square&logo=react)](https://reactjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
-
-## ✨ Features
-
--   **Terminal Aesthetic**: Unique brand identity featuring a dark mode with terminal-inspired visuals, custom typography (Geist Mono), and electric violet accents.
--   **Modern UI/UX**: Built with React 19 and Next.js 15 for a fast, responsive user experience.
--   **Dynamic Animations**: Powered by Framer Motion for smooth transitions and interactive elements.
--   **Dynamic Stats**: Tracks GitHub stats and project uptime in real-time.
--   **Comprehensive Portfolio**: Showcases various projects ranging from Python automation to Flask web apps.
--   **Professional Timeline**: Detailed experience in HPC (High-Performance Computing) and Technical Support.
--   **Modern Styling**: Styled with Tailwind CSS 4.0 for a clean and professional look.
--   **SEO Optimized**: Built-in meta tags and semantic HTML for better visibility.
+This is the source code for my personal portfolio website, [the-whiz.dev](https://the-whiz.dev).
+It showcases my projects, experience, skills, and certifications.
 
 ## 🛠️ Tech Stack
 
--   **Framework**: [Next.js 15 (App Router)](https://nextjs.org/)
--   **Language**: [TypeScript](https://www.typescriptlang.org/)
--   **Styling**: [Tailwind CSS 4.0](https://tailwindcss.com/)
--   **Animations**: [Framer Motion](https://www.framer.com/motion/)
--   **Icons**: [Lucide React](https://lucide.dev/)
--   **Analytics**: [Vercel Speed Insights](https://vercel.com/docs/speed-insights)
-
-## 📁 Project Structure
-
-```text
-src/
-├── app/          # Next.js App Router pages and layouts
-├── components/   # Reusable UI components (Hero, Projects, Skills, etc.)
-├── data/         # Centralized data file for profile, projects, and experience
-├── lib/          # Utility functions and helper methods
-└── public/       # Static assets (images, fonts, PDFs)
-```
+-   **Framework**: React (Vite)
+-   **Language**: TypeScript
+-   **Styling**: Tailwind CSS, Framer Motion
+-   **Package Manager**: Bun
 
 ## 🚀 Getting Started
 
@@ -44,8 +16,7 @@ To run this project locally, follow these steps:
 
 ### Prerequisites
 
--   **Node.js**: >= 18.18.0 (Required for Next.js 16)
--   **Package Manager**: npm, yarn, or pnpm
+-   **Bun**: Latest version (Required)
 
 ### Installation
 
@@ -57,16 +28,16 @@ To run this project locally, follow these steps:
 
 2.  **Install dependencies**:
     ```bash
-    npm install
+    bun install
     ```
 
 3.  **Run the development server**:
     ```bash
-    npm run dev
+    bun run dev
     ```
 
 4.  **Open the browser**:
-    Navigate to `http://localhost:3000` to see the result.
+    Navigate to `http://localhost:5173` to see the result.
 
 ## 📦 Deployment
 
