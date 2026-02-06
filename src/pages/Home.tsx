@@ -109,7 +109,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div 
             className="cursor-pointer" 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <img 
               src="/assets/img/navbar-logo-symbol.png" 
@@ -245,30 +245,31 @@ export default function Home() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="text-center"
         >
-          <h1 className="font-monument text-[10vw] md:text-[12vw] leading-[0.85] tracking-tighter">
-            <span className="block text-stroke">RADU</span>
-            <span className="block text-orange-500">CHIRIAC</span>
-          </h1>
-          <motion.p
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ delay: 0.3, duration: 1 }}
-             className="font-clash text-zinc-400 text-lg md:text-2xl mt-6 tracking-wide"
-          >
-            HPC ENGINEER AT <a href="https://www.bull.com" target="_blank" rel="noreferrer" className="text-orange-500 hover:text-white transition-colors">BULL</a> AND HOBBYST DEVELOPER
-          </motion.p>
-          <motion.a
-            href={profile.locationUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 1 }}
-            className="block text-zinc-500 font-clash text-sm mt-2 hover:text-orange-500 transition-colors"
-          >
-            {profile.location.toUpperCase()}
-          </motion.a>
-        </motion.div>
+            <h1 className="font-monument text-[10vw] md:text-[12vw] leading-[0.85] tracking-tighter">
+              <span className="block text-stroke">RADU</span>
+              <span className="block text-orange-500">CHIRIAC</span>
+            </h1>
+            <motion.p
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.3, duration: 1 }}
+               className="font-clash text-zinc-400 text-lg md:text-2xl mt-6 tracking-wide"
+            >
+              HPC ENGINEER AT <a href="https://www.bull.com" target="_blank" rel="noreferrer" className="text-orange-500 hover:text-white transition-colors">BULL</a> AND HOBBYST DEVELOPER
+            </motion.p>
+            <motion.a
+              href={profile.locationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 1 }}
+              className="block text-zinc-500 font-clash text-sm mt-2 hover:text-orange-500 transition-colors"
+            >
+              {profile.location.toUpperCase()}
+            </motion.a>
+          </motion.div>
+
 
         <motion.p
           initial={{ opacity: 0 }}
@@ -278,6 +279,8 @@ export default function Home() {
         >
           SCROLL TO EXPLORE
         </motion.p>
+
+
 
         <motion.div
           className="absolute bottom-12"
