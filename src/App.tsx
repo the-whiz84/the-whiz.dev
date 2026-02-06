@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
+import { SpeedInsights } from '@vercel/speed-insights/react'
 import Home from './pages/Home'
 import Privacy from './pages/Privacy'
 
@@ -9,6 +10,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/privacy" element={<Privacy />} />
       </Routes>
+      <SpeedInsights />
     </BrowserRouter>
   )
 }
