@@ -80,9 +80,18 @@ export default function Home() {
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 p-4 bg-black/50 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
-          {/* Section Links */}
-          <div className="flex gap-6 items-center">
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
+          
+          {/* Left: Logo */}
+          <button 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex-shrink-0 hover:opacity-80 transition-opacity"
+          >
+            <img src="/logo.png" alt="TW Logo" className="h-10 w-10 object-contain drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
+          </button>
+
+          {/* Center: Section Links */}
+          <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-8 items-center">
             <a href="#projects" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Projects</a>
             <a href="#skills" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Skills</a>
             <a href="#experience" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Experience</a>
@@ -96,7 +105,8 @@ export default function Home() {
               V3 <ExternalLink className="w-3 h-3" />
             </a>
           </div>
-          {/* Social Icons */}
+
+          {/* Right: Social Icons */}
           <div className="flex gap-3">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
