@@ -8,7 +8,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 function IsometricBlock({ 
   children, 
-  color = 'bg-violet-500/20', 
+  color = 'bg-emerald-500/20', 
   delay = 0,
   className = ''
 }: { 
@@ -35,7 +35,7 @@ function IsometricBlock({
   )
 }
 
-export default function Design2() {
+export default function Home() {
   return (
     <div 
       className="min-h-screen bg-dark text-white overflow-x-hidden"
@@ -49,14 +49,12 @@ export default function Design2() {
         .font-outfit { font-family: 'Outfit', sans-serif; }
         
         .bg-dark { background: linear-gradient(135deg, #0a0a0f 0%, #12121a 50%, #0d0d14 100%); }
-        .bg-violet { background: rgba(139, 92, 246, 0.15); }
         .bg-emerald { background: rgba(16, 185, 129, 0.15); }
         .bg-amber { background: rgba(245, 158, 11, 0.15); }
         .bg-cyan { background: rgba(6, 182, 212, 0.15); }
         .bg-rose { background: rgba(244, 63, 94, 0.15); }
         .bg-glass { background: rgba(255, 255, 255, 0.05); }
         
-        .text-violet { color: #a78bfa; }
         .text-emerald { color: #34d399; }
         .text-amber { color: #fbbf24; }
         .text-cyan { color: #22d3ee; }
@@ -68,21 +66,36 @@ export default function Design2() {
           gap: 1.5rem;
         }
         
-        .glow-violet { box-shadow: 0 0 40px rgba(139, 92, 246, 0.3); }
         .glow-emerald { box-shadow: 0 0 40px rgba(16, 185, 129, 0.3); }
         .glow-amber { box-shadow: 0 0 40px rgba(245, 158, 11, 0.3); }
       `}</style>
 
       {/* Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl" />
         <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl" />
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 p-6">
+      <nav className="fixed top-0 left-0 right-0 z-50 p-4 bg-black/50 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
+          {/* Section Links */}
+          <div className="flex gap-6 items-center">
+            <a href="#projects" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Projects</a>
+            <a href="#skills" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Skills</a>
+            <a href="#experience" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Experience</a>
+            <a href="#certifications" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Certifications</a>
+            <a 
+              href="https://v3.the-whiz.dev" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors font-space flex items-center gap-1"
+            >
+              V3 <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
+          {/* Social Icons */}
           <div className="flex gap-3">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
@@ -92,7 +105,7 @@ export default function Design2() {
                   href={s.url} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 hover:border-violet-500/50 hover:bg-violet-500/10 transition-all"
+                  className="p-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all"
                 >
                   <Icon className="w-4 h-4 text-zinc-400" />
                 </a>
@@ -114,7 +127,7 @@ export default function Design2() {
             <h1 className="font-outfit text-5xl md:text-7xl font-bold leading-tight">
               <span className="text-zinc-300">Hello, I'm</span>
               <br />
-              <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
                 {profile.name.split(' ')[0]}
               </span>
             </h1>
@@ -124,7 +137,7 @@ export default function Design2() {
             <div className="flex gap-4 mt-8">
               <a 
                 href={profile.resumeUrl}
-                className="font-outfit flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-full hover:shadow-lg hover:shadow-violet-500/25 transition-all"
+                className="font-outfit flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-full hover:shadow-lg hover:shadow-emerald-500/25 transition-all"
               >
                 <FileDown className="w-4 h-4" /> Resume
               </a>
@@ -132,7 +145,7 @@ export default function Design2() {
                 href={profile.locationUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-outfit flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur border border-white/10 text-zinc-300 rounded-full hover:border-violet-500/50 transition-all"
+                className="font-outfit flex items-center gap-2 px-6 py-3 bg-white/5 backdrop-blur border border-white/10 text-zinc-300 rounded-full hover:border-emerald-500/50 transition-all"
               >
                 <MapPin className="w-4 h-4" /> {profile.location}
               </a>
@@ -142,9 +155,9 @@ export default function Design2() {
           {/* Right: Isometric Stack */}
           <div className="relative h-96" style={{ transformStyle: 'preserve-3d' }}>
             <IsometricBlock 
-              color="bg-violet" 
+              color="bg-emerald" 
               delay={0.1}
-              className="absolute top-0 right-0 w-48 h-48 glow-violet"
+              className="absolute top-0 right-0 w-48 h-48 glow-emerald"
             >
               <span className="font-space text-5xl">👨‍💻</span>
             </IsometricBlock>
@@ -188,7 +201,7 @@ export default function Design2() {
             {skills.map((skill, i) => (
               <IsometricBlock 
                 key={skill.name} 
-                color={['bg-violet', 'bg-emerald', 'bg-amber', 'bg-cyan', 'bg-rose'][i % 5]}
+                color={['bg-emerald', 'bg-teal', 'bg-amber', 'bg-cyan', 'bg-rose'][i % 5]}
                 delay={i * 0.1}
               >
                 <h3 className="font-space text-lg font-bold mb-2 text-white">{skill.name}</h3>
@@ -201,7 +214,7 @@ export default function Design2() {
 
       {/* Experience Section */}
       <section className="py-24 px-8 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/5 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
         <div className="max-w-6xl mx-auto relative">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -221,7 +234,7 @@ export default function Design2() {
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                   <div>
                     <h3 className="font-outfit text-xl font-bold text-white">{exp.role}</h3>
-                    <p className="font-space text-sm text-violet">{exp.company}</p>
+                    <p className="font-space text-sm text-emerald-400">{exp.company}</p>
                   </div>
                   <span className="font-space text-xs text-zinc-500 bg-white/5 px-3 py-1 rounded-full border border-white/10">
                     {exp.period}
@@ -247,13 +260,13 @@ export default function Design2() {
             viewport={{ once: true }}
             className="font-outfit text-4xl font-bold text-center mb-16"
           >
-            My <span className="text-violet">Projects</span>
+            My <span className="text-emerald-400">Projects</span>
           </motion.h2>
           <div className="grid-iso">
             {projects.map((project, i) => (
               <IsometricBlock 
                 key={project.title} 
-                color={['bg-violet', 'bg-emerald', 'bg-amber', 'bg-cyan', 'bg-rose'][i % 5]}
+                color={['bg-teal', 'bg-emerald', 'bg-amber', 'bg-cyan', 'bg-rose'][i % 5]}
                 delay={i * 0.1}
               >
                 {/* Project Image */}
@@ -277,7 +290,7 @@ export default function Design2() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-outfit text-sm flex items-center gap-1 text-zinc-300 hover:text-violet transition-colors"
+                  className="font-outfit text-sm flex items-center gap-1 text-zinc-300 hover:text-emerald-400 transition-colors"
                 >
                   <ExternalLink className="w-3 h-3" /> {project.linkLabel}
                 </a>
@@ -317,7 +330,7 @@ export default function Design2() {
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-outfit text-sm text-violet hover:text-violet-300 flex items-center gap-1 transition-colors"
+                  className="font-outfit text-sm text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors"
                 >
                   <ExternalLink className="w-3 h-3" /> View Certificate
                 </a>
@@ -346,9 +359,9 @@ export default function Design2() {
                 href={s.url} 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="p-3 bg-violet-500/10 border border-violet-500/20 rounded-full hover:bg-violet-500/20 hover:border-violet-500/40 transition-all"
+                className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-full hover:bg-emerald-500/20 hover:border-emerald-500/40 transition-all"
               >
-                <Icon className="w-5 h-5 text-violet-400" />
+                <Icon className="w-5 h-5 text-emerald-400" />
               </a>
             ) : null
           })}

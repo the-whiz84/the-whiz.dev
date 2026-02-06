@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router'
-import Design2 from './pages/Design2'
+import Home from './pages/Home'
 import './index.css'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Design2 />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>
   )
