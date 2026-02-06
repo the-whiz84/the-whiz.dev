@@ -137,30 +137,20 @@ export default function Home() {
                 </li>
               )
             })}
-            {/* V1 & V2 Links moved here */}
+            {/* V3 Link */}
             <li>
               <a
-                href="https://v1.the-whiz.dev"
+                href="https://v3.the-whiz.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-clash text-sm tracking-wider text-zinc-400 hover:text-orange-500 transition-all duration-300"
+                className="font-clash text-sm tracking-wider text-orange-500 hover:text-orange-400 transition-all duration-300 flex items-center gap-1"
               >
-                V1
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://v2.the-whiz.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-clash text-sm tracking-wider text-zinc-400 hover:text-orange-500 transition-all duration-300"
-              >
-                V2
+                V3 <ArrowUpRight className="w-4 h-4" />
               </a>
             </li>
           </ul>
 
-          {/* Social Icons + V1/V2 Links */}
+          {/* Social Icons */}
           <div className="hidden md:flex items-center gap-4">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
@@ -178,7 +168,6 @@ export default function Home() {
             })}
           </div>
 
-          {/* Mobile Menu Toggle */}
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -212,9 +201,9 @@ export default function Home() {
                 href="https://v3.the-whiz.dev"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-clash text-sm text-zinc-400 hover:text-orange-500 transition-colors flex items-center gap-2"
+                className="font-clash text-lg text-orange-500 hover:text-orange-400 transition-colors flex items-center gap-2 font-bold tracking-wider"
               >
-                V3 <ArrowUpRight className="w-4 h-4" />
+                V3 WEBSITE <ArrowUpRight className="w-5 h-5" />
               </a>
               
               <div className="flex gap-6 mt-4">
