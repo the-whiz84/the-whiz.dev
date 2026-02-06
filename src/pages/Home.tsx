@@ -1,7 +1,8 @@
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import { Link } from 'react-router'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
-import { Github, Linkedin, Twitter, MapPin, FileDown, ExternalLink } from 'lucide-react'
+import { Github, Linkedin, Twitter, MapPin, FileDown, ExternalLink, Menu, X } from 'lucide-react'
+import { useState } from 'react'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
@@ -22,7 +23,7 @@ function IsometricBlock({
     <motion.div
       initial={{ opacity: 0, y: 50, rotateX: -20 }}
       whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0.2 }} // Optimized for mobile scroll
       transition={{ delay, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
       className={`${color} ${className} rounded-2xl p-6 backdrop-blur-xl border border-white/10 transform-gpu`}
@@ -37,6 +38,11 @@ function IsometricBlock({
 }
 
 export default function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const toggleMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
+  const closeMenu = () => setIsMobileMenuOpen(false)
+
   return (
     <>
       {/* Styles */}
@@ -81,13 +87,13 @@ export default function Home() {
           
           {/* Left: Logo */}
           <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="flex-shrink-0 hover:opacity-80 transition-opacity"
+            onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); closeMenu(); }}
+            className="flex-shrink-0 hover:opacity-80 transition-opacity relative z-50"
           >
             <img src="/assets/img/logo.png" alt="TW Logo" className="h-10 w-10 object-contain drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
           </button>
 
-          {/* Center: Section Links */}
+          {/* Desktop Center: Section Links */}
           <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 gap-8 items-center">
             <a href="#projects" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Projects</a>
             <a href="#skills" className="text-sm text-zinc-400 hover:text-emerald-400 transition-colors font-space">Skills</a>
@@ -103,25 +109,79 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Right: Social Icons */}
-          <div className="flex gap-3">
-            {socials.map((s) => {
-              const Icon = iconMap[s.icon]
-              return Icon ? (
-                <a 
-                  key={s.name} 
-                  href={s.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all"
-                >
-                  <Icon className="w-4 h-4 text-zinc-400" />
-                </a>
-              ) : null
-            })}
+          {/* Right: Social Icons & Mobile Toggle */}
+          <div className="flex items-center gap-3">
+             {/* Desktop Socials */}
+            <div className="hidden md:flex gap-3">
+              {socials.map((s) => {
+                const Icon = iconMap[s.icon]
+                return Icon ? (
+                  <a 
+                    key={s.name} 
+                    href={s.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 hover:border-emerald-500/50 hover:bg-emerald-500/10 transition-all"
+                  >
+                    <Icon className="w-4 h-4 text-zinc-400" />
+                  </a>
+                ) : null
+              })}
+            </div>
+
+            {/* Mobile Hamburger */}
+            <button 
+              onClick={toggleMenu}
+              className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors relative z-50"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-8 pt-20"
+          >
+            <a onClick={closeMenu} href="#projects" className="font-outfit text-2xl font-bold text-white hover:text-emerald-400 transition-colors">Projects</a>
+            <a onClick={closeMenu} href="#skills" className="font-outfit text-2xl font-bold text-white hover:text-emerald-400 transition-colors">Skills</a>
+            <a onClick={closeMenu} href="#experience" className="font-outfit text-2xl font-bold text-white hover:text-emerald-400 transition-colors">Experience</a>
+            <a onClick={closeMenu} href="#certifications" className="font-outfit text-2xl font-bold text-white hover:text-emerald-400 transition-colors">Certifications</a>
+            <a 
+              onClick={closeMenu}
+              href="https://v3.the-whiz.dev" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="font-outfit text-xl text-emerald-400 hover:text-emerald-300 transition-colors flex items-center gap-2"
+            >
+              Previous Version (V3) <ExternalLink className="w-5 h-5" />
+            </a>
+            
+            <div className="flex gap-6 mt-8">
+              {socials.map((s) => {
+                const Icon = iconMap[s.icon]
+                return Icon ? (
+                  <a 
+                    key={s.name} 
+                    href={s.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-3 bg-white/5 rounded-full border border-white/10 hover:bg-emerald-500/20 transition-all"
+                  >
+                    <Icon className="w-6 h-6 text-zinc-400" />
+                  </a>
+                ) : null
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div 
         className="min-h-screen bg-dark text-white overflow-x-hidden"
