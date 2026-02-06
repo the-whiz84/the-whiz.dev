@@ -1,10 +1,32 @@
-import { motion } from 'motion/react'
 import { Link } from 'react-router'
 import { ArrowLeft } from 'lucide-react'
 
 export default function Privacy() {
   return (
     <div className="min-h-screen bg-black text-white font-clash">
+      {/* CSS Animations */}
+      <style>{`
+        .font-monument { font-family: 'Monument Extended', 'Clash Display', sans-serif; }
+        .font-clash { font-family: 'Clash Display', sans-serif; }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-200 { animation-delay: 0.2s; opacity: 0; }
+      `}</style>
+
       {/* Background */}
       <div className="fixed inset-0 bg-gradient-to-br from-black via-zinc-950 to-black" />
 
@@ -18,24 +40,17 @@ export default function Privacy() {
           <span className="font-clash text-sm tracking-widest">BACK</span>
         </Link>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="font-monument text-[12vw] md:text-[8vw] leading-none mb-12"
+        <h1
+          className="font-monument text-[12vw] md:text-[8vw] leading-none mb-12 animate-fade-in-up"
           style={{
             WebkitTextStroke: '1px rgba(255,255,255,0.3)',
             WebkitTextFillColor: 'transparent',
           }}
         >
           PRIVACY
-        </motion.h1>
+        </h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="space-y-10 text-zinc-400"
-        >
+        <div className="space-y-10 text-zinc-400 animate-fade-in-up delay-200">
           <section>
             <h2 className="font-monument text-xl text-white mb-4">INTRODUCTION</h2>
             <p className="leading-relaxed">
@@ -85,7 +100,7 @@ export default function Privacy() {
           <div className="pt-8 border-t border-zinc-800 text-sm text-zinc-600">
             Last Updated: January 2026
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   )

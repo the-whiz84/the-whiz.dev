@@ -63,7 +63,7 @@ export const projects: Project[] = [
     title: "Zero-Dawn v2",
     description:
       "The second iteration of my personal portfolio website, built to showcase my growing skills and projects. Created using Python, Flask and Bootstrap 5.",
-    image: "/assets/img/project-v2-updated.png",
+    image: "/assets/img/project-v2-updated.webp",
     link: "https://github.com/the-whiz84/zero-dawn-v2",
     linkLabel: "View Code",
     tags: ["Python", "Flask", "Bootstrap 5"],
