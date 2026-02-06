@@ -137,6 +137,8 @@ export default function Home() {
             <div className="flex gap-4 mt-8">
               <a 
                 href={profile.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-outfit flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-full hover:shadow-lg hover:shadow-emerald-500/25 transition-all"
               >
                 <FileDown className="w-4 h-4" /> Resume
