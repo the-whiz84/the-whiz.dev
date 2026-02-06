@@ -84,7 +84,7 @@ export default function Home() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex-shrink-0 hover:opacity-80 transition-opacity"
           >
-            <img src="/logo.png" alt="TW Logo" className="h-10 w-10 object-contain drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
+            <img src="/assets/img/logo.png" alt="TW Logo" className="h-10 w-10 object-contain drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
           </button>
 
           {/* Center: Section Links */}
