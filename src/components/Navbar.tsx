@@ -14,7 +14,7 @@ const navItems = [
   { label: "Skills", href: "#skills", external: false },
   { label: "Certifications", href: "#certifications", external: false },
   { label: "V1", href: "https://v1.the-whiz.dev", external: true },
-  { label: "V2", href: "/v2", external: false },
+  { label: "V2", href: "https://v2.the-whiz.dev", external: true },
 ];
 
 export function Navbar() {
