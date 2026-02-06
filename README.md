@@ -1,14 +1,23 @@
-# The-Whiz.dev
+# The-Whiz.dev (Isometric Edition)
 
 This is the source code for my personal portfolio website, [the-whiz.dev](https://the-whiz.dev).
-It showcases my projects, experience, skills, and certifications.
+This version features a **3D Isometric Design**, glassmorphism UI, and fluid animations for a modern, immersive experience.
 
 ## 🛠️ Tech Stack
 
--   **Framework**: React (Vite)
+-   **Framework**: React 19 (Vite)
 -   **Language**: TypeScript
--   **Styling**: Tailwind CSS, Framer Motion
+-   **Styling**: Tailwind CSS v4, Framer Motion
+-   **Design**: Isometric Layouts, Glassmorphism, Emerald Theme
 -   **Package Manager**: Bun
+
+## ✨ Key Features
+
+-   **Isometric Cards**: 3D transform effects on hover for Projects and Skills.
+-   **Smooth Scrolling**: Custom scroll behavior with a persistent, fixed navbar.
+-   **Glassmorphism**: Backdrop blur effects and translucent layers.
+-   **Dynamic Stats**: Real-time coding stats and automatic year updates.
+-   **Responsive**: Fully optimized for Desktop and Mobile (stacked layout on small screens).
 
 ## 🚀 Getting Started
 
