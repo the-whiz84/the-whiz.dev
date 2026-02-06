@@ -251,86 +251,86 @@ export default function Home() {
         </section>
 
         {/* Skills Section */}
-        <section className="py-24 px-8 relative">
-          <div className="max-w-6xl mx-auto">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-outfit text-4xl font-bold text-center mb-16"
-            >
-              My <span className="text-emerald">Skills</span>
-            </motion.h2>
-            <div className="grid-iso">
-              {skills.map((skill, i) => (
-                <IsometricBlock 
-                  key={skill.name} 
-                  color={['bg-emerald', 'bg-teal', 'bg-amber', 'bg-cyan', 'bg-rose'][i % 5]}
-                  delay={i * 0.1}
-                >
-                  <h3 className="font-space text-lg font-bold mb-2 text-white">{skill.name}</h3>
-                  <p className="font-outfit text-sm text-zinc-400">{skill.description}</p>
-                </IsometricBlock>
-              ))}
-            </div>
+      <section className="py-24 px-8 relative">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-outfit text-5xl font-bold text-center mb-16"
+          >
+            My <span className="text-emerald-400">Skills</span>
+          </motion.h2>
+          <div className="grid-iso">
+            {skills.map((skill, i) => (
+              <IsometricBlock 
+                key={skill.name} 
+                color={['bg-emerald', 'bg-teal', 'bg-amber', 'bg-cyan', 'bg-rose'][i % 5]}
+                delay={i * 0.1}
+              >
+                <h3 className="font-space text-lg font-bold mb-2 text-white">{skill.name}</h3>
+                <p className="font-outfit text-sm text-zinc-400">{skill.description}</p>
+              </IsometricBlock>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Experience Section */}
-        <section className="py-24 px-8 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
-          <div className="max-w-6xl mx-auto relative">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+      {/* Experience Section */}
+      <section className="py-24 px-8 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
+        <div className="max-w-6xl mx-auto relative">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
 
-              className="font-outfit text-5xl font-bold text-center mb-16"
-            >
-              My <span className="text-amber">Journey</span>
-            </motion.h2>
-            <div className="space-y-6">
-              {experience.slice(0, 4).map((exp, i) => (
-                <IsometricBlock 
-                  key={i} 
-                  color="bg-glass"
-                  delay={i * 0.1}
-                >
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                      <h3 className="font-outfit text-2xl font-bold text-white">{exp.role}</h3>
-                      <p className="font-space text-base text-emerald-400">{exp.company}</p>
-                    </div>
-                    <span className="font-space text-xs text-zinc-500 bg-white/5 px-3 py-1 rounded-full border border-white/10">
-                      {exp.period}
-                    </span>
+            className="font-outfit text-5xl font-bold text-center mb-16"
+          >
+            My <span className="text-emerald-400">Journey</span>
+          </motion.h2>
+          <div className="space-y-6">
+            {experience.slice(0, 4).map((exp, i) => (
+              <IsometricBlock 
+                key={i} 
+                color="bg-glass"
+                delay={i * 0.1}
+              >
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div>
+                    <h3 className="font-outfit text-2xl font-bold text-white">{exp.role}</h3>
+                    <p className="font-space text-base text-emerald-400">{exp.company}</p>
                   </div>
-                  <ul className="mt-4 space-y-1">
-                    {exp.accomplishments.slice(0, 2).map((acc, j) => (
-                      <li key={j} className="font-outfit text-base text-zinc-400">• {acc}</li>
-                    ))}
-                  </ul>
-                </IsometricBlock>
-              ))}
-            </div>
+                  <span className="font-space text-xs text-zinc-500 bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                    {exp.period}
+                  </span>
+                </div>
+                <ul className="mt-4 space-y-1">
+                  {exp.accomplishments.slice(0, 2).map((acc, j) => (
+                    <li key={j} className="font-outfit text-base text-zinc-400">• {acc}</li>
+                  ))}
+                </ul>
+              </IsometricBlock>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
 
 
-        {/* Certifications Section */}
-        <section className="py-24 px-8 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
-          <div className="max-w-6xl mx-auto relative">
-            <motion.h2 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+      {/* Certifications Section */}
+      <section className="py-24 px-8 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/5 to-transparent" />
+        <div className="max-w-6xl mx-auto relative">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
 
-              className="font-outfit text-5xl font-bold text-center mb-16"
-            >
-              <span className="text-emerald">Certifications</span>
-            </motion.h2>
+            className="font-outfit text-5xl font-bold text-center mb-16"
+          >
+            <span className="text-emerald-400">Certifications</span>
+          </motion.h2>
             <div className="grid-iso">
               {certifications.map((cert, i) => (
                 <IsometricBlock 
@@ -367,7 +367,7 @@ export default function Home() {
             viewport={{ once: true }}
             className="font-outfit text-zinc-500"
           >
-            Built with 💜 by {profile.name} • {new Date().getFullYear()}
+            Built with AI agents by {profile.name} • {new Date().getFullYear()}
           </motion.p>
           <Link to="/privacy" className="block mt-4 text-sm text-zinc-600 hover:text-emerald-400 transition-colors font-space">
             Privacy Policy
