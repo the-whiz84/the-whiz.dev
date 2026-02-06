@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, socials, experience, certifications } from '../data'
 import { Github, Linkedin, Twitter, Mail, ArrowUpRight, Menu, X, Download } from 'lucide-react'
@@ -179,62 +179,64 @@ export default function Home() {
           </div>
 
           {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white p-2"
+            className="md:hidden text-white p-2 relative z-50"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden bg-zinc-900 border-t border-zinc-800 px-6 py-4"
-          >
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left font-clash py-3 border-b border-zinc-800 ${
-                  activeSection === item.href.substring(1)
-                    ? 'text-orange-500'
-                    : 'text-zinc-300'
-                }`}
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-8 pt-20"
+            >
+              {navItems.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => scrollToSection(item.href)}
+                  className="font-clash text-2xl font-bold text-white hover:text-orange-500 transition-colors uppercase tracking-widest"
+                >
+                  {item.label}
+                </button>
+              ))}
+              <div className="h-px w-24 bg-white/10" />
+              <a
+                href="https://v3.the-whiz.dev"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-clash text-sm text-zinc-400 hover:text-orange-500 transition-colors flex items-center gap-2"
               >
-                {item.label.toUpperCase()}
-              </button>
-            ))}
-            <a
-              href="https://v1.the-whiz.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-left font-clash py-3 border-b border-zinc-800 text-zinc-300 hover:text-orange-500"
-            >
-              V1 WEBSITE
-            </a>
-            <a
-              href="https://v2.the-whiz.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block w-full text-left font-clash py-3 border-b border-zinc-800 text-zinc-300 hover:text-orange-500"
-            >
-              V2 WEBSITE
-            </a>
-            <div className="flex gap-4 pt-4">
-              {socials.map((s) => {
-                const Icon = iconMap[s.icon]
-                return Icon ? (
-                  <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer">
-                    <Icon className="w-5 h-5 text-zinc-400" />
-                  </a>
-                ) : null
-              })}
-            </div>
-          </motion.div>
-        )}
+                V3 <ArrowUpRight className="w-4 h-4" />
+              </a>
+              
+              <div className="flex gap-6 mt-4">
+                {socials.map((s) => {
+                  const Icon = iconMap[s.icon]
+                  return Icon ? (
+                    <a
+                      key={s.name}
+                      href={s.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-3 bg-white/5 rounded-full border border-white/10 hover:border-orange-500/50 hover:text-orange-500 transition-all"
+                    >
+                      <Icon className="w-6 h-6" />
+                    </a>
+                  ) : null
+                })}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
       </nav>
 
       {/* Hero — Full Viewport Typography */}
