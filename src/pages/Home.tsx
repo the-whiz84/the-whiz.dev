@@ -261,7 +261,6 @@ export default function Home() {
             </motion.a>
           </motion.div>
 
-
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -270,8 +269,6 @@ export default function Home() {
         >
           SCROLL TO EXPLORE
         </motion.p>
-
-
 
         <motion.div
           className="absolute bottom-12"
