@@ -22,13 +22,12 @@ function NeonCard({
   className = ''
 }: { 
   children: React.ReactNode
-  glowColor?: 'cyan' | 'pink' | 'purple'
+  glowColor?: 'cyan' | 'pink'
   className?: string
 }) {
   const glowMap = {
     cyan: 'shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30',
     pink: 'shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30',
-    purple: 'shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_50px_rgba(139,92,246,0.5)] border-purple-500/30',
   }
   
   return (
@@ -121,7 +120,8 @@ export default function Home() {
         
         .neon-cyan { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff; }
         .neon-pink { color: #ff0080; text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080; }
-        .neon-purple { color: #8b5cf6; text-shadow: 0 0 10px #8b5cf6, 0 0 20px #8b5cf6, 0 0 40px #8b5cf6; }
+        .neon-cyan { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff; }
+        .neon-pink { color: #ff0080; text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080; }
         
         .glitch-text {
           position: relative;
@@ -212,7 +212,7 @@ export default function Home() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-orbitron text-xs tracking-wider px-4 py-2 rounded transition-all duration-300 text-cyan-400 hover:text-cyan-300 hover:bg-slate-800/50 neon-cyan"
+                      className="font-orbitron text-sm tracking-wider px-4 py-2 rounded transition-all duration-300 text-cyan-400 hover:text-cyan-300 hover:bg-slate-800/50 neon-cyan"
                     >
                       {item.label.toUpperCase()}
                     </a>
@@ -223,7 +223,7 @@ export default function Home() {
                 <li key={item.label}>
                   <button
                     onClick={() => scrollToSection(item.href)}
-                    className={`font-orbitron text-xs tracking-wider px-4 py-2 rounded transition-all duration-300 ${
+                    className={`font-orbitron text-sm tracking-wider px-4 py-2 rounded transition-all duration-300 ${
                       isActive
                         ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 shadow-[0_0_15px_rgba(0,255,255,0.3)]'
                         : 'text-slate-400 hover:text-cyan-400 hover:bg-slate-800/50'
@@ -339,7 +339,7 @@ export default function Home() {
           >
             <a 
               href={profile.resumeUrl}
-              className="font-orbitron px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 text-black font-bold rounded hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-all flex items-center gap-2"
+              className="font-orbitron px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-600 text-black font-bold rounded hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-all flex items-center gap-2"
             >
               <Zap className="w-5 h-5" /> DOWNLOAD CV
             </a>
@@ -389,7 +389,7 @@ export default function Home() {
                 className="group"
               >
                 <NeonCard 
-                  glowColor={['pink', 'purple', 'cyan'][i % 3] as 'cyan' | 'pink' | 'purple'}
+                  glowColor={['pink', 'cyan'][i % 2] as 'cyan' | 'pink'}
                   className="h-full"
                 >
                   {/* Project Image */}
@@ -404,10 +404,10 @@ export default function Home() {
                   <h3 className="font-orbitron text-lg font-bold text-white mb-2 group-hover:neon-cyan transition-all">
                     {project.title.toUpperCase()}
                   </h3>
-                  <p className="font-rajdhani text-slate-400 text-sm mb-4 line-clamp-2">{project.description}</p>
+                  <p className="font-rajdhani text-slate-400 text-base mb-4 line-clamp-2">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="font-orbitron text-xs px-2 py-1 border border-purple-500/30 text-purple-400 rounded">
+                      <span key={tag} className="font-orbitron text-sm px-2 py-1 border border-pink-500/30 text-pink-400 rounded">
                         {tag}
                       </span>
                     ))}
@@ -431,18 +431,18 @@ export default function Home() {
             viewport={{ once: true }}
             className="font-orbitron text-4xl font-bold mb-12"
           >
-            <span className="neon-purple">CAPABILITIES</span>
+            <span className="neon-pink">CAPABILITIES</span>
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {skills.map((skill, i) => (
               <NeonCard 
                 key={skill.name} 
-                glowColor={['cyan', 'pink', 'purple'][i % 3] as 'cyan' | 'pink' | 'purple'}
+                glowColor={['cyan', 'pink'][i % 2] as 'cyan' | 'pink'}
               >
-                <h3 className="font-orbitron text-sm font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">
+                <h3 className="font-orbitron text-lg font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">
                   {skill.name.toUpperCase()}
                 </h3>
-                <p className="font-rajdhani text-slate-400 text-sm">{skill.description}</p>
+                <p className="font-rajdhani text-slate-400 text-base">{skill.description}</p>
               </NeonCard>
             ))}
           </div>
@@ -468,13 +468,13 @@ export default function Home() {
                     <h3 className="font-orbitron text-lg font-bold neon-cyan">{exp.role.toUpperCase()}</h3>
                     <p className="font-rajdhani text-pink-400 text-lg">{exp.company}</p>
                   </div>
-                  <span className="font-orbitron text-xs text-slate-500 border border-slate-700 px-3 py-1 rounded">
+                  <span className="font-orbitron text-sm text-slate-500 border border-slate-700 px-3 py-1 rounded">
                     {exp.period}
                   </span>
                 </div>
                 <ul className="mt-4 space-y-2">
                   {exp.accomplishments.map((acc, j) => (
-                    <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2 text-sm">
+                    <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2 text-base">
                       <ArrowRight className="w-4 h-4 text-cyan-500 mt-0.5 flex-shrink-0" /> {acc}
                     </li>
                   ))}
@@ -494,23 +494,23 @@ export default function Home() {
             viewport={{ once: true }}
             className="font-orbitron text-4xl font-bold mb-12"
           >
-            <span className="neon-purple">CERTIFICATIONS</span>
+            <span className="neon-pink">CERTIFICATIONS</span>
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {certifications.map((cert) => (
-              <NeonCard key={cert.title} glowColor="purple">
+              <NeonCard key={cert.title} glowColor="pink">
                 <div className="flex items-start gap-4 mb-4">
                   <img src={cert.image} alt={cert.title} className="w-16 h-16 object-contain rounded bg-slate-800 p-2" />
                   <div>
-                    <h3 className="font-orbitron text-xs font-bold text-white">{cert.title}</h3>
-                    <p className="font-rajdhani text-slate-500 text-xs mt-1">{cert.description}</p>
+                    <h3 className="font-orbitron text-lg font-bold text-white">{cert.title}</h3>
+                    <p className="font-rajdhani text-slate-500 text-base mt-1">{cert.description}</p>
                   </div>
                 </div>
                 <a 
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-rajdhani text-purple-400 text-sm flex items-center gap-1 hover:neon-purple transition-all"
+                  className="font-rajdhani text-cyan-400 text-base flex items-center gap-1 hover:neon-pink transition-all"
                 >
                   <ExternalLink className="w-3 h-3" /> Verify
                 </a>
@@ -537,9 +537,9 @@ export default function Home() {
                   href={s.url} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="p-3 border border-purple-500/30 rounded hover:border-purple-400 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] transition-all"
+                  className="p-3 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all"
                 >
-                  <Icon className="w-5 h-5 text-purple-400" />
+                  <Icon className="w-5 h-5 text-cyan-400" />
                 </a>
               ) : null
             })}
