@@ -10,8 +10,8 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 const navItems = [
   { label: 'Projects', href: '#projects', type: 'section' },
-  { label: 'Skills', href: '#skills', type: 'section' },
   { label: 'Experience', href: '#experience', type: 'section' },
+  { label: 'Skills', href: '#skills', type: 'section' },
   { label: 'Certifications', href: '#certifications', type: 'section' },
   { label: 'V3', href: 'https://v3.the-whiz.dev', type: 'external' },
 ]
