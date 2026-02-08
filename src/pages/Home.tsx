@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router'
 import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
-import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X } from 'lucide-react'
+import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin } from 'lucide-react'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
@@ -194,7 +194,7 @@ export default function Home() {
             <span className="relative inline-flex">
               <span className="absolute inset-0 rounded-full blur-lg bg-cyan-500/40 opacity-0 group-hover:opacity-100 transition-opacity" />
               <img
-                src="/assets/img/navbar-logo.png"
+                src="/assets/img/tw-logo.png"
                 alt="Logo"
                 className="relative w-12 h-12 -my-1 rounded-full border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,255,0.35)] group-hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] transition-all"
               />
@@ -321,11 +321,14 @@ export default function Home() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="font-rajdhani text-cyan-400 text-xl tracking-[0.3em] mb-6">ROOT ACCESS GRANTED</p>
-            <h1 className="font-orbitron text-5xl md:text-8xl font-black">
+            <h1 className="font-orbitron text-6xl md:text-9xl font-black mb-4 leading-none tracking-tight">
               <GlitchText className="neon-cyan">{profile.name.split(' ')[0].toUpperCase()}</GlitchText>
-              <br />
+              {' '}
               <span className="neon-pink">{profile.name.split(' ')[1]?.toUpperCase()}</span>
             </h1>
+            <h2 className="font-rajdhani text-2xl md:text-3xl text-slate-400 mb-8 tracking-wider">
+              Username: <span className="text-cyan-400 font-bold drop-shadow-[0_0_10px_rgba(0,255,255,0.5)]">The-Whiz</span>
+            </h2>
             <p className="font-rajdhani text-xl text-slate-400 mt-8 max-w-2xl mx-auto">
               {profile.tagline}
             </p>
@@ -339,7 +342,9 @@ export default function Home() {
           >
             <a 
               href={profile.resumeUrl}
-              className="font-orbitron px-6 py-3 bg-gradient-to-r from-cyan-500 to-pink-600 text-black font-bold rounded hover:shadow-[0_0_30px_rgba(0,255,255,0.5)] transition-all flex items-center gap-2"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-orbitron px-6 py-3 border-2 border-cyan-500 text-cyan-400 font-bold rounded hover:bg-cyan-500/10 hover:shadow-[0_0_30px_rgba(0,255,255,0.3)] transition-all flex items-center gap-2"
             >
               <Zap className="w-5 h-5" /> DOWNLOAD CV
             </a>
@@ -347,9 +352,9 @@ export default function Home() {
               href={profile.locationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-orbitron px-6 py-3 border-2 border-pink-500 text-pink-400 font-bold rounded hover:bg-pink-500/10 hover:shadow-[0_0_30px_rgba(255,0,128,0.3)] transition-all"
+              className="font-orbitron px-6 py-3 border-2 border-pink-500 text-pink-400 font-bold rounded hover:bg-pink-500/10 hover:shadow-[0_0_30px_rgba(255,0,128,0.3)] transition-all flex items-center gap-2"
             >
-              LOCATE ME
+              <MapPin className="w-5 h-5" /> SIBIU, ROMANIA
             </a>
           </motion.div>
         </div>
@@ -364,7 +369,7 @@ export default function Home() {
 
       {/* Projects Section — Right After Hero */}
       <section id="projects" className="py-24 px-6 md:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.h2 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -401,7 +406,7 @@ export default function Home() {
                     />
                   </div>
                   
-                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 group-hover:neon-cyan transition-all">
+                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 group-hover:neon-pink transition-all">
                     {project.title.toUpperCase()}
                   </h3>
                   <p className="font-rajdhani text-slate-400 text-base mb-4 line-clamp-2">{project.description}</p>
@@ -412,38 +417,11 @@ export default function Home() {
                       </span>
                     ))}
                   </div>
-                  <span className="font-rajdhani text-cyan-400 flex items-center gap-2 text-sm">
+                  <span className="font-rajdhani text-pink-400 flex items-center gap-2 text-sm">
                     <ExternalLink className="w-4 h-4" /> {project.linkLabel}
                   </span>
                 </NeonCard>
               </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="py-24 px-6 md:px-8">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="font-orbitron text-4xl font-bold mb-12"
-          >
-            <span className="neon-pink">CAPABILITIES</span>
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {skills.map((skill, i) => (
-              <NeonCard 
-                key={skill.name} 
-                glowColor={['cyan', 'pink'][i % 2] as 'cyan' | 'pink'}
-              >
-                <h3 className="font-orbitron text-lg font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">
-                  {skill.name.toUpperCase()}
-                </h3>
-                <p className="font-rajdhani text-slate-400 text-base">{skill.description}</p>
-              </NeonCard>
             ))}
           </div>
         </div>
@@ -485,6 +463,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Skills Section */}
+      <section id="skills" className="py-24 px-6 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          <motion.h2 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="font-orbitron text-4xl font-bold mb-12"
+          >
+            <span className="neon-pink">CAPABILITIES</span>
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {skills.map((skill, i) => (
+              <NeonCard 
+                key={skill.name} 
+                glowColor={['cyan', 'pink'][i % 2] as 'cyan' | 'pink'}
+              >
+                <h3 className="font-orbitron text-lg font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">
+                  {skill.name.toUpperCase()}
+                </h3>
+                <p className="font-rajdhani text-slate-400 text-base">{skill.description}</p>
+              </NeonCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Certifications Section */}
       <section id="certifications" className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
@@ -494,11 +499,11 @@ export default function Home() {
             viewport={{ once: true }}
             className="font-orbitron text-4xl font-bold mb-12"
           >
-            <span className="neon-pink">CERTIFICATIONS</span>
+            <span className="neon-cyan">CERTIFICATIONS</span>
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {certifications.map((cert) => (
-              <NeonCard key={cert.title} glowColor="pink">
+              <NeonCard key={cert.title} glowColor="cyan" className="h-full flex flex-col">
                 <div className="flex items-start gap-4 mb-4">
                   <img src={cert.image} alt={cert.title} className="w-16 h-16 object-contain rounded bg-slate-800 p-2" />
                   <div>
@@ -510,7 +515,7 @@ export default function Home() {
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-rajdhani text-cyan-400 text-base flex items-center gap-1 hover:neon-pink transition-all"
+                  className="font-rajdhani text-cyan-400 text-base flex items-center gap-1 hover:neon-cyan transition-all mt-auto"
                 >
                   <ExternalLink className="w-3 h-3" /> Verify
                 </a>
