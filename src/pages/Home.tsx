@@ -528,10 +528,10 @@ export default function Home() {
       {/* Footer */}
       <footer className="py-16 px-8 border-t border-cyan-500/20">
         <div className="max-w-6xl mx-auto text-center">
-          <p className="font-orbitron text-sm text-slate-600">
-            © {new Date().getFullYear()} {profile.name.toUpperCase()}
-            <span className="mx-2 text-slate-700">|</span>
-            <Link to="/privacy" className="hover:text-cyan-400 transition-colors">PRIVACY POLICY</Link>
+          <p className="font-orbitron text-sm">
+            <span className="neon-cyan">© {new Date().getFullYear()} {profile.name.toUpperCase()}</span>
+            <span className="mx-2 text-pink-500">|</span>
+            <Link to="/privacy" className="neon-pink hover:text-pink-300 transition-colors">PRIVACY POLICY</Link>
           </p>
           <div className="flex justify-center gap-4 mt-6">
             {socials.map((s) => {
