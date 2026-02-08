@@ -189,46 +189,6 @@ export const experience: ExperienceItem[] = [
       "Managed support tickets and purchase orders for employees.",
     ],
   },
-  {
-    company: "CGS Romania",
-    logo: "/assets/img/logos/CGS.svg",
-    role: "Technical Support Engineer - Okta",
-    period: "April 2020 - Jan. 2022",
-    accomplishments: [
-      "Resolved complex SSO, MFA, and federation tickets (SAML/OIDC/SCIM).",
-      "Guided admins on Okta integrations and Access Gateway troubleshooting.",
-    ],
-  },
-  {
-    company: "CGS Romania",
-    logo: "/assets/img/logos/CGS.svg",
-    role: "L2 Technical Mentor - Dell",
-    period: "April 2018 - March 2020",
-    accomplishments: [
-      "Mentored L1 support teams and collaborated with L3 team.",
-      "Developed and delivered training materials for new product lines.",
-      "Managed Jira ticket escalations to internal teams.",
-    ],
-  },
-  {
-    company: "CGS Romania",
-    logo: "/assets/img/logos/CGS.svg",
-    role: "Technical Support Agent - Lenovo",
-    period: "Oct. 2014 - April 2018",
-    accomplishments: [
-      "Diagnosed and resolved hardware/software issues for laptops and mobile devices.",
-      "Identified root causes to provide permanent customer solutions.",
-    ],
-  },
-  {
-    company: "CGS Romania",
-    logo: "/assets/img/logos/CGS.svg",
-    role: "Back Office Agent - Sprint",
-    period: "Aug. 2012 - Oct. 2014",
-    accomplishments: [
-      "Managed support tickets and purchase orders for employees.",
-    ],
-  },
 ];
 
 
