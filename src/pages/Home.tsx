@@ -180,7 +180,7 @@ export default function Home() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-slate-950/90 backdrop-blur-md border-b border-cyan-500/30 py-3'
+            ? 'bg-slate-950/90 backdrop-blur-md border-b border-transparent py-3'
             : 'bg-transparent py-6'
         }`}
       >
@@ -195,7 +195,7 @@ export default function Home() {
               <img
                 src="/assets/img/navbar-logo.png"
                 alt="Logo"
-                className="relative w-10 h-10 rounded-full border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,255,0.35)] group-hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] transition-all"
+                className="relative w-12 h-12 -my-1 rounded-full border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,255,0.35)] group-hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] transition-all"
               />
             </span>
           </button>
@@ -211,7 +211,7 @@ export default function Home() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-orbitron text-xs tracking-wider px-4 py-2 rounded transition-all duration-300 text-slate-300 hover:text-cyan-300 hover:bg-slate-800/50 border border-cyan-500/20 hover:border-cyan-400/60"
+                      className="font-orbitron text-xs tracking-wider px-4 py-2 rounded transition-all duration-300 text-cyan-400 hover:text-cyan-300 hover:bg-slate-800/50 neon-cyan"
                     >
                       {item.label.toUpperCase()}
                     </a>
@@ -279,7 +279,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block w-full text-left font-orbitron text-sm py-3 border-b border-slate-800 text-slate-300 hover:text-cyan-300"
+                    className="block w-full text-left font-orbitron text-sm py-3 border-b border-slate-800 text-cyan-400 hover:text-cyan-300 neon-cyan"
                   >
                     {item.label.toUpperCase()}
                   </a>
