@@ -409,7 +409,7 @@ export default function Home() {
                   <h3 className="font-orbitron text-lg font-bold text-white mb-2 group-hover:neon-pink transition-all">
                     {project.title.toUpperCase()}
                   </h3>
-                  <p className="font-rajdhani text-slate-400 text-base mb-4 line-clamp-2">{project.description}</p>
+                  <p className="font-rajdhani text-slate-400 text-base mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.slice(0, 3).map((tag) => (
                       <span key={tag} className="font-orbitron text-sm px-2 py-1 border border-pink-500/30 text-pink-400 rounded">
@@ -529,7 +529,7 @@ export default function Home() {
       <footer className="py-16 px-8 border-t border-cyan-500/20">
         <div className="max-w-6xl mx-auto text-center">
           <p className="font-orbitron text-sm text-slate-600">
-            © 2026 {profile.name.toUpperCase()} // ENGINEERED FOR PERFORMANCE
+            © {new Date().getFullYear()} {profile.name.toUpperCase()}
             <span className="mx-2 text-slate-700">|</span>
             <Link to="/privacy" className="hover:text-cyan-400 transition-colors">PRIVACY POLICY</Link>
           </p>
