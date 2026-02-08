@@ -531,7 +531,12 @@ export default function Home() {
           <p className="font-orbitron text-sm">
             <span className="neon-cyan">© {new Date().getFullYear()} {profile.name.toUpperCase()}</span>
             <span className="mx-2 text-pink-500">|</span>
-            <Link to="/privacy" className="neon-pink hover:text-pink-300 transition-colors">PRIVACY POLICY</Link>
+            <Link 
+              to="/privacy" 
+              className="neon-pink hover:text-pink-300 transition-all hover:scale-105 inline-block hover:drop-shadow-[0_0_8px_rgba(255,0,128,0.5)]"
+            >
+              PRIVACY POLICY
+            </Link>
           </p>
           <div className="flex justify-center gap-4 mt-6">
             {socials.map((s) => {
