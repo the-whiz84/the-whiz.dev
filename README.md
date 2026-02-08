@@ -1,5 +1,7 @@
 # The-Whiz.dev — Kinetic Edition ⚡
 
+![Kinetic Preview](public/assets/img/preview.png)
+
 This is the source code for the **Kinetic Edition** of my personal portfolio website, [the-whiz.dev](https://the-whiz.dev). This version emphasizes speed, bold typography, and impactful motion, reflecting a modern, high-performance aesthetic.
 
 ## ✨ Design Philosophy — "Kinetic Impact"
