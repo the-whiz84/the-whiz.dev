@@ -539,37 +539,37 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-8 px-8 border-t border-cyan-500/20 relative bg-slate-950/80 backdrop-blur-sm">
-        <div className="w-full max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 relative">
+        <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-6 md:gap-12 relative">
           
-          {/* Left: Arrow, Logo & Tagline */}
-          <div className="flex flex-col md:flex-row items-center gap-6 md:flex-1">
-            {/* Scroll to Top Arrow - Now on the left */}
+          {/* Left: Arrow, Logo & Tagline - Aligned Start */}
+          <div className="flex flex-col md:flex-row items-center gap-6 justify-self-center md:justify-self-start overflow-hidden w-full max-w-lg">
+            {/* Scroll to Top Arrow */}
             <motion.button
               onClick={() => scrollToSection('#top')}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.9 }}
-              className="hidden md:flex p-3 border border-pink-500/30 bg-slate-900/80 rounded-full hover:border-pink-400 hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all"
+              className="hidden md:flex p-3 border border-pink-500/30 bg-slate-900/80 rounded-full hover:border-pink-400 hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all flex-shrink-0"
               title="Back to Top"
             >
               <ArrowUp className="w-5 h-5 text-pink-500 group-hover:text-pink-300" />
             </motion.button>
 
-            <div className="flex flex-col items-center md:items-start text-center md:text-left select-none pointer-events-none">
-              <h2 className="font-orbitron text-2xl font-black tracking-tight leading-none group">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left select-none pointer-events-none min-w-0">
+              <h2 className="font-orbitron text-2xl font-black tracking-tight leading-none group whitespace-nowrap">
                 <span className="neon-cyan">THE</span>
                 <span className="neon-pink">-</span>
                 <span className="neon-cyan">WHIZ</span>
                 <span className="neon-pink">.dev</span>
               </h2>
-              <p className="font-rajdhani text-slate-400 text-sm md:text-base tracking-wider mt-2 max-w-md">
+              <p className="font-rajdhani text-slate-400 text-sm md:text-base tracking-wider mt-2 whitespace-nowrap overflow-visible">
                 {footerTagline}
               </p>
             </div>
           </div>
 
-          {/* Center: Copyright & Links - Restored Neon Colors */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 font-orbitron text-xs md:absolute md:left-1/2 md:-translate-x-1/2">
-            <span className="whitespace-nowrap neon-cyan">© {new Date().getFullYear()} {profile.name.toUpperCase()}</span>
+          {/* Center: Copyright & Links - Aligned Center */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 font-orbitron text-xs justify-self-center whitespace-nowrap">
+            <span className="neon-cyan">© {new Date().getFullYear()} {profile.name.toUpperCase()}</span>
             <span className="hidden md:inline text-pink-500">|</span>
             <Link 
               to="/privacy" 
@@ -579,8 +579,8 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Right: Socials - Restored Neon Colors */}
-          <div className="flex items-center gap-4 md:flex-1 md:justify-end">
+          {/* Right: Socials - Aligned Center */}
+          <div className="flex items-center gap-4 justify-self-center md:justify-self-center">
             <div className="flex gap-3">
               {socials.map((s) => {
                 const Icon = iconMap[s.icon]
