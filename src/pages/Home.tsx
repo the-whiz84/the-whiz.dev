@@ -1,38 +1,70 @@
+import { motion } from 'motion/react'
+import { Link } from 'react-router'
 import { useState, useEffect, useRef } from 'react'
-import { profile, projects, skills, socials, experience, certifications } from '../data'
-import { Github, Linkedin, Twitter, Mail, ArrowUpRight, Menu, X, Download } from 'lucide-react'
+import { profile, projects, skills, experience, socials, certifications } from '../data'
+import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin } from 'lucide-react'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
 }
 
 const navItems = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Certifications', href: '#certifications' },
+  { label: 'Projects', href: '#projects', type: 'section' },
+  { label: 'Skills', href: '#skills', type: 'section' },
+  { label: 'Experience', href: '#experience', type: 'section' },
+  { label: 'Certifications', href: '#certifications', type: 'section' },
+  { label: 'V3', href: 'https://v3.the-whiz.dev', type: 'external' },
 ]
 
-// CSS animation utilities
-const fadeInUp = "animate-fade-in-up"
-const fadeIn = "animate-fade-in"
-const slideInLeft = "animate-slide-in-left"
-const slideInRight = "animate-slide-in-right"
+function NeonCard({ 
+  children, 
+  glowColor = 'cyan',
+  className = ''
+}: { 
+  children: React.ReactNode
+  glowColor?: 'cyan' | 'pink'
+  className?: string
+}) {
+  const glowMap = {
+    cyan: 'shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30',
+    pink: 'shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30',
+  }
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.3 }}
+      className={`bg-slate-900/80 backdrop-blur-sm border rounded-lg p-6 transition-all duration-300 ${glowMap[glowColor]} ${className}`}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
+function GlitchText({ children, className = '' }: { children: string; className?: string }) {
+  return (
+    <span className={`glitch-text relative ${className}`} data-text={children}>
+      {children}
+    </span>
+  )
+}
+
+/**
+ * Neon-themed landing page with section navigation.
+ */
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const sectionRatios = useRef<Record<string, number>>({})
-  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
     const handleScroll = () => {
-      setIsScrolled(container.scrollTop > 50)
-      if (container.scrollTop < 100) {
+      setIsScrolled(window.scrollY > 50)
+      if (window.scrollY < 100) {
         setActiveSection('')
       }
     }
@@ -53,18 +85,17 @@ export default function Home() {
       },
       {
         threshold: [0, 0.2, 0.4, 0.6, 0.8, 1],
-        rootMargin: '-20% 0px -20% 0px',
-        root: container
+        rootMargin: '-20% 0px -20% 0px'
       }
     )
 
-    container.querySelectorAll('section[id]').forEach((section) => {
+    document.querySelectorAll('section[id]').forEach((section) => {
       observer.observe(section)
     })
 
-    container.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll)
     return () => {
-      container.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('scroll', handleScroll)
       observer.disconnect()
     }
   }, [])
@@ -79,151 +110,123 @@ export default function Home() {
   }
 
   return (
-    <div
-      ref={containerRef}
-      className="h-screen overflow-y-auto bg-black text-white scroll-smooth"
-      style={{ fontFamily: "'Clash Display', sans-serif" }}
-    >
-      {/* CSS Keyframes & Font Definitions */}
+    <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
+      {/* Styles */}
       <style>{`
-        .font-monument { font-family: 'Monument Extended', 'Clash Display', sans-serif; }
-        .font-clash { font-family: 'Clash Display', sans-serif; }
-
-        .text-stroke {
-          -webkit-text-stroke: 2px white;
-          color: transparent;
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+        
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
+        
+        .neon-cyan { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff; }
+        .neon-pink { color: #ff0080; text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080; }
+        .neon-cyan { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff; }
+        .neon-pink { color: #ff0080; text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080; }
+        
+        .glitch-text {
+          position: relative;
         }
-
-        .text-stroke-orange {
-          -webkit-text-stroke: 2px #f97316;
-          color: transparent;
+        .glitch-text:hover::before,
+        .glitch-text:hover::after {
+          content: attr(data-text);
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
         }
-
-        /* CSS Animation Keyframes */
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        .glitch-text:hover::before {
+          animation: glitch-1 0.3s infinite;
+          color: #00ffff;
+          z-index: -1;
         }
-
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
+        .glitch-text:hover::after {
+          animation: glitch-2 0.3s infinite;
+          color: #ff0080;
+          z-index: -2;
         }
-
-        @keyframes slide-in-left {
-          from {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        
+        @keyframes glitch-1 {
+          0%, 100% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, 2px); }
+          50% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -2px); }
         }
-
-        @keyframes slide-in-right {
-          from {
-            opacity: 0;
-            transform: translateX(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        @keyframes glitch-2 {
+          0%, 100% { clip-path: inset(40% 0 20% 0); transform: translate(2px, -2px); }
+          50% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 2px); }
         }
-
-        @keyframes bounce-gentle {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(10px); }
+        
+        .grid-pattern {
+          background-image: 
+            linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
+          background-size: 50px 50px;
         }
-
-        @keyframes mobile-menu-in {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out forwards;
-        }
-
-        .animate-slide-in-left {
-          animation: slide-in-left 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-slide-in-right {
-          animation: slide-in-right 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .animate-bounce-gentle {
-          animation: bounce-gentle 1.5s ease-in-out infinite;
-        }
-
-        .animate-mobile-menu {
-          animation: mobile-menu-in 0.2s ease-out forwards;
-        }
-
-        /* Stagger animation delays */
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-600 { animation-delay: 0.6s; }
-
-        /* Initially hide animated elements */
-        .animate-on-load {
-          opacity: 0;
+        
+        .scanline {
+          background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.1) 2px,
+            rgba(0,0,0,0.1) 4px
+          );
         }
       `}</style>
+
+      {/* Grid Background */}
+      <div className="fixed inset-0 grid-pattern pointer-events-none" />
+      <div className="fixed inset-0 scanline pointer-events-none opacity-50" />
 
       {/* Fixed Navbar with Section Highlighting */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-black/80 backdrop-blur-md py-2'
-            : 'bg-transparent py-3'
+            ? 'bg-slate-950/90 backdrop-blur-md py-3'
+            : 'bg-transparent py-6'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <div 
-            className="cursor-pointer" 
-            onClick={() => containerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-6">
+          <button
+            aria-label="Scroll to top"
+            onClick={() => scrollToSection('#top')}
+            className="flex items-center gap-3 group"
           >
-            <img 
-              src="/assets/img/navbar-logo-symbol.webp" 
-              alt="The Whiz" 
-              className="h-16 w-auto hover:opacity-80 transition-opacity" 
-            />
-          </div>
+            <span className="relative inline-flex">
+              <span className="absolute inset-0 rounded-full blur-lg bg-cyan-500/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img
+                src="/assets/img/tw-logo.png"
+                alt="Logo"
+                className="relative w-12 h-12 -my-1 rounded-full border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,255,0.35)] group-hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] transition-all"
+              />
+            </span>
+          </button>
 
           {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-8">
+          <ul className="hidden md:flex items-center gap-1 flex-1 justify-center">
             {navItems.map((item) => {
-              const isActive = activeSection === item.href.substring(1)
+              const isActive = item.type === 'section' && activeSection === item.href.substring(1)
+              if (item.type === 'external') {
+                return (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-orbitron text-sm tracking-wider px-4 py-2 rounded transition-all duration-300 text-cyan-400 hover:text-cyan-300 hover:bg-slate-800/50 neon-cyan"
+                    >
+                      {item.label.toUpperCase()}
+                    </a>
+                  </li>
+                )
+              }
               return (
                 <li key={item.label}>
                   <button
                     onClick={() => scrollToSection(item.href)}
-                    className={`font-clash text-sm tracking-wider transition-all duration-300 ${
+                    className={`font-orbitron text-sm tracking-wider px-4 py-2 rounded transition-all duration-300 ${
                       isActive
-                        ? 'text-orange-500'
-                        : 'text-zinc-400 hover:text-orange-500'
+                        ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 shadow-[0_0_15px_rgba(0,255,255,0.3)]'
+                        : 'text-slate-400 hover:text-cyan-400 hover:bg-slate-800/50'
                     }`}
                   >
                     {item.label.toUpperCase()}
@@ -231,21 +234,10 @@ export default function Home() {
                 </li>
               )
             })}
-            {/* V3 Link */}
-            <li>
-              <a
-                href="https://v3.the-whiz.dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-clash text-sm tracking-wider text-orange-500 hover:text-orange-400 transition-all duration-300 flex items-center gap-1"
-              >
-                V3 <ArrowUpRight className="w-4 h-4" />
-              </a>
-            </li>
           </ul>
 
           {/* Social Icons */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex gap-3">
             {socials.map((s) => {
               const Icon = iconMap[s.icon]
               return Icon ? (
@@ -254,9 +246,9 @@ export default function Home() {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-zinc-400 hover:text-orange-500 transition-colors"
+                  className="p-2 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-all"
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-4 h-4 text-cyan-400" />
                 </a>
               ) : null
             })}
@@ -264,169 +256,208 @@ export default function Home() {
 
           {/* Mobile Menu Toggle */}
           <button
+            aria-label="Toggle navigation menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden text-white p-2 relative z-50"
+            className="md:hidden p-2 border border-cyan-500/30 rounded"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5 text-cyan-400" /> : <Menu className="w-5 h-5 text-cyan-400" />}
           </button>
         </div>
 
-        {/* Mobile Menu Overlay - CSS animated */}
+        {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center gap-8 pt-20 animate-mobile-menu">
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.href)}
-                className="font-clash text-2xl font-bold text-white hover:text-orange-500 transition-colors uppercase tracking-widest"
-              >
-                {item.label}
-              </button>
-            ))}
-            <div className="h-px w-24 bg-white/10" />
-            <a
-              href="https://v3.the-whiz.dev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-clash text-lg text-orange-500 hover:text-orange-400 transition-colors flex items-center gap-2 font-bold tracking-wider"
-            >
-              V3 WEBSITE <ArrowUpRight className="w-5 h-5" />
-            </a>
-            
-            <div className="flex gap-6 mt-4">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden bg-slate-900/95 backdrop-blur-md border-t border-cyan-500/30 px-6 py-4"
+          >
+            {navItems.map((item) => {
+              if (item.type === 'external') {
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block w-full text-left font-orbitron text-sm py-3 border-b border-slate-800 text-cyan-400 hover:text-cyan-300 neon-cyan"
+                  >
+                    {item.label.toUpperCase()}
+                  </a>
+                )
+              }
+              return (
+                <button
+                  key={item.label}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`block w-full text-left font-orbitron text-sm py-3 border-b border-slate-800 ${
+                    activeSection === item.href.substring(1) ? 'text-cyan-400' : 'text-slate-300'
+                  }`}
+                >
+                  {item.label.toUpperCase()}
+                </button>
+              )
+            })}
+            <div className="flex gap-4 pt-4">
               {socials.map((s) => {
                 const Icon = iconMap[s.icon]
                 return Icon ? (
-                  <a
-                    key={s.name}
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 bg-white/5 rounded-full border border-white/10 hover:border-orange-500/50 hover:text-orange-500 transition-all"
-                  >
-                    <Icon className="w-6 h-6" />
+                  <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer">
+                    <Icon className="w-5 h-5 text-cyan-400" />
                   </a>
                 ) : null
               })}
             </div>
-          </div>
+          </motion.div>
         )}
-
       </nav>
 
-      {/* Hero — Full Viewport Typography */}
-      <section className="h-screen flex flex-col items-center justify-center relative overflow-hidden">
-        <div className={`text-center animate-on-load ${fadeInUp}`}>
-            <h1 className="font-monument text-[10vw] md:text-[12vw] leading-[0.85] tracking-tighter">
-              <span className="block text-stroke">RADU</span>
-              <span className="block text-orange-500">CHIRIAC</span>
+      {/* Hero Section */}
+      <section id="top" className="min-h-screen flex items-center justify-center pt-20 px-8 relative">
+        <div className="text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <p className="font-rajdhani text-cyan-400 text-xl tracking-[0.3em] mb-6">ROOT ACCESS GRANTED</p>
+            <h1 className="font-orbitron text-6xl md:text-9xl font-black mb-4 leading-none tracking-tight">
+              <GlitchText className="neon-cyan">{profile.name.split(' ')[0].toUpperCase()}</GlitchText>
+              {' '}
+              <span className="neon-pink">{profile.name.split(' ')[1]?.toUpperCase()}</span>
             </h1>
-            <p className={`font-clash text-zinc-400 text-lg md:text-2xl mt-6 tracking-wide animate-on-load ${fadeIn} delay-300`}>
-              HPC ENGINEER AT <a href="https://www.bull.com" target="_blank" rel="noreferrer" className="text-orange-500 hover:text-white transition-colors">BULL</a> AND HOBBYST DEVELOPER
+            <h2 className="font-rajdhani text-2xl md:text-3xl text-slate-400 mb-8 tracking-wider">
+              Username: <span className="text-cyan-400 font-bold drop-shadow-[0_0_10px_rgba(0,255,255,0.5)]">The-Whiz</span>
+            </h2>
+            <p className="font-rajdhani text-xl text-slate-400 mt-8 max-w-2xl mx-auto">
+              {profile.tagline}
             </p>
-            <a
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="flex flex-wrap justify-center gap-4 mt-12"
+          >
+            <a 
+              href={profile.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-orbitron px-6 py-3 border-2 border-cyan-500 text-cyan-400 font-bold rounded hover:bg-cyan-500/10 hover:shadow-[0_0_30px_rgba(0,255,255,0.3)] transition-all flex items-center gap-2"
+            >
+              <Zap className="w-5 h-5" /> DOWNLOAD CV
+            </a>
+            <a 
               href={profile.locationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`block text-zinc-500 font-clash text-sm mt-2 hover:text-orange-500 transition-colors animate-on-load ${fadeIn} delay-600`}
+              className="font-orbitron px-6 py-3 border-2 border-pink-500 text-pink-400 font-bold rounded hover:bg-pink-500/10 hover:shadow-[0_0_30px_rgba(255,0,128,0.3)] transition-all flex items-center gap-2"
             >
-              {profile.location.toUpperCase()}
+              <MapPin className="w-5 h-5" /> SIBIU, ROMANIA
             </a>
-          </div>
-
-        <p className={`absolute bottom-24 text-zinc-500 font-clash text-lg tracking-wider animate-on-load ${fadeIn} delay-500`}>
-          SCROLL TO EXPLORE
-        </p>
-
-        <div className="absolute bottom-12 animate-bounce-gentle">
-          <div className="w-px h-12 bg-gradient-to-b from-orange-500 to-transparent" />
+          </motion.div>
         </div>
+
+        {/* Animated Line */}
+        <motion.div 
+          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
+          animate={{ opacity: [0.3, 1, 0.3] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        />
       </section>
 
       {/* Projects Section — Right After Hero */}
       <section id="projects" className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className={`font-monument text-[10vw] md:text-[8vw] text-stroke mb-12 ${slideInLeft}`}>
-            PROJECTS
-          </h2>
-
+          <motion.h2 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="font-orbitron text-4xl font-bold mb-12"
+          >
+            <span className="neon-pink">PROJECTS</span>
+          </motion.h2>
+          
           {/* Project Cards with Images */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, i) => (
-              <a
+              <motion.a
                 key={project.title}
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative overflow-hidden rounded-lg bg-zinc-900 border border-zinc-800 hover:border-orange-500 transition-all duration-500 ${fadeInUp}`}
-                style={{ animationDelay: `${i * 100}ms` }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group"
               >
-                {/* Project Image */}
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                </div>
-
-                {/* Project Info */}
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-monument text-lg group-hover:text-orange-500 transition-colors">
-                      {project.title.toUpperCase()}
-                    </h3>
-                    <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
+                <NeonCard 
+                  glowColor={['pink', 'cyan'][i % 2] as 'cyan' | 'pink'}
+                  className="h-full"
+                >
+                  {/* Project Image */}
+                  <div className="aspect-video rounded overflow-hidden mb-4 bg-slate-800">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                    />
                   </div>
-                  <p className="font-clash text-zinc-500 text-base line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mt-4">
+                  
+                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 group-hover:neon-pink transition-all">
+                    {project.title.toUpperCase()}
+                  </h3>
+                  <p className="font-rajdhani text-slate-400 text-base mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="font-clash text-xs px-2 py-1 bg-zinc-800 text-zinc-400 rounded"
-                      >
+                      <span key={tag} className="font-orbitron text-sm px-2 py-1 border border-pink-500/30 text-pink-400 rounded">
                         {tag}
                       </span>
                     ))}
                   </div>
-                </div>
-              </a>
+                  <span className="font-rajdhani text-pink-400 flex items-center gap-2 text-sm">
+                    <ExternalLink className="w-4 h-4" /> {project.linkLabel}
+                  </span>
+                </NeonCard>
+              </motion.a>
             ))}
           </div>
         </div>
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="py-24 px-6 md:px-8">
+      <section id="experience" className="py-24 px-6 md:px-8 relative">
         <div className="max-w-6xl mx-auto">
-          <h2 className={`font-monument text-[10vw] md:text-[8vw] text-stroke-orange mb-12 ${slideInLeft}`}>
-            EXPERIENCE
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <motion.h2 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="font-orbitron text-4xl font-bold mb-12"
+          >
+            <span className="neon-cyan">EXPERIENCE LOG</span>
+          </motion.h2>
+          <div className="space-y-6">
             {experience.map((exp, i) => (
-              <div
-                key={i}
-                className={`border-l-4 border-zinc-800 hover:border-orange-500 pl-6 transition-all duration-500 text-left ${i % 2 === 0 ? slideInLeft : slideInRight}`}
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                <span className="font-clash text-zinc-600 text-sm tracking-widest">
-                  {exp.period}
-                </span>
-                <h3 className="font-monument text-2xl mt-2">{exp.role.toUpperCase()}</h3>
-                <p className="font-clash text-orange-500 text-lg mt-1">{exp.company}</p>
+              <NeonCard key={i} glowColor="cyan">
+                <div className="flex flex-col md:flex-row justify-between items-start gap-4">
+                  <div>
+                    <h3 className="font-orbitron text-lg font-bold neon-cyan">{exp.role.toUpperCase()}</h3>
+                    <p className="font-rajdhani text-pink-400 text-lg">{exp.company}</p>
+                  </div>
+                  <span className="font-orbitron text-sm text-slate-500 border border-slate-700 px-3 py-1 rounded">
+                    {exp.period}
+                  </span>
+                </div>
                 <ul className="mt-4 space-y-2">
                   {exp.accomplishments.map((acc, j) => (
-                    <li key={j} className="font-clash text-zinc-500 text-base">
-                      • {acc}
+                    <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2 text-base">
+                      <ArrowRight className="w-4 h-4 text-cyan-500 mt-0.5 flex-shrink-0" /> {acc}
                     </li>
                   ))}
                 </ul>
-              </div>
+              </NeonCard>
             ))}
           </div>
         </div>
@@ -435,116 +466,93 @@ export default function Home() {
       {/* Skills Section */}
       <section id="skills" className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className={`font-monument text-[10vw] md:text-[8vw] text-stroke mb-12 ${slideInLeft}`}>
-            SKILLS
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <motion.h2 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="font-orbitron text-4xl font-bold mb-12"
+          >
+            <span className="neon-pink">CAPABILITIES</span>
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {skills.map((skill, i) => (
-              <div
-                key={skill.name}
-                className={`group p-6 border border-zinc-800 hover:border-orange-500 transition-all duration-500 ${fadeInUp}`}
-                style={{ animationDelay: `${i * 100}ms` }}
+              <NeonCard 
+                key={skill.name} 
+                glowColor={['cyan', 'pink'][i % 2] as 'cyan' | 'pink'}
               >
-                <h3 className="font-monument text-xl mb-3 group-hover:text-orange-500 transition-colors">
+                <h3 className="font-orbitron text-lg font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">
                   {skill.name.toUpperCase()}
                 </h3>
-                <p className="font-clash text-zinc-500 group-hover:text-zinc-300 transition-colors text-base">
-                  {skill.description}
-                </p>
-              </div>
+                <p className="font-rajdhani text-slate-400 text-base">{skill.description}</p>
+              </NeonCard>
             ))}
           </div>
         </div>
       </section>
-
 
       {/* Certifications Section */}
       <section id="certifications" className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className={`font-monument text-[10vw] md:text-[8vw] text-stroke-orange mb-12 ${slideInLeft}`}>
-            CERTS
-          </h2>
+          <motion.h2 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="font-orbitron text-4xl font-bold mb-12"
+          >
+            <span className="neon-cyan">CERTIFICATIONS</span>
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {certifications.map((cert, i) => (
-              <a
-                key={cert.title}
-                href={cert.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`group p-6 border border-zinc-800 hover:border-orange-500 transition-all duration-500 flex flex-col items-center text-center ${fadeInUp}`}
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
-                <img
-                  src={cert.image}
-                  alt={cert.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-20 h-20 object-contain mb-4 group-hover:scale-110 transition-transform"
-                />
-                <h3 className="font-monument text-base mb-2 group-hover:text-orange-500 transition-colors">
-                  {cert.title.toUpperCase()}
-                </h3>
-                <p className="font-clash text-zinc-500 text-base">{cert.description}</p>
-              </a>
+            {certifications.map((cert) => (
+              <NeonCard key={cert.title} glowColor="cyan" className="h-full flex flex-col">
+                <div className="flex items-start gap-4 mb-4">
+                  <img src={cert.image} alt={cert.title} className="w-16 h-16 object-contain rounded bg-slate-800 p-2" />
+                  <div>
+                    <h3 className="font-orbitron text-lg font-bold text-white">{cert.title}</h3>
+                    <p className="font-rajdhani text-slate-500 text-base mt-1">{cert.description}</p>
+                  </div>
+                </div>
+                <a 
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-rajdhani text-cyan-400 text-base flex items-center gap-1 hover:neon-cyan transition-all mt-auto"
+                >
+                  <ExternalLink className="w-3 h-3" /> Verify
+                </a>
+              </NeonCard>
             ))}
           </div>
         </div>
       </section>
 
-      <footer id="contact" className="py-10 px-8 border-t border-zinc-900 relative overflow-hidden">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-10">
-            <div className="text-left">
-              <h2 className={`font-monument text-3xl md:text-4xl text-orange-500 mb-4 ${fadeInUp}`}>
-                LET'S CONNECT
-              </h2>
-              <p className="font-clash text-zinc-400 text-base max-w-md">
-                {profile.tagline}
-              </p>
-            </div>
-            
-            <div className={`flex flex-wrap gap-4 md:justify-end ${fadeIn}`}>
-              <a
-                href={profile.resumeUrl}
-                className="font-clash text-sm px-8 py-4 border border-zinc-800 bg-zinc-900/50 text-white hover:bg-orange-500 hover:border-orange-500 hover:text-black transition-all duration-300 flex items-center gap-3"
-              >
-                <Download className="w-4 h-4" /> DOWNLOAD CV
-              </a>
-              <a
-                href="mailto:radu@the-whiz.dev"
-                className="font-clash text-sm px-8 py-4 bg-white text-black hover:bg-orange-500 transition-all duration-300 flex items-center gap-3"
-              >
-                <Mail className="w-4 h-4" /> SEND EMAIL
-              </a>
-            </div>
-          </div>
-
-          <div className="border-t border-zinc-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <p className="font-clash text-zinc-600 text-xs tracking-wider">
-                © 2026 RADU CHIRIAC. ALL RIGHTS RESERVED.
-              </p>
-              <a href="/privacy" className="font-clash text-zinc-600 hover:text-orange-500 text-xs tracking-wider transition-colors">
-                PRIVACY POLICY
-              </a>
-            </div>
-
-            <div className="flex items-center gap-4">
-              {socials.map((s) => {
-                const Icon = iconMap[s.icon]
-                return Icon ? (
-                  <a
-                    key={s.name}
-                    href={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-orange-500 transition-all duration-300"
-                  >
-                    <Icon className="w-4 h-4" />
-                  </a>
-                ) : null
-              })}
-            </div>
+      {/* Footer */}
+      <footer className="py-16 px-8 border-t border-cyan-500/20">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="font-orbitron text-sm">
+            <span className="neon-cyan">© {new Date().getFullYear()} {profile.name.toUpperCase()}</span>
+            <span className="mx-2 text-pink-500">|</span>
+            <Link 
+              to="/privacy" 
+              className="neon-pink hover:text-pink-300 transition-all hover:scale-105 inline-block hover:drop-shadow-[0_0_8px_rgba(255,0,128,0.5)]"
+            >
+              PRIVACY POLICY
+            </Link>
+          </p>
+          <div className="flex justify-center gap-4 mt-6">
+            {socials.map((s) => {
+              const Icon = iconMap[s.icon]
+              return Icon ? (
+                <a 
+                  key={s.name} 
+                  href={s.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-3 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all"
+                >
+                  <Icon className="w-5 h-5 text-cyan-400" />
+                </a>
+              ) : null
+            })}
           </div>
         </div>
       </footer>

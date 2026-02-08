@@ -49,7 +49,7 @@ export const profile = {
   location: "Sibiu, Romania",
   locationUrl: "https://maps.app.goo.gl/riqMDNYqAJRaxHdr9",
   resumeUrl: "/files/Resume.pdf",
-  image: "/assets/img/hero-portrait.png",
+  image: "/assets/img/tw-logo.png",
 };
 
 export const socials: SocialLink[] = [
@@ -59,6 +59,15 @@ export const socials: SocialLink[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    title: "Zero-Dawn v3",
+    description:
+      "The third iteration of my personal portfolio website, featuring a terminal-inspired aesthetic with custom typography (Geist Mono), and electric violet accents.",
+    image: "/assets/img/project-v3.png",
+    link: "https://github.com/the-whiz84/zero-dawn-v3",
+    linkLabel: "View Code",
+    tags: ["TypeScript", "React", "Tailwind CSS"],
+  },  
   {
     title: "Zero-Dawn v2",
     description:
@@ -103,15 +112,6 @@ export const projects: Project[] = [
     link: "https://todo.the-whiz.dev",
     linkLabel: "Go to Website",
     tags: ["Flask", "PostgreSQL", "Bootstrap 5"],
-  },
-  {
-    title: "Demo E-Commerce Website",
-    description:
-      "This is an e-commerce Example Website created with Flask, Bootstrap 5 and functioning payment processing for testing using Stripe's API services.",
-    image: "/assets/img/shop.webp",
-    link: "https://shop.the-whiz.dev",
-    linkLabel: "Go to Website",
-    tags: ["Flask", "Stripe API", "Bootstrap 5"],
   },
 ];
 

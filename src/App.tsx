@@ -1,20 +1,18 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import { SpeedInsights } from '@vercel/speed-insights/react'
+import Home from './pages/Home'
+import Privacy from './pages/Privacy'
+import './index.css'
 
-const Home = lazy(() => import('./pages/Home'))
-const Privacy = lazy(() => import('./pages/Privacy'))
-
+/**
+ * Root application shell and route wiring.
+ */
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div className="h-screen bg-black" />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/privacy" element={<Privacy />} />
-        </Routes>
-      </Suspense>
-      <SpeedInsights />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/privacy" element={<Privacy />} />      </Routes>
     </BrowserRouter>
   )
 }

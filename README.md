@@ -1,57 +1,65 @@
-# The-Whiz.dev — Kinetic Edition ⚡
+# The-Whiz.dev | Cyberpunk Portfolio
 
-![Kinetic Preview](public/assets/img/preview.png)
+![The-Whiz Portfolio Preview](public/assets/img/preview.png)
 
-This is the source code for the **Kinetic Edition** of my personal portfolio website, [the-whiz.dev](https://the-whiz.dev). This version emphasizes speed, bold typography, and impactful motion, reflecting a modern, high-performance aesthetic.
+This is the source code for my personal portfolio website, [the-whiz.dev](https://the-whiz.dev).
+Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects, terminal-inspired stats, and a high-performance modern stack.
 
-## ✨ Design Philosophy — "Kinetic Impact"
+## ✨ Features
 
-The Kinetic Edition is built to make a bold statement. Key design features include:
-- **Typography-First Approach**: USing custom font pairings like **Monument Extended** and **Clash Display** for a high-end, editorial feel.
-- **High-Contrast Palette**: Deep obsidian backgrounds contrasted with vibrant **Orange-500** accents.
-- **Motion-Driven UX**: Utilizing **Framer Motion** for speed-inspired transitions, entrance animations, and section-tracking navigation.
-- **Glassmorphic Navigation**: A sophisticated full-screen mobile overlay and a dynamic, blur-heavy desktop navbar.
+-   **Cyberpunk Design**: Neon Cyan & Pink color palette with glassmorphism and glow effects.
+-   **Interactive UI**: Smooth animations powered by Framer Motion.
+-   **Glitch Typography**: Custom `GlitchText` components for a retro-futuristic feel.
+-   **Responsive Layout**: Fully optimized for Desktop, Tablet, and Mobile.
+-   **Performance First**: Engineered with Vite and React for lightning-fast loads.
 
 ## 🛠️ Tech Stack
 
-- **Core**: [React 19](https://react.dev/)
-- **Build Tool**: [Vite](https://vitejs.dev/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **Runtime/PM**: [Bun](https://bun.sh/)
+-   **Framework**: React 19 (Vite)
+-   **Language**: TypeScript
+-   **Styling**: Tailwind CSS v4
+-   **Animations**: Motion (Framer Motion)
+-   **Icons**: Lucide React
+-   **Package Manager**: Bun
 
 ## 🚀 Getting Started
 
-To run the Kinetic Edition locally:
+To run this project locally:
 
 ### Prerequisites
-- **Bun**: Latest version recommended.
 
-### Installation & Run
+-   **Bun**: Latest version (Required)
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/the-whiz84/the-whiz.dev.git
-   cd the-whiz.dev
-   ```
+### Installation
 
-2. **Install dependencies**:
-   ```bash
-   bun install
-   ```
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/the-whiz84/the-whiz.dev.git
+    cd the-whiz.dev
+    ```
 
-3. **Run development server**:
-   ```bash
-   bun run dev
-   ```
+2.  **Install dependencies**:
+    ```bash
+    bun install
+    ```
 
-4. **Visit**: `http://localhost:5173`
+3.  **Run the development server**:
+    ```bash
+    bun run dev
+    ```
+
+4.  **Open the browser**:
+    Navigate to `http://localhost:5173` to verify "ROOT ACCESS GRANTED".
 
 ## 📦 Deployment
 
-Optimized for deployment on [Vercel](https://vercel.com). Includes custom configuration for analytics and performance monitoring.
+Optimized for deployment on [Vercel](https://vercel.com).
+Push to main/master branch to trigger automatic builds.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-Built with ⚡ by [Radu Chiriac](https://the-whiz.dev)
+Built with ❤️ and ☕ by [Radu Chiriac](https://the-whiz.dev) // **ENGINEERED FOR PERFORMANCE**
