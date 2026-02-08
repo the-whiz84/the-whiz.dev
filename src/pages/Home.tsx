@@ -8,10 +8,11 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 }
 
 const navItems = [
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Certifications', href: '#certifications' },
+  { label: 'Projects', href: '#projects', type: 'section' },
+  { label: 'Skills', href: '#skills', type: 'section' },
+  { label: 'Experience', href: '#experience', type: 'section' },
+  { label: 'Certifications', href: '#certifications', type: 'section' },
+  { label: 'V3', href: 'https://v3.the-whiz.dev', type: 'external' },
 ]
 
 function NeonCard({ 
@@ -51,7 +52,10 @@ function GlitchText({ children, className = '' }: { children: string; className?
   )
 }
 
-export default function Design3() {
+/**
+ * Neon-themed landing page with section navigation.
+ */
+export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
@@ -180,11 +184,43 @@ export default function Design3() {
             : 'bg-transparent py-6'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-6">
+          <button
+            aria-label="Scroll to top"
+            onClick={() => scrollToSection('#top')}
+            className="flex items-center gap-3 group"
+          >
+            <span className="relative inline-flex">
+              <span className="absolute inset-0 rounded-full blur-lg bg-cyan-500/40 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <img
+                src="/assets/img/navbar-logo.png"
+                alt="Logo"
+                className="relative w-10 h-10 rounded-full border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,255,0.35)] group-hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] transition-all"
+              />
+            </span>
+            <span className="hidden lg:inline font-orbitron text-xs tracking-[0.3em] text-slate-400 group-hover:text-cyan-300 transition-colors">
+              THE WHIZ
+            </span>
+          </button>
+
           {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-1">
+          <ul className="hidden md:flex items-center gap-1 flex-1">
             {navItems.map((item) => {
-              const isActive = activeSection === item.href.substring(1)
+              const isActive = item.type === 'section' && activeSection === item.href.substring(1)
+              if (item.type === 'external') {
+                return (
+                  <li key={item.label} className="ml-auto">
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-orbitron text-xs tracking-wider px-4 py-2 rounded transition-all duration-300 text-slate-300 hover:text-cyan-300 hover:bg-slate-800/50 border border-cyan-500/20 hover:border-cyan-400/60"
+                    >
+                      {item.label.toUpperCase()}
+                    </a>
+                  </li>
+                )
+              }
               return (
                 <li key={item.label}>
                   <button
@@ -222,6 +258,7 @@ export default function Design3() {
 
           {/* Mobile Menu Toggle */}
           <button
+            aria-label="Toggle navigation menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 border border-cyan-500/30 rounded"
           >
@@ -236,17 +273,33 @@ export default function Design3() {
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden bg-slate-900/95 backdrop-blur-md border-t border-cyan-500/30 px-6 py-4"
           >
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                onClick={() => scrollToSection(item.href)}
-                className={`block w-full text-left font-orbitron text-sm py-3 border-b border-slate-800 ${
-                  activeSection === item.href.substring(1) ? 'text-cyan-400' : 'text-slate-300'
-                }`}
-              >
-                {item.label.toUpperCase()}
-              </button>
-            ))}
+            {navItems.map((item) => {
+              if (item.type === 'external') {
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block w-full text-left font-orbitron text-sm py-3 border-b border-slate-800 text-slate-300 hover:text-cyan-300"
+                  >
+                    {item.label.toUpperCase()}
+                  </a>
+                )
+              }
+              return (
+                <button
+                  key={item.label}
+                  onClick={() => scrollToSection(item.href)}
+                  className={`block w-full text-left font-orbitron text-sm py-3 border-b border-slate-800 ${
+                    activeSection === item.href.substring(1) ? 'text-cyan-400' : 'text-slate-300'
+                  }`}
+                >
+                  {item.label.toUpperCase()}
+                </button>
+              )
+            })}
             <div className="flex gap-4 pt-4">
               {socials.map((s) => {
                 const Icon = iconMap[s.icon]
@@ -262,7 +315,7 @@ export default function Design3() {
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center pt-20 px-8 relative">
+      <section id="top" className="min-h-screen flex items-center justify-center pt-20 px-8 relative">
         <div className="text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
