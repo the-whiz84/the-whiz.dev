@@ -1,5 +1,7 @@
 # The-Whiz.dev (Isometric Edition)
 
+![Isometric Preview](public/assets/img/preview.png)
+
 This is the source code for my personal portfolio website, [the-whiz.dev](https://the-whiz.dev).
 This version features a **3D Isometric Design**, glassmorphism UI, and fluid animations for a modern, immersive experience.
 
