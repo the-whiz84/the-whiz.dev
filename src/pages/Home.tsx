@@ -1,4 +1,5 @@
 import { motion } from 'motion/react'
+import { Link } from 'react-router'
 import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
 import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X } from 'lucide-react'
@@ -180,7 +181,7 @@ export default function Home() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-slate-950/90 backdrop-blur-md border-b border-transparent py-3'
+            ? 'bg-slate-950/90 backdrop-blur-md py-3'
             : 'bg-transparent py-6'
         }`}
       >
@@ -319,7 +320,7 @@ export default function Home() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <p className="font-rajdhani text-cyan-400 text-xl tracking-[0.3em] mb-6">WELCOME TO THE GRID</p>
+            <p className="font-rajdhani text-cyan-400 text-xl tracking-[0.3em] mb-6">ROOT ACCESS GRANTED</p>
             <h1 className="font-orbitron text-5xl md:text-8xl font-black">
               <GlitchText className="neon-cyan">{profile.name.split(' ')[0].toUpperCase()}</GlitchText>
               <br />
@@ -523,7 +524,9 @@ export default function Home() {
       <footer className="py-16 px-8 border-t border-cyan-500/20">
         <div className="max-w-6xl mx-auto text-center">
           <p className="font-orbitron text-sm text-slate-600">
-            © 2026 {profile.name.toUpperCase()} // ALL SYSTEMS OPERATIONAL
+            © 2026 {profile.name.toUpperCase()} // ENGINEERED FOR PERFORMANCE
+            <span className="mx-2 text-slate-700">|</span>
+            <Link to="/privacy" className="hover:text-cyan-400 transition-colors">PRIVACY POLICY</Link>
           </p>
           <div className="flex justify-center gap-4 mt-6">
             {socials.map((s) => {
