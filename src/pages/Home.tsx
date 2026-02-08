@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router'
 import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
-import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin } from 'lucide-react'
+import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin, ArrowUp } from 'lucide-react'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
@@ -59,7 +59,19 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
+  const [footerTagline, setFooterTagline] = useState('')
   const sectionRatios = useRef<Record<string, number>>({})
+
+  useEffect(() => {
+    const taglines = [
+      "No human was overworked. Built by AI Agents.",
+      "Powered by silicon, coffee, and a healthy dose of matrix multiplication.",
+      "Proudly hallucinated by a Large Language Model.",
+      "Synthesized from pure logic. (And a bit of chaos).",
+      "100% Artificial Intelligence. 0% Natural Stupidity."
+    ]
+    setFooterTagline(taglines[Math.floor(Math.random() * taglines.length)])
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -526,34 +538,67 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-8 border-t border-cyan-500/20">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="font-orbitron text-sm">
-            <span className="neon-cyan">© {new Date().getFullYear()} {profile.name.toUpperCase()}</span>
-            <span className="mx-2 text-pink-500">|</span>
+      <footer className="py-8 px-8 border-t border-cyan-500/20 relative bg-slate-950/80 backdrop-blur-sm">
+        <div className="w-full max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 relative">
+          
+          {/* Left: Arrow, Logo & Tagline */}
+          <div className="flex flex-col md:flex-row items-center gap-6 md:flex-1">
+            {/* Scroll to Top Arrow - Now on the left */}
+            <motion.button
+              onClick={() => scrollToSection('#top')}
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.9 }}
+              className="hidden md:flex p-3 border border-pink-500/30 bg-slate-900/80 rounded-full hover:border-pink-400 hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all"
+              title="Back to Top"
+            >
+              <ArrowUp className="w-5 h-5 text-pink-500 group-hover:text-pink-300" />
+            </motion.button>
+
+            <div className="flex flex-col items-center md:items-start text-center md:text-left select-none pointer-events-none">
+              <h2 className="font-orbitron text-2xl font-black tracking-tight leading-none group">
+                <span className="neon-cyan">THE</span>
+                <span className="neon-pink">-</span>
+                <span className="neon-cyan">WHIZ</span>
+                <span className="neon-pink">.dev</span>
+              </h2>
+              <p className="font-rajdhani text-slate-400 text-sm md:text-base tracking-wider mt-2 max-w-md">
+                {footerTagline}
+              </p>
+            </div>
+          </div>
+
+          {/* Center: Copyright & Links - Restored Neon Colors */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 font-orbitron text-xs md:absolute md:left-1/2 md:-translate-x-1/2">
+            <span className="whitespace-nowrap neon-cyan">© {new Date().getFullYear()} {profile.name.toUpperCase()}</span>
+            <span className="hidden md:inline text-pink-500">|</span>
             <Link 
               to="/privacy" 
-              className="neon-pink hover:text-pink-300 transition-all hover:scale-105 inline-block hover:drop-shadow-[0_0_8px_rgba(255,0,128,0.5)]"
+              className="neon-pink hover:text-pink-300 transition-all hover:scale-105 hover:drop-shadow-[0_0_8px_rgba(255,0,128,0.5)]"
             >
               PRIVACY POLICY
             </Link>
-          </p>
-          <div className="flex justify-center gap-4 mt-6">
-            {socials.map((s) => {
-              const Icon = iconMap[s.icon]
-              return Icon ? (
-                <a 
-                  key={s.name} 
-                  href={s.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-3 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all"
-                >
-                  <Icon className="w-5 h-5 text-cyan-400" />
-                </a>
-              ) : null
-            })}
           </div>
+
+          {/* Right: Socials - Restored Neon Colors */}
+          <div className="flex items-center gap-4 md:flex-1 md:justify-end">
+            <div className="flex gap-3">
+              {socials.map((s) => {
+                const Icon = iconMap[s.icon]
+                return Icon ? (
+                  <a 
+                    key={s.name} 
+                    href={s.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="p-3 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all"
+                  >
+                    <Icon className="w-5 h-5 text-cyan-400" />
+                  </a>
+                ) : null
+              })}
+            </div>
+          </div>
+
         </div>
       </footer>
     </div>
