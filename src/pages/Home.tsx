@@ -198,18 +198,15 @@ export default function Home() {
                 className="relative w-10 h-10 rounded-full border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,255,0.35)] group-hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] transition-all"
               />
             </span>
-            <span className="hidden lg:inline font-orbitron text-xs tracking-[0.3em] text-slate-400 group-hover:text-cyan-300 transition-colors">
-              THE WHIZ
-            </span>
           </button>
 
           {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-1 flex-1">
+          <ul className="hidden md:flex items-center gap-1 flex-1 justify-center">
             {navItems.map((item) => {
               const isActive = item.type === 'section' && activeSection === item.href.substring(1)
               if (item.type === 'external') {
                 return (
-                  <li key={item.label} className="ml-auto">
+                  <li key={item.label}>
                     <a
                       href={item.href}
                       target="_blank"
@@ -463,7 +460,7 @@ export default function Home() {
             <span className="neon-cyan">EXPERIENCE LOG</span>
           </motion.h2>
           <div className="space-y-6">
-            {experience.slice(0, 4).map((exp, i) => (
+            {experience.map((exp, i) => (
               <NeonCard key={i} glowColor="cyan">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                   <div>
