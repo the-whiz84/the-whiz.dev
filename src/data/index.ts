@@ -245,6 +245,13 @@ export const skills: Skill[] = [
 
 export const certifications: Certification[] = [
   {
+    title: "AWS Certified Solutions Architect – Associate",
+    image: "/assets/img/logos/aws.png",
+    description:
+      "Validates ability to design and deploy secure, scalable, and cost-effective systems on AWS.",
+    link: "https://www.credly.com/badges/c75558c2-7879-40b0-aa16-be2c78d56971/public_url",
+  },
+  {
     title: "100 Days of Code: The Complete Python Bootcamp",
     image: "/assets/img/logos/python.webp",
     description:
@@ -257,12 +264,5 @@ export const certifications: Certification[] = [
     description:
       "Validates proficiency in Linux system configuration, CLI navigation, and core package management.",
     link: "https://www.credly.com/badges/ee106ea6-ba34-440b-9f29-3f2a59239e9d/public_url",
-  },
-  {
-    title: "Okta Certified Consultant",
-    image: "/assets/img/logos/Okta-consultant.webp",
-    description:
-      "Expert-level validation for scoping and implementing complex Okta SSO/MFA integrations and architectures.",
-    link: "https://www.credly.com/badges/0239f2b6-94c8-42cb-8ba4-1aa1435067a8/public_url",
   },
 ];
