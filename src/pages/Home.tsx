@@ -25,21 +25,51 @@ function NeonCard({
   glowColor?: 'cyan' | 'pink'
   className?: string
 }) {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect()
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    })
+  }
+
   const glowMap = {
     cyan: 'shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30',
     pink: 'shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30',
   }
+
+  const spotlightMap = {
+    cyan: 'rgba(0, 255, 255, 0.15)',
+    pink: 'rgba(255, 0, 128, 0.15)',
+  }
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.3 }}
-      className={`bg-slate-900/80 backdrop-blur-sm border rounded-lg p-6 transition-all duration-300 ${glowMap[glowColor]} ${className}`}
+      whileHover={{ y: -5 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`relative group bg-slate-900/80 backdrop-blur-sm border rounded-lg p-6 transition-all duration-300 overflow-hidden ${glowMap[glowColor]} ${className}`}
     >
-      {children}
+      {/* Spotlight Effect */}
+      {isHovered && (
+        <div 
+          className="pointer-events-none absolute -inset-px transition duration-300 z-0 opacity-100"
+          style={{
+            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, ${spotlightMap[glowColor]}, transparent 40%)`
+          }}
+        />
+      )}
+      <div className="relative z-10 h-full flex flex-col">
+        {children}
+      </div>
     </motion.div>
   )
 }
@@ -169,9 +199,15 @@ export default function Home() {
         
         .grid-pattern {
           background-image: 
-            linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
+            linear-gradient(rgba(0,255,255,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,255,255,0.06) 1px, transparent 1px);
           background-size: 50px 50px;
+          animation: grid-move 20s linear infinite;
+        }
+        
+        @keyframes grid-move {
+          0% { background-position: 0 0; }
+          100% { background-position: 50px 50px; }
         }
         
         .scanline {
@@ -403,35 +439,38 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group"
+                className="group/card block h-full"
               >
                 <NeonCard 
-                  glowColor={['pink', 'cyan'][i % 2] as 'cyan' | 'pink'}
-                  className="h-full"
+                  glowColor="pink"
+                  className="h-full flex flex-col"
                 >
                   {/* Project Image */}
-                  <div className="aspect-video rounded overflow-hidden mb-4 bg-slate-800">
+                  <div className="aspect-video rounded overflow-hidden mb-4 bg-slate-800 shrink-0">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                      className="w-full h-full object-cover opacity-70 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-500"
                     />
                   </div>
                   
-                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 group-hover:neon-pink transition-all">
+                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] shrink-0">
                     {project.title.toUpperCase()}
                   </h3>
-                  <p className="font-rajdhani text-slate-400 text-base mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="font-orbitron text-sm px-2 py-1 border border-pink-500/30 text-pink-400 rounded">
-                        {tag}
-                      </span>
-                    ))}
+                  <p className="font-rajdhani text-slate-400 text-base mb-4 flex-grow">{project.description}</p>
+                  
+                  <div className="flex flex-col gap-4 mt-auto shrink-0">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.slice(0, 3).map((tag) => (
+                        <span key={tag} className="font-orbitron text-sm px-2 py-1 border rounded transition-colors border-pink-500/30 text-pink-400 group-hover/card:bg-pink-500/10">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="font-rajdhani flex items-center gap-2 text-sm transition-all text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
+                      <ExternalLink className="w-4 h-4" /> {project.linkLabel}
+                    </span>
                   </div>
-                  <span className="font-rajdhani text-pink-400 flex items-center gap-2 text-sm">
-                    <ExternalLink className="w-4 h-4" /> {project.linkLabel}
-                  </span>
                 </NeonCard>
               </motion.a>
             ))}
@@ -452,11 +491,11 @@ export default function Home() {
           </motion.h2>
           <div className="space-y-6">
             {experience.map((exp, i) => (
-              <NeonCard key={i} glowColor="cyan">
+              <NeonCard key={i} glowColor="cyan" className="group/card">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                   <div>
-                    <h3 className="font-orbitron text-lg font-bold neon-cyan">{exp.role.toUpperCase()}</h3>
-                    <p className="font-rajdhani text-pink-400 text-lg">{exp.company}</p>
+                    <h3 className="font-orbitron text-lg font-bold text-white transition-all group-hover/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)]">{exp.role.toUpperCase()}</h3>
+                    <p className="font-rajdhani text-cyan-400 text-lg group-hover/card:text-cyan-300 transition-colors">{exp.company}</p>
                   </div>
                   <span className="font-orbitron text-sm text-slate-500 border border-slate-700 px-3 py-1 rounded">
                     {exp.period}
@@ -465,7 +504,8 @@ export default function Home() {
                 <ul className="mt-4 space-y-2">
                   {exp.accomplishments.map((acc, j) => (
                     <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2 text-base">
-                      <ArrowRight className="w-4 h-4 text-cyan-500 mt-0.5 flex-shrink-0" /> {acc}
+                      <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0 transition-all text-cyan-500 group-hover/card:text-cyan-300 group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" /> 
+                      <span className="group-hover/card:text-slate-300 transition-colors">{acc}</span>
                     </li>
                   ))}
                 </ul>
@@ -486,13 +526,14 @@ export default function Home() {
           >
             <span className="neon-pink">CAPABILITIES</span>
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {skills.map((skill, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {skills.map((skill) => (
               <NeonCard 
                 key={skill.name} 
-                glowColor={['cyan', 'pink'][i % 2] as 'cyan' | 'pink'}
+                glowColor="pink"
+                className="group/card"
               >
-                <h3 className="font-orbitron text-lg font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-pink-500">
+                <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)]">
                   {skill.name.toUpperCase()}
                 </h3>
                 <p className="font-rajdhani text-slate-400 text-base">{skill.description}</p>
@@ -515,19 +556,19 @@ export default function Home() {
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {certifications.map((cert) => (
-              <NeonCard key={cert.title} glowColor="cyan" className="h-full flex flex-col">
+              <NeonCard key={cert.title} glowColor="cyan" className="h-full flex flex-col group/card">
                 <div className="flex items-start gap-4 mb-4">
                   <img src={cert.image} alt={cert.title} className="w-16 h-16 object-contain rounded bg-slate-800 p-2" />
                   <div>
-                    <h3 className="font-orbitron text-lg font-bold text-white">{cert.title}</h3>
-                    <p className="font-rajdhani text-slate-500 text-base mt-1">{cert.description}</p>
+                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title}</h3>
+                    <p className="font-rajdhani text-slate-500 text-base mt-1 group-hover/card:text-slate-400 transition-colors">{cert.description}</p>
                   </div>
                 </div>
                 <a 
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-rajdhani text-cyan-400 text-base flex items-center gap-1 hover:neon-cyan transition-all mt-auto"
+                  className="font-rajdhani text-base flex items-center gap-1 transition-all mt-auto text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]"
                 >
                   <ExternalLink className="w-3 h-3" /> Verify
                 </a>
