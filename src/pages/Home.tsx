@@ -37,8 +37,8 @@ function NeonCard({
   }
 
   const glowMap = {
-    cyan: 'shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] data-[active='true']:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30',
-    pink: 'shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] data-[active='true']:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30',
+    cyan: `shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] data-[active='true']:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30`,
+    pink: `shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] data-[active='true']:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30`,
   }
 
   const spotlightMap = {
