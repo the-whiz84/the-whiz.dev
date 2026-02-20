@@ -497,7 +497,7 @@ export default function Home() {
                     <span className="font-orbitron text-5xl font-black text-white whitespace-nowrap">
                       {`${((Date.now() - new Date('2020-10-01').getTime()) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1)}y`}
                     </span>
-                    <span className="font-rajdhani text-slate-500 text-base whitespace-nowrap">Since first project</span>
+                    <span className="font-rajdhani text-slate-500 text-base whitespace-nowrap">Since First Project</span>
                   </div>
                   <div className="mt-1 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
                     <motion.div
