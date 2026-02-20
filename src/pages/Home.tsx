@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router'
 import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
-import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin, ArrowUp } from 'lucide-react'
+import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin, ArrowUp, Terminal, Clock } from 'lucide-react'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
@@ -82,6 +82,19 @@ function GlitchText({ children, className = '' }: { children: string; className?
   )
 }
 
+/** Breathing neon divider placed between every page section. */
+function SectionDivider() {
+  return (
+    <motion.div
+      className="relative h-px mx-8 md:mx-16 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
+      animate={{ opacity: [0.3, 1, 0.3] }}
+      transition={{ repeat: Infinity, duration: 2.5 }}
+    >
+      <div className="absolute inset-0 blur-sm bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
+    </motion.div>
+  )
+}
+
 /**
  * Neon-themed landing page with section navigation.
  */
@@ -90,6 +103,7 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const [footerTagline, setFooterTagline] = useState('')
+  const [repoCount, setRepoCount] = useState<number | null>(null)
   const sectionRatios = useRef<Record<string, number>>({})
 
   useEffect(() => {
@@ -101,6 +115,14 @@ export default function Home() {
       "100% Artificial Intelligence. 0% Natural Stupidity."
     ]
     setFooterTagline(taglines[Math.floor(Math.random() * taglines.length)])
+  }, [])
+
+  /** Fetch public repo count from GitHub API on mount. */
+  useEffect(() => {
+    fetch('https://api.github.com/users/the-whiz84')
+      .then((r) => r.json())
+      .then((d) => setRepoCount(d.public_repos ?? null))
+      .catch(() => setRepoCount(null))
   }, [])
 
   useEffect(() => {
@@ -428,12 +450,74 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Animated Line */}
-        <motion.div 
-          className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
-          animate={{ opacity: [0.3, 1, 0.3] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        />
+        {/* Terminal Stats Block */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.6 }}
+          className="w-full max-w-2xl mx-auto mt-16 px-4"
+        >
+          <div className="bg-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-lg overflow-hidden">
+            {/* Terminal header bar */}
+            <div className="flex items-center gap-2 px-4 py-2 border-b border-cyan-500/10 bg-slate-950/60">
+              <div className="w-3 h-3 rounded-full bg-pink-500/70" />
+              <div className="w-3 h-3 rounded-full bg-cyan-500/70" />
+              <div className="w-3 h-3 rounded-full bg-slate-600" />
+              <span className="font-orbitron text-xs text-slate-500 ml-2 tracking-widest">system.stats</span>
+            </div>
+            {/* Stats row */}
+            <div className="grid grid-cols-2 divide-x divide-cyan-500/10">
+              {/* Repos */}
+              <div className="flex flex-col gap-2 p-6">
+                <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
+                  <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Public Repos</span>
+                </div>
+                <span className="font-orbitron text-5xl font-black text-white">
+                  {repoCount !== null ? repoCount : '—'}
+                </span>
+                <span className="font-rajdhani text-slate-500 text-sm">Active Projects</span>
+                <div className="mt-2 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 1.8, delay: 1.1 }}
+                    className="h-full bg-gradient-to-r from-cyan-500 via-cyan-400 to-transparent shadow-[0_0_8px_rgba(0,255,255,0.6)]"
+                  />
+                </div>
+              </div>
+              {/* Uptime */}
+              <div className="flex flex-col gap-2 p-6">
+                <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
+                  <Clock className="w-3.5 h-3.5 text-pink-400" />
+                  <span>Uptime</span>
+                </div>
+                <span className="font-orbitron text-5xl font-black text-white">
+                  {(() => {
+                    const ms = Date.now() - new Date('2020-10-01').getTime()
+                    const years = Math.floor(ms / (1000 * 60 * 60 * 24 * 365.25))
+                    const months = Math.floor((ms % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44))
+                    return `${years}y ${months}m`
+                  })()}
+                </span>
+                <span className="font-rajdhani text-slate-500 text-sm">Since Hello World</span>
+                <div className="mt-2 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 1.8, delay: 1.3 }}
+                    className="h-full bg-gradient-to-r from-pink-500 via-pink-400 to-transparent shadow-[0_0_8px_rgba(255,0,128,0.6)]"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Animated Section Divider */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <SectionDivider />
+        </div>
       </section>
 
       {/* Projects Section — Right After Hero */}
@@ -499,6 +583,8 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* Experience Section */}
       <section id="experience" className="py-24 px-6 md:px-8 relative">
         <div className="max-w-6xl mx-auto">
@@ -536,6 +622,8 @@ export default function Home() {
         </div>
       </section>
 
+      <SectionDivider />
+
       {/* Skills Section */}
       <section id="skills" className="py-24 px-6 md:px-8">
         <div className="max-w-6xl mx-auto">
@@ -563,6 +651,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <SectionDivider />
 
       {/* Certifications Section */}
       <section id="certifications" className="py-24 px-6 md:px-8">
