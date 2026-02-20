@@ -37,8 +37,8 @@ function NeonCard({
   }
 
   const glowMap = {
-    cyan: `shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] data-[active='true']:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30`,
-    pink: `shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] data-[active='true']:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30`,
+    cyan: `shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] max-md:data-[active='true']:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30`,
+    pink: `shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] max-md:data-[active='true']:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30`,
   }
 
   const spotlightMap = {
@@ -471,11 +471,11 @@ export default function Home() {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-70 group-hover/card:opacity-100 group-data-[active='true']/card:opacity-100 group-hover/card:scale-105 group-data-[active='true']/card:scale-105 transition-all duration-500"
+                      className="w-full h-full object-cover opacity-70 group-hover/card:opacity-100 max-md:group-data-[active='true']/card:opacity-100 group-hover/card:scale-105 max-md:group-data-[active='true']/card:scale-105 transition-all duration-500"
                     />
                   </div>
                   
-                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 group-data-[active='true']/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] shrink-0">
+                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 max-md:group-data-[active='true']/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] shrink-0">
                     {project.title.toUpperCase()}
                   </h3>
                   <p className="font-rajdhani text-slate-400 text-base mb-4 flex-grow">{project.description}</p>
@@ -483,12 +483,12 @@ export default function Home() {
                   <div className="flex flex-col gap-4 mt-auto shrink-0">
                     <div className="flex flex-wrap gap-2">
                       {project.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="font-orbitron text-sm px-2 py-1 border rounded transition-colors border-pink-500/30 text-pink-400 group-hover/card:bg-pink-500/10 group-data-[active='true']/card:bg-pink-500/10">
+                        <span key={tag} className="font-orbitron text-sm px-2 py-1 border rounded transition-colors border-pink-500/30 text-pink-400 group-hover/card:bg-pink-500/10 max-md:group-data-[active='true']/card:bg-pink-500/10">
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <span className="font-rajdhani flex items-center gap-2 text-sm transition-all text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
+                    <span className="font-rajdhani flex items-center gap-2 text-sm transition-all text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
                       <ExternalLink className="w-4 h-4" /> {project.linkLabel}
                     </span>
                   </div>
@@ -515,8 +515,8 @@ export default function Home() {
               <NeonCard key={i} glowColor="cyan" className="group/card">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                   <div>
-                    <h3 className="font-orbitron text-lg font-bold text-white transition-all group-hover/card:text-cyan-400 group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)]">{exp.role.toUpperCase()}</h3>
-                    <p className="font-rajdhani text-cyan-400 text-lg group-hover/card:text-cyan-300 group-data-[active='true']/card:text-cyan-300 transition-colors">{exp.company}</p>
+                    <h3 className="font-orbitron text-lg font-bold text-white transition-all group-hover/card:text-cyan-400 max-md:group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)]">{exp.role.toUpperCase()}</h3>
+                    <p className="font-rajdhani text-cyan-400 text-lg group-hover/card:text-cyan-300 max-md:group-data-[active='true']/card:text-cyan-300 transition-colors">{exp.company}</p>
                   </div>
                   <span className="font-orbitron text-sm text-slate-500 border border-slate-700 px-3 py-1 rounded">
                     {exp.period}
@@ -525,8 +525,8 @@ export default function Home() {
                 <ul className="mt-4 space-y-2">
                   {exp.accomplishments.map((acc, j) => (
                     <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2 text-base">
-                      <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0 transition-all text-cyan-500 group-hover/card:text-cyan-300 group-data-[active='true']/card:text-cyan-300 group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" /> 
-                      <span className="group-hover/card:text-slate-300 group-data-[active='true']/card:text-slate-300 transition-colors">{acc}</span>
+                      <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0 transition-all text-cyan-500 group-hover/card:text-cyan-300 max-md:group-data-[active='true']/card:text-cyan-300 group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" /> 
+                      <span className="group-hover/card:text-slate-300 max-md:group-data-[active='true']/card:text-slate-300 transition-colors">{acc}</span>
                     </li>
                   ))}
                 </ul>
@@ -554,7 +554,7 @@ export default function Home() {
                 glowColor="pink"
                 className="group/card"
               >
-                <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 group-data-[active='true']/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)]">
+                <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 max-md:group-data-[active='true']/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)]">
                   {skill.name.toUpperCase()}
                 </h3>
                 <p className="font-rajdhani text-slate-400 text-base">{skill.description}</p>
@@ -581,15 +581,15 @@ export default function Home() {
                 <div className="flex items-start gap-4 mb-4">
                   <img src={cert.image} alt={cert.title} className="w-16 h-16 object-contain rounded bg-slate-800 p-2" />
                   <div>
-                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title}</h3>
-                    <p className="font-rajdhani text-slate-500 text-base mt-1 group-hover/card:text-slate-400 group-data-[active='true']/card:text-slate-400 transition-colors">{cert.description}</p>
+                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 max-md:group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title}</h3>
+                    <p className="font-rajdhani text-slate-500 text-base mt-1 group-hover/card:text-slate-400 max-md:group-data-[active='true']/card:text-slate-400 transition-colors">{cert.description}</p>
                   </div>
                 </div>
                 <a 
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-rajdhani text-base flex items-center gap-1 transition-all mt-auto text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]"
+                  className="font-rajdhani text-base flex items-center gap-1 transition-all mt-auto text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]"
                 >
                   <ExternalLink className="w-3 h-3" /> Verify
                 </a>
@@ -604,7 +604,7 @@ export default function Home() {
         <div className="w-full max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-6 md:gap-12 relative">
           
           {/* Left: Arrow, Logo & Tagline - Aligned Start */}
-          <div className="flex flex-col md:flex-row items-center gap-6 justify-self-center md:justify-self-start overflow-hidden w-full max-w-lg">
+          <div className="flex flex-row items-center gap-4 justify-self-center md:justify-self-start overflow-hidden w-full max-w-lg">
             {/* Scroll to Top Arrow */}
             <motion.button
               onClick={() => scrollToSection('#top')}
