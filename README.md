@@ -1,6 +1,6 @@
 # The-Whiz.dev | Cyberpunk Portfolio
 
-![The-Whiz Portfolio Preview](public/assets/img/preview.png)
+![The-Whiz Portfolio Preview](public/assets/img/preview.webp)
 
 This is the source code for my personal portfolio website, [the-whiz.dev](https://the-whiz.dev).
 Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects, terminal-inspired stats, and a high-performance modern stack.
@@ -8,10 +8,11 @@ Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects, termin
 ## ✨ Features
 
 -   **Cyberpunk Design**: Neon Cyan & Pink color palette with glassmorphism and glow effects.
--   **Interactive UI**: Smooth animations powered by Framer Motion.
+-   **Interactive UI**: Smooth animations powered by Framer Motion, featuring an ambient mouse-tracking neon spotlight on cards.
+-   **Parallax Grid**: A sleek, slowly breathing geometric background grid highlighting the cyber aesthetic.
 -   **Glitch Typography**: Custom `GlitchText` components for a retro-futuristic feel.
 -   **Responsive Layout**: Fully optimized for Desktop, Tablet, and Mobile.
--   **Performance First**: Engineered with Vite and React for lightning-fast loads.
+-   **Performance First**: Engineered with Vite, React, and deeply optimized WebP assets for lightning-fast loads.
 
 ## 🛠️ Tech Stack
 

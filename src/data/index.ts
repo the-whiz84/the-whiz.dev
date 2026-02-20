@@ -49,7 +49,7 @@ export const profile = {
   location: "Sibiu, Romania",
   locationUrl: "https://maps.app.goo.gl/riqMDNYqAJRaxHdr9",
   resumeUrl: "/files/Resume.pdf",
-  image: "/assets/img/tw-logo.png",
+  image: "/assets/img/tw-logo.webp",
 };
 
 export const socials: SocialLink[] = [
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     title: "Zero-Dawn v3",
     description:
       "The third iteration of my personal portfolio website, featuring a terminal-inspired aesthetic with custom typography (Geist Mono), and electric violet accents.",
-    image: "/assets/img/project-v3.png",
+    image: "/assets/img/project-v3.webp",
     link: "https://github.com/the-whiz84/zero-dawn-v3",
     linkLabel: "View Code",
     tags: ["TypeScript", "React", "Tailwind CSS"],
@@ -246,7 +246,7 @@ export const skills: Skill[] = [
 export const certifications: Certification[] = [
   {
     title: "AWS Certified Solutions Architect – Associate",
-    image: "/assets/img/logos/aws.png",
+    image: "/assets/img/logos/aws.webp",
     description:
       "Validates ability to design and deploy secure, scalable, and cost-effective systems on AWS.",
     link: "https://www.credly.com/badges/c75558c2-7879-40b0-aa16-be2c78d56971/public_url",

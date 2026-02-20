@@ -242,7 +242,7 @@ export default function Home() {
             <span className="relative inline-flex">
               <span className="absolute inset-0 rounded-full blur-lg bg-cyan-500/40 opacity-0 group-hover:opacity-100 transition-opacity" />
               <img
-                src="/assets/img/tw-logo.png"
+                src="/assets/img/tw-logo.webp"
                 alt="Logo"
                 className="relative w-12 h-12 -my-1 rounded-full border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,255,0.35)] group-hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] transition-all"
               />
