@@ -2,7 +2,7 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router'
 import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
-import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin, ArrowUp, Terminal, Clock } from 'lucide-react'
+import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin, ArrowUp, Clock } from 'lucide-react'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
@@ -465,17 +465,19 @@ export default function Home() {
                 <span className="font-orbitron text-xs text-slate-500 ml-2 tracking-widest">system.stats</span>
               </div>
               {/* Stats row */}
-              <div className="grid grid-cols-2 divide-x divide-cyan-500/10">
+              <div className="flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-cyan-500/10">
                 {/* Repos */}
-                <div className="flex flex-col gap-2 p-6">
+                <div className="flex flex-col gap-2 p-6 flex-1">
                   <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
-                    <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Public Repos</span>
+                    <Github className="w-3.5 h-3.5 text-cyan-400" />
+                    <span className="whitespace-nowrap">Public Repos</span>
                   </div>
-                  <span className="font-orbitron text-5xl font-black text-white">
-                    {repoCount !== null ? repoCount : '—'}
-                  </span>
-                  <span className="font-rajdhani text-slate-500 text-base">Active Projects</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-orbitron text-5xl font-black text-white">
+                      {repoCount !== null ? repoCount : '—'}
+                    </span>
+                    <span className="font-rajdhani text-slate-500 text-base whitespace-nowrap">Active Projects</span>
+                  </div>
                   <div className="mt-1 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
@@ -486,20 +488,17 @@ export default function Home() {
                   </div>
                 </div>
                 {/* Uptime */}
-                <div className="flex flex-col gap-2 p-6">
+                <div className="flex flex-col gap-2 p-6 flex-1">
                   <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
                     <Clock className="w-3.5 h-3.5 text-pink-400" />
-                    <span>Uptime</span>
+                    <span className="whitespace-nowrap">Uptime</span>
                   </div>
-                  <span className="font-orbitron text-5xl font-black text-white">
-                    {(() => {
-                      const ms = Date.now() - new Date('2020-10-01').getTime()
-                      const years = Math.floor(ms / (1000 * 60 * 60 * 24 * 365.25))
-                      const months = Math.floor((ms % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44))
-                      return `${years}y ${months}m`
-                    })()}
-                  </span>
-                  <span className="font-rajdhani text-slate-500 text-base">Since Hello World</span>
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-orbitron text-5xl font-black text-white whitespace-nowrap">
+                      {`${((Date.now() - new Date('2020-10-01').getTime()) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1)}y`}
+                    </span>
+                    <span className="font-rajdhani text-slate-500 text-base whitespace-nowrap">Since first project</span>
+                  </div>
                   <div className="mt-1 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
