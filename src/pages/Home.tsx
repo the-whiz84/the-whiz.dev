@@ -37,8 +37,8 @@ function NeonCard({
   }
 
   const glowMap = {
-    cyan: 'shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30',
-    pink: 'shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30',
+    cyan: 'shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] data-[active='true']:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30',
+    pink: 'shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] data-[active='true']:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30',
   }
 
   const spotlightMap = {
@@ -131,6 +131,26 @@ export default function Home() {
       }
     )
 
+    const cardObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.setAttribute('data-active', 'true')
+          } else {
+            entry.target.setAttribute('data-active', 'false')
+          }
+        })
+      },
+      {
+        threshold: 0.5,
+        rootMargin: '0px 0px -15% 0px'
+      }
+    )
+
+    document.querySelectorAll('.group\\/card').forEach((card) => {
+      cardObserver.observe(card)
+    })
+
     document.querySelectorAll('section[id]').forEach((section) => {
       observer.observe(section)
     })
@@ -139,6 +159,7 @@ export default function Home() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
       observer.disconnect()
+      cardObserver.disconnect()
     }
   }, [])
 
@@ -450,11 +471,11 @@ export default function Home() {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-70 group-hover/card:opacity-100 group-hover/card:scale-105 transition-all duration-500"
+                      className="w-full h-full object-cover opacity-70 group-hover/card:opacity-100 group-data-[active='true']/card:opacity-100 group-hover/card:scale-105 group-data-[active='true']/card:scale-105 transition-all duration-500"
                     />
                   </div>
                   
-                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] shrink-0">
+                  <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 group-data-[active='true']/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] shrink-0">
                     {project.title.toUpperCase()}
                   </h3>
                   <p className="font-rajdhani text-slate-400 text-base mb-4 flex-grow">{project.description}</p>
@@ -462,12 +483,12 @@ export default function Home() {
                   <div className="flex flex-col gap-4 mt-auto shrink-0">
                     <div className="flex flex-wrap gap-2">
                       {project.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="font-orbitron text-sm px-2 py-1 border rounded transition-colors border-pink-500/30 text-pink-400 group-hover/card:bg-pink-500/10">
+                        <span key={tag} className="font-orbitron text-sm px-2 py-1 border rounded transition-colors border-pink-500/30 text-pink-400 group-hover/card:bg-pink-500/10 group-data-[active='true']/card:bg-pink-500/10">
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <span className="font-rajdhani flex items-center gap-2 text-sm transition-all text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
+                    <span className="font-rajdhani flex items-center gap-2 text-sm transition-all text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
                       <ExternalLink className="w-4 h-4" /> {project.linkLabel}
                     </span>
                   </div>
@@ -494,8 +515,8 @@ export default function Home() {
               <NeonCard key={i} glowColor="cyan" className="group/card">
                 <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                   <div>
-                    <h3 className="font-orbitron text-lg font-bold text-white transition-all group-hover/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)]">{exp.role.toUpperCase()}</h3>
-                    <p className="font-rajdhani text-cyan-400 text-lg group-hover/card:text-cyan-300 transition-colors">{exp.company}</p>
+                    <h3 className="font-orbitron text-lg font-bold text-white transition-all group-hover/card:text-cyan-400 group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)]">{exp.role.toUpperCase()}</h3>
+                    <p className="font-rajdhani text-cyan-400 text-lg group-hover/card:text-cyan-300 group-data-[active='true']/card:text-cyan-300 transition-colors">{exp.company}</p>
                   </div>
                   <span className="font-orbitron text-sm text-slate-500 border border-slate-700 px-3 py-1 rounded">
                     {exp.period}
@@ -504,8 +525,8 @@ export default function Home() {
                 <ul className="mt-4 space-y-2">
                   {exp.accomplishments.map((acc, j) => (
                     <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2 text-base">
-                      <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0 transition-all text-cyan-500 group-hover/card:text-cyan-300 group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" /> 
-                      <span className="group-hover/card:text-slate-300 transition-colors">{acc}</span>
+                      <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0 transition-all text-cyan-500 group-hover/card:text-cyan-300 group-data-[active='true']/card:text-cyan-300 group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" /> 
+                      <span className="group-hover/card:text-slate-300 group-data-[active='true']/card:text-slate-300 transition-colors">{acc}</span>
                     </li>
                   ))}
                 </ul>
@@ -533,7 +554,7 @@ export default function Home() {
                 glowColor="pink"
                 className="group/card"
               >
-                <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)]">
+                <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 group-data-[active='true']/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)]">
                   {skill.name.toUpperCase()}
                 </h3>
                 <p className="font-rajdhani text-slate-400 text-base">{skill.description}</p>
@@ -560,15 +581,15 @@ export default function Home() {
                 <div className="flex items-start gap-4 mb-4">
                   <img src={cert.image} alt={cert.title} className="w-16 h-16 object-contain rounded bg-slate-800 p-2" />
                   <div>
-                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title}</h3>
-                    <p className="font-rajdhani text-slate-500 text-base mt-1 group-hover/card:text-slate-400 transition-colors">{cert.description}</p>
+                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title}</h3>
+                    <p className="font-rajdhani text-slate-500 text-base mt-1 group-hover/card:text-slate-400 group-data-[active='true']/card:text-slate-400 transition-colors">{cert.description}</p>
                   </div>
                 </div>
                 <a 
                   href={cert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-rajdhani text-base flex items-center gap-1 transition-all mt-auto text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]"
+                  className="font-rajdhani text-base flex items-center gap-1 transition-all mt-auto text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]"
                 >
                   <ExternalLink className="w-3 h-3" /> Verify
                 </a>
@@ -589,7 +610,7 @@ export default function Home() {
               onClick={() => scrollToSection('#top')}
               whileHover={{ y: -3 }}
               whileTap={{ scale: 0.9 }}
-              className="hidden md:flex p-3 border border-pink-500/30 bg-slate-900/80 rounded-full hover:border-pink-400 hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all flex-shrink-0"
+              className="flex p-3 border border-pink-500/30 bg-slate-900/80 rounded-full hover:border-pink-400 hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all flex-shrink-0"
               title="Back to Top"
             >
               <ArrowUp className="w-5 h-5 text-pink-500 group-hover:text-pink-300" />
