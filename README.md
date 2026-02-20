@@ -3,7 +3,7 @@
 ![The-Whiz Portfolio Preview](public/assets/img/preview.webp)
 
 This is the source code for my personal portfolio website, [the-whiz.dev](https://the-whiz.dev).
-Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects, terminal-inspired stats, and a high-performance modern stack.
+Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects and a high-performance modern stack.
 
 ## ✨ Features
 
@@ -63,4 +63,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Built with ❤️ and ☕ by [Radu Chiriac](https://the-whiz.dev) // **ENGINEERED FOR PERFORMANCE**
+Built with ❤️ and ☕ by [Radu Chiriac](https://the-whiz.dev)
