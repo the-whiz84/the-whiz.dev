@@ -454,7 +454,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.6 }}
-            className="w-full max-w-xl mx-auto mt-8"
+            className="w-full max-w-2xl mx-auto mt-16"
           >
             <div className="bg-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-lg overflow-hidden">
               {/* Terminal header bar */}
@@ -467,15 +467,15 @@ export default function Home() {
               {/* Stats row */}
               <div className="grid grid-cols-2 divide-x divide-cyan-500/10">
                 {/* Repos */}
-                <div className="flex flex-col gap-1.5 p-4">
+                <div className="flex flex-col gap-2 p-6">
                   <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
                     <Terminal className="w-3.5 h-3.5 text-cyan-400" />
                     <span>Public Repos</span>
                   </div>
-                  <span className="font-orbitron text-4xl font-black text-white">
+                  <span className="font-orbitron text-5xl font-black text-white">
                     {repoCount !== null ? repoCount : '—'}
                   </span>
-                  <span className="font-rajdhani text-slate-500 text-sm">Active Projects</span>
+                  <span className="font-rajdhani text-slate-500 text-base">Active Projects</span>
                   <div className="mt-1 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
@@ -486,12 +486,12 @@ export default function Home() {
                   </div>
                 </div>
                 {/* Uptime */}
-                <div className="flex flex-col gap-1.5 p-4">
+                <div className="flex flex-col gap-2 p-6">
                   <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
                     <Clock className="w-3.5 h-3.5 text-pink-400" />
                     <span>Uptime</span>
                   </div>
-                  <span className="font-orbitron text-4xl font-black text-white">
+                  <span className="font-orbitron text-5xl font-black text-white">
                     {(() => {
                       const ms = Date.now() - new Date('2020-10-01').getTime()
                       const years = Math.floor(ms / (1000 * 60 * 60 * 24 * 365.25))
@@ -499,7 +499,7 @@ export default function Home() {
                       return `${years}y ${months}m`
                     })()}
                   </span>
-                  <span className="font-rajdhani text-slate-500 text-sm">Since Hello World</span>
+                  <span className="font-rajdhani text-slate-500 text-base">Since Hello World</span>
                   <div className="mt-1 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
