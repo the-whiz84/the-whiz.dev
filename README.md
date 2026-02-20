@@ -11,8 +11,12 @@ Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects and a h
 -   **Interactive UI**: Smooth animations powered by Framer Motion, featuring an ambient mouse-tracking neon spotlight on cards.
 -   **Parallax Grid**: A sleek, slowly breathing geometric background grid highlighting the cyber aesthetic.
 -   **Glitch Typography**: Custom `GlitchText` components for a retro-futuristic feel.
+-   **Live System Stats**: Hero section displays real-time GitHub public repo count (fetched from the GitHub API) and developer uptime since first commit — styled as a terminal widget.
+-   **Neon Section Dividers**: Animated cyan breathing dividers separate each page section.
+-   **Mobile Card Interactions**: Scroll-triggered `IntersectionObserver` activates card hover effects on touch devices, replacing the unavailable hover state.
 -   **Responsive Layout**: Fully optimized for Desktop, Tablet, and Mobile.
 -   **Performance First**: Engineered with Vite, React, and deeply optimized WebP assets for lightning-fast loads.
+-   **Vercel Speed Insights**: Integrated real-user performance monitoring via `@vercel/speed-insights`.
 
 ## 🛠️ Tech Stack
 
@@ -22,6 +26,7 @@ Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects and a h
 -   **Animations**: Motion (Framer Motion)
 -   **Icons**: Lucide React
 -   **Package Manager**: Bun
+-   **Deployment**: Vercel (with Speed Insights)
 
 ## 🚀 Getting Started
 
