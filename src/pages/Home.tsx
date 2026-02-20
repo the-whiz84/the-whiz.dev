@@ -404,8 +404,8 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="top" className="min-h-screen flex items-center justify-center pt-20 px-8 relative">
-        <div className="text-center">
+      <section id="top" className="min-h-screen flex flex-col items-center justify-center pt-20 px-8 relative">
+        <div className="text-center w-full">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -448,71 +448,71 @@ export default function Home() {
               <MapPin className="w-5 h-5" /> SIBIU, ROMANIA
             </a>
           </motion.div>
-        </div>
 
-        {/* Terminal Stats Block */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.6 }}
-          className="w-full max-w-2xl mx-auto mt-16 px-4"
-        >
-          <div className="bg-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-lg overflow-hidden">
-            {/* Terminal header bar */}
-            <div className="flex items-center gap-2 px-4 py-2 border-b border-cyan-500/10 bg-slate-950/60">
-              <div className="w-3 h-3 rounded-full bg-pink-500/70" />
-              <div className="w-3 h-3 rounded-full bg-cyan-500/70" />
-              <div className="w-3 h-3 rounded-full bg-slate-600" />
-              <span className="font-orbitron text-xs text-slate-500 ml-2 tracking-widest">system.stats</span>
-            </div>
-            {/* Stats row */}
-            <div className="grid grid-cols-2 divide-x divide-cyan-500/10">
-              {/* Repos */}
-              <div className="flex flex-col gap-2 p-6">
-                <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
-                  <Terminal className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Public Repos</span>
+          {/* Terminal Stats Block — below CTA buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="w-full max-w-xl mx-auto mt-8"
+          >
+            <div className="bg-slate-900/80 backdrop-blur-sm border border-cyan-500/20 rounded-lg overflow-hidden">
+              {/* Terminal header bar */}
+              <div className="flex items-center gap-2 px-4 py-2 border-b border-cyan-500/10 bg-slate-950/60">
+                <div className="w-2.5 h-2.5 rounded-full bg-pink-500/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-cyan-500/70" />
+                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
+                <span className="font-orbitron text-xs text-slate-500 ml-2 tracking-widest">system.stats</span>
+              </div>
+              {/* Stats row */}
+              <div className="grid grid-cols-2 divide-x divide-cyan-500/10">
+                {/* Repos */}
+                <div className="flex flex-col gap-1.5 p-4">
+                  <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
+                    <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Public Repos</span>
+                  </div>
+                  <span className="font-orbitron text-4xl font-black text-white">
+                    {repoCount !== null ? repoCount : '—'}
+                  </span>
+                  <span className="font-rajdhani text-slate-500 text-sm">Active Projects</span>
+                  <div className="mt-1 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: '100%' }}
+                      transition={{ duration: 1.8, delay: 1.1 }}
+                      className="h-full bg-gradient-to-r from-cyan-500 via-cyan-400 to-transparent shadow-[0_0_8px_rgba(0,255,255,0.6)]"
+                    />
+                  </div>
                 </div>
-                <span className="font-orbitron text-5xl font-black text-white">
-                  {repoCount !== null ? repoCount : '—'}
-                </span>
-                <span className="font-rajdhani text-slate-500 text-sm">Active Projects</span>
-                <div className="mt-2 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: '100%' }}
-                    transition={{ duration: 1.8, delay: 1.1 }}
-                    className="h-full bg-gradient-to-r from-cyan-500 via-cyan-400 to-transparent shadow-[0_0_8px_rgba(0,255,255,0.6)]"
-                  />
+                {/* Uptime */}
+                <div className="flex flex-col gap-1.5 p-4">
+                  <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
+                    <Clock className="w-3.5 h-3.5 text-pink-400" />
+                    <span>Uptime</span>
+                  </div>
+                  <span className="font-orbitron text-4xl font-black text-white">
+                    {(() => {
+                      const ms = Date.now() - new Date('2020-10-01').getTime()
+                      const years = Math.floor(ms / (1000 * 60 * 60 * 24 * 365.25))
+                      const months = Math.floor((ms % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44))
+                      return `${years}y ${months}m`
+                    })()}
+                  </span>
+                  <span className="font-rajdhani text-slate-500 text-sm">Since Hello World</span>
+                  <div className="mt-1 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: '100%' }}
+                      transition={{ duration: 1.8, delay: 1.3 }}
+                      className="h-full bg-gradient-to-r from-pink-500 via-pink-400 to-transparent shadow-[0_0_8px_rgba(255,0,128,0.6)]"
+                    />
+                  </div>
                 </div>
               </div>
-              {/* Uptime */}
-              <div className="flex flex-col gap-2 p-6">
-                <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
-                  <Clock className="w-3.5 h-3.5 text-pink-400" />
-                  <span>Uptime</span>
-                </div>
-                <span className="font-orbitron text-5xl font-black text-white">
-                  {(() => {
-                    const ms = Date.now() - new Date('2020-10-01').getTime()
-                    const years = Math.floor(ms / (1000 * 60 * 60 * 24 * 365.25))
-                    const months = Math.floor((ms % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24 * 30.44))
-                    return `${years}y ${months}m`
-                  })()}
-                </span>
-                <span className="font-rajdhani text-slate-500 text-sm">Since Hello World</span>
-                <div className="mt-2 h-1 w-full rounded-full bg-slate-800 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: '100%' }}
-                    transition={{ duration: 1.8, delay: 1.3 }}
-                    className="h-full bg-gradient-to-r from-pink-500 via-pink-400 to-transparent shadow-[0_0_8px_rgba(255,0,128,0.6)]"
-                  />
-                </div>
-              </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
 
         {/* Animated Section Divider */}
         <div className="absolute bottom-0 left-0 right-0">
