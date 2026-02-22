@@ -5,36 +5,10 @@ import { ArrowLeft } from 'lucide-react'
 export default function Privacy() {
   return (
     <div className="min-h-screen bg-slate-950 text-white font-rajdhani">
-      {/* Styles */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
-        
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
-        .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
-        
-        .neon-cyan { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff; }
-        .neon-pink { color: #ff0080; text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080; }
-        
-        .grid-pattern {
-          background-image: 
-            linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
-          background-size: 50px 50px;
-        }
-        
-        .scanline {
-          background: repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0,0,0,0.1) 2px,
-            rgba(0,0,0,0.1) 4px
-          );
-        }
-      `}</style>
+
 
       {/* Grid Background */}
-      <div className="fixed inset-0 grid-pattern pointer-events-none" />
+      <div className="fixed inset-0 grid-pattern-privacy pointer-events-none" />
       <div className="fixed inset-0 scanline pointer-events-none opacity-50" />
 
       {/* Content */}

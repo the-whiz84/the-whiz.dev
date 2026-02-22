@@ -1,6 +1,107 @@
 @import "tailwindcss";
 
-html, body {
-  background-color: #020617; /* slate-950 */
-  color: white;
+@theme {
+  --color-background: #020617; /* slate-950 */
+  --color-foreground: white;
+
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+
+  --color-pink-300: #f9a8d4;
+  --color-pink-400: #f472b6;
+  --color-pink-500: #ec4899;
+
+  --animate-glitch-1: glitch-1 0.3s infinite;
+  --animate-glitch-2: glitch-2 0.3s infinite;
+  --animate-grid-move: grid-move 20s linear infinite;
+
+  @keyframes glitch-1 {
+    0%, 100% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, 2px); }
+    50% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -2px); }
+  }
+  @keyframes glitch-2 {
+    0%, 100% { clip-path: inset(40% 0 20% 0); transform: translate(2px, -2px); }
+    50% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 2px); }
+  }
+  @keyframes grid-move {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+  }
+}
+
+@utility font-orbitron {
+  font-family: 'Orbitron', sans-serif;
+}
+
+@utility font-rajdhani {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+@utility neon-cyan {
+  color: #00ffff;
+  text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
+}
+
+@utility neon-pink {
+  color: #ff0080;
+  text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080;
+}
+
+@utility glitch-text {
+  position: relative;
+  
+  &:hover::before,
+  &:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover::before {
+    animation: var(--animate-glitch-1);
+    color: #00ffff;
+    z-index: -1;
+  }
+
+  &:hover::after {
+    animation: var(--animate-glitch-2);
+    color: #ff0080;
+    z-index: -2;
+  }
+}
+
+@utility grid-pattern {
+  background-image: 
+    linear-gradient(rgba(0,255,255,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,0.06) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: var(--animate-grid-move);
+}
+
+@utility grid-pattern-privacy {
+  background-image: 
+    linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+@utility scanline {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.1) 2px,
+    rgba(0,0,0,0.1) 4px
+  );
+}
+
+@layer base {
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
 }

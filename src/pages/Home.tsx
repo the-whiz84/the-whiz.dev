@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
 import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin, ArrowUp, Clock } from 'lucide-react'
+import { NeonCard } from '../components/ui/neon-card'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
@@ -16,63 +17,7 @@ const navItems = [
   { label: 'V3', href: 'https://v3.the-whiz.dev', type: 'external' },
 ]
 
-function NeonCard({ 
-  children, 
-  glowColor = 'cyan',
-  className = ''
-}: { 
-  children: React.ReactNode
-  glowColor?: 'cyan' | 'pink'
-  className?: string
-}) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovered, setIsHovered] = useState(false)
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    })
-  }
-
-  const glowMap = {
-    cyan: `shadow-[0_0_30px_rgba(0,255,255,0.3)] hover:shadow-[0_0_50px_rgba(0,255,255,0.5)] max-md:data-[active='true']:shadow-[0_0_50px_rgba(0,255,255,0.5)] border-cyan-500/30`,
-    pink: `shadow-[0_0_30px_rgba(255,0,128,0.3)] hover:shadow-[0_0_50px_rgba(255,0,128,0.5)] max-md:data-[active='true']:shadow-[0_0_50px_rgba(255,0,128,0.5)] border-pink-500/30`,
-  }
-
-  const spotlightMap = {
-    cyan: 'rgba(0, 255, 255, 0.15)',
-    pink: 'rgba(255, 0, 128, 0.15)',
-  }
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -5 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`relative group bg-slate-900/80 backdrop-blur-sm border rounded-lg p-6 transition-all duration-300 overflow-hidden ${glowMap[glowColor]} ${className}`}
-    >
-      {/* Spotlight Effect */}
-      {isHovered && (
-        <div 
-          className="pointer-events-none absolute -inset-px transition duration-300 z-0 opacity-100"
-          style={{
-            background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, ${spotlightMap[glowColor]}, transparent 40%)`
-          }}
-        />
-      )}
-      <div className="relative z-10 h-full flex flex-col">
-        {children}
-      </div>
-    </motion.div>
-  )
-}
 
 function GlitchText({ children, className = '' }: { children: string; className?: string }) {
   return (
@@ -102,20 +47,20 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
-  const [footerTagline, setFooterTagline] = useState('')
   const [repoCount, setRepoCount] = useState<number | null>(null)
+  const [uptime] = useState(() => ((Date.now() - new Date('2020-10-01').getTime()) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1))
   const sectionRatios = useRef<Record<string, number>>({})
 
-  useEffect(() => {
+  const [footerTagline] = useState(() => {
     const taglines = [
-      "No human was overworked. Built by AI Agents.",
-      "Powered by silicon, coffee, and a healthy dose of matrix multiplication.",
-      "Proudly hallucinated by a Large Language Model.",
-      "Synthesized from pure logic. (And a bit of chaos).",
-      "100% Artificial Intelligence. 0% Natural Stupidity."
+      "Built with AI. No humans overworked.",
+      "Powered by silicon and matrix multiplication.",
+      "Proudly hallucinated by an LLM.",
+      "Synthesized from pure logic & a bit of chaos.",
+      "100% Artificial Intelligence."
     ]
-    setFooterTagline(taglines[Math.floor(Math.random() * taglines.length)])
-  }, [])
+    return taglines[Math.floor(Math.random() * taglines.length)]
+  })
 
   /** Fetch public repo count from GitHub API on mount. */
   useEffect(() => {
@@ -177,7 +122,7 @@ export default function Home() {
       observer.observe(section)
     })
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', handleScroll)
       observer.disconnect()
@@ -196,73 +141,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
-      {/* Styles */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
-        
-        .font-orbitron { font-family: 'Orbitron', sans-serif; }
-        .font-rajdhani { font-family: 'Rajdhani', sans-serif; }
-        
-        .neon-cyan { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff; }
-        .neon-pink { color: #ff0080; text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080; }
-        .neon-cyan { color: #00ffff; text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff; }
-        .neon-pink { color: #ff0080; text-shadow: 0 0 10px #ff0080, 0 0 20px #ff0080, 0 0 40px #ff0080; }
-        
-        .glitch-text {
-          position: relative;
-        }
-        .glitch-text:hover::before,
-        .glitch-text:hover::after {
-          content: attr(data-text);
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
-        .glitch-text:hover::before {
-          animation: glitch-1 0.3s infinite;
-          color: #00ffff;
-          z-index: -1;
-        }
-        .glitch-text:hover::after {
-          animation: glitch-2 0.3s infinite;
-          color: #ff0080;
-          z-index: -2;
-        }
-        
-        @keyframes glitch-1 {
-          0%, 100% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, 2px); }
-          50% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -2px); }
-        }
-        @keyframes glitch-2 {
-          0%, 100% { clip-path: inset(40% 0 20% 0); transform: translate(2px, -2px); }
-          50% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 2px); }
-        }
-        
-        .grid-pattern {
-          background-image: 
-            linear-gradient(rgba(0,255,255,0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0,255,255,0.06) 1px, transparent 1px);
-          background-size: 50px 50px;
-          animation: grid-move 20s linear infinite;
-        }
-        
-        @keyframes grid-move {
-          0% { background-position: 0 0; }
-          100% { background-position: 50px 50px; }
-        }
-        
-        .scanline {
-          background: repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0,0,0,0.1) 2px,
-            rgba(0,0,0,0.1) 4px
-          );
-        }
-      `}</style>
+
 
       {/* Grid Background */}
       <div className="fixed inset-0 grid-pattern pointer-events-none" />
@@ -495,7 +374,7 @@ export default function Home() {
                   </div>
                   <div className="flex items-baseline gap-2">
                     <span className="font-orbitron text-5xl font-black text-white whitespace-nowrap">
-                      {`${((Date.now() - new Date('2020-10-01').getTime()) / (1000 * 60 * 60 * 24 * 365.25)).toFixed(1)}y`}
+                      {`${uptime}y`}
                     </span>
                     <span className="font-rajdhani text-slate-500 text-base whitespace-nowrap">Since First Project</span>
                   </div>
