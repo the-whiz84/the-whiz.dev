@@ -282,7 +282,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="top" className="min-h-screen flex flex-col items-center justify-center pt-20 px-8 relative overflow-hidden">
-        <InteractiveGridBackground className="top-24 md:top-28" />
+        <InteractiveGridBackground />
 
         <div className="text-center w-full relative z-10">
           <motion.div
