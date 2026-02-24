@@ -1,9 +1,14 @@
 
+import { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import { SpeedInsights } from "@vercel/speed-insights/react"
-import Home from './pages/Home'
-import Privacy from './pages/Privacy'
-import './index.css'
+
+const Home = lazy(() => import('./pages/Home'))
+const Privacy = lazy(() => import('./pages/Privacy'))
+const SpeedInsights = lazy(() =>
+  import('@vercel/speed-insights/react').then((module) => ({
+    default: module.SpeedInsights,
+  }))
+)
 
 /**
  * Root application shell and route wiring.
@@ -11,11 +16,17 @@ import './index.css'
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/privacy" element={<Privacy />} />
-      </Routes>
-      <SpeedInsights />
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/privacy" element={<Privacy />} />
+        </Routes>
+      </Suspense>
+      {import.meta.env.PROD && (
+        <Suspense fallback={null}>
+          <SpeedInsights />
+        </Suspense>
+      )}
     </BrowserRouter>
   )
 }

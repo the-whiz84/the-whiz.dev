@@ -161,6 +161,9 @@ export default function Home() {
               <img
                 src="/assets/img/tw-logo.webp"
                 alt="Logo"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
                 className="relative w-12 h-12 -my-1 rounded-full border border-cyan-500/40 shadow-[0_0_20px_rgba(0,255,255,0.35)] group-hover:shadow-[0_0_35px_rgba(0,255,255,0.6)] transition-all"
               />
             </span>
@@ -432,6 +435,11 @@ export default function Home() {
                     <img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
+                      width={1280}
+                      height={720}
                       className="w-full h-full object-cover opacity-70 group-hover/card:opacity-100 max-md:group-data-[active='true']/card:opacity-100 group-hover/card:scale-105 max-md:group-data-[active='true']/card:scale-105 transition-all duration-500"
                     />
                   </div>
@@ -546,7 +554,16 @@ export default function Home() {
             {certifications.map((cert) => (
               <NeonCard key={cert.title} glowColor="cyan" className="h-full flex flex-col group/card">
                 <div className="flex items-start gap-4 mb-4">
-                  <img src={cert.image} alt={cert.title} className="w-16 h-16 object-contain rounded bg-slate-800 p-2" />
+                  <img
+                    src={cert.image}
+                    alt={cert.title}
+                    loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
+                    width={64}
+                    height={64}
+                    className="w-16 h-16 object-contain rounded bg-slate-800 p-2"
+                  />
                   <div>
                     <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 max-md:group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title}</h3>
                     <p className="font-rajdhani text-slate-500 text-base mt-1 group-hover/card:text-slate-400 max-md:group-data-[active='true']/card:text-slate-400 transition-colors">{cert.description}</p>
