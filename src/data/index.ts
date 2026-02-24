@@ -109,8 +109,8 @@ export const projects: Project[] = [
     description:
       "ToDo Web App created with Flask, Bootstrap 5 and PostgreSQL database to manage each user's lists. Tasks show due date and can be closed or deleted.",
     image: "/assets/img/organize-it.webp",
-    link: "https://todo.the-whiz.dev",
-    linkLabel: "Go to Website",
+    link: "https://github.com/the-whiz84/Flask-ToDo-App",
+    linkLabel: "View Code",
     tags: ["Python", "Flask", "PostgreSQL", "Bootstrap 5"],
   },
 ];
