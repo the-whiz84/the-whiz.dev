@@ -2,15 +2,12 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router'
 import { ArrowLeft } from 'lucide-react'
 
+/**
+ * Privacy policy page on a plain dark background.
+ */
 export default function Privacy() {
   return (
     <div className="min-h-screen bg-slate-950 text-white font-rajdhani">
-
-
-      {/* Grid Background */}
-      <div className="fixed inset-0 grid-pattern-privacy pointer-events-none" />
-      <div className="fixed inset-0 scanline pointer-events-none opacity-50" />
-
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-20">
         <Link

@@ -14,7 +14,6 @@
 
   --animate-glitch-1: glitch-1 0.3s infinite;
   --animate-glitch-2: glitch-2 0.3s infinite;
-  --animate-grid-move: grid-move 20s linear infinite;
 
   @keyframes glitch-1 {
     0%, 100% { clip-path: inset(20% 0 30% 0); transform: translate(-2px, 2px); }
@@ -23,10 +22,6 @@
   @keyframes glitch-2 {
     0%, 100% { clip-path: inset(40% 0 20% 0); transform: translate(2px, -2px); }
     50% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, 2px); }
-  }
-  @keyframes grid-move {
-    0% { background-position: 0 0; }
-    100% { background-position: 50px 50px; }
   }
 }
 
@@ -72,31 +67,6 @@
     color: #ff0080;
     z-index: -2;
   }
-}
-
-@utility grid-pattern {
-  background-image: 
-    linear-gradient(rgba(0,255,255,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,255,0.06) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: var(--animate-grid-move);
-}
-
-@utility grid-pattern-privacy {
-  background-image: 
-    linear-gradient(rgba(0,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,255,0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-@utility scanline {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.1) 2px,
-    rgba(0,0,0,0.1) 4px
-  );
 }
 
 @layer base {

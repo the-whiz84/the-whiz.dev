@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
 import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin, ArrowUp, Clock } from 'lucide-react'
 import { NeonCard } from '../components/ui/neon-card'
+import { InteractiveGridBackground } from '../components/ui/interactive-grid-background'
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Github, Linkedin, Twitter
@@ -141,12 +142,6 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white overflow-x-hidden">
-
-
-      {/* Grid Background */}
-      <div className="fixed inset-0 grid-pattern pointer-events-none" />
-      <div className="fixed inset-0 scanline pointer-events-none opacity-50" />
-
       {/* Fixed Navbar with Section Highlighting */}
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -283,8 +278,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="top" className="min-h-screen flex flex-col items-center justify-center pt-20 px-8 relative">
-        <div className="text-center w-full">
+      <section id="top" className="min-h-screen flex flex-col items-center justify-center pt-20 px-8 relative overflow-hidden">
+        <InteractiveGridBackground className="top-24 md:top-28" />
+
+        <div className="text-center w-full relative z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -314,6 +311,7 @@ export default function Home() {
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-grid-active-block="true"
               className="font-orbitron px-6 py-3 border-2 border-cyan-500 text-cyan-400 font-bold rounded hover:bg-cyan-500/10 hover:shadow-[0_0_30px_rgba(0,255,255,0.3)] transition-all flex items-center gap-2"
             >
               <Zap className="w-5 h-5" /> DOWNLOAD CV
@@ -322,6 +320,7 @@ export default function Home() {
               href={profile.locationUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-grid-active-block="true"
               className="font-orbitron px-6 py-3 border-2 border-pink-500 text-pink-400 font-bold rounded hover:bg-pink-500/10 hover:shadow-[0_0_30px_rgba(255,0,128,0.3)] transition-all flex items-center gap-2"
             >
               <MapPin className="w-5 h-5" /> SIBIU, ROMANIA

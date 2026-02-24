@@ -1,6 +1,6 @@
 # The-Whiz.dev | Cyberpunk Portfolio
 
-![The-Whiz Portfolio Preview](public/assets/img/preview.webp)
+![The-Whiz Portfolio Preview](public/assets/img/preview-hero-grid.png)
 
 This is the source code for my personal portfolio website, [the-whiz.dev](https://the-whiz.dev).
 Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects and a high-performance modern stack.
@@ -8,8 +8,9 @@ Designed with a **Cyberpunk / Neon Aesthetic**, featuring glitch effects and a h
 ## ✨ Features
 
 -   **Cyberpunk Design**: Neon Cyan & Pink color palette with glassmorphism and glow effects.
--   **Interactive UI**: Smooth animations powered by Framer Motion, featuring an ambient mouse-tracking neon spotlight on cards.
--   **Parallax Grid**: A sleek, slowly breathing geometric background grid highlighting the cyber aesthetic.
+-   **Interactive UI**: Smooth animations powered by Framer Motion, featuring mouse-tracking neon spotlight effects on cards and in the hero grid.
+-   **Hero-Scoped Cyber Grid**: A lightweight interactive SVG grid appears only in the hero section, keeping the rest of the site clean and fast.
+-   **Readable CTA Zone**: Grid activation is disabled over hero CTAs so action buttons remain visually clear.
 -   **Glitch Typography**: Custom `GlitchText` components for a retro-futuristic feel.
 -   **Live System Stats**: Hero section displays real-time GitHub public repo count (fetched from the GitHub API) and developer uptime since first commit — styled as a terminal widget.
 -   **Neon Section Dividers**: Animated cyan breathing dividers separate each page section.
