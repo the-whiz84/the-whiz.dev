@@ -46,23 +46,8 @@ export function InteractiveGridBackground({
   const showSpotlight = isFinePointer && isCursorInside
 
   const isBlockedHoverPoint = (clientX: number, clientY: number) => {
-    const parentElement = containerRef.current?.parentElement
-    if (!parentElement) return false
-
-    const blockedElements = parentElement.querySelectorAll<HTMLElement>(
-      '[data-grid-active-block="true"]'
-    )
-    for (const blockedElement of blockedElements) {
-      const blockedBounds = blockedElement.getBoundingClientRect()
-      const isInBlockedBounds =
-        clientX >= blockedBounds.left &&
-        clientX <= blockedBounds.right &&
-        clientY >= blockedBounds.top &&
-        clientY <= blockedBounds.bottom
-      if (isInBlockedBounds) return true
-    }
-
-    return false
+    const hoveredElement = document.elementFromPoint(clientX, clientY)
+    return Boolean(hoveredElement?.closest('[data-grid-active-block="true"]'))
   }
 
   const columns = Math.max(1, Math.ceil(containerSize.width / GRID_CELL_SIZE))

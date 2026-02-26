@@ -180,6 +180,7 @@ export default function Home() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      data-grid-active-block="true"
                       className="font-orbitron text-sm tracking-wider px-4 py-2 rounded transition-all duration-300 text-cyan-400 hover:text-cyan-300 hover:bg-slate-800/50 neon-cyan"
                     >
                       {item.label.toUpperCase()}
@@ -191,6 +192,7 @@ export default function Home() {
                 <li key={item.label}>
                   <button
                     onClick={() => scrollToSection(item.href)}
+                    data-grid-active-block="true"
                     className={`font-orbitron text-sm tracking-wider px-4 py-2 rounded transition-all duration-300 ${
                       isActive
                         ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 shadow-[0_0_15px_rgba(0,255,255,0.3)]'
@@ -214,6 +216,7 @@ export default function Home() {
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  data-grid-active-block="true"
                   className="p-2 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-all"
                 >
                   <Icon className="w-4 h-4 text-cyan-400" />
