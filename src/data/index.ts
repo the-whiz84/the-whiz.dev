@@ -1,3 +1,5 @@
+import type { SiteIconName } from '../components/ui/site-icon'
+
 export interface Project {
   title: string;
   description: string;
@@ -26,7 +28,7 @@ export interface EducationItem {
 
 export interface Skill {
   name: string;
-  icon: string;
+  icon: SiteIconName;
   description: string;
 }
 
@@ -40,7 +42,7 @@ export interface Certification {
 export interface SocialLink {
   name: string;
   url: string;
-  icon: string;
+  icon: SiteIconName;
 }
 
 export const profile = {
@@ -53,9 +55,9 @@ export const profile = {
 };
 
 export const socials: SocialLink[] = [
-  { name: "GitHub", url: "https://github.com/the-whiz84", icon: "Github" },
-  { name: "LinkedIn", url: "https://www.linkedin.com/in/radu-chiriac/", icon: "Linkedin" },
-  { name: "X", url: "https://x.com/the_whiz84", icon: "Twitter" },
+  { name: "GitHub", url: "https://github.com/the-whiz84", icon: "github" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/radu-chiriac/", icon: "linkedin" },
+  { name: "X", url: "https://x.com/the_whiz84", icon: "x" },
 ];
 
 export const projects: Project[] = [
@@ -196,48 +198,48 @@ export const experience: ExperienceItem[] = [
 export const skills: Skill[] = [
   {
     name: "Linux",
-    icon: "Terminal",
+    icon: "linux",
     description: "Using as the main operating system. Capable of writing bash/shell scripts.",
   },
   {
     name: "Python",
-    icon: "Code",
+    icon: "python",
     description:
       "Learned Python as my first programming language. I have used it in various projects, including web development, data analysis and automation.",
   },
   {
     name: "Identity and Access Management",
-    icon: "ShieldCheck",
+    icon: "identity",
     description:
       "Resolved support tickets for Okta clients that integrated their on-prem or cloud applications with SSO, MFA and Lifecycle Management.",
   },
   {
     name: "Technical Support",
-    icon: "Headset",
+    icon: "support",
     description:
       "Highly experienced in offering technical support, both hardware and software, while working for Lenovo, Dell and Okta.",
   },
   {
     name: "Git and GitHub",
-    icon: "GitBranch",
+    icon: "git",
     description:
       "Experienced with git-based version control. I use Github for all my projects but have experience with Gitlab also.",
   },
   {
     name: "Puppet",
-    icon: "GitMerge",
+    icon: "automation",
     description:
       "I use it in my daily work for configuration management and automatic updates of RHEL servers.",
   },
   {
     name: "Cloud Computing",
-    icon: "Cloud",
+    icon: "cloud",
     description:
       "Worked with features and technologies from the major cloud providers such as GCP, AWS and Azure.",
   },
   {
     name: "Web Development",
-    icon: "Globe",
+    icon: "web",
     description:
       "During the Python course, I was introduced to and learned Flask, Bootstrap, HTML and CSS.",
   },

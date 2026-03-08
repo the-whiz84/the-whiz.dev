@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Link } from 'react-router'
-import { ArrowLeft } from 'lucide-react'
+import { SiteIcon } from '../components/ui/site-icon'
 
 /**
  * Privacy policy page on a plain dark background.
@@ -14,7 +14,7 @@ export default function Privacy() {
           to="/"
           className="inline-flex items-center gap-2 text-slate-500 hover:text-cyan-400 transition-colors mb-12"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <SiteIcon name="back" className="w-4 h-4" />
           <span className="font-orbitron text-xs tracking-widest">BACK</span>
         </Link>
 
