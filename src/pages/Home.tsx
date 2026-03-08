@@ -616,7 +616,7 @@ export default function Home() {
                     className="w-16 h-16 object-contain rounded bg-slate-800 p-2"
                   />
                   <div>
-                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 max-md:group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title}</h3>
+                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 max-md:group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title.toUpperCase()}</h3>
                     <p className="font-rajdhani text-slate-500 text-base mt-1 group-hover/card:text-slate-400 max-md:group-data-[active='true']/card:text-slate-400 transition-colors">{cert.description}</p>
                   </div>
                 </div>
