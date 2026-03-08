@@ -2,13 +2,10 @@ import { motion } from 'motion/react'
 import { Link } from 'react-router'
 import { useState, useEffect, useRef } from 'react'
 import { profile, projects, skills, experience, socials, certifications } from '../data'
-import { Github, Linkedin, Twitter, ArrowRight, ExternalLink, Zap, Menu, X, MapPin, ArrowUp, Clock } from 'lucide-react'
 import { NeonCard } from '../components/ui/neon-card'
 import { InteractiveGridBackground } from '../components/ui/interactive-grid-background'
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Github, Linkedin, Twitter
-}
+import { ShimmerButton } from '../components/ui/shimmer-button'
+import { SiteIcon } from '../components/ui/site-icon'
 
 const navItems = [
   { label: 'Projects', href: '#projects', type: 'section' },
@@ -17,8 +14,6 @@ const navItems = [
   { label: 'Certifications', href: '#certifications', type: 'section' },
   { label: 'V3', href: 'https://v3.the-whiz.dev', type: 'external' },
 ]
-
-
 
 function GlitchText({ children, className = '' }: { children: string; className?: string }) {
   return (
@@ -38,6 +33,40 @@ function SectionDivider() {
     >
       <div className="absolute inset-0 blur-sm bg-gradient-to-r from-transparent via-cyan-400 to-transparent" />
     </motion.div>
+  )
+}
+
+function SocialLinkControl({
+  href,
+  label,
+  icon,
+  compact = false,
+}: {
+  href: string
+  label: string
+  icon: React.ReactNode
+  compact?: boolean
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      title={label}
+      data-grid-active-block="true"
+      className={compact
+        ? 'group inline-flex items-center justify-center rounded border border-cyan-500/30 p-2.5 transition-all hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.3)]'
+        : 'group relative inline-flex items-center justify-center rounded border border-cyan-500/30 p-3 transition-all hover:border-cyan-400 hover:shadow-[0_0_18px_rgba(0,255,255,0.32)]'
+      }
+    >
+      {icon}
+      {!compact ? (
+        <span className="pointer-events-none absolute left-1/2 top-full mt-2 hidden -translate-x-1/2 whitespace-nowrap rounded border border-cyan-500/30 bg-slate-950/95 px-2 py-1 font-orbitron text-[10px] uppercase tracking-[0.26em] text-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.12)] group-hover:block group-focus-visible:block">
+          {label}
+        </span>
+      ) : null}
+    </a>
   )
 }
 
@@ -209,19 +238,19 @@ export default function Home() {
           {/* Social Icons */}
           <div className="hidden md:flex gap-3">
             {socials.map((s) => {
-              const Icon = iconMap[s.icon]
-              return Icon ? (
-                <a
+              return (
+                <SocialLinkControl
                   key={s.name}
                   href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  data-grid-active-block="true"
-                  className="p-2 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.3)] transition-all"
-                >
-                  <Icon className="w-4 h-4 text-cyan-400" />
-                </a>
-              ) : null
+                  label={s.name}
+                  icon={
+                    <SiteIcon
+                      name={s.icon}
+                      className="h-6 w-6 text-cyan-400 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.65)]"
+                    />
+                  }
+                />
+              )
             })}
           </div>
 
@@ -231,7 +260,10 @@ export default function Home() {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 border border-cyan-500/30 rounded"
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5 text-cyan-400" /> : <Menu className="w-5 h-5 text-cyan-400" />}
+            <SiteIcon
+              name={isMobileMenuOpen ? 'close' : 'menu'}
+              className="w-5 h-5 text-cyan-400"
+            />
           </button>
         </div>
 
@@ -271,12 +303,20 @@ export default function Home() {
             })}
             <div className="flex gap-4 pt-4">
               {socials.map((s) => {
-                const Icon = iconMap[s.icon]
-                return Icon ? (
-                  <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer">
-                    <Icon className="w-5 h-5 text-cyan-400" />
-                  </a>
-                ) : null
+                return (
+                  <SocialLinkControl
+                    key={s.name}
+                    href={s.url}
+                    label={s.name}
+                    compact
+                    icon={
+                      <SiteIcon
+                        name={s.icon}
+                        className="h-6 w-6 text-cyan-400 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.65)]"
+                      />
+                    }
+                  />
+                )
               })}
             </div>
           </motion.div>
@@ -313,24 +353,27 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 0.6 }}
             className="flex flex-wrap justify-center gap-4 mt-12"
           >
-            <a 
+            <ShimmerButton
               href={profile.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
               data-grid-active-block="true"
-              className="font-orbitron px-6 py-3 border-2 border-cyan-500 text-cyan-400 font-bold rounded hover:bg-cyan-500/10 hover:shadow-[0_0_30px_rgba(0,255,255,0.3)] transition-all flex items-center gap-2"
+              className="tracking-wide"
             >
-              <Zap className="w-5 h-5" /> DOWNLOAD CV
-            </a>
-            <a 
+              <SiteIcon name="download" className="w-5 h-5" />
+              DOWNLOAD CV
+            </ShimmerButton>
+            <ShimmerButton
               href={profile.locationUrl}
               target="_blank"
               rel="noopener noreferrer"
+              tone="pink"
               data-grid-active-block="true"
-              className="font-orbitron px-6 py-3 border-2 border-pink-500 text-pink-400 font-bold rounded hover:bg-pink-500/10 hover:shadow-[0_0_30px_rgba(255,0,128,0.3)] transition-all flex items-center gap-2"
+              className="tracking-wide"
             >
-              <MapPin className="w-5 h-5" /> SIBIU, ROMANIA
-            </a>
+              <SiteIcon name="location" className="w-5 h-5" />
+              SIBIU, ROMANIA
+            </ShimmerButton>
           </motion.div>
 
           {/* Terminal Stats Block — below CTA buttons */}
@@ -353,7 +396,7 @@ export default function Home() {
                 {/* Repos */}
                 <div className="flex flex-col gap-2 p-6 flex-1">
                   <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
-                    <Github className="w-3.5 h-3.5 text-cyan-400" />
+                    <SiteIcon name="repo" className="w-3.5 h-3.5 text-cyan-400" />
                     <span className="whitespace-nowrap">Public Repos</span>
                   </div>
                   <div className="flex items-baseline gap-2">
@@ -374,7 +417,7 @@ export default function Home() {
                 {/* Uptime */}
                 <div className="flex flex-col gap-2 p-6 flex-1">
                   <div className="flex items-center gap-2 font-orbitron text-xs text-slate-500 tracking-widest uppercase">
-                    <Clock className="w-3.5 h-3.5 text-pink-400" />
+                    <SiteIcon name="uptime" className="w-3.5 h-3.5 text-pink-400" />
                     <span className="whitespace-nowrap">Uptime</span>
                   </div>
                   <div className="flex items-baseline gap-2">
@@ -461,7 +504,7 @@ export default function Home() {
                       ))}
                     </div>
                     <span className="font-rajdhani flex items-center gap-2 text-sm transition-all text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
-                      <ExternalLink className="w-4 h-4" /> {project.linkLabel}
+                      <SiteIcon name="external" className="w-4 h-4" /> {project.linkLabel}
                     </span>
                   </div>
                 </NeonCard>
@@ -499,7 +542,7 @@ export default function Home() {
                 <ul className="mt-4 space-y-2">
                   {exp.accomplishments.map((acc, j) => (
                     <li key={j} className="font-rajdhani text-slate-400 flex items-start gap-2 text-base">
-                      <ArrowRight className="w-4 h-4 mt-0.5 flex-shrink-0 transition-all text-cyan-500 group-hover/card:text-cyan-300 max-md:group-data-[active='true']/card:text-cyan-300 group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" /> 
+                      <SiteIcon name="bullet" className="w-4 h-4 mt-0.5 flex-shrink-0 transition-all text-cyan-500 group-hover/card:text-cyan-300 max-md:group-data-[active='true']/card:text-cyan-300 group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" /> 
                       <span className="group-hover/card:text-slate-300 max-md:group-data-[active='true']/card:text-slate-300 transition-colors">{acc}</span>
                     </li>
                   ))}
@@ -528,12 +571,17 @@ export default function Home() {
               <NeonCard 
                 key={skill.name} 
                 glowColor="pink"
-                className="group/card"
+                className="group/card h-full"
               >
-                <h3 className="font-orbitron text-lg font-bold text-white mb-2 transition-all group-hover/card:text-pink-400 max-md:group-data-[active='true']/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)]">
-                  {skill.name.toUpperCase()}
-                </h3>
-                <p className="font-rajdhani text-slate-400 text-base">{skill.description}</p>
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-pink-500/25 bg-slate-900/90 text-pink-300 transition-all group-hover/card:border-pink-400/60 group-hover/card:text-pink-200">
+                    <SiteIcon name={skill.icon} className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-orbitron text-lg font-bold text-white transition-all group-hover/card:text-pink-400 max-md:group-data-[active='true']/card:text-pink-400 group-hover/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(255,0,128,0.7)]">
+                    {skill.name.toUpperCase()}
+                  </h3>
+                </div>
+                <p className="font-rajdhani text-base text-slate-400">{skill.description}</p>
               </NeonCard>
             ))}
           </div>
@@ -568,7 +616,7 @@ export default function Home() {
                     className="w-16 h-16 object-contain rounded bg-slate-800 p-2"
                   />
                   <div>
-                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 max-md:group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title}</h3>
+                    <h3 className="font-orbitron text-lg font-bold text-white group-hover/card:text-cyan-400 max-md:group-data-[active='true']/card:text-cyan-400 group-hover/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_8px_rgba(0,255,255,0.7)] transition-all">{cert.title.toUpperCase()}</h3>
                     <p className="font-rajdhani text-slate-500 text-base mt-1 group-hover/card:text-slate-400 max-md:group-data-[active='true']/card:text-slate-400 transition-colors">{cert.description}</p>
                   </div>
                 </div>
@@ -578,7 +626,7 @@ export default function Home() {
                   rel="noopener noreferrer"
                   className="font-rajdhani text-base flex items-center gap-1 transition-all mt-auto text-cyan-400 hover:neon-cyan group-hover/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)] max-md:group-data-[active='true']/card:drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]"
                 >
-                  <ExternalLink className="w-3 h-3" /> Verify
+                  <SiteIcon name="external" className="w-3 h-3" /> Verify
                 </a>
               </NeonCard>
             ))}
@@ -599,8 +647,9 @@ export default function Home() {
               whileTap={{ scale: 0.9 }}
               className="flex p-3 border border-pink-500/30 bg-slate-900/80 rounded-full hover:border-pink-400 hover:shadow-[0_0_15px_rgba(255,0,128,0.3)] transition-all flex-shrink-0"
               title="Back to Top"
+              aria-label="Back to top"
             >
-              <ArrowUp className="w-5 h-5 text-pink-500 group-hover:text-pink-300" />
+              <SiteIcon name="top" className="w-5 h-5 text-pink-500" />
             </motion.button>
 
             <div className="flex flex-col items-center md:items-start text-center md:text-left select-none pointer-events-none min-w-0">
@@ -632,18 +681,19 @@ export default function Home() {
           <div className="flex items-center gap-4 justify-self-center md:justify-self-center">
             <div className="flex gap-3">
               {socials.map((s) => {
-                const Icon = iconMap[s.icon]
-                return Icon ? (
-                  <a 
+                return (
+                  <SocialLinkControl
                     key={s.name} 
                     href={s.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="p-3 border border-cyan-500/30 rounded hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(0,255,255,0.3)] transition-all"
-                  >
-                    <Icon className="w-5 h-5 text-cyan-400" />
-                  </a>
-                ) : null
+                    label={s.name}
+                    icon={
+                      <SiteIcon
+                        name={s.icon}
+                        className="h-5 w-5 text-cyan-400 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.65)]"
+                      />
+                    }
+                  />
+                )
               })}
             </div>
           </div>

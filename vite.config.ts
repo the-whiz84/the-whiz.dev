@@ -11,7 +11,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router'],
-          'icons': ['lucide-react'],
         },
       },
     },
