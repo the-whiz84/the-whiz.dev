@@ -53,7 +53,6 @@ function SocialLinkControl({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      title={label}
       data-grid-active-block="true"
       className={compact
         ? 'group inline-flex items-center justify-center rounded border border-cyan-500/30 p-2.5 transition-all hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.3)]'
