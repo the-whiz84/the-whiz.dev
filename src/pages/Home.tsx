@@ -56,12 +56,12 @@ function SocialLinkControl({
       data-grid-active-block="true"
       className={compact
         ? 'group inline-flex items-center justify-center rounded border border-cyan-500/30 p-2.5 transition-all hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.3)]'
-        : 'group relative inline-flex items-center justify-center rounded border border-cyan-500/30 p-3 transition-all hover:border-cyan-400 hover:shadow-[0_0_18px_rgba(0,255,255,0.32)]'
+        : 'group relative inline-flex items-center justify-center rounded border border-cyan-500/30 p-2 transition-all hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(0,255,255,0.3)]'
       }
     >
       {icon}
       {!compact ? (
-        <span className="pointer-events-none absolute left-1/2 top-full mt-2 hidden -translate-x-1/2 whitespace-nowrap rounded border border-cyan-500/30 bg-slate-950/95 px-2 py-1 font-orbitron text-[10px] uppercase tracking-[0.26em] text-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.12)] group-hover:block group-focus-visible:block">
+        <span className="pointer-events-none absolute left-1/2 top-full mt-2 hidden -translate-x-1/2 whitespace-nowrap font-orbitron text-[9px] uppercase tracking-[0.22em] text-cyan-300 group-hover:block group-focus-visible:block">
           {label}
         </span>
       ) : null}
@@ -245,7 +245,7 @@ export default function Home() {
                   icon={
                     <SiteIcon
                       name={s.icon}
-                      className="h-6 w-6 text-cyan-400 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.65)]"
+                      className="h-4 w-4 text-cyan-400 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.65)]"
                     />
                   }
                 />
@@ -665,7 +665,7 @@ export default function Home() {
           </div>
 
           {/* Center: Copyright & Links - Aligned Center */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 font-orbitron text-xs justify-self-center whitespace-nowrap">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 font-orbitron text-sm md:text-base justify-self-center whitespace-nowrap">
             <span className="neon-cyan">© {new Date().getFullYear()} {profile.name.toUpperCase()}</span>
             <span className="hidden md:inline text-pink-500">|</span>
             <Link 
@@ -688,7 +688,7 @@ export default function Home() {
                     icon={
                       <SiteIcon
                         name={s.icon}
-                        className="h-5 w-5 text-cyan-400 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.65)]"
+                        className="h-4 w-4 text-cyan-400 group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(34,211,238,0.65)]"
                       />
                     }
                   />
