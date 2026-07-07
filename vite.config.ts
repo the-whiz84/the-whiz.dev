@@ -7,10 +7,15 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   build: {
     // Split vendor chunks for better caching
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router'],
+        codeSplitting: {
+          groups: [
+            {
+              name: 'react-vendor',
+              test: /node_modules\/(?:react|react-dom|react-router)\//,
+            },
+          ],
         },
       },
     },
