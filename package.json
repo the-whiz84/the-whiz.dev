@@ -14,7 +14,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "motion": "^12.40.0",
+    "motion": "^13.1.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router": "^8.3.0",
@@ -31,7 +31,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.5",
     "globals": "^17.3.0",
-    "typescript": "~6.0.3",
+    "typescript": "~7.0.2",
     "typescript-eslint": "^8.56.1",
     "vite": "^8.1.5"
   }
