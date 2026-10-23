@@ -19,8 +19,8 @@ export default defineConfig({
         },
       },
     },
-    // Enable minification
-    minify: 'esbuild',
+    // Vite 8 uses Oxc by default; keep the build on its bundled minifier.
+    minify: 'oxc',
     // Target modern browsers
     target: 'esnext',
     // Enable CSS code splitting
