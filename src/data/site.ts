@@ -16,7 +16,6 @@ export type CommandItem =
   | { id: string; label: string; hint: string; kind: 'route'; value: `/${string}` }
   | { id: string; label: string; hint: string; kind: 'mailto'; value: `mailto:${string}` }
   | { id: string; label: string; hint: string; kind: 'external'; value: string }
-  | { id: string; label: string; hint: string; kind: 'copy'; value: string }
   | { id: string; label: string; hint: string; kind: 'theme' };
 
 export interface StackLayer {
@@ -107,13 +106,6 @@ export const commandItems: CommandItem[] = [
     hint: '✉',
     kind: 'mailto',
     value: `mailto:${profile.email}`,
-  },
-  {
-    id: 'copy',
-    label: `Copy email — ${profile.email}`,
-    hint: '↵',
-    kind: 'copy',
-    value: profile.email,
   },
   {
     id: 'resume',

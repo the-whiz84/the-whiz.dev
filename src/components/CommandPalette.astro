@@ -61,15 +61,6 @@ import { commandItems } from '../data/site';
   );
   let activeIndex = 0;
 
-  async function copyText(text: string): Promise<boolean> {
-    try {
-      await navigator.clipboard.writeText(text);
-      return true;
-    } catch {
-      return false;
-    }
-  }
-
   function visibleItems(): HTMLButtonElement[] {
     return allItems.filter((item) => !item.hidden);
   }
@@ -103,10 +94,6 @@ import { commandItems } from '../data/site';
         value.startsWith('https://')
       ) {
         window.open(value, '_blank', 'noopener,noreferrer');
-      }
-    } else if (kind === 'copy') {
-      if (value) {
-        void copyText(value);
       }
     } else if (kind === 'theme') {
       document.dispatchEvent(new CustomEvent('tw:toggle-theme'));
