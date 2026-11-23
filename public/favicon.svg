@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none">
+  <style>
+    .bg { fill: #F4F2EC; }
+    .ink { fill: #141413; }
+    .signal { fill: #D94E1F; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #121315; }
+      .ink { fill: #ECEAE3; }
+      .signal { fill: #F06434; }
+    }
+  </style>
+  <rect class="bg" width="36" height="36" rx="6" />
+  <g transform="translate(0 4)">
+    <rect class="ink" x="2" y="5" width="15" height="3.2" />
+    <rect class="ink" x="7.9" y="8" width="3.2" height="15" />
+    <polygon class="ink" points="15.2,5 18.4,5 21.6,23 18.4,23" />
+    <polygon class="ink" points="18.4,23 21.6,23 25.4,11.5 22.4,11.5" />
+    <polygon class="ink" points="22.4,11.5 25.4,11.5 29.4,23 26.2,23" />
+    <polygon class="signal" points="26.2,23 29.4,23 34.2,5 31,5" />
+  </g>
+</svg>

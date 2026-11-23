@@ -1,0 +1,91 @@
+---
+import { stackLayers } from '../data/site';
+---
+
+<section class="w-full border-b border-[var(--rule)]" aria-labelledby="stack-heading">
+  <div class="mx-auto w-full max-w-[1360px] px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
+    <div class="mb-4 flex flex-wrap items-baseline justify-between gap-3">
+      <h2
+        id="stack-heading"
+        class="m-0 font-mono text-[13px] uppercase tracking-[0.08em] text-[var(--ink-muted)]"
+      >
+        <strong class="mr-2 font-semibold text-[var(--signal)]">02</strong>Infrastructure Stack
+      </h2>
+      <span class="font-mono text-[13px] text-[var(--ink-muted)]">Select a layer to inspect</span>
+    </div>
+
+    <div data-stack-schematic>
+      <div
+        role="tablist"
+        aria-label="Infrastructure layers"
+        class="grid grid-cols-2 border border-[var(--rule)] sm:grid-cols-5"
+      >
+        {
+          stackLayers.map((layer, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`stack-tab-${layer.id}`}
+              aria-controls={`stack-panel-${layer.id}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              tabindex={index === 0 ? 0 : -1}
+              data-stack-tab={index}
+              class:list={[
+                'relative cursor-pointer border-0 border-b border-r border-[var(--rule)] px-4 py-3.5 text-left font-mono text-[13px] leading-[1.35] transition-colors sm:border-b-0 sm:last:border-r-0 [&:nth-child(2n)]:border-r-0 sm:[&:nth-child(2n)]:border-r [&:last-child]:col-span-2 sm:[&:last-child]:col-span-1 [&:last-child]:border-b-0 [&:last-child]:border-r-0',
+                index === 0
+                  ? 'bg-[var(--paper-alt)] font-semibold text-[var(--ink)]'
+                  : 'bg-transparent text-[var(--ink-muted)] hover:bg-[var(--paper-alt)] hover:text-[var(--ink)]',
+              ]}
+            >
+              <span
+                data-tab-bar
+                aria-hidden="true"
+                class:list={[
+                  'absolute left-0 right-0 top-0 h-[2.5px] bg-[var(--signal)]',
+                  index === 0 ? 'block' : 'hidden',
+                ]}
+              />
+              <span class="mb-1 block text-xs text-[var(--signal)]">{layer.code}</span>
+              <span>{layer.label}</span>
+            </button>
+          ))
+        }
+      </div>
+
+      {
+        stackLayers.map((layer, index) => (
+          <div
+            role="tabpanel"
+            id={`stack-panel-${layer.id}`}
+            aria-labelledby={`stack-tab-${layer.id}`}
+            data-stack-panel={index}
+            hidden={index !== 0}
+            class="grid grid-cols-1 items-start gap-6 border border-t-0 border-[var(--rule)] bg-[var(--paper-alt)] px-5 py-5 sm:grid-cols-[1.55fr_1fr] sm:px-6 sm:py-6"
+          >
+            <div>
+              <h3 class="m-0 mb-2 text-[18px] font-semibold tracking-[-0.01em] text-[var(--ink)] sm:text-[20px]">
+                {layer.title}
+              </h3>
+              <p class="m-0 text-[15px] leading-[1.6] text-[var(--ink-muted)] sm:text-[16px]">
+                {layer.description}
+              </p>
+            </div>
+            <div class="flex flex-col gap-2.5 border-t border-[var(--rule)] pt-4 font-mono sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+              <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+                Stack &amp; Proof
+              </span>
+              <div class="flex flex-wrap gap-1.5">
+                {layer.tags.map((tag) => (
+                  <span class="bg-[var(--badge-bg)] px-2.5 py-1 text-xs text-[var(--ink)]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <span class="text-[13px] text-[var(--ink-muted)]">{layer.scope}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,159 @@
+---
+import type { GitHubSnapshot } from '../lib/github';
+
+interface Props {
+  snapshot: GitHubSnapshot;
+  isLoading?: boolean;
+}
+
+const { snapshot, isLoading = false } = Astro.props;
+const statusText = isLoading
+  ? `Syncing · github.com/${snapshot.username}`
+  : snapshot.isFallback
+    ? `Snapshot · github.com/${snapshot.username}`
+    : `Live · github.com/${snapshot.username}`;
+---
+
+<section class="w-full border-b border-[var(--rule)]" aria-labelledby="github-heading">
+  <div class="mx-auto w-full max-w-[1360px] px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
+    <div class="mb-4 flex flex-wrap items-baseline justify-between gap-3">
+      <h2
+        id="github-heading"
+        class="m-0 font-mono text-[13px] uppercase tracking-[0.08em] text-[var(--ink-muted)]"
+      >
+        <strong class="mr-2 font-semibold text-[var(--signal)]">01</strong>GitHub Activity · @{snapshot.username}
+      </h2>
+      <a
+        href={snapshot.profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 font-mono text-[13px] text-[var(--ink-muted)] no-underline hover:text-[var(--signal)]"
+      >
+        <span
+          class:list={[
+            'inline-block h-2 w-2 rounded-full bg-[var(--signal)]',
+            isLoading ? 'animate-pulse' : '',
+          ]}
+          aria-hidden="true"
+        ></span>
+        <span>{statusText}</span>
+      </a>
+    </div>
+
+    <div class="border border-[var(--rule)] bg-[var(--paper-alt)]">
+      <div class="grid grid-cols-1 border-b border-[var(--rule)] font-mono sm:grid-cols-[0.85fr_1.35fr_1fr]">
+        <div
+          class="flex flex-col gap-1.5 border-b border-[var(--rule)] px-5 py-4 sm:border-b-0 sm:border-r"
+        >
+          <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+            Public Repos
+          </span>
+          <span class="font-sans text-[30px] font-bold leading-[1.1] tracking-[-0.02em] text-[var(--ink)] sm:text-[34px]">
+            {snapshot.publicReposCount}
+          </span>
+          <a
+            href={`${snapshot.profileUrl}?tab=repositories`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[13px] text-[var(--ink-muted)] no-underline hover:text-[var(--signal)]"
+          >
+            @{snapshot.username} ↗
+          </a>
+        </div>
+
+        <div
+          class="flex flex-col gap-1.5 border-b border-[var(--rule)] px-5 py-4 sm:border-b-0 sm:border-r"
+        >
+          <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+            Latest Updated Repo
+          </span>
+          <a
+            href={snapshot.latestRepo.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="truncate font-sans text-[20px] font-bold leading-[1.25] tracking-[-0.02em] text-[var(--ink)] no-underline hover:text-[var(--signal)] sm:text-[24px]"
+          >
+            {snapshot.latestRepo.name} ↗
+          </a>
+          <span class="text-[13px] text-[var(--ink-muted)]">
+            <span class="font-medium text-[var(--signal)]">{snapshot.latestRepo.language}</span> · pushed{' '}
+            {snapshot.latestRepo.pushedLabel}
+          </span>
+        </div>
+
+        <div class="flex flex-col gap-1.5 px-5 py-4">
+          <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+            12-Month Activity
+          </span>
+          <span class="font-sans text-[30px] font-bold leading-[1.1] tracking-[-0.02em] text-[var(--ink)] sm:text-[34px]">
+            {snapshot.yearlyContributions}
+          </span>
+          <span class="text-[13px] text-[var(--ink-muted)]">contributions · 52-week trace</span>
+        </div>
+      </div>
+
+      <div class="px-5 pb-3.5 pt-4">
+        <div class="mb-2.5 flex flex-wrap items-baseline justify-between gap-2 font-mono text-xs sm:text-[13px]">
+          <span class="uppercase tracking-[0.06em] text-[var(--ink-muted)]">
+            52-Week Activity Trace ({snapshot.dateRangeLabel})
+          </span>
+          <span
+            data-pulse-readout
+            class="font-medium text-[var(--ink)]"
+            aria-live="polite"
+          >
+            Hover a week bar to inspect
+          </span>
+        </div>
+
+        <div
+          data-pulse-bars
+          class="grid h-14 grid-cols-[repeat(52,minmax(0,1fr))] items-end gap-1 border-b border-[var(--rule)] pb-0.5 sm:h-16"
+          role="img"
+          aria-label={`52-week GitHub contribution trace totaling ${snapshot.yearlyContributions} contributions`}
+        >
+          {
+            snapshot.weeks.map((w) => (
+              <button
+                type="button"
+                data-pulse-bar
+                data-label={w.title}
+                title={w.title}
+                aria-label={w.title}
+                style={`height: ${w.heightPct}%; opacity: ${w.score > 0 ? w.opacity : 1};`}
+                class:list={[
+                  'w-full cursor-crosshair rounded-t-[1px] border-0 p-0 transition-opacity hover:opacity-75 focus-visible:opacity-100',
+                  w.score > 0 ? 'bg-[var(--signal)]' : 'bg-[var(--bar-idle)]',
+                ]}
+              />
+            ))
+          }
+        </div>
+
+        <div class="mt-2 flex justify-between font-mono text-xs text-[var(--ink-muted)]">
+          {snapshot.monthLabels.map((m) => <span>{m}</span>)}
+        </div>
+      </div>
+
+      <div
+        class="grid grid-cols-1 border-t border-[var(--rule)] bg-[var(--paper)] font-mono text-[13px] text-[var(--ink-muted)] sm:grid-cols-3"
+      >
+        {
+          snapshot.recentRepos.map((repo) => (
+            <a
+              href={repo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-baseline justify-between gap-3 border-b border-[var(--rule)] px-5 py-3 text-[var(--ink-muted)] no-underline transition-colors last:border-b-0 hover:bg-[var(--paper-alt)] sm:border-b-0 sm:border-r sm:last:border-r-0"
+            >
+              <strong class="truncate font-semibold text-[var(--ink)]">{repo.name}</strong>
+              <span class="shrink-0 text-xs sm:text-[13px]">
+                {repo.shortLang} · {repo.pushedLabel}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

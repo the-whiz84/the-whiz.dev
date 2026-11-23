@@ -1,0 +1,121 @@
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/ibm-plex-mono/600.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Space Grotesk Variable', 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root,
+html[data-theme='light'] {
+  --paper: #f4f2ec;
+  --paper-alt: #ece8df;
+  --ink: #141413;
+  --ink-muted: #5a5750;
+  --rule: #d3cec2;
+  --rule-strong: #141413;
+  --signal: #d94e1f;
+  --signal-soft: rgba(217, 78, 31, 0.11);
+  --bar-idle: #d6d1c5;
+  --badge-bg: #e7e3d9;
+}
+
+html[data-theme='dark'] {
+  --paper: #121315;
+  --paper-alt: #181a1e;
+  --ink: #eceae3;
+  --ink-muted: #949188;
+  --rule: #2a2d33;
+  --rule-strong: #eceae3;
+  --signal: #f06434;
+  --signal-soft: rgba(240, 100, 52, 0.15);
+  --bar-idle: #2a2e35;
+  --badge-bg: #1e2126;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    --paper: #121315;
+    --paper-alt: #181a1e;
+    --ink: #eceae3;
+    --ink-muted: #949188;
+    --rule: #2a2d33;
+    --rule-strong: #eceae3;
+    --signal: #f06434;
+    --signal-soft: rgba(240, 100, 52, 0.15);
+    --bar-idle: #2a2e35;
+    --badge-bg: #1e2126;
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+html {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 2px;
+}
+
+[data-stack-tab]:focus-visible,
+[data-pulse-bar]:focus-visible {
+  outline-offset: -2px;
+}
+
+dialog.cmd-dialog {
+  margin: 12vh auto auto;
+  padding: 0;
+  width: min(540px, calc(100vw - 2rem));
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background-color: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.28);
+}
+
+dialog.cmd-dialog::backdrop {
+  background-color: rgba(20, 20, 19, 0.52);
+}
+
+@media (max-width: 640px) {
+  dialog.cmd-dialog {
+    margin-top: 8vh;
+  }
+}

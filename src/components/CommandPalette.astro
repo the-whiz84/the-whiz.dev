@@ -1,0 +1,77 @@
+---
+import { profile, socials } from '../data/site';
+
+const commands = [
+  { id: 'home', label: 'Go to Overview', hint: '/', kind: 'route', value: '/' },
+  { id: 'now', label: 'Go to /now', hint: '/now', kind: 'route', value: '/now' },
+  { id: 'colophon', label: 'Go to /colophon', hint: '/colophon', kind: 'route', value: '/colophon' },
+  { id: 'privacy', label: 'Go to /privacy', hint: '/privacy', kind: 'route', value: '/privacy' },
+  { id: 'email', label: `Email ${profile.email}`, hint: '✉', kind: 'mailto', value: `mailto:${profile.email}` },
+  { id: 'copy', label: `Copy email — ${profile.email}`, hint: '↵', kind: 'copy', value: profile.email },
+  { id: 'resume', label: 'Open Resume.pdf', hint: '↗', kind: 'external', value: profile.resumeUrl },
+  { id: 'theme', label: 'Toggle Light / Dark theme', hint: 'T', kind: 'theme', value: '' },
+  ...socials.map((s) => ({
+    id: s.name.toLowerCase(),
+    label: `Open ${s.name}`,
+    hint: '↗',
+    kind: 'external',
+    value: s.url,
+  })),
+];
+---
+
+<dialog
+  id="cmd-palette"
+  class="cmd-dialog"
+  aria-labelledby="cmd-palette-title"
+>
+  <div
+    class="flex items-center justify-between border-b border-[var(--rule)] bg-[var(--paper-alt)] px-4 py-3 font-mono text-xs text-[var(--ink-muted)]"
+  >
+    <span id="cmd-palette-title">Quick Jump (⌘K)</span>
+    <button
+      type="button"
+      data-cmd-close
+      class="cursor-pointer border-0 bg-transparent p-0 font-mono text-xs text-[var(--ink-muted)] hover:text-[var(--ink)]"
+    >
+      ESC to close
+    </button>
+  </div>
+
+  <div class="border-b border-[var(--rule)] px-4 py-3">
+    <input
+      id="cmd-filter"
+      type="search"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="Filter routes or actions..."
+      aria-label="Filter commands"
+      class="w-full border-0 bg-transparent font-mono text-sm text-[var(--ink)] placeholder:text-[var(--ink-muted)] focus:outline-none"
+    />
+  </div>
+
+  <div id="cmd-list" role="listbox" aria-label="Commands" class="max-h-[360px] overflow-y-auto">
+    {
+      commands.map((cmd, idx) => (
+        <button
+          type="button"
+          role="option"
+          aria-selected={idx === 0 ? 'true' : 'false'}
+          data-cmd-item
+          data-kind={cmd.kind}
+          data-value={cmd.value}
+          data-label={cmd.label.toLowerCase()}
+          class:list={[
+            'flex w-full cursor-pointer items-center justify-between border-0 border-b border-[var(--rule)] px-4 py-3 text-left font-mono text-[13.5px] text-[var(--ink)] transition-colors last:border-b-0',
+            idx === 0
+              ? 'bg-[var(--signal-soft)] text-[var(--signal)]'
+              : 'bg-transparent hover:bg-[var(--signal-soft)] hover:text-[var(--signal)]',
+          ]}
+        >
+          <span>{cmd.label}</span>
+          <span class="text-xs text-[var(--ink-muted)]">{cmd.hint}</span>
+        </button>
+      ))
+    }
+  </div>
+</dialog>

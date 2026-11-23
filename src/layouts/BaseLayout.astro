@@ -1,0 +1,359 @@
+---
+import SpeedInsights from '@vercel/speed-insights/astro';
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import { profile } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  noindex = false,
+} = Astro.props;
+
+const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? `https://${profile.domain}`;
+const normalizedPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
+const canonicalUrl = `${siteOrigin}${normalizedPath}`;
+const ogImageUrl = `${siteOrigin}/og-card.png`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('tw-theme');
+          var theme =
+            saved === 'light' || saved === 'dark'
+              ? saved
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+  </head>
+  <body class="bg-[var(--paper)] text-[var(--ink)]">
+    <div class="flex min-h-dvh w-full flex-col bg-[var(--paper)] text-[var(--ink)]">
+      <SiteHeader currentPath={normalizedPath} />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+
+    <CommandPalette />
+    <SpeedInsights />
+
+    <script>
+      const THEME_KEY = 'tw-theme';
+      const root = document.documentElement;
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function getCurrentTheme(): 'light' | 'dark' {
+        return root.dataset.theme === 'dark' ? 'dark' : 'light';
+      }
+
+      function syncThemeButtons() {
+        const isDark = getCurrentTheme() === 'dark';
+        document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+          btn.textContent = isDark ? 'Light' : 'Dark';
+          btn.setAttribute('aria-pressed', String(isDark));
+          btn.setAttribute(
+            'aria-label',
+            isDark ? 'Switch to light theme' : 'Switch to dark theme',
+          );
+        });
+      }
+
+      function applyTheme(theme: 'light' | 'dark', persist: boolean) {
+        root.dataset.theme = theme;
+        root.style.colorScheme = theme;
+        if (persist) {
+          try {
+            localStorage.setItem(THEME_KEY, theme);
+          } catch {}
+        }
+        syncThemeButtons();
+      }
+
+      function toggleTheme() {
+        const next = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+        applyTheme(next, true);
+      }
+
+      syncThemeButtons();
+
+      document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+        btn.addEventListener('click', toggleTheme);
+      });
+
+      mq.addEventListener('change', (e) => {
+        try {
+          if (!localStorage.getItem(THEME_KEY)) {
+            applyTheme(e.matches ? 'dark' : 'light', false);
+          }
+        } catch {}
+      });
+
+      // Auto-updating copyright year
+      const currentYear = String(new Date().getFullYear());
+      document.querySelectorAll('[data-current-year]').forEach((el) => {
+        el.textContent = currentYear;
+      });
+
+      // Live Europe/Bucharest clock
+      const clockEls = document.querySelectorAll<HTMLElement>('[data-sibiu-clock]');
+      if (clockEls.length > 0) {
+        const updateClock = () => {
+          try {
+            const parts = new Intl.DateTimeFormat('en-GB', {
+              timeZone: 'Europe/Bucharest',
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+              timeZoneName: 'short',
+            }).formatToParts(new Date());
+            const hour = parts.find((p) => p.type === 'hour')?.value ?? '';
+            const minute = parts.find((p) => p.type === 'minute')?.value ?? '';
+            const tz = parts.find((p) => p.type === 'timeZoneName')?.value ?? 'EET';
+            if (hour && minute) {
+              const formatted = `${hour}:${minute} ${tz}`;
+              clockEls.forEach((el) => {
+                el.textContent = formatted;
+              });
+            }
+          } catch {}
+        };
+        updateClock();
+        window.setInterval(updateClock, 30_000);
+      }
+
+      // Clipboard helper (used by Command Palette)
+      async function copyText(text: string): Promise<boolean> {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch {
+          return false;
+        }
+      }
+
+      // Event delegation for GitHub activity bars (works seamlessly across Server Island swap)
+      document.addEventListener('mouseover', (event) => {
+        const target = (event.target as Element | null)?.closest?.('[data-pulse-bar]');
+        if (!target) return;
+        const container = target.closest('[data-pulse-bars]')?.parentElement;
+        const readout = container?.querySelector('[data-pulse-readout]');
+        const label = target.getAttribute('data-label');
+        if (readout && label) {
+          readout.textContent = label;
+        }
+      });
+
+      document.addEventListener('focusin', (event) => {
+        const target = (event.target as Element | null)?.closest?.('[data-pulse-bar]');
+        if (!target) return;
+        const container = target.closest('[data-pulse-bars]')?.parentElement;
+        const readout = container?.querySelector('[data-pulse-readout]');
+        const label = target.getAttribute('data-label');
+        if (readout && label) {
+          readout.textContent = label;
+        }
+      });
+
+      document.addEventListener('mouseout', (event) => {
+        const bars = (event.target as Element | null)?.closest?.('[data-pulse-bars]');
+        if (!bars) return;
+        const next = (event as MouseEvent).relatedTarget as Node | null;
+        if (next && bars.contains(next)) return;
+        const readout = bars.parentElement?.querySelector('[data-pulse-readout]');
+        if (readout) {
+          readout.textContent = 'Hover a week bar to inspect';
+        }
+      });
+
+      // Stack schematic interactive tabs
+      document.querySelectorAll<HTMLElement>('[data-stack-schematic]').forEach((schematic) => {
+        const tabs = Array.from(schematic.querySelectorAll<HTMLButtonElement>('[data-stack-tab]'));
+        const panels = Array.from(schematic.querySelectorAll<HTMLElement>('[data-stack-panel]'));
+
+        function selectLayer(idx: number, moveFocus = false) {
+          tabs.forEach((tab, i) => {
+            const active = i === idx;
+            tab.setAttribute('aria-selected', String(active));
+            tab.tabIndex = active ? 0 : -1;
+            tab.classList.toggle('bg-[var(--paper-alt)]', active);
+            tab.classList.toggle('font-semibold', active);
+            tab.classList.toggle('text-[var(--ink)]', active);
+            tab.classList.toggle('bg-transparent', !active);
+            tab.classList.toggle('text-[var(--ink-muted)]', !active);
+            const bar = tab.querySelector('[data-tab-bar]');
+            if (bar) {
+              bar.classList.toggle('hidden', !active);
+              bar.classList.toggle('block', active);
+            }
+          });
+          panels.forEach((panel, i) => {
+            panel.hidden = i !== idx;
+          });
+          if (moveFocus) tabs[idx]?.focus();
+        }
+
+        tabs.forEach((tab, idx) => {
+          tab.addEventListener('click', () => selectLayer(idx));
+          tab.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+              e.preventDefault();
+              selectLayer((idx + 1) % tabs.length, true);
+            } else if (e.key === 'ArrowLeft') {
+              e.preventDefault();
+              selectLayer((idx - 1 + tabs.length) % tabs.length, true);
+            } else if (e.key === 'Home') {
+              e.preventDefault();
+              selectLayer(0, true);
+            } else if (e.key === 'End') {
+              e.preventDefault();
+              selectLayer(tabs.length - 1, true);
+            }
+          });
+        });
+      });
+
+      // Command palette (⌘K / Ctrl+K)
+      const dialog = document.getElementById('cmd-palette') as HTMLDialogElement | null;
+      const filterInput = document.getElementById('cmd-filter') as HTMLInputElement | null;
+      const allItems = Array.from(
+        document.querySelectorAll<HTMLButtonElement>('[data-cmd-item]'),
+      );
+      let activeIndex = 0;
+
+      function visibleItems(): HTMLButtonElement[] {
+        return allItems.filter((item) => !item.hidden);
+      }
+
+      function highlightItem(idx: number) {
+        const items = visibleItems();
+        if (items.length === 0) return;
+        activeIndex = Math.max(0, Math.min(idx, items.length - 1));
+        allItems.forEach((item) => {
+          item.setAttribute('aria-selected', 'false');
+          item.classList.remove('bg-[var(--signal-soft)]', 'text-[var(--signal)]');
+        });
+        const chosen = items[activeIndex];
+        chosen.setAttribute('aria-selected', 'true');
+        chosen.classList.add('bg-[var(--signal-soft)]', 'text-[var(--signal)]');
+      }
+
+      function runCmdItem(item: HTMLButtonElement) {
+        const kind = item.dataset.kind;
+        const value = item.dataset.value ?? '';
+        dialog?.close();
+        if ((kind === 'route' || kind === 'mailto') && value) {
+          window.location.href = value;
+        } else if (kind === 'external' && value) {
+          window.open(value, '_blank', 'noopener,noreferrer');
+        } else if (kind === 'copy' && value) {
+          void copyText(value);
+        } else if (kind === 'theme') {
+          toggleTheme();
+        }
+      }
+
+      function openPalette() {
+        if (!dialog) return;
+        if (filterInput) filterInput.value = '';
+        allItems.forEach((item) => {
+          item.hidden = false;
+        });
+        highlightItem(0);
+        dialog.showModal();
+        filterInput?.focus();
+      }
+
+      document.querySelectorAll('[data-open-cmd]').forEach((btn) => {
+        btn.addEventListener('click', openPalette);
+      });
+
+      document.querySelectorAll('[data-cmd-close]').forEach((btn) => {
+        btn.addEventListener('click', () => dialog?.close());
+      });
+
+      dialog?.addEventListener('click', (e) => {
+        if (e.target === dialog) dialog.close();
+      });
+
+      filterInput?.addEventListener('input', () => {
+        const q = filterInput.value.trim().toLowerCase();
+        allItems.forEach((item) => {
+          const text = item.dataset.label ?? '';
+          item.hidden = q.length > 0 && !text.includes(q);
+        });
+        highlightItem(0);
+      });
+
+      filterInput?.addEventListener('keydown', (e) => {
+        const items = visibleItems();
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          highlightItem((activeIndex + 1) % Math.max(1, items.length));
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          highlightItem((activeIndex - 1 + Math.max(1, items.length)) % Math.max(1, items.length));
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          if (items[activeIndex]) runCmdItem(items[activeIndex]);
+        }
+      });
+
+      allItems.forEach((item) => {
+        item.addEventListener('click', () => runCmdItem(item));
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          if (dialog?.open) {
+            dialog.close();
+          } else {
+            openPalette();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

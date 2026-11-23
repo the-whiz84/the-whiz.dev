@@ -1,62 +1,44 @@
-# The-Whiz.dev | Neon Portfolio
+# the-whiz.dev
 
-![The-Whiz Portfolio Preview](public/assets/img/preview-hero-grid.png)
+Personal website for **Radu Chiriac** (`The-Whiz`), HPC & Linux Infrastructure Engineer.
 
-Source for [the-whiz.dev](https://the-whiz.dev), a React and Tailwind CSS v4 portfolio with a neon terminal aesthetic, custom SVG icon system, and a hero-scoped wireframe horizon.
+Built with an **Industrial Spec Sheet** layout on **Astro 7**, **Tailwind CSS v4**, and **Vercel**—pre-rendered as static HTML with an edge-cached Astro Server Island for live GitHub activity.
 
 ## Features
 
-- Neon cyan and pink visual system with glitch typography and terminal-style stats.
-- Hero-scoped animated wireframe horizon with restrained ambient motion.
-- Custom local SVG icon family used across navigation, CTAs, stats, skills, footer, and utility controls.
-- Dual shimmer CTAs in the hero for resume download and location.
-- Responsive card-driven layout for projects, experience, skills, and certifications.
-- Mobile-friendly hover-state fallback using `IntersectionObserver`.
-- Live GitHub repo count and developer uptime in the hero terminal card.
-- Vercel Speed Insights integration for real-user performance monitoring.
+- Static-first pages (`/`, `/now`, `/colophon`, `/privacy`, `/404`) with native cross-document View Transitions.
+- System-default Light/Dark theme (`prefers-color-scheme`) with zero first-paint flash and `localStorage` toggle.
+- Edge-cached Astro Server Island (`server:defer`) showing live GitHub public repo count, latest updated code repository, and a 52-week activity trace with interactive bar inspection and static fallback.
+- Interactive 5-layer infrastructure stack schematic and accessible `⌘K` / `Ctrl+K` quick-jump palette.
+- Self-hosted typography (`Space Grotesk Variable` + `IBM Plex Mono`).
+- Cookieless performance telemetry via `@vercel/speed-insights/astro`.
 
 ## Tech Stack
 
-- Framework: React 19 with Vite
-- Language: TypeScript
-- Styling: Tailwind CSS v4
-- Animation: Motion
-- Routing: React Router 7
-- Utilities: `clsx`, `tailwind-merge`, `class-variance-authority`
-- Package manager: Bun
-- Deployment: Vercel
+- **Framework:** Astro 7 (`output: 'static'` + `@astrojs/vercel` adapter)
+- **Language:** TypeScript (strict)
+- **Styling:** Tailwind CSS v4 (`@tailwindcss/vite`)
+- **Fonts:** `@fontsource-variable/space-grotesk`, `@fontsource/ibm-plex-mono`
+- **Package Manager:** Bun
+- **Hosting & Telemetry:** Vercel + `@vercel/speed-insights/astro`
 
 ## Local Development
 
 Prerequisite: Bun
 
-1. Clone the repository.
-   ```bash
-   git clone https://github.com/the-whiz84/the-whiz.dev.git
-   cd the-whiz.dev
-   ```
-2. Install dependencies.
-   ```bash
-   bun install
-   ```
-3. Start the development server.
-   ```bash
-   bun run dev
-   ```
-4. Open `http://localhost:5173`.
+```bash
+bun install
+bun run dev
+```
+
+Open `http://localhost:4321`.
 
 ## Scripts
 
-- `bun run dev`: start the Vite development server
-- `bun run build`: run TypeScript build and production bundle
-- `bun run lint`: run ESLint
+- `bun run dev`: start the Astro development server
+- `bun run check`: run Astro & TypeScript diagnostics (`astro check`)
+- `bun run build`: run `astro check && astro build`
 - `bun run preview`: preview the production build locally
-
-## Performance Notes
-
-- Hero animation is isolated to the top section to limit continuous work lower in the page.
-- Static sections rely on lightweight CSS effects and deferred image loading.
-- Current production build output is split into cached vendor and app chunks through Vite manual chunking.
 
 ## License
 

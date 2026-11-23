@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/site';
+
+const clauses = [
+  {
+    label: 'No Cookies / Ads',
+    detail:
+      'This website does not set advertising cookies, run third-party marketing trackers, or build personal visitor profiles.',
+  },
+  {
+    label: 'Performance',
+    detail:
+      'Uses Vercel Speed Insights to collect anonymous, cookieless Core Web Vitals (page load latency and responsiveness metrics) to monitor site reliability.',
+  },
+  {
+    label: 'Local Storage',
+    detail:
+      'Only your optional Light/Dark theme override is stored locally in browser storage (tw-theme) so the site remembers your preference across visits.',
+  },
+  {
+    label: 'Contact',
+    detailPrefix: 'Questions about this policy can be sent to ',
+    email: profile.email,
+  },
+];
+---
+
+<BaseLayout
+  title={`/privacy — ${profile.name} (${profile.handle})`}
+  description="Privacy policy for the-whiz.dev: no advertising cookies, no personal tracking, cookieless Vercel Speed Insights performance telemetry."
+  canonicalPath="/privacy"
+>
+  <section class="w-full">
+    <div class="mx-auto w-full max-w-[1360px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+      <div class="max-w-[860px]">
+        <a
+          href="/"
+          class="mb-5 inline-block font-mono text-[13px] text-[var(--signal)] no-underline hover:underline"
+        >
+          ← Back to overview
+        </a>
+
+        <h1 class="m-0 text-[36px] font-bold tracking-[-0.03em] text-[var(--ink)] sm:text-[44px]">
+          /privacy
+        </h1>
+        <p class="m-0 mb-8 mt-2 font-mono text-[13px] text-[var(--ink-muted)]">
+          Short, accurate disclosure
+        </p>
+
+        <div class="border-t border-[var(--rule-strong)]">
+          {
+            clauses.map((item) => (
+              <div class="grid grid-cols-1 gap-2 border-b border-[var(--rule)] py-5 sm:grid-cols-[180px_1fr] sm:gap-6">
+                <strong class="font-mono text-xs uppercase tracking-[0.06em] text-[var(--ink)] sm:text-[13px]">
+                  {item.label}
+                </strong>
+                <p class="m-0 text-[15.5px] leading-[1.65] text-[var(--ink-muted)] sm:text-[16px]">
+                  {'email' in item && item.email ? (
+                    <>
+                      {item.detailPrefix}
+                      <a
+                        href={`mailto:${item.email}`}
+                        class="border-b border-[var(--rule)] text-[var(--ink)] no-underline hover:border-[var(--signal)] hover:text-[var(--signal)]"
+                      >
+                        {item.email}
+                      </a>
+                      .
+                    </>
+                  ) : (
+                    item.detail
+                  )}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

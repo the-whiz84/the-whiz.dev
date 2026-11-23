@@ -10,12 +10,11 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.astro
+.vercel
+.env
+.env.*
 *.local
-
-# Next.js
-.next/*
-.next
-out/
 
 # Editor directories and files
 .vscode/*

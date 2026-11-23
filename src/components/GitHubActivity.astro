@@ -1,0 +1,14 @@
+---
+import GitHubActivityView from './GitHubActivityView.astro';
+import { profile } from '../data/site';
+import { fetchGitHubSnapshot } from '../lib/github';
+
+const snapshot = await fetchGitHubSnapshot(profile.githubUsername);
+
+Astro.response.headers.set(
+  'Cache-Control',
+  'public, max-age=0, s-maxage=1800, stale-while-revalidate=86400',
+);
+---
+
+<GitHubActivityView snapshot={snapshot} />

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/site';
+
+const items = [
+  {
+    label: 'Framework',
+    detail:
+      'Built with Astro 7 and Tailwind CSS v4. Every page pre-renders as static HTML by default, paired with one edge-cached Server Island for live GitHub activity.',
+  },
+  {
+    label: 'Typography',
+    detail:
+      'Self-hosted Space Grotesk Variable for display and body copy, paired with IBM Plex Mono for indices, dates, and technical readouts.',
+  },
+  {
+    label: 'Theming',
+    detail:
+      'Follows your OS and browser prefers-color-scheme automatically with zero first-paint flash, plus an explicit Light/Dark toggle persisted in localStorage.',
+  },
+  {
+    label: 'Hosting & Perf',
+    detail:
+      'Deployed on Vercel with Bun, zero heavy client UI runtime, native CSS View Transitions, and cookieless Core Web Vitals via Vercel Speed Insights.',
+  },
+  {
+    label: 'Navigation',
+    detail:
+      'Press ⌘K (or Ctrl+K) anywhere on the site for instant route jumping, theme switching, and one-click email copying.',
+  },
+];
+---
+
+<BaseLayout
+  title={`/colophon — ${profile.name} (${profile.handle})`}
+  description="How the-whiz.dev is designed, built, typeset, and hosted."
+  canonicalPath="/colophon"
+>
+  <section class="w-full">
+    <div class="mx-auto w-full max-w-[1360px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+      <div class="max-w-[860px]">
+        <a
+          href="/"
+          class="mb-5 inline-block font-mono text-[13px] text-[var(--signal)] no-underline hover:underline"
+        >
+          ← Back to overview
+        </a>
+
+        <h1 class="m-0 text-[36px] font-bold tracking-[-0.03em] text-[var(--ink)] sm:text-[44px]">
+          /colophon
+        </h1>
+        <p class="m-0 mb-8 mt-2 font-mono text-[13px] text-[var(--ink-muted)]">
+          How {profile.domain} is built and served
+        </p>
+
+        <div class="border-t border-[var(--rule-strong)]">
+          {
+            items.map((item) => (
+              <div class="grid grid-cols-1 gap-2 border-b border-[var(--rule)] py-5 sm:grid-cols-[180px_1fr] sm:gap-6">
+                <strong class="font-mono text-xs uppercase tracking-[0.06em] text-[var(--ink)] sm:text-[13px]">
+                  {item.label}
+                </strong>
+                <p class="m-0 text-[15.5px] leading-[1.65] text-[var(--ink-muted)] sm:text-[16px]">
+                  {item.detail}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
