@@ -1,0 +1,13 @@
+---
+import SpecSheetPage from '../components/SpecSheetPage.astro';
+import { nowMeta, profile } from '../data/site';
+---
+
+<SpecSheetPage
+  title={`/now — ${profile.name} (${profile.handle})`}
+  description="What Radu Chiriac is currently focused on in infrastructure, study, and off-hours tinkering."
+  canonicalPath="/now"
+  heading="/now"
+  subtitle={`Updated ${nowMeta.updatedAt} · Current focus`}
+  entries={nowMeta.entries}
+/>

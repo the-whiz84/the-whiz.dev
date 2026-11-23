@@ -1,0 +1,13 @@
+---
+import SpecSheetPage from '../components/SpecSheetPage.astro';
+import { colophonEntries, profile } from '../data/site';
+---
+
+<SpecSheetPage
+  title={`/colophon — ${profile.name} (${profile.handle})`}
+  description="How the-whiz.dev is designed, built, typeset, and hosted."
+  canonicalPath="/colophon"
+  heading="/colophon"
+  subtitle={`How ${profile.domain} is built and served`}
+  entries={colophonEntries}
+/>

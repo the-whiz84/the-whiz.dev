@@ -1,0 +1,116 @@
+---
+import SectionHeader from './SectionHeader.astro';
+import { stackLayers } from '../data/site';
+---
+
+<section class="w-full border-b border-[var(--rule)]" aria-labelledby="stack-heading">
+  <div class="mx-auto w-full max-w-[1360px] px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
+    <SectionHeader id="stack-heading" number="02" title="Infrastructure Stack">
+      <span class="font-mono text-[13px] text-[var(--ink-muted)]">Select a layer to inspect</span>
+    </SectionHeader>
+
+    <div data-stack-schematic>
+      <div
+        role="tablist"
+        aria-label="Infrastructure layers"
+        class="grid grid-cols-2 border border-[var(--rule)] sm:grid-cols-5"
+      >
+        {
+          stackLayers.map((layer, index) => (
+            <button
+              type="button"
+              role="tab"
+              id={`stack-tab-${layer.id}`}
+              aria-controls={`stack-panel-${layer.id}`}
+              aria-selected={index === 0 ? 'true' : 'false'}
+              tabindex={index === 0 ? 0 : -1}
+              data-stack-tab={index}
+              class="group relative cursor-pointer border-0 border-b border-r border-[var(--rule)] bg-transparent px-4 py-3.5 text-left font-mono text-[13px] leading-[1.35] text-[var(--ink-muted)] transition-colors hover:bg-[var(--paper-alt)] hover:text-[var(--ink)] aria-selected:bg-[var(--paper-alt)] aria-selected:font-semibold aria-selected:text-[var(--ink)] sm:border-b-0 sm:last:border-r-0 [&:nth-child(2n)]:border-r-0 sm:[&:nth-child(2n)]:border-r [&:last-child]:col-span-2 sm:[&:last-child]:col-span-1 [&:last-child]:border-b-0 [&:last-child]:border-r-0"
+            >
+              <span
+                data-tab-bar
+                aria-hidden="true"
+                class="absolute left-0 right-0 top-0 hidden h-[2.5px] bg-[var(--signal)] group-aria-selected:block"
+              />
+              <span class="mb-1 block text-xs text-[var(--signal)]">{layer.code}</span>
+              <span>{layer.label}</span>
+            </button>
+          ))
+        }
+      </div>
+
+      {
+        stackLayers.map((layer, index) => (
+          <div
+            role="tabpanel"
+            id={`stack-panel-${layer.id}`}
+            aria-labelledby={`stack-tab-${layer.id}`}
+            data-stack-panel={index}
+            hidden={index !== 0}
+            class="grid grid-cols-1 items-start gap-6 border border-t-0 border-[var(--rule)] bg-[var(--paper-alt)] px-5 py-5 sm:grid-cols-[1.55fr_1fr] sm:px-6 sm:py-6"
+          >
+            <div>
+              <h3 class="m-0 mb-2 text-[18px] font-semibold tracking-[-0.01em] text-[var(--ink)] sm:text-[20px]">
+                {layer.title}
+              </h3>
+              <p class="m-0 text-[15px] leading-[1.6] text-[var(--ink-muted)] sm:text-[16px]">
+                {layer.description}
+              </p>
+            </div>
+            <div class="flex flex-col gap-2.5 border-t border-[var(--rule)] pt-4 font-mono sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+              <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+                Stack &amp; Proof
+              </span>
+              <div class="flex flex-wrap gap-1.5">
+                {layer.tags.map((tag) => (
+                  <span class="bg-[var(--badge-bg)] px-2.5 py-1 text-xs text-[var(--ink)]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <span class="text-[13px] text-[var(--ink-muted)]">{layer.scope}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-stack-schematic]').forEach((schematic) => {
+    const tabs = Array.from(schematic.querySelectorAll<HTMLButtonElement>('[data-stack-tab]'));
+    const panels = Array.from(schematic.querySelectorAll<HTMLElement>('[data-stack-panel]'));
+
+    function selectLayer(idx: number, moveFocus = false) {
+      tabs.forEach((tab, i) => {
+        const active = i === idx;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+      });
+      panels.forEach((panel, i) => {
+        panel.hidden = i !== idx;
+      });
+      if (moveFocus) tabs[idx]?.focus();
+    }
+
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => selectLayer(idx));
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          selectLayer((idx + 1) % tabs.length, true);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          selectLayer((idx - 1 + tabs.length) % tabs.length, true);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          selectLayer(0, true);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          selectLayer(tabs.length - 1, true);
+        }
+      });
+    });
+  });
+</script>

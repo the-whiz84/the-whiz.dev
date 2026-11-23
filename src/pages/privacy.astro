@@ -1,0 +1,13 @@
+---
+import SpecSheetPage from '../components/SpecSheetPage.astro';
+import { privacyEntries, profile } from '../data/site';
+---
+
+<SpecSheetPage
+  title={`/privacy — ${profile.name} (${profile.handle})`}
+  description="Privacy policy for the-whiz.dev: no advertising cookies, no personal tracking, cookieless Vercel Speed Insights performance telemetry."
+  canonicalPath="/privacy"
+  heading="/privacy"
+  subtitle="Short, accurate disclosure"
+  entries={privacyEntries}
+/>

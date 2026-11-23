@@ -1,0 +1,143 @@
+---
+import SpeedInsights from '@vercel/speed-insights/astro';
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import { profile } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  noindex = false,
+} = Astro.props;
+
+const siteOrigin = Astro.site?.toString().replace(/\/$/, '') ?? `https://${profile.domain}`;
+const normalizedPath = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
+const canonicalUrl = `${siteOrigin}${normalizedPath}`;
+const ogImageUrl = `${siteOrigin}/og-card.png`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('tw-theme');
+          var theme =
+            saved === 'light' || saved === 'dark'
+              ? saved
+              : window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profile.name} — ${profile.role}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+  </head>
+  <body class="bg-[var(--paper)] text-[var(--ink)]">
+    <div class="flex min-h-dvh w-full flex-col bg-[var(--paper)] text-[var(--ink)]">
+      <SiteHeader currentPath={normalizedPath} />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+
+    <CommandPalette />
+    <SpeedInsights />
+
+    <script>
+      const THEME_KEY = 'tw-theme';
+      const root = document.documentElement;
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+
+      function getCurrentTheme(): 'light' | 'dark' {
+        return root.dataset.theme === 'dark' ? 'dark' : 'light';
+      }
+
+      function syncThemeButtons() {
+        const isDark = getCurrentTheme() === 'dark';
+        document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((btn) => {
+          btn.textContent = isDark ? 'Light' : 'Dark';
+          btn.setAttribute('aria-pressed', String(isDark));
+          btn.setAttribute(
+            'aria-label',
+            isDark ? 'Switch to light theme' : 'Switch to dark theme',
+          );
+        });
+      }
+
+      function applyTheme(theme: 'light' | 'dark', persist: boolean) {
+        root.dataset.theme = theme;
+        root.style.colorScheme = theme;
+        if (persist) {
+          try {
+            localStorage.setItem(THEME_KEY, theme);
+          } catch {}
+        }
+        syncThemeButtons();
+      }
+
+      function toggleTheme() {
+        const next = getCurrentTheme() === 'dark' ? 'light' : 'dark';
+        applyTheme(next, true);
+      }
+
+      syncThemeButtons();
+
+      document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+        btn.addEventListener('click', toggleTheme);
+      });
+
+      document.addEventListener('tw:toggle-theme', toggleTheme);
+
+      mq.addEventListener('change', (e) => {
+        try {
+          if (!localStorage.getItem(THEME_KEY)) {
+            applyTheme(e.matches ? 'dark' : 'light', false);
+          }
+        } catch {}
+      });
+
+      // Auto-updating copyright year
+      const currentYear = String(new Date().getFullYear());
+      document.querySelectorAll('[data-current-year]').forEach((el) => {
+        el.textContent = currentYear;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+---
+import Monogram from './Monogram.astro';
+import { navItems } from '../data/site';
+
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+const normalize = (p: string) => (p.length > 1 && p.endsWith('/') ? p.slice(0, -1) : p);
+const activePath = normalize(currentPath);
+
+const navLinkClass = (isActive: boolean) => [
+  'border-b-[1.5px] py-0.5 no-underline transition-colors',
+  isActive
+    ? 'border-[var(--signal)] font-semibold text-[var(--signal)]'
+    : 'border-transparent text-[var(--ink-muted)] hover:text-[var(--ink)]',
+];
+---
+
+<header class="w-full border-b border-[var(--rule)] bg-[var(--paper)] font-mono">
+  <div class="mx-auto flex w-full max-w-[1360px] items-center justify-between gap-4 px-5 py-4 sm:px-8 lg:px-12">
+    <a
+      href="/"
+      class="inline-flex items-center gap-3 text-sm font-semibold tracking-[0.03em] text-[var(--ink)] no-underline transition-colors hover:text-[var(--signal)]"
+    >
+      <Monogram size={22} />
+      <span>THE-WHIZ.DEV</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-7 text-[13px] sm:inline-flex">
+      {
+        navItems.map((item) => {
+          const isActive = activePath === item.href;
+          return (
+            <a
+              href={item.href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={navLinkClass(isActive)}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <div class="inline-flex items-center gap-2">
+      <button
+        type="button"
+        data-open-cmd
+        aria-label="Open quick jump palette"
+        class="cursor-pointer rounded-[3px] border border-[var(--rule)] bg-transparent px-3 py-1.5 font-mono text-[13px] text-[var(--ink)] transition-colors hover:border-[var(--ink)] hover:bg-[var(--paper-alt)]"
+      >
+        ⌘K
+      </button>
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label="Toggle color theme"
+        class="cursor-pointer rounded-[3px] border border-[var(--rule)] bg-transparent px-3 py-1.5 font-mono text-[13px] text-[var(--ink)] transition-colors hover:border-[var(--ink)] hover:bg-[var(--paper-alt)]"
+      >
+        Dark
+      </button>
+    </div>
+  </div>
+
+  <nav
+    aria-label="Mobile navigation"
+    class="border-t border-[var(--rule)] bg-[var(--paper-alt)] sm:hidden"
+  >
+    <div class="mx-auto flex w-full max-w-[1360px] items-center gap-6 px-5 py-2.5 text-[13px]">
+      {
+        navItems.map((item) => {
+          const isActive = activePath === item.href;
+          return (
+            <a
+              href={item.href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={navLinkClass(isActive)}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </div>
+  </nav>
+</header>

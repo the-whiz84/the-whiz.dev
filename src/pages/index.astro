@@ -1,0 +1,305 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GitHubActivity from '../components/GitHubActivity.astro';
+import GitHubActivityView from '../components/GitHubActivityView.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import StackSchematic from '../components/StackSchematic.astro';
+import {
+  career,
+  certifications,
+  portfolioArchive,
+  profile,
+  publicRepos,
+  socials,
+} from '../data/site';
+import { formatBucharestClock } from '../lib/clock';
+import { FALLBACK_GITHUB_SNAPSHOT } from '../lib/github';
+
+const initialClock = formatBucharestClock();
+---
+
+<BaseLayout
+  title={`${profile.name} (${profile.handle}) — ${profile.role}`}
+  description="HPC & Linux Infrastructure Engineer in Romania. Fifteen years across hardware diagnostics, Okta IAM, RHEL fleet automation, Puppet, and AWS architecture."
+  canonicalPath="/"
+>
+  <!-- Hero (full-bleed band, 2-column spec sheet split) -->
+  <section class="w-full border-b border-[var(--rule)]">
+    <div
+      class="mx-auto grid w-full max-w-[1360px] grid-cols-1 px-5 sm:px-8 lg:px-12 md:grid-cols-[1.65fr_1fr]"
+    >
+      <div
+        class="flex flex-col justify-center border-b border-[var(--rule)] py-12 sm:py-16 lg:py-20 md:border-b-0 md:border-r md:pr-10 lg:pr-14"
+      >
+        <p
+          class="m-0 mb-3 font-mono text-xs font-semibold uppercase tracking-[0.09em] text-[var(--signal)] sm:text-[13px]"
+        >
+          {profile.role}
+        </p>
+        <h1
+          class="m-0 text-[clamp(2.5rem,4.9vw,4.5rem)] font-bold uppercase leading-[0.98] tracking-[-0.04em] text-[var(--ink)] lg:whitespace-nowrap"
+        >
+          {profile.name}
+        </h1>
+        <p class="m-0 mt-3 font-mono text-base text-[var(--ink-muted)] sm:text-lg">
+          Online as <span class="font-semibold text-[var(--signal)]">{profile.handle}</span>
+        </p>
+        <p
+          class="my-6 max-w-[56ch] text-[16px] leading-[1.6] text-[var(--ink-muted)] sm:text-[18px]"
+        >
+          {profile.lead}
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <a
+            href={`mailto:${profile.email}`}
+            class="rounded-[3px] border border-[var(--ink)] bg-[var(--ink)] px-4 py-2.5 font-mono text-[13px] text-[var(--paper)] no-underline transition-colors hover:border-[var(--signal)] hover:bg-[var(--signal)] hover:text-white"
+          >
+            Email {profile.email}
+          </a>
+          <a
+            href={profile.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="rounded-[3px] border border-[var(--rule)] bg-transparent px-4 py-2.5 font-mono text-[13px] text-[var(--ink)] no-underline transition-colors hover:border-[var(--ink)] hover:bg-[var(--paper-alt)]"
+          >
+            Resume.pdf ↗
+          </a>
+        </div>
+      </div>
+
+      <aside aria-label="Engineering summary" class="grid grid-rows-5 font-mono">
+        <div
+          class="flex flex-col justify-center gap-1.5 border-b border-[var(--rule)] py-4 md:pl-8 lg:pl-10"
+        >
+          <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+            Current Role
+          </span>
+          <span class="text-[14px] font-medium text-[var(--ink)] sm:text-[15px]">
+            {profile.currentRoleShort}
+          </span>
+        </div>
+        <div
+          class="flex flex-col justify-center gap-1.5 border-b border-[var(--rule)] py-4 md:pl-8 lg:pl-10"
+        >
+          <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+            Location
+          </span>
+          <span class="text-[14px] font-medium text-[var(--ink)] sm:text-[15px]">
+            <a
+              href={profile.locationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[var(--ink)] no-underline hover:text-[var(--signal)]"
+            >
+              {profile.location}
+            </a>
+            <span class="text-[var(--ink-muted)]"> · </span>
+            <span data-sibiu-clock>{initialClock}</span>
+          </span>
+        </div>
+        <div
+          class="flex flex-col justify-center gap-1.5 border-b border-[var(--rule)] py-4 md:pl-8 lg:pl-10"
+        >
+          <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+            Certifications
+          </span>
+          <span class="text-[14px] font-medium text-[var(--ink)] sm:text-[15px]">
+            {profile.certificationsShort}
+          </span>
+        </div>
+        <div
+          class="flex flex-col justify-center gap-1.5 border-b border-[var(--rule)] py-4 md:pl-8 lg:pl-10"
+        >
+          <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+            Core Stack
+          </span>
+          <span class="text-[14px] font-medium text-[var(--ink)] sm:text-[15px]">
+            {profile.coreStackShort}
+          </span>
+        </div>
+        <div class="flex flex-col justify-center gap-1.5 py-4 md:pl-8 lg:pl-10">
+          <span class="text-xs uppercase tracking-[0.08em] text-[var(--ink-muted)]">
+            Profiles
+          </span>
+          <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[14px] font-medium sm:text-[15px]">
+            {
+              socials.map((item, idx) => (
+                <>
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="border-b border-[var(--rule)] text-[var(--ink)] no-underline transition-colors hover:border-[var(--signal)] hover:text-[var(--signal)]"
+                  >
+                    {item.name} ↗
+                  </a>
+                  {idx < socials.length - 1 && (
+                    <span aria-hidden="true" class="text-[var(--ink-muted)]">·</span>
+                  )}
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 01: Live GitHub Telemetry (Edge-cached Astro Server Island) -->
+  <GitHubActivity server:defer>
+    <GitHubActivityView slot="fallback" snapshot={FALLBACK_GITHUB_SNAPSHOT} isLoading={true} />
+  </GitHubActivity>
+
+  <!-- 02: Infrastructure Stack Schematic -->
+  <StackSchematic />
+
+  <!-- 03 & 04: Career Lineage + Public Repos & Archive -->
+  <section class="w-full border-b border-[var(--rule)]">
+    <div
+      class="mx-auto grid w-full max-w-[1360px] grid-cols-1 px-5 sm:px-8 lg:px-12 md:grid-cols-[1.08fr_1fr]"
+    >
+      <div
+        class="border-b border-[var(--rule)] py-10 sm:py-12 md:border-b-0 md:border-r md:pr-10 lg:pr-12"
+        aria-labelledby="career-heading"
+      >
+        <SectionHeader id="career-heading" number="03" title="Career Lineage (15+ Yrs)" />
+
+        <div>
+          {
+            career.map((item, idx) => (
+              <article
+                class:list={[
+                  'border-t py-4',
+                  idx === 0 ? 'border-[var(--rule-strong)]' : 'border-[var(--rule)]',
+                ]}
+              >
+                <div class="flex items-baseline justify-between gap-3">
+                  <h3 class="m-0 text-[16px] font-semibold text-[var(--ink)] sm:text-[17px]">
+                    {item.role}
+                  </h3>
+                  <span class="shrink-0 font-mono text-xs uppercase text-[var(--ink-muted)] sm:text-[13px]">
+                    {item.period}
+                  </span>
+                </div>
+                <p class="my-1.5 font-mono text-xs text-[var(--signal)] sm:text-[13px]">
+                  {item.organization}
+                </p>
+                <p class="m-0 text-[14.5px] leading-[1.6] text-[var(--ink-muted)] sm:text-[15px]">
+                  {item.summary}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="py-10 sm:py-12 md:pl-10 lg:pl-12" aria-labelledby="repos-heading">
+        <SectionHeader id="repos-heading" number="04" title="Public Repos & Archive" />
+
+        <div>
+          {
+            publicRepos.map((repo, idx) => (
+              <div
+                class:list={[
+                  'grid grid-cols-[1fr_auto] items-baseline gap-4 border-t py-4',
+                  idx === 0 ? 'border-[var(--rule-strong)]' : 'border-[var(--rule)]',
+                ]}
+              >
+                <div>
+                  <a
+                    href={repo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-[16px] font-semibold text-[var(--ink)] no-underline hover:text-[var(--signal)] sm:text-[17px]"
+                  >
+                    {repo.name} ↗
+                  </a>
+                  <p class="m-0 mt-1 text-[14.5px] leading-[1.6] text-[var(--ink-muted)] sm:text-[15px]">
+                    {repo.description}
+                  </p>
+                </div>
+                <span class="whitespace-nowrap font-mono text-xs text-[var(--ink-muted)] sm:text-[13px]">
+                  {repo.tag}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+
+        <div
+          class="mt-4 border-t border-dashed border-[var(--rule)] pt-3.5 font-mono text-[13px] leading-[1.7] text-[var(--ink-muted)]"
+        >
+          <strong class="font-semibold text-[var(--ink)]">PORTFOLIO ARCHIVE:</strong>
+          {
+            portfolioArchive.map((item, idx) => (
+              <>
+                {' '}
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="border-b border-[var(--rule)] text-[var(--ink-muted)] no-underline hover:border-[var(--signal)] hover:text-[var(--signal)]"
+                >
+                  {item.label} ↗
+                </a>
+                {idx < portfolioArchive.length - 1 ? ' ·' : ''}
+              </>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05: Verified Certifications -->
+  <section class="w-full" aria-labelledby="certs-heading">
+    <div class="mx-auto w-full max-w-[1360px] px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
+      <SectionHeader id="certs-heading" number="05" title="Verified Certifications" />
+
+      <div class="grid grid-cols-1 border border-[var(--rule)] sm:grid-cols-3">
+        {
+          certifications.map((cert) => (
+            <a
+              href={cert.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col justify-between gap-3.5 border-b border-[var(--rule)] p-5 text-left no-underline transition-colors last:border-b-0 hover:bg-[var(--paper-alt)] sm:border-b-0 sm:border-r sm:p-6 sm:last:border-r-0"
+            >
+              <div>
+                <div class="font-mono text-xs uppercase tracking-[0.06em] text-[var(--signal)]">
+                  {cert.issuer}
+                </div>
+                <div class="mt-1.5 text-[16px] font-semibold leading-[1.35] text-[var(--ink)] sm:text-[17px]">
+                  {cert.title}
+                </div>
+              </div>
+              <span class="font-mono text-[13px] text-[var(--ink-muted)] group-hover:text-[var(--signal)]">
+                {cert.linkLabel} ↗
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { formatBucharestClock } from '../lib/clock';
+
+  const clockEls = document.querySelectorAll<HTMLElement>('[data-sibiu-clock]');
+  if (clockEls.length > 0) {
+    const updateClock = () => {
+      try {
+        const formatted = formatBucharestClock();
+        if (formatted) {
+          clockEls.forEach((el) => {
+            el.textContent = formatted;
+          });
+        }
+      } catch {}
+    };
+    updateClock();
+    window.setInterval(updateClock, 30_000);
+  }
+</script>

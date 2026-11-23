@@ -1,0 +1,164 @@
+---
+import { commandItems } from '../data/site';
+---
+
+<dialog
+  id="cmd-palette"
+  class="cmd-dialog"
+  aria-labelledby="cmd-palette-title"
+>
+  <div
+    class="flex items-center justify-between border-b border-[var(--rule)] bg-[var(--paper-alt)] px-4 py-3 font-mono text-xs text-[var(--ink-muted)]"
+  >
+    <span id="cmd-palette-title">Quick Jump (⌘K)</span>
+    <button
+      type="button"
+      data-cmd-close
+      class="cursor-pointer border-0 bg-transparent p-0 font-mono text-xs text-[var(--ink-muted)] hover:text-[var(--ink)]"
+    >
+      ESC to close
+    </button>
+  </div>
+
+  <div class="border-b border-[var(--rule)] px-4 py-3">
+    <input
+      id="cmd-filter"
+      type="search"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="Filter routes or actions..."
+      aria-label="Filter commands"
+      class="w-full border-0 bg-transparent font-mono text-sm text-[var(--ink)] placeholder:text-[var(--ink-muted)] focus:outline-none"
+    />
+  </div>
+
+  <div id="cmd-list" role="listbox" aria-label="Commands" class="max-h-[360px] overflow-y-auto">
+    {
+      commandItems.map((cmd, idx) => (
+        <button
+          type="button"
+          role="option"
+          aria-selected={idx === 0 ? 'true' : 'false'}
+          data-cmd-item
+          data-kind={cmd.kind}
+          data-value={cmd.kind === 'theme' ? '' : cmd.value}
+          data-label={cmd.label.toLowerCase()}
+          class="flex w-full cursor-pointer items-center justify-between border-0 border-b border-[var(--rule)] bg-transparent px-4 py-3 text-left font-mono text-[13.5px] text-[var(--ink)] transition-colors last:border-b-0 hover:bg-[var(--signal-soft)] hover:text-[var(--signal)] aria-selected:bg-[var(--signal-soft)] aria-selected:text-[var(--signal)]"
+        >
+          <span>{cmd.label}</span>
+          <span class="text-xs text-[var(--ink-muted)]">{cmd.hint}</span>
+        </button>
+      ))
+    }
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('cmd-palette') as HTMLDialogElement | null;
+  const filterInput = document.getElementById('cmd-filter') as HTMLInputElement | null;
+  const allItems = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('[data-cmd-item]'),
+  );
+  let activeIndex = 0;
+
+  function visibleItems(): HTMLButtonElement[] {
+    return allItems.filter((item) => !item.hidden);
+  }
+
+  function highlightItem(idx: number) {
+    const items = visibleItems();
+    if (items.length === 0) return;
+    activeIndex = Math.max(0, Math.min(idx, items.length - 1));
+    allItems.forEach((item) => {
+      item.setAttribute('aria-selected', 'false');
+    });
+    items[activeIndex]?.setAttribute('aria-selected', 'true');
+  }
+
+  function runCmdItem(item: HTMLButtonElement) {
+    const kind = item.dataset.kind;
+    const value = item.dataset.value ?? '';
+    dialog?.close();
+
+    if (kind === 'route') {
+      if (value.startsWith('/') && !value.startsWith('//')) {
+        window.location.href = value;
+      }
+    } else if (kind === 'mailto') {
+      if (value.startsWith('mailto:')) {
+        window.location.href = value;
+      }
+    } else if (kind === 'external') {
+      if (
+        (value.startsWith('/') && !value.startsWith('//')) ||
+        value.startsWith('https://')
+      ) {
+        window.open(value, '_blank', 'noopener,noreferrer');
+      }
+    } else if (kind === 'theme') {
+      document.dispatchEvent(new CustomEvent('tw:toggle-theme'));
+    }
+  }
+
+  function openPalette() {
+    if (!dialog) return;
+    if (filterInput) filterInput.value = '';
+    allItems.forEach((item) => {
+      item.hidden = false;
+    });
+    highlightItem(0);
+    dialog.showModal();
+    filterInput?.focus();
+  }
+
+  document.querySelectorAll('[data-open-cmd]').forEach((btn) => {
+    btn.addEventListener('click', openPalette);
+  });
+
+  document.querySelectorAll('[data-cmd-close]').forEach((btn) => {
+    btn.addEventListener('click', () => dialog?.close());
+  });
+
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+
+  filterInput?.addEventListener('input', () => {
+    const q = filterInput.value.trim().toLowerCase();
+    allItems.forEach((item) => {
+      const text = item.dataset.label ?? '';
+      item.hidden = q.length > 0 && !text.includes(q);
+    });
+    highlightItem(0);
+  });
+
+  filterInput?.addEventListener('keydown', (e) => {
+    const items = visibleItems();
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      highlightItem((activeIndex + 1) % Math.max(1, items.length));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      highlightItem((activeIndex - 1 + Math.max(1, items.length)) % Math.max(1, items.length));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const chosen = items[activeIndex];
+      if (chosen) runCmdItem(chosen);
+    }
+  });
+
+  allItems.forEach((item) => {
+    item.addEventListener('click', () => runCmdItem(item));
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      if (dialog?.open) {
+        dialog.close();
+      } else {
+        openPalette();
+      }
+    }
+  });
+</script>

@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/site';
+---
+
+<BaseLayout
+  title={`404 // Route Not Found — ${profile.domain}`}
+  description="The requested route does not exist on the-whiz.dev."
+  canonicalPath="/404"
+  noindex={true}
+>
+  <section class="w-full">
+    <div class="mx-auto w-full max-w-[1360px] px-5 py-16 sm:px-8 sm:py-24 lg:px-12">
+      <div class="max-w-[720px]">
+        <p class="m-0 mb-3 font-mono text-xs font-semibold uppercase tracking-[0.08em] text-[var(--signal)] sm:text-[13px]">
+          ERR 404 // ROUTE NOT FOUND
+        </p>
+        <h1 class="m-0 text-[36px] font-bold tracking-[-0.03em] text-[var(--ink)] sm:text-[46px]">
+          Nothing mapped at this path.
+        </h1>
+        <p class="my-5 max-w-[54ch] text-[16px] leading-[1.65] text-[var(--ink-muted)] sm:text-[17px]">
+          The document or endpoint you asked for has moved or never existed. Jump back to a known page or press{' '}
+          <kbd class="rounded-[2px] border border-[var(--rule)] bg-[var(--paper-alt)] px-1.5 py-0.5 font-mono text-xs text-[var(--ink)]">
+            ⌘K
+          </kbd>{' '}
+          to search routes.
+        </p>
+
+        <div class="mt-7 flex flex-wrap gap-2.5">
+          <a
+            href="/"
+            class="rounded-[3px] border border-[var(--ink)] bg-[var(--ink)] px-4 py-2.5 font-mono text-[13px] text-[var(--paper)] no-underline transition-colors hover:border-[var(--signal)] hover:bg-[var(--signal)] hover:text-white"
+          >
+            ← Overview
+          </a>
+          <a
+            href="/now"
+            class="rounded-[3px] border border-[var(--rule)] px-4 py-2.5 font-mono text-[13px] text-[var(--ink)] no-underline transition-colors hover:border-[var(--ink)] hover:bg-[var(--paper-alt)]"
+          >
+            /now
+          </a>
+          <a
+            href="/colophon"
+            class="rounded-[3px] border border-[var(--rule)] px-4 py-2.5 font-mono text-[13px] text-[var(--ink)] no-underline transition-colors hover:border-[var(--ink)] hover:bg-[var(--paper-alt)]"
+          >
+            /colophon
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
