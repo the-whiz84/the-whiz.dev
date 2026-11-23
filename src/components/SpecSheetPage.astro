@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import type { SpecEntry } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  heading: string;
+  subtitle: string;
+  entries: SpecEntry[];
+}
+
+const { title, description, canonicalPath, heading, subtitle, entries } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath}>
+  <section class="w-full">
+    <div class="mx-auto w-full max-w-[1360px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+      <div class="max-w-[860px]">
+        <a
+          href="/"
+          class="mb-5 inline-block font-mono text-[13px] text-[var(--signal)] no-underline hover:underline"
+        >
+          ← Back to overview
+        </a>
+
+        <h1 class="m-0 text-[36px] font-bold tracking-[-0.03em] text-[var(--ink)] sm:text-[44px]">
+          {heading}
+        </h1>
+        <p class="m-0 mb-8 mt-2 font-mono text-[13px] text-[var(--ink-muted)]">
+          {subtitle}
+        </p>
+
+        <div class="border-t border-[var(--rule-strong)]">
+          {
+            entries.map((entry) => (
+              <div class="grid grid-cols-1 gap-2 border-b border-[var(--rule)] py-5 sm:grid-cols-[180px_1fr] sm:gap-6">
+                <strong class="font-mono text-xs uppercase tracking-[0.06em] text-[var(--ink)] sm:text-[13px]">
+                  {entry.label}
+                </strong>
+                <p class="m-0 text-[15.5px] leading-[1.65] text-[var(--ink-muted)] sm:text-[16px]">
+                  {entry.detail}{
+                    entry.link && (
+                      <><a
+                        href={entry.link.href}
+                        class="border-b border-[var(--rule)] text-[var(--ink)] no-underline hover:border-[var(--signal)] hover:text-[var(--signal)]"
+                      >{entry.link.text}</a>{entry.link.suffix ?? ''}</>
+                    )
+                  }
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

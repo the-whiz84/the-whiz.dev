@@ -1,3 +1,5 @@
+import { profile } from '../data/site';
+
 export interface RepoItem {
   name: string;
   url: string;
@@ -12,8 +14,7 @@ export interface ActivityWeek {
   end: string;
   rangeLabel: string;
   score: number;
-  heightPct: number;
-  opacity: number;
+  maxScore: number;
   title: string;
 }
 
@@ -29,6 +30,8 @@ export interface GitHubSnapshot {
   monthLabels: string[];
   isFallback: boolean;
 }
+
+const GITHUB_USERNAME_RE = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
 
 const SHORT_LANG_MAP: Record<string, string> = {
   TypeScript: 'TS',
@@ -59,6 +62,23 @@ const monthYearUtc = new Intl.DateTimeFormat('en-US', {
   timeZone: 'UTC',
 });
 
+function sanitizeGitHubUsername(username: string): string {
+  return GITHUB_USERNAME_RE.test(username) ? username : profile.githubUsername;
+}
+
+function parseSafeGitHubUrl(rawUrl: unknown, fallbackUrl: string): string {
+  if (typeof rawUrl !== 'string') return fallbackUrl;
+  try {
+    const url = new URL(rawUrl);
+    if (url.protocol === 'https:' && url.hostname === 'github.com') {
+      return url.toString();
+    }
+  } catch {
+    // Fall back to constructed GitHub URL
+  }
+  return fallbackUrl;
+}
+
 function formatShortLang(language: string | null | undefined): string {
   if (!language) return 'Code';
   return SHORT_LANG_MAP[language] ?? language.slice(0, 6);
@@ -79,10 +99,6 @@ function buildWeeksFromScores(
     const startFmt = shortUtcDate.format(new Date(`${w.start}T00:00:00Z`));
     const endFmt = shortUtcDate.format(new Date(`${w.end}T00:00:00Z`));
     const rangeLabel = `${startFmt} – ${endFmt}`;
-    const heightPct =
-      w.score === 0 ? 11 : Math.min(100, 22 + Math.round((w.score / maxScore) * 78));
-    const opacity =
-      w.score === 0 ? 1 : Number((0.45 + (w.score / maxScore) * 0.55).toFixed(2));
     const title =
       w.score === 0
         ? `${rangeLabel} · quiet week`
@@ -93,8 +109,7 @@ function buildWeeksFromScores(
       end: w.end,
       rangeLabel,
       score: w.score,
-      heightPct,
-      opacity,
+      maxScore,
       title,
     };
   });
@@ -105,16 +120,22 @@ function computeMonthTicks(weeks: ActivityWeek[]): string[] {
     return ['DEC', 'FEB', 'APR', 'JUN', 'AUG', 'OCT', 'NOV'];
   }
   const indices = [1, 9, 17, 26, 35, 43, weeks.length - 1];
-  return indices.map((idx) => {
+  const labels: string[] = [];
+  for (const idx of indices) {
     const w = weeks[Math.min(idx, weeks.length - 1)];
-    return monthUpper.format(new Date(`${w.end}T00:00:00Z`)).toUpperCase();
-  });
+    if (w) {
+      labels.push(monthUpper.format(new Date(`${w.end}T00:00:00Z`)).toUpperCase());
+    }
+  }
+  return labels;
 }
 
 function computeDateRangeLabel(weeks: ActivityWeek[]): string {
-  if (weeks.length === 0) return 'Last 52 Weeks';
-  const first = monthYearUtc.format(new Date(`${weeks[0].start}T00:00:00Z`));
-  const last = monthYearUtc.format(new Date(`${weeks[weeks.length - 1].end}T00:00:00Z`));
+  const firstWeek = weeks[0];
+  const lastWeek = weeks[weeks.length - 1];
+  if (!firstWeek || !lastWeek) return 'Last 52 Weeks';
+  const first = monthYearUtc.format(new Date(`${firstWeek.start}T00:00:00Z`));
+  const last = monthYearUtc.format(new Date(`${lastWeek.end}T00:00:00Z`));
   return `${first} – ${last}`;
 }
 
@@ -134,14 +155,16 @@ function buildFallbackWeeks(): ActivityWeek[] {
 }
 
 const FALLBACK_WEEKS = buildFallbackWeeks();
+const DEFAULT_USERNAME = profile.githubUsername;
+const DEFAULT_PROFILE_URL = `https://github.com/${encodeURIComponent(DEFAULT_USERNAME)}`;
 
 export const FALLBACK_GITHUB_SNAPSHOT: GitHubSnapshot = {
-  username: 'the-whiz84',
-  profileUrl: 'https://github.com/the-whiz84',
+  username: DEFAULT_USERNAME,
+  profileUrl: DEFAULT_PROFILE_URL,
   publicReposCount: 10,
   latestRepo: {
     name: 'the-whiz.dev',
-    url: 'https://github.com/the-whiz84/the-whiz.dev',
+    url: `${DEFAULT_PROFILE_URL}/the-whiz.dev`,
     language: 'TypeScript',
     shortLang: 'TS',
     pushedAt: '2026-11-23T15:00:16Z',
@@ -150,7 +173,7 @@ export const FALLBACK_GITHUB_SNAPSHOT: GitHubSnapshot = {
   recentRepos: [
     {
       name: 'the-whiz.dev',
-      url: 'https://github.com/the-whiz84/the-whiz.dev',
+      url: `${DEFAULT_PROFILE_URL}/the-whiz.dev`,
       language: 'TypeScript',
       shortLang: 'TS',
       pushedAt: '2026-11-23T15:00:16Z',
@@ -158,7 +181,7 @@ export const FALLBACK_GITHUB_SNAPSHOT: GitHubSnapshot = {
     },
     {
       name: 'zero-dawn-v3',
-      url: 'https://github.com/the-whiz84/zero-dawn-v3',
+      url: `${DEFAULT_PROFILE_URL}/zero-dawn-v3`,
       language: 'TypeScript',
       shortLang: 'TS',
       pushedAt: '2026-11-21T16:23:05Z',
@@ -166,7 +189,7 @@ export const FALLBACK_GITHUB_SNAPSHOT: GitHubSnapshot = {
     },
     {
       name: 'Python_Projects',
-      url: 'https://github.com/the-whiz84/Python_Projects',
+      url: `${DEFAULT_PROFILE_URL}/Python_Projects`,
       language: 'Python',
       shortLang: 'Py',
       pushedAt: '2026-11-03T16:38:16Z',
@@ -180,15 +203,33 @@ export const FALLBACK_GITHUB_SNAPSHOT: GitHubSnapshot = {
   isFallback: true,
 };
 
-interface GitHubUserResponse {
-  public_repos?: number;
+interface ParsedGitHubRepo {
+  name: string;
+  htmlUrl: unknown;
+  language: string | null;
+  pushedAt: string;
 }
 
-interface GitHubRepoResponse {
-  name: string;
-  html_url: string;
-  language: string | null;
-  pushed_at: string;
+function parseGitHubRepo(value: unknown): ParsedGitHubRepo | null {
+  if (!value || typeof value !== 'object') return null;
+  const record = value as Record<string, unknown>;
+  if (
+    typeof record.name !== 'string' ||
+    record.name.length === 0 ||
+    typeof record.pushed_at !== 'string'
+  ) {
+    return null;
+  }
+  const language =
+    typeof record.language === 'string' && record.language.length > 0
+      ? record.language
+      : null;
+  return {
+    name: record.name,
+    htmlUrl: record.html_url,
+    language,
+    pushedAt: record.pushed_at,
+  };
 }
 
 function parseContributionsHtml(html: string): {
@@ -198,25 +239,36 @@ function parseContributionsHtml(html: string): {
   const totalMatch = html.match(
     /([0-9,]+)\s+contributions?\s+in\s+the\s+last\s+year/i,
   );
-  const total = totalMatch
-    ? Number.parseInt(totalMatch[1].replaceAll(',', ''), 10)
+  const totalRaw = totalMatch?.[1];
+  const parsedTotal = totalRaw
+    ? Number.parseInt(totalRaw.replaceAll(',', ''), 10)
     : null;
+  const total =
+    parsedTotal !== null && Number.isFinite(parsedTotal) ? parsedTotal : null;
 
   const dayMap = new Map<string, number>();
-  const re1 = /data-date="(\d{4}-\d{2}-\d{2})"[^>]*data-level="(\d)"/g;
-  const re2 = /data-level="(\d)"[^>]*data-date="(\d{4}-\d{2}-\d{2})"/g;
+  const re1 = /data-date="(\d{4}-\d{2}-\d{2})"[^>\r\n]{0,200}data-level="(\d)"/g;
+  const re2 = /data-level="(\d)"[^>\r\n]{0,200}data-date="(\d{4}-\d{2}-\d{2})"/g;
 
   for (const m of html.matchAll(re1)) {
-    dayMap.set(m[1], Number.parseInt(m[2], 10));
+    const date = m[1];
+    const level = m[2];
+    if (date && level) {
+      dayMap.set(date, Number.parseInt(level, 10));
+    }
   }
   if (dayMap.size === 0) {
     for (const m of html.matchAll(re2)) {
-      dayMap.set(m[2], Number.parseInt(m[1], 10));
+      const level = m[1];
+      const date = m[2];
+      if (date && level) {
+        dayMap.set(date, Number.parseInt(level, 10));
+      }
     }
   }
 
   if (dayMap.size < 350) {
-    return { total: Number.isFinite(total) ? total : null, weeks: null };
+    return { total, weeks: null };
   }
 
   const sortedDays = Array.from(dayMap.entries())
@@ -226,30 +278,39 @@ function parseContributionsHtml(html: string): {
   const buckets: { start: string; end: string; score: number }[] = [];
   for (let i = 0; i < sortedDays.length; i += 7) {
     const chunk = sortedDays.slice(i, i + 7);
-    if (chunk.length === 0) continue;
+    const first = chunk[0];
+    const last = chunk[chunk.length - 1];
+    if (!first || !last) continue;
     const score = chunk.reduce((sum, [, lvl]) => sum + lvl, 0);
     buckets.push({
-      start: chunk[0][0],
-      end: chunk[chunk.length - 1][0],
+      start: first[0],
+      end: last[0],
       score,
     });
   }
 
   if (buckets.length === 0) {
-    return { total: Number.isFinite(total) ? total : null, weeks: null };
+    return { total, weeks: null };
   }
 
   return {
-    total: Number.isFinite(total) ? total : null,
+    total,
     weeks: buildWeeksFromScores(buckets.slice(-52)),
   };
 }
 
 export async function fetchGitHubSnapshot(
-  username = 'the-whiz84',
+  username: string = profile.githubUsername,
 ): Promise<GitHubSnapshot> {
+  const safeUsername = sanitizeGitHubUsername(username);
+  const encodedUsername = encodeURIComponent(safeUsername);
+  const profileUrl = `https://github.com/${encodedUsername}`;
+
+  const envToken: unknown =
+    import.meta.env.GITHUB_TOKEN ??
+    (typeof process !== 'undefined' ? process.env.GITHUB_TOKEN : undefined);
   const token =
-    typeof process !== 'undefined' ? process.env.GITHUB_TOKEN : undefined;
+    typeof envToken === 'string' && envToken.length > 0 ? envToken : undefined;
 
   const apiHeaders: Record<string, string> = {
     'User-Agent': 'the-whiz.dev',
@@ -260,18 +321,18 @@ export async function fetchGitHubSnapshot(
   }
 
   const [userRes, reposRes, contribRes] = await Promise.allSettled([
-    fetch(`https://api.github.com/users/${username}`, {
+    fetch(`https://api.github.com/users/${encodedUsername}`, {
       headers: apiHeaders,
       signal: AbortSignal.timeout(4000),
     }),
     fetch(
-      `https://api.github.com/users/${username}/repos?sort=pushed&per_page=20`,
+      `https://api.github.com/users/${encodedUsername}/repos?sort=pushed&per_page=20`,
       {
         headers: apiHeaders,
         signal: AbortSignal.timeout(4000),
       },
     ),
-    fetch(`https://github.com/users/${username}/contributions`, {
+    fetch(`https://github.com/users/${encodedUsername}/contributions`, {
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; the-whiz.dev)',
       },
@@ -283,9 +344,14 @@ export async function fetchGitHubSnapshot(
   let userOk = false;
   if (userRes.status === 'fulfilled' && userRes.value.ok) {
     try {
-      const userData = (await userRes.value.json()) as GitHubUserResponse;
-      if (typeof userData.public_repos === 'number') {
-        publicReposCount = userData.public_repos;
+      const userData: unknown = await userRes.value.json();
+      if (
+        userData &&
+        typeof userData === 'object' &&
+        typeof (userData as Record<string, unknown>).public_repos === 'number'
+      ) {
+        publicReposCount = (userData as Record<string, unknown>)
+          .public_repos as number;
         userOk = true;
       }
     } catch {
@@ -297,21 +363,30 @@ export async function fetchGitHubSnapshot(
   let reposOk = false;
   if (reposRes.status === 'fulfilled' && reposRes.value.ok) {
     try {
-      const rawRepos = (await reposRes.value.json()) as GitHubRepoResponse[];
+      const rawRepos: unknown = await reposRes.value.json();
       if (Array.isArray(rawRepos)) {
-        const filtered = rawRepos
-          .filter((r) => r.name.toLowerCase() !== username.toLowerCase())
-          .sort((a, b) => b.pushed_at.localeCompare(a.pushed_at))
+        const parsedRepos: ParsedGitHubRepo[] = [];
+        for (const item of rawRepos) {
+          const parsed = parseGitHubRepo(item);
+          if (parsed) {
+            parsedRepos.push(parsed);
+          }
+        }
+
+        const filtered = parsedRepos
+          .filter((r) => r.name.toLowerCase() !== safeUsername.toLowerCase())
+          .sort((a, b) => b.pushedAt.localeCompare(a.pushedAt))
           .slice(0, 3)
           .map<RepoItem>((r) => {
             const lang = r.language ?? 'Code';
+            const fallbackRepoUrl = `${profileUrl}/${encodeURIComponent(r.name)}`;
             return {
               name: r.name,
-              url: r.html_url,
+              url: parseSafeGitHubUrl(r.htmlUrl, fallbackRepoUrl),
               language: lang,
               shortLang: formatShortLang(lang),
-              pushedAt: r.pushed_at,
-              pushedLabel: formatPushedDate(r.pushed_at),
+              pushedAt: r.pushedAt,
+              pushedLabel: formatPushedDate(r.pushedAt),
             };
           });
 
@@ -347,8 +422,8 @@ export async function fetchGitHubSnapshot(
   const latestRepo = recentRepos[0] ?? FALLBACK_GITHUB_SNAPSHOT.latestRepo;
 
   return {
-    username,
-    profileUrl: `https://github.com/${username}`,
+    username: safeUsername,
+    profileUrl,
     publicReposCount,
     latestRepo,
     recentRepos,

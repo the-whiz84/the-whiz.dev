@@ -1,18 +1,13 @@
 ---
+import SectionHeader from './SectionHeader.astro';
 import { stackLayers } from '../data/site';
 ---
 
 <section class="w-full border-b border-[var(--rule)]" aria-labelledby="stack-heading">
   <div class="mx-auto w-full max-w-[1360px] px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
-    <div class="mb-4 flex flex-wrap items-baseline justify-between gap-3">
-      <h2
-        id="stack-heading"
-        class="m-0 font-mono text-[13px] uppercase tracking-[0.08em] text-[var(--ink-muted)]"
-      >
-        <strong class="mr-2 font-semibold text-[var(--signal)]">02</strong>Infrastructure Stack
-      </h2>
+    <SectionHeader id="stack-heading" number="02" title="Infrastructure Stack">
       <span class="font-mono text-[13px] text-[var(--ink-muted)]">Select a layer to inspect</span>
-    </div>
+    </SectionHeader>
 
     <div data-stack-schematic>
       <div
@@ -30,20 +25,12 @@ import { stackLayers } from '../data/site';
               aria-selected={index === 0 ? 'true' : 'false'}
               tabindex={index === 0 ? 0 : -1}
               data-stack-tab={index}
-              class:list={[
-                'relative cursor-pointer border-0 border-b border-r border-[var(--rule)] px-4 py-3.5 text-left font-mono text-[13px] leading-[1.35] transition-colors sm:border-b-0 sm:last:border-r-0 [&:nth-child(2n)]:border-r-0 sm:[&:nth-child(2n)]:border-r [&:last-child]:col-span-2 sm:[&:last-child]:col-span-1 [&:last-child]:border-b-0 [&:last-child]:border-r-0',
-                index === 0
-                  ? 'bg-[var(--paper-alt)] font-semibold text-[var(--ink)]'
-                  : 'bg-transparent text-[var(--ink-muted)] hover:bg-[var(--paper-alt)] hover:text-[var(--ink)]',
-              ]}
+              class="group relative cursor-pointer border-0 border-b border-r border-[var(--rule)] bg-transparent px-4 py-3.5 text-left font-mono text-[13px] leading-[1.35] text-[var(--ink-muted)] transition-colors hover:bg-[var(--paper-alt)] hover:text-[var(--ink)] aria-selected:bg-[var(--paper-alt)] aria-selected:font-semibold aria-selected:text-[var(--ink)] sm:border-b-0 sm:last:border-r-0 [&:nth-child(2n)]:border-r-0 sm:[&:nth-child(2n)]:border-r [&:last-child]:col-span-2 sm:[&:last-child]:col-span-1 [&:last-child]:border-b-0 [&:last-child]:border-r-0"
             >
               <span
                 data-tab-bar
                 aria-hidden="true"
-                class:list={[
-                  'absolute left-0 right-0 top-0 h-[2.5px] bg-[var(--signal)]',
-                  index === 0 ? 'block' : 'hidden',
-                ]}
+                class="absolute left-0 right-0 top-0 hidden h-[2.5px] bg-[var(--signal)] group-aria-selected:block"
               />
               <span class="mb-1 block text-xs text-[var(--signal)]">{layer.code}</span>
               <span>{layer.label}</span>
@@ -89,3 +76,41 @@ import { stackLayers } from '../data/site';
     </div>
   </div>
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-stack-schematic]').forEach((schematic) => {
+    const tabs = Array.from(schematic.querySelectorAll<HTMLButtonElement>('[data-stack-tab]'));
+    const panels = Array.from(schematic.querySelectorAll<HTMLElement>('[data-stack-panel]'));
+
+    function selectLayer(idx: number, moveFocus = false) {
+      tabs.forEach((tab, i) => {
+        const active = i === idx;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+      });
+      panels.forEach((panel, i) => {
+        panel.hidden = i !== idx;
+      });
+      if (moveFocus) tabs[idx]?.focus();
+    }
+
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('click', () => selectLayer(idx));
+      tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          selectLayer((idx + 1) % tabs.length, true);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          selectLayer((idx - 1 + tabs.length) % tabs.length, true);
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          selectLayer(0, true);
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          selectLayer(tabs.length - 1, true);
+        }
+      });
+    });
+  });
+</script>

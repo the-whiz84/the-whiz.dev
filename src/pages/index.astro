@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GitHubActivity from '../components/GitHubActivity.astro';
 import GitHubActivityView from '../components/GitHubActivityView.astro';
+import SectionHeader from '../components/SectionHeader.astro';
 import StackSchematic from '../components/StackSchematic.astro';
 import {
   career,
@@ -11,15 +12,10 @@ import {
   publicRepos,
   socials,
 } from '../data/site';
+import { formatBucharestClock } from '../lib/clock';
 import { FALLBACK_GITHUB_SNAPSHOT } from '../lib/github';
 
-const initialClock = new Intl.DateTimeFormat('en-GB', {
-  timeZone: profile.timezone,
-  hour: '2-digit',
-  minute: '2-digit',
-  hour12: false,
-  timeZoneName: 'short',
-}).format(new Date());
+const initialClock = formatBucharestClock();
 ---
 
 <BaseLayout
@@ -166,14 +162,7 @@ const initialClock = new Intl.DateTimeFormat('en-GB', {
         class="border-b border-[var(--rule)] py-10 sm:py-12 md:border-b-0 md:border-r md:pr-10 lg:pr-12"
         aria-labelledby="career-heading"
       >
-        <div class="mb-4 flex items-baseline justify-between gap-2">
-          <h2
-            id="career-heading"
-            class="m-0 font-mono text-[13px] uppercase tracking-[0.08em] text-[var(--ink-muted)]"
-          >
-            <strong class="mr-2 font-semibold text-[var(--signal)]">03</strong>Career Lineage (15+ Yrs)
-          </h2>
-        </div>
+        <SectionHeader id="career-heading" number="03" title="Career Lineage (15+ Yrs)" />
 
         <div>
           {
@@ -205,14 +194,7 @@ const initialClock = new Intl.DateTimeFormat('en-GB', {
       </div>
 
       <div class="py-10 sm:py-12 md:pl-10 lg:pl-12" aria-labelledby="repos-heading">
-        <div class="mb-4 flex items-baseline justify-between gap-2">
-          <h2
-            id="repos-heading"
-            class="m-0 font-mono text-[13px] uppercase tracking-[0.08em] text-[var(--ink-muted)]"
-          >
-            <strong class="mr-2 font-semibold text-[var(--signal)]">04</strong>Public Repos &amp; Archive
-          </h2>
-        </div>
+        <SectionHeader id="repos-heading" number="04" title="Public Repos & Archive" />
 
         <div>
           {
@@ -272,14 +254,7 @@ const initialClock = new Intl.DateTimeFormat('en-GB', {
   <!-- 05: Verified Certifications -->
   <section class="w-full" aria-labelledby="certs-heading">
     <div class="mx-auto w-full max-w-[1360px] px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
-      <div class="mb-4 flex items-baseline justify-between gap-2">
-        <h2
-          id="certs-heading"
-          class="m-0 font-mono text-[13px] uppercase tracking-[0.08em] text-[var(--ink-muted)]"
-        >
-          <strong class="mr-2 font-semibold text-[var(--signal)]">05</strong>Verified Certifications
-        </h2>
-      </div>
+      <SectionHeader id="certs-heading" number="05" title="Verified Certifications" />
 
       <div class="grid grid-cols-1 border border-[var(--rule)] sm:grid-cols-3">
         {
@@ -308,3 +283,23 @@ const initialClock = new Intl.DateTimeFormat('en-GB', {
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { formatBucharestClock } from '../lib/clock';
+
+  const clockEls = document.querySelectorAll<HTMLElement>('[data-sibiu-clock]');
+  if (clockEls.length > 0) {
+    const updateClock = () => {
+      try {
+        const formatted = formatBucharestClock();
+        if (formatted) {
+          clockEls.forEach((el) => {
+            el.textContent = formatted;
+          });
+        }
+      } catch {}
+    };
+    updateClock();
+    window.setInterval(updateClock, 30_000);
+  }
+</script>

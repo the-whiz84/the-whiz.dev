@@ -1,7 +1,23 @@
+import { BUCHAREST_TIMEZONE } from '../lib/clock';
+
+export { formatBucharestClock } from '../lib/clock';
+
 export interface SocialLink {
   name: string;
   url: string;
 }
+
+export interface NavItem {
+  label: string;
+  href: `/${string}`;
+}
+
+export type CommandItem =
+  | { id: string; label: string; hint: string; kind: 'route'; value: `/${string}` }
+  | { id: string; label: string; hint: string; kind: 'mailto'; value: `mailto:${string}` }
+  | { id: string; label: string; hint: string; kind: 'external'; value: string }
+  | { id: string; label: string; hint: string; kind: 'copy'; value: string }
+  | { id: string; label: string; hint: string; kind: 'theme' };
 
 export interface StackLayer {
   id: string;
@@ -30,7 +46,6 @@ export interface RepoHighlight {
 export interface ArchiveEntry {
   label: string;
   url: string;
-  note?: string;
 }
 
 export interface Certification {
@@ -40,9 +55,16 @@ export interface Certification {
   url: string;
 }
 
-export interface NowEntry {
+export interface SpecEntryLink {
+  href: string;
+  text: string;
+  suffix?: string;
+}
+
+export interface SpecEntry {
   label: string;
   detail: string;
+  link?: SpecEntryLink;
 }
 
 export const profile = {
@@ -55,17 +77,61 @@ export const profile = {
   resumeUrl: '/files/Resume.pdf',
   location: 'Sibiu, Romania',
   locationUrl: 'https://maps.app.goo.gl/riqMDNYqAJRaxHdr9',
-  timezone: 'Europe/Bucharest',
+  timezone: BUCHAREST_TIMEZONE,
   githubUsername: 'the-whiz84',
   currentRoleShort: 'Bull Romania · Automotive HPC',
   certificationsShort: 'AWS SAA · CompTIA Linux+',
   coreStackShort: 'RHEL · Puppet · Python · AWS',
 } as const;
 
+export const navItems: NavItem[] = [
+  { label: 'Overview', href: '/' },
+  { label: '/now', href: '/now' },
+  { label: '/colophon', href: '/colophon' },
+];
+
 export const socials: SocialLink[] = [
   { name: 'GitHub', url: 'https://github.com/the-whiz84' },
   { name: 'LinkedIn', url: 'https://www.linkedin.com/in/radu-chiriac/' },
   { name: 'X', url: 'https://x.com/the_whiz84' },
+];
+
+export const commandItems: CommandItem[] = [
+  { id: 'home', label: 'Go to Overview', hint: '/', kind: 'route', value: '/' },
+  { id: 'now', label: 'Go to /now', hint: '/now', kind: 'route', value: '/now' },
+  { id: 'colophon', label: 'Go to /colophon', hint: '/colophon', kind: 'route', value: '/colophon' },
+  { id: 'privacy', label: 'Go to /privacy', hint: '/privacy', kind: 'route', value: '/privacy' },
+  {
+    id: 'email',
+    label: `Email ${profile.email}`,
+    hint: '✉',
+    kind: 'mailto',
+    value: `mailto:${profile.email}`,
+  },
+  {
+    id: 'copy',
+    label: `Copy email — ${profile.email}`,
+    hint: '↵',
+    kind: 'copy',
+    value: profile.email,
+  },
+  {
+    id: 'resume',
+    label: 'Open Resume.pdf',
+    hint: '↗',
+    kind: 'external',
+    value: profile.resumeUrl,
+  },
+  { id: 'theme', label: 'Toggle Light / Dark theme', hint: 'T', kind: 'theme' },
+  ...socials.map(
+    (s): CommandItem => ({
+      id: s.name.toLowerCase(),
+      label: `Open ${s.name}`,
+      hint: '↗',
+      kind: 'external',
+      value: s.url,
+    }),
+  ),
 ];
 
 export const stackLayers: StackLayer[] = [
@@ -234,5 +300,60 @@ export const nowMeta = {
       detail:
         'Linux tinkering, refining local editor and terminal tooling (Zed, Ghostty), and diving into deep videogames.',
     },
-  ] satisfies NowEntry[],
+  ] satisfies SpecEntry[],
 };
+
+export const colophonEntries: SpecEntry[] = [
+  {
+    label: 'Framework',
+    detail:
+      'Built with Astro 7 and Tailwind CSS v4. Every page pre-renders as static HTML by default, paired with one edge-cached Server Island for live GitHub activity.',
+  },
+  {
+    label: 'Typography',
+    detail:
+      'Self-hosted Space Grotesk Variable for display and body copy, paired with IBM Plex Mono for indices, dates, and technical readouts.',
+  },
+  {
+    label: 'Theming',
+    detail:
+      'Follows your OS and browser prefers-color-scheme automatically with zero first-paint flash, plus an explicit Light/Dark toggle persisted in localStorage.',
+  },
+  {
+    label: 'Hosting & Perf',
+    detail:
+      'Deployed on Vercel with Bun, zero heavy client UI runtime, native CSS View Transitions, and cookieless Core Web Vitals via Vercel Speed Insights.',
+  },
+  {
+    label: 'Navigation',
+    detail:
+      'Press ⌘K (or Ctrl+K) anywhere on the site for instant route jumping, theme switching, and one-click email copying.',
+  },
+];
+
+export const privacyEntries: SpecEntry[] = [
+  {
+    label: 'No Cookies / Ads',
+    detail:
+      'This website does not set advertising cookies, run third-party marketing trackers, or build personal visitor profiles.',
+  },
+  {
+    label: 'Performance',
+    detail:
+      'Uses Vercel Speed Insights to collect anonymous, cookieless Core Web Vitals (page load latency and responsiveness metrics) to monitor site reliability.',
+  },
+  {
+    label: 'Local Storage',
+    detail:
+      'Only your optional Light/Dark theme override is stored locally in browser storage (tw-theme) so the site remembers your preference across visits.',
+  },
+  {
+    label: 'Contact',
+    detail: 'Questions about this policy can be sent to ',
+    link: {
+      href: `mailto:${profile.email}`,
+      text: profile.email,
+      suffix: '.',
+    },
+  },
+];

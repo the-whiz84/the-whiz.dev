@@ -1,4 +1,5 @@
 ---
+import SectionHeader from './SectionHeader.astro';
 import type { GitHubSnapshot } from '../lib/github';
 
 interface Props {
@@ -7,22 +8,30 @@ interface Props {
 }
 
 const { snapshot, isLoading = false } = Astro.props;
+const defaultReadout = 'Hover a week bar to inspect';
 const statusText = isLoading
   ? `Syncing · github.com/${snapshot.username}`
   : snapshot.isFallback
     ? `Snapshot · github.com/${snapshot.username}`
     : `Live · github.com/${snapshot.username}`;
+
+const bars = snapshot.weeks.map((w) => {
+  const maxScore = Math.max(1, w.maxScore);
+  const heightPct =
+    w.score === 0 ? 11 : Math.min(100, 22 + Math.round((w.score / maxScore) * 78));
+  const opacity =
+    w.score === 0 ? 1 : Number((0.45 + (w.score / maxScore) * 0.55).toFixed(2));
+  return { ...w, heightPct, opacity };
+});
 ---
 
 <section class="w-full border-b border-[var(--rule)]" aria-labelledby="github-heading">
   <div class="mx-auto w-full max-w-[1360px] px-5 py-10 sm:px-8 sm:py-12 lg:px-12">
-    <div class="mb-4 flex flex-wrap items-baseline justify-between gap-3">
-      <h2
-        id="github-heading"
-        class="m-0 font-mono text-[13px] uppercase tracking-[0.08em] text-[var(--ink-muted)]"
-      >
-        <strong class="mr-2 font-semibold text-[var(--signal)]">01</strong>GitHub Activity · @{snapshot.username}
-      </h2>
+    <SectionHeader
+      id="github-heading"
+      number="01"
+      title={`GitHub Activity · @${snapshot.username}`}
+    >
       <a
         href={snapshot.profileUrl}
         target="_blank"
@@ -38,7 +47,7 @@ const statusText = isLoading
         ></span>
         <span>{statusText}</span>
       </a>
-    </div>
+    </SectionHeader>
 
     <div class="border border-[var(--rule)] bg-[var(--paper-alt)]">
       <div class="grid grid-cols-1 border-b border-[var(--rule)] font-mono sm:grid-cols-[0.85fr_1.35fr_1fr]">
@@ -99,21 +108,22 @@ const statusText = isLoading
           </span>
           <span
             data-pulse-readout
+            data-default-readout={defaultReadout}
             class="font-medium text-[var(--ink)]"
             aria-live="polite"
           >
-            Hover a week bar to inspect
+            {defaultReadout}
           </span>
         </div>
 
         <div
           data-pulse-bars
           class="grid h-14 grid-cols-[repeat(52,minmax(0,1fr))] items-end gap-1 border-b border-[var(--rule)] pb-0.5 sm:h-16"
-          role="img"
+          role="group"
           aria-label={`52-week GitHub contribution trace totaling ${snapshot.yearlyContributions} contributions`}
         >
           {
-            snapshot.weeks.map((w) => (
+            bars.map((w) => (
               <button
                 type="button"
                 data-pulse-bar
@@ -157,3 +167,43 @@ const statusText = isLoading
     </div>
   </div>
 </section>
+
+<script>
+  if (!document.documentElement.dataset.pulseDelegated) {
+    document.documentElement.dataset.pulseDelegated = '1';
+
+    const updateReadout = (event: Event) => {
+      const target =
+        event.target instanceof Element
+          ? event.target.closest('[data-pulse-bar]')
+          : null;
+      if (!target) return;
+      const container = target.closest('[data-pulse-bars]')?.parentElement;
+      const readout = container?.querySelector('[data-pulse-readout]');
+      const label = target.getAttribute('data-label');
+      if (readout && label) {
+        readout.textContent = label;
+      }
+    };
+
+    document.addEventListener('mouseover', updateReadout);
+    document.addEventListener('focusin', updateReadout);
+
+    document.addEventListener('mouseout', (event) => {
+      const bars =
+        event.target instanceof Element
+          ? event.target.closest('[data-pulse-bars]')
+          : null;
+      if (!bars) return;
+      const next = event.relatedTarget;
+      if (next instanceof Node && bars.contains(next)) return;
+      const readout = bars.parentElement?.querySelector('[data-pulse-readout]');
+      if (readout) {
+        const defaultText = readout.getAttribute('data-default-readout');
+        if (defaultText) {
+          readout.textContent = defaultText;
+        }
+      }
+    });
+  }
+</script>
