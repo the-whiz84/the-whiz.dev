@@ -327,7 +327,7 @@ export const colophonEntries: SpecEntry[] = [
   {
     label: 'Navigation',
     detail:
-      'Press ⌘K (or Ctrl+K) anywhere on the site for instant route jumping, theme switching, and one-click email copying.',
+      'Press ⌘K (or Ctrl+K) anywhere on the site for instant route jumping, theme switching, and direct email sending.',
   },
 ];
 
